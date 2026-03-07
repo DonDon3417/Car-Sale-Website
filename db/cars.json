@@ -1,0 +1,3820 @@
+[
+  {
+    "_id": { "$oid": "6986056b620d7745bfde7f02" },
+    "name": "Toyota Camry",
+    "slug": "toyota-camry-1770390891014-0",
+    "brand": { "$oid": "6985d18f1645746fad37dd02" },
+    "category": { "$oid": "6985d2d8b9e0bd203be55720" },
+    "price": 1000001,
+    "discountPrice": 1000000,
+    "year": 2025,
+    "fuelType": "Điện",
+    "transmission": "Tự động",
+    "seats": 7,
+    "engine": "234kW Electric Motor",
+    "mileage": 17,
+    "colors": [
+      {
+        "name": "Đỏ Ruby",
+        "code": "#9b111e",
+        "_id": { "$oid": "6986056b620d7745bfde7f03" }
+      },
+      {
+        "name": "Nâu Đồng",
+        "code": "#8b4513",
+        "_id": { "$oid": "6986056b620d7745bfde7f04" }
+      },
+      {
+        "name": "Xanh Lá",
+        "code": "#1a472a",
+        "_id": { "$oid": "6986056b620d7745bfde7f05" }
+      },
+      {
+        "name": "Xám Titanium",
+        "code": "#5a5a5a",
+        "_id": { "$oid": "6986056b620d7745bfde7f06" }
+      },
+      {
+        "name": "Đen Obsidian",
+        "code": "#0d0d0d",
+        "_id": { "$oid": "6986056b620d7745bfde7f07" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "G",
+        "price": 429615409,
+        "_id": { "$oid": "6986056b620d7745bfde7f08" }
+      },
+      {
+        "name": "V",
+        "price": 575357325,
+        "_id": { "$oid": "6986056b620d7745bfde7f09" }
+      },
+      {
+        "name": "Q",
+        "price": 595354637,
+        "_id": { "$oid": "6986056b620d7745bfde7f0a" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-2.jpg",
+      "/uploads/cars/sample-car-8.jpg",
+      "/uploads/cars/sample-car-12.jpg"
+    ],
+    "description": "Toyota Camry - Mẫu xe pickup / bán tải Toyota với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "4365",
+      "width": "1891",
+      "height": "1776",
+      "wheelBase": "2716",
+      "horsepower": "378",
+      "torque": "322"
+    },
+    "stock": 2,
+    "viewCount": 2052,
+    "status": "available",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.036Z" },
+    "updatedAt": { "$date": "2026-02-10T02:48:35.185Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde7f0b" },
+    "name": "Toyota Corolla Cross",
+    "slug": "toyota-corolla-cross-1770390891014-1",
+    "brand": { "$oid": "6985d18f1645746fad37dd02" },
+    "category": { "$oid": "6985d2d8b9e0bd203be55725" },
+    "price": 1150295131,
+    "discountPrice": 0,
+    "year": 2023,
+    "fuelType": "Hybrid",
+    "transmission": "Số sàn",
+    "seats": 5,
+    "engine": "2.3L Turbo",
+    "mileage": 12,
+    "colors": [
+      {
+        "name": "Xanh Dương",
+        "code": "#1e3a5f",
+        "_id": { "$oid": "6986056b620d7745bfde7f0c" }
+      },
+      {
+        "name": "Xanh Lá",
+        "code": "#1a472a",
+        "_id": { "$oid": "6986056b620d7745bfde7f0d" }
+      },
+      {
+        "name": "Xám Titanium",
+        "code": "#5a5a5a",
+        "_id": { "$oid": "6986056b620d7745bfde7f0e" }
+      },
+      {
+        "name": "Đỏ Ruby",
+        "code": "#9b111e",
+        "_id": { "$oid": "6986056b620d7745bfde7f0f" }
+      },
+      {
+        "name": "Bạc Ánh Kim",
+        "code": "#c0c0c0",
+        "_id": { "$oid": "6986056b620d7745bfde7f10" }
+      },
+      {
+        "name": "Trắng Ngọc Trai",
+        "code": "#f5f5f5",
+        "_id": { "$oid": "6986056b620d7745bfde7f11" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "Standard",
+        "price": 1150295131,
+        "_id": { "$oid": "6986056b620d7745bfde7f12" }
+      },
+      {
+        "name": "Premium",
+        "price": 1255555557,
+        "_id": { "$oid": "6986056b620d7745bfde7f13" }
+      },
+      {
+        "name": "Luxury",
+        "price": 1422703699,
+        "_id": { "$oid": "6986056b620d7745bfde7f14" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-1.jpg",
+      "/uploads/cars/sample-car-11.jpg",
+      "/uploads/cars/sample-car-15.jpg"
+    ],
+    "description": "Toyota Corolla Cross - Mẫu xe luxury / xe sang Toyota với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "5122",
+      "width": "1888",
+      "height": "1782",
+      "wheelBase": "2936",
+      "horsepower": "288",
+      "torque": "762"
+    },
+    "stock": 8,
+    "viewCount": 2680,
+    "status": "available",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.036Z" },
+    "updatedAt": { "$date": "2026-02-06T15:14:51.036Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde7f15" },
+    "name": "Toyota Vios",
+    "slug": "toyota-vios-1770390891014-2",
+    "brand": { "$oid": "6985d18f1645746fad37dd02" },
+    "category": { "$oid": "6985d2d8b9e0bd203be55725" },
+    "price": 1057097578,
+    "discountPrice": 980164367,
+    "year": 2024,
+    "fuelType": "Điện",
+    "transmission": "Số sàn",
+    "seats": 7,
+    "engine": "362kW Electric Motor",
+    "mileage": 18,
+    "colors": [
+      {
+        "name": "Nâu Đồng",
+        "code": "#8b4513",
+        "_id": { "$oid": "6986056b620d7745bfde7f16" }
+      },
+      {
+        "name": "Xanh Dương",
+        "code": "#1e3a5f",
+        "_id": { "$oid": "6986056b620d7745bfde7f17" }
+      },
+      {
+        "name": "Xám Titanium",
+        "code": "#5a5a5a",
+        "_id": { "$oid": "6986056b620d7745bfde7f18" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "Base",
+        "price": 1057097578,
+        "_id": { "$oid": "6986056b620d7745bfde7f19" }
+      },
+      {
+        "name": "Mid",
+        "price": 1145518765,
+        "_id": { "$oid": "6986056b620d7745bfde7f1a" }
+      },
+      {
+        "name": "Top",
+        "price": 1187079230,
+        "_id": { "$oid": "6986056b620d7745bfde7f1b" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-13.jpg",
+      "/uploads/cars/sample-car-4.jpg",
+      "/uploads/cars/sample-car-3.jpg"
+    ],
+    "description": "Toyota Vios - Mẫu xe luxury / xe sang Toyota với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "5063",
+      "width": "1937",
+      "height": "1460",
+      "wheelBase": "3015",
+      "horsepower": "105",
+      "torque": "353"
+    },
+    "stock": 7,
+    "viewCount": 3960,
+    "status": "available",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.036Z" },
+    "updatedAt": { "$date": "2026-02-06T15:14:51.036Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde7f1c" },
+    "name": "Toyota Fortuner",
+    "slug": "toyota-fortuner-1770390891014-3",
+    "brand": { "$oid": "6985d18f1645746fad37dd02" },
+    "category": { "$oid": "6985d2d8b9e0bd203be5571c" },
+    "price": 978414760,
+    "discountPrice": 919949830,
+    "year": 2024,
+    "fuelType": "Dầu",
+    "transmission": "Tự động",
+    "seats": 8,
+    "engine": "2.4L V6",
+    "mileage": 8,
+    "colors": [
+      {
+        "name": "Trắng Ngọc Trai",
+        "code": "#f5f5f5",
+        "_id": { "$oid": "6986056b620d7745bfde7f1d" }
+      },
+      {
+        "name": "Xanh Dương",
+        "code": "#1e3a5f",
+        "_id": { "$oid": "6986056b620d7745bfde7f1e" }
+      },
+      {
+        "name": "Nâu Đồng",
+        "code": "#8b4513",
+        "_id": { "$oid": "6986056b620d7745bfde7f1f" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "Base",
+        "price": 978414760,
+        "_id": { "$oid": "6986056b620d7745bfde7f20" }
+      },
+      {
+        "name": "Mid",
+        "price": 1038553996,
+        "_id": { "$oid": "6986056b620d7745bfde7f21" }
+      },
+      {
+        "name": "Top",
+        "price": 1163193636,
+        "_id": { "$oid": "6986056b620d7745bfde7f22" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-7.jpg",
+      "/uploads/cars/sample-car-8.jpg",
+      "/uploads/cars/sample-car-4.jpg"
+    ],
+    "description": "Toyota Fortuner - Mẫu xe suv Toyota với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "4861",
+      "width": "1933",
+      "height": "1514",
+      "wheelBase": "2611",
+      "horsepower": "332",
+      "torque": "664"
+    },
+    "stock": 1,
+    "viewCount": 1433,
+    "status": "available",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.036Z" },
+    "updatedAt": { "$date": "2026-02-06T15:14:51.036Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde7f23" },
+    "name": "Toyota Land Cruiser",
+    "slug": "toyota-land-cruiser-1770390891014-4",
+    "brand": { "$oid": "6985d18f1645746fad37dd02" },
+    "category": { "$oid": "6985d2d8b9e0bd203be5571c" },
+    "price": 1430580889,
+    "discountPrice": 0,
+    "year": 2022,
+    "fuelType": "Dầu",
+    "transmission": "Số sàn",
+    "seats": 5,
+    "engine": "2.6L Turbo",
+    "mileage": 10,
+    "colors": [
+      {
+        "name": "Đỏ Ruby",
+        "code": "#9b111e",
+        "_id": { "$oid": "6986056b620d7745bfde7f24" }
+      },
+      {
+        "name": "Đen Obsidian",
+        "code": "#0d0d0d",
+        "_id": { "$oid": "6986056b620d7745bfde7f25" }
+      },
+      {
+        "name": "Xám Titanium",
+        "code": "#5a5a5a",
+        "_id": { "$oid": "6986056b620d7745bfde7f26" }
+      },
+      {
+        "name": "Xanh Dương",
+        "code": "#1e3a5f",
+        "_id": { "$oid": "6986056b620d7745bfde7f27" }
+      },
+      {
+        "name": "Bạc Ánh Kim",
+        "code": "#c0c0c0",
+        "_id": { "$oid": "6986056b620d7745bfde7f28" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "Standard",
+        "price": 1430580889,
+        "_id": { "$oid": "6986056b620d7745bfde7f29" }
+      },
+      {
+        "name": "Premium",
+        "price": 1574139465,
+        "_id": { "$oid": "6986056b620d7745bfde7f2a" }
+      },
+      {
+        "name": "Luxury",
+        "price": 1729407913,
+        "_id": { "$oid": "6986056b620d7745bfde7f2b" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-10.jpg",
+      "/uploads/cars/sample-car-10.jpg",
+      "/uploads/cars/sample-car-12.jpg",
+      "/uploads/cars/sample-car-3.jpg"
+    ],
+    "description": "Toyota Land Cruiser - Mẫu xe suv Toyota với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "4852",
+      "width": "1918",
+      "height": "1757",
+      "wheelBase": "2781",
+      "horsepower": "432",
+      "torque": "252"
+    },
+    "stock": 2,
+    "viewCount": 2118,
+    "status": "coming_soon",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.036Z" },
+    "updatedAt": { "$date": "2026-02-06T15:14:51.036Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde7f2c" },
+    "name": "Toyota Veloz Cross",
+    "slug": "toyota-veloz-cross-1770390891014-5",
+    "brand": { "$oid": "6985d18f1645746fad37dd02" },
+    "category": { "$oid": "6985d2d8b9e0bd203be55721" },
+    "price": 666034548,
+    "discountPrice": 0,
+    "year": 2022,
+    "fuelType": "Hybrid",
+    "transmission": "Số sàn",
+    "seats": 5,
+    "engine": "2.4L I4",
+    "mileage": 12,
+    "colors": [
+      {
+        "name": "Bạc Ánh Kim",
+        "code": "#c0c0c0",
+        "_id": { "$oid": "6986056b620d7745bfde7f2d" }
+      },
+      {
+        "name": "Đỏ Ruby",
+        "code": "#9b111e",
+        "_id": { "$oid": "6986056b620d7745bfde7f2e" }
+      },
+      {
+        "name": "Xám Titanium",
+        "code": "#5a5a5a",
+        "_id": { "$oid": "6986056b620d7745bfde7f2f" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "Standard",
+        "price": 666034548,
+        "_id": { "$oid": "6986056b620d7745bfde7f30" }
+      },
+      {
+        "name": "Premium",
+        "price": 757499949,
+        "_id": { "$oid": "6986056b620d7745bfde7f31" }
+      },
+      {
+        "name": "Luxury",
+        "price": 939472888,
+        "_id": { "$oid": "6986056b620d7745bfde7f32" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-6.jpg",
+      "/uploads/cars/sample-car-6.jpg",
+      "/uploads/cars/sample-car-6.jpg",
+      "/uploads/cars/sample-car-1.jpg"
+    ],
+    "description": "Toyota Veloz Cross - Mẫu xe coupe Toyota với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "4496",
+      "width": "1980",
+      "height": "1695",
+      "wheelBase": "2764",
+      "horsepower": "156",
+      "torque": "766"
+    },
+    "stock": 8,
+    "viewCount": 4933,
+    "status": "coming_soon",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.036Z" },
+    "updatedAt": { "$date": "2026-02-06T15:14:51.036Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde7f33" },
+    "name": "Toyota Raize",
+    "slug": "toyota-raize-1770390891014-6",
+    "brand": { "$oid": "6985d18f1645746fad37dd02" },
+    "category": { "$oid": "6985d2d8b9e0bd203be55720" },
+    "price": 452054690,
+    "discountPrice": 0,
+    "year": 2022,
+    "fuelType": "Hybrid",
+    "transmission": "Tự động",
+    "seats": 4,
+    "engine": "1.5L V8",
+    "mileage": 10,
+    "colors": [
+      {
+        "name": "Đen Obsidian",
+        "code": "#0d0d0d",
+        "_id": { "$oid": "6986056b620d7745bfde7f34" }
+      },
+      {
+        "name": "Đỏ Ruby",
+        "code": "#9b111e",
+        "_id": { "$oid": "6986056b620d7745bfde7f35" }
+      },
+      {
+        "name": "Xanh Lá",
+        "code": "#1a472a",
+        "_id": { "$oid": "6986056b620d7745bfde7f36" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "Base",
+        "price": 452054690,
+        "_id": { "$oid": "6986056b620d7745bfde7f37" }
+      },
+      {
+        "name": "Mid",
+        "price": 595806347,
+        "_id": { "$oid": "6986056b620d7745bfde7f38" }
+      },
+      {
+        "name": "Top",
+        "price": 577030576,
+        "_id": { "$oid": "6986056b620d7745bfde7f39" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-8.jpg",
+      "/uploads/cars/sample-car-12.jpg",
+      "/uploads/cars/sample-car-9.jpg",
+      "/uploads/cars/sample-car-8.jpg"
+    ],
+    "description": "Toyota Raize - Mẫu xe pickup / bán tải Toyota với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "4218",
+      "width": "1979",
+      "height": "1848",
+      "wheelBase": "2642",
+      "horsepower": "541",
+      "torque": "732"
+    },
+    "stock": 9,
+    "viewCount": 2394,
+    "status": "available",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.036Z" },
+    "updatedAt": { "$date": "2026-02-06T15:14:51.036Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde7f3a" },
+    "name": "Toyota Innova Cross",
+    "slug": "toyota-innova-cross-1770390891014-7",
+    "brand": { "$oid": "6985d18f1645746fad37dd02" },
+    "category": { "$oid": "6985d2d8b9e0bd203be5571e" },
+    "price": 404661319,
+    "discountPrice": 0,
+    "year": 2022,
+    "fuelType": "Dầu",
+    "transmission": "Tự động",
+    "seats": 7,
+    "engine": "3.4L I4",
+    "mileage": 8,
+    "colors": [
+      {
+        "name": "Bạc Ánh Kim",
+        "code": "#c0c0c0",
+        "_id": { "$oid": "6986056b620d7745bfde7f3b" }
+      },
+      {
+        "name": "Trắng Ngọc Trai",
+        "code": "#f5f5f5",
+        "_id": { "$oid": "6986056b620d7745bfde7f3c" }
+      },
+      {
+        "name": "Xanh Lá",
+        "code": "#1a472a",
+        "_id": { "$oid": "6986056b620d7745bfde7f3d" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "Sport",
+        "price": 404661319,
+        "_id": { "$oid": "6986056b620d7745bfde7f3e" }
+      },
+      {
+        "name": "Elegance",
+        "price": 514068922,
+        "_id": { "$oid": "6986056b620d7745bfde7f3f" }
+      },
+      {
+        "name": "Signature",
+        "price": 647442877,
+        "_id": { "$oid": "6986056b620d7745bfde7f40" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-5.jpg",
+      "/uploads/cars/sample-car-12.jpg",
+      "/uploads/cars/sample-car-15.jpg",
+      "/uploads/cars/sample-car-8.jpg"
+    ],
+    "description": "Toyota Innova Cross - Mẫu xe hatchback  Toyota với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "4216",
+      "width": "1877",
+      "height": "1715",
+      "wheelBase": "2929",
+      "horsepower": "296",
+      "torque": "856"
+    },
+    "stock": 5,
+    "viewCount": 1630,
+    "status": "available",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.036Z" },
+    "updatedAt": { "$date": "2026-02-06T15:14:51.036Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde7f41" },
+    "name": "Honda City",
+    "slug": "honda-city-1770390891014-8",
+    "brand": { "$oid": "6985d18f1645746fad37dd03" },
+    "category": { "$oid": "6985d2d8b9e0bd203be55724" },
+    "price": 926490846,
+    "discountPrice": 865289447,
+    "year": 2024,
+    "fuelType": "Hybrid",
+    "transmission": "Số sàn",
+    "seats": 4,
+    "engine": "2.9L Turbo",
+    "mileage": 10,
+    "colors": [
+      {
+        "name": "Trắng Ngọc Trai",
+        "code": "#f5f5f5",
+        "_id": { "$oid": "6986056b620d7745bfde7f42" }
+      },
+      {
+        "name": "Nâu Đồng",
+        "code": "#8b4513",
+        "_id": { "$oid": "6986056b620d7745bfde7f43" }
+      },
+      {
+        "name": "Đỏ Ruby",
+        "code": "#9b111e",
+        "_id": { "$oid": "6986056b620d7745bfde7f44" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "Standard",
+        "price": 926490846,
+        "_id": { "$oid": "6986056b620d7745bfde7f45" }
+      },
+      {
+        "name": "Premium",
+        "price": 1022837159,
+        "_id": { "$oid": "6986056b620d7745bfde7f46" }
+      },
+      {
+        "name": "Luxury",
+        "price": 1042430478,
+        "_id": { "$oid": "6986056b620d7745bfde7f47" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-6.jpg",
+      "/uploads/cars/sample-car-1.jpg",
+      "/uploads/cars/sample-car-13.jpg",
+      "/uploads/cars/sample-car-6.jpg"
+    ],
+    "description": "Honda City - Mẫu xe electric / xe điện Honda với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "4676",
+      "width": "1786",
+      "height": "1467",
+      "wheelBase": "2901",
+      "horsepower": "303",
+      "torque": "716"
+    },
+    "stock": 2,
+    "viewCount": 2378,
+    "status": "coming_soon",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.036Z" },
+    "updatedAt": { "$date": "2026-02-06T15:14:51.036Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde7f48" },
+    "name": "Honda Civic",
+    "slug": "honda-civic-1770390891014-9",
+    "brand": { "$oid": "6985d18f1645746fad37dd03" },
+    "category": { "$oid": "6985d2d8b9e0bd203be55725" },
+    "price": 1493615002,
+    "discountPrice": 0,
+    "year": 2023,
+    "fuelType": "Điện",
+    "transmission": "Tự động",
+    "seats": 5,
+    "engine": "168kW Electric Motor",
+    "mileage": 25,
+    "colors": [
+      {
+        "name": "Xanh Lá",
+        "code": "#1a472a",
+        "_id": { "$oid": "6986056b620d7745bfde7f49" }
+      },
+      {
+        "name": "Nâu Đồng",
+        "code": "#8b4513",
+        "_id": { "$oid": "6986056b620d7745bfde7f4a" }
+      },
+      {
+        "name": "Đỏ Ruby",
+        "code": "#9b111e",
+        "_id": { "$oid": "6986056b620d7745bfde7f4b" }
+      },
+      {
+        "name": "Bạc Ánh Kim",
+        "code": "#c0c0c0",
+        "_id": { "$oid": "6986056b620d7745bfde7f4c" }
+      },
+      {
+        "name": "Xanh Dương",
+        "code": "#1e3a5f",
+        "_id": { "$oid": "6986056b620d7745bfde7f4d" }
+      },
+      {
+        "name": "Đen Obsidian",
+        "code": "#0d0d0d",
+        "_id": { "$oid": "6986056b620d7745bfde7f4e" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "Standard",
+        "price": 1493615002,
+        "_id": { "$oid": "6986056b620d7745bfde7f4f" }
+      },
+      {
+        "name": "Premium",
+        "price": 1604080141,
+        "_id": { "$oid": "6986056b620d7745bfde7f50" }
+      },
+      {
+        "name": "Luxury",
+        "price": 1689352964,
+        "_id": { "$oid": "6986056b620d7745bfde7f51" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-12.jpg",
+      "/uploads/cars/sample-car-12.jpg",
+      "/uploads/cars/sample-car-2.jpg"
+    ],
+    "description": "Honda Civic - Mẫu xe luxury / xe sang Honda với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "4468",
+      "width": "1903",
+      "height": "1851",
+      "wheelBase": "3013",
+      "horsepower": "184",
+      "torque": "576"
+    },
+    "stock": 4,
+    "viewCount": 869,
+    "status": "available",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.036Z" },
+    "updatedAt": { "$date": "2026-02-06T15:14:51.036Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde7f52" },
+    "name": "Honda CR-V",
+    "slug": "honda-cr-v-1770390891014-10",
+    "brand": { "$oid": "6985d18f1645746fad37dd03" },
+    "category": { "$oid": "6985d2d8b9e0bd203be55721" },
+    "price": 1183832731,
+    "discountPrice": 0,
+    "year": 2022,
+    "fuelType": "Điện",
+    "transmission": "Tự động",
+    "seats": 7,
+    "engine": "318kW Electric Motor",
+    "mileage": 16,
+    "colors": [
+      {
+        "name": "Đen Obsidian",
+        "code": "#0d0d0d",
+        "_id": { "$oid": "6986056b620d7745bfde7f53" }
+      },
+      {
+        "name": "Xám Titanium",
+        "code": "#5a5a5a",
+        "_id": { "$oid": "6986056b620d7745bfde7f54" }
+      },
+      {
+        "name": "Xanh Lá",
+        "code": "#1a472a",
+        "_id": { "$oid": "6986056b620d7745bfde7f55" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "Base",
+        "price": 1183832731,
+        "_id": { "$oid": "6986056b620d7745bfde7f56" }
+      },
+      {
+        "name": "Mid",
+        "price": 1328799158,
+        "_id": { "$oid": "6986056b620d7745bfde7f57" }
+      },
+      {
+        "name": "Top",
+        "price": 1444950111,
+        "_id": { "$oid": "6986056b620d7745bfde7f58" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-4.jpg",
+      "/uploads/cars/sample-car-1.jpg",
+      "/uploads/cars/sample-car-4.jpg"
+    ],
+    "description": "Honda CR-V - Mẫu xe coupe Honda với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "4824",
+      "width": "1963",
+      "height": "1669",
+      "wheelBase": "2989",
+      "horsepower": "352",
+      "torque": "704"
+    },
+    "stock": 9,
+    "viewCount": 4778,
+    "status": "available",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.036Z" },
+    "updatedAt": { "$date": "2026-02-06T15:14:51.036Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde7f59" },
+    "name": "Honda HR-V",
+    "slug": "honda-hr-v-1770390891014-11",
+    "brand": { "$oid": "6985d18f1645746fad37dd03" },
+    "category": { "$oid": "6985d2d8b9e0bd203be55724" },
+    "price": 1221175500,
+    "discountPrice": 0,
+    "year": 2023,
+    "fuelType": "Dầu",
+    "transmission": "Số sàn",
+    "seats": 8,
+    "engine": "3.4L V8",
+    "mileage": 11,
+    "colors": [
+      {
+        "name": "Nâu Đồng",
+        "code": "#8b4513",
+        "_id": { "$oid": "6986056b620d7745bfde7f5a" }
+      },
+      {
+        "name": "Xanh Dương",
+        "code": "#1e3a5f",
+        "_id": { "$oid": "6986056b620d7745bfde7f5b" }
+      },
+      {
+        "name": "Bạc Ánh Kim",
+        "code": "#c0c0c0",
+        "_id": { "$oid": "6986056b620d7745bfde7f5c" }
+      },
+      {
+        "name": "Xám Titanium",
+        "code": "#5a5a5a",
+        "_id": { "$oid": "6986056b620d7745bfde7f5d" }
+      },
+      {
+        "name": "Đỏ Ruby",
+        "code": "#9b111e",
+        "_id": { "$oid": "6986056b620d7745bfde7f5e" }
+      },
+      {
+        "name": "Đen Obsidian",
+        "code": "#0d0d0d",
+        "_id": { "$oid": "6986056b620d7745bfde7f5f" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "Sport",
+        "price": 1221175500,
+        "_id": { "$oid": "6986056b620d7745bfde7f60" }
+      },
+      {
+        "name": "Elegance",
+        "price": 1335835151,
+        "_id": { "$oid": "6986056b620d7745bfde7f61" }
+      },
+      {
+        "name": "Signature",
+        "price": 1364563970,
+        "_id": { "$oid": "6986056b620d7745bfde7f62" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-10.jpg",
+      "/uploads/cars/sample-car-2.jpg",
+      "/uploads/cars/sample-car-15.jpg",
+      "/uploads/cars/sample-car-14.jpg"
+    ],
+    "description": "Honda HR-V - Mẫu xe electric / xe điện Honda với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "4967",
+      "width": "1786",
+      "height": "1452",
+      "wheelBase": "2756",
+      "horsepower": "140",
+      "torque": "401"
+    },
+    "stock": 3,
+    "viewCount": 2660,
+    "status": "available",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.036Z" },
+    "updatedAt": { "$date": "2026-02-06T15:14:51.036Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde7f63" },
+    "name": "Honda Accord",
+    "slug": "honda-accord-1770390891014-12",
+    "brand": { "$oid": "6985d18f1645746fad37dd03" },
+    "category": { "$oid": "6985d2d8b9e0bd203be55723" },
+    "price": 1159619391,
+    "discountPrice": 0,
+    "year": 2022,
+    "fuelType": "Xăng",
+    "transmission": "Số sàn",
+    "seats": 4,
+    "engine": "2.9L V6",
+    "mileage": 10,
+    "colors": [
+      {
+        "name": "Đen Obsidian",
+        "code": "#0d0d0d",
+        "_id": { "$oid": "6986056b620d7745bfde7f64" }
+      },
+      {
+        "name": "Bạc Ánh Kim",
+        "code": "#c0c0c0",
+        "_id": { "$oid": "6986056b620d7745bfde7f65" }
+      },
+      {
+        "name": "Xanh Dương",
+        "code": "#1e3a5f",
+        "_id": { "$oid": "6986056b620d7745bfde7f66" }
+      },
+      {
+        "name": "Trắng Ngọc Trai",
+        "code": "#f5f5f5",
+        "_id": { "$oid": "6986056b620d7745bfde7f67" }
+      },
+      {
+        "name": "Xám Titanium",
+        "code": "#5a5a5a",
+        "_id": { "$oid": "6986056b620d7745bfde7f68" }
+      },
+      {
+        "name": "Xanh Lá",
+        "code": "#1a472a",
+        "_id": { "$oid": "6986056b620d7745bfde7f69" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "G",
+        "price": 1159619391,
+        "_id": { "$oid": "6986056b620d7745bfde7f6a" }
+      },
+      {
+        "name": "V",
+        "price": 1218811998,
+        "_id": { "$oid": "6986056b620d7745bfde7f6b" }
+      },
+      {
+        "name": "Q",
+        "price": 1398331199,
+        "_id": { "$oid": "6986056b620d7745bfde7f6c" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-14.jpg",
+      "/uploads/cars/sample-car-4.jpg",
+      "/uploads/cars/sample-car-9.jpg"
+    ],
+    "description": "Honda Accord - Mẫu xe convertible / mui trần Honda với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "4510",
+      "width": "1904",
+      "height": "1862",
+      "wheelBase": "2953",
+      "horsepower": "278",
+      "torque": "527"
+    },
+    "stock": 1,
+    "viewCount": 2397,
+    "status": "available",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.037Z" },
+    "updatedAt": { "$date": "2026-02-07T07:02:49.666Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde7f6d" },
+    "name": "Honda BR-V",
+    "slug": "honda-br-v-1770390891014-13",
+    "brand": { "$oid": "6985d18f1645746fad37dd03" },
+    "category": { "$oid": "6985d2d8b9e0bd203be55722" },
+    "price": 564717586,
+    "discountPrice": 0,
+    "year": 2023,
+    "fuelType": "Điện",
+    "transmission": "Số sàn",
+    "seats": 4,
+    "engine": "300kW Electric Motor",
+    "mileage": 19,
+    "colors": [
+      {
+        "name": "Xanh Lá",
+        "code": "#1a472a",
+        "_id": { "$oid": "6986056b620d7745bfde7f6e" }
+      },
+      {
+        "name": "Xanh Dương",
+        "code": "#1e3a5f",
+        "_id": { "$oid": "6986056b620d7745bfde7f6f" }
+      },
+      {
+        "name": "Xám Titanium",
+        "code": "#5a5a5a",
+        "_id": { "$oid": "6986056b620d7745bfde7f70" }
+      },
+      {
+        "name": "Trắng Ngọc Trai",
+        "code": "#f5f5f5",
+        "_id": { "$oid": "6986056b620d7745bfde7f71" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "G",
+        "price": 564717586,
+        "_id": { "$oid": "6986056b620d7745bfde7f72" }
+      },
+      {
+        "name": "V",
+        "price": 624640156,
+        "_id": { "$oid": "6986056b620d7745bfde7f73" }
+      },
+      {
+        "name": "Q",
+        "price": 680542740,
+        "_id": { "$oid": "6986056b620d7745bfde7f74" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-6.jpg",
+      "/uploads/cars/sample-car-10.jpg"
+    ],
+    "description": "Honda BR-V - Mẫu xe sport / thể thao Honda với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "4550",
+      "width": "1932",
+      "height": "1752",
+      "wheelBase": "3095",
+      "horsepower": "295",
+      "torque": "701"
+    },
+    "stock": 5,
+    "viewCount": 2298,
+    "status": "available",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.037Z" },
+    "updatedAt": { "$date": "2026-02-10T02:49:27.194Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde7f75" },
+    "name": "Hyundai Accent",
+    "slug": "hyundai-accent-1770390891014-14",
+    "brand": { "$oid": "6985d18f1645746fad37dd04" },
+    "category": { "$oid": "6985d2d8b9e0bd203be55722" },
+    "price": 874395353,
+    "discountPrice": 0,
+    "year": 2024,
+    "fuelType": "Hybrid",
+    "transmission": "Tự động",
+    "seats": 7,
+    "engine": "3.1L V8",
+    "mileage": 10,
+    "colors": [
+      {
+        "name": "Bạc Ánh Kim",
+        "code": "#c0c0c0",
+        "_id": { "$oid": "6986056b620d7745bfde7f76" }
+      },
+      {
+        "name": "Xanh Lá",
+        "code": "#1a472a",
+        "_id": { "$oid": "6986056b620d7745bfde7f77" }
+      },
+      {
+        "name": "Đỏ Ruby",
+        "code": "#9b111e",
+        "_id": { "$oid": "6986056b620d7745bfde7f78" }
+      },
+      {
+        "name": "Đen Obsidian",
+        "code": "#0d0d0d",
+        "_id": { "$oid": "6986056b620d7745bfde7f79" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "Base",
+        "price": 874395353,
+        "_id": { "$oid": "6986056b620d7745bfde7f7a" }
+      },
+      {
+        "name": "Mid",
+        "price": 987338453,
+        "_id": { "$oid": "6986056b620d7745bfde7f7b" }
+      },
+      {
+        "name": "Top",
+        "price": 1008970399,
+        "_id": { "$oid": "6986056b620d7745bfde7f7c" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-5.jpg",
+      "/uploads/cars/sample-car-11.jpg",
+      "/uploads/cars/sample-car-6.jpg"
+    ],
+    "description": "Hyundai Accent - Mẫu xe sport / thể thao Hyundai với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "4560",
+      "width": "1796",
+      "height": "1592",
+      "wheelBase": "3018",
+      "horsepower": "275",
+      "torque": "208"
+    },
+    "stock": 10,
+    "viewCount": 1691,
+    "status": "available",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.037Z" },
+    "updatedAt": { "$date": "2026-02-06T15:14:51.037Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde7f7d" },
+    "name": "Hyundai Elantra",
+    "slug": "hyundai-elantra-1770390891014-15",
+    "brand": { "$oid": "6985d18f1645746fad37dd04" },
+    "category": { "$oid": "6985d2d8b9e0bd203be5571f" },
+    "price": 877317151,
+    "discountPrice": 0,
+    "year": 2023,
+    "fuelType": "Xăng",
+    "transmission": "Số sàn",
+    "seats": 7,
+    "engine": "1.9L Turbo",
+    "mileage": 9,
+    "colors": [
+      {
+        "name": "Trắng Ngọc Trai",
+        "code": "#f5f5f5",
+        "_id": { "$oid": "6986056b620d7745bfde7f7e" }
+      },
+      {
+        "name": "Bạc Ánh Kim",
+        "code": "#c0c0c0",
+        "_id": { "$oid": "6986056b620d7745bfde7f7f" }
+      },
+      {
+        "name": "Xám Titanium",
+        "code": "#5a5a5a",
+        "_id": { "$oid": "6986056b620d7745bfde7f80" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "G",
+        "price": 877317151,
+        "_id": { "$oid": "6986056b620d7745bfde7f81" }
+      },
+      {
+        "name": "V",
+        "price": 1024001463,
+        "_id": { "$oid": "6986056b620d7745bfde7f82" }
+      },
+      {
+        "name": "Q",
+        "price": 1059109937,
+        "_id": { "$oid": "6986056b620d7745bfde7f83" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-4.jpg",
+      "/uploads/cars/sample-car-10.jpg",
+      "/uploads/cars/sample-car-3.jpg"
+    ],
+    "description": "Hyundai Elantra - Mẫu xe mpv Hyundai với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "4263",
+      "width": "1956",
+      "height": "1821",
+      "wheelBase": "2894",
+      "horsepower": "120",
+      "torque": "305"
+    },
+    "stock": 3,
+    "viewCount": 2751,
+    "status": "available",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.037Z" },
+    "updatedAt": { "$date": "2026-02-10T08:57:10.142Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde7f84" },
+    "name": "Hyundai Tucson",
+    "slug": "hyundai-tucson-1770390891014-16",
+    "brand": { "$oid": "6985d18f1645746fad37dd04" },
+    "category": { "$oid": "6985d2d8b9e0bd203be55721" },
+    "price": 804927051,
+    "discountPrice": 0,
+    "year": 2022,
+    "fuelType": "Dầu",
+    "transmission": "Tự động",
+    "seats": 7,
+    "engine": "4.0L I4",
+    "mileage": 6,
+    "colors": [
+      {
+        "name": "Đen Obsidian",
+        "code": "#0d0d0d",
+        "_id": { "$oid": "6986056b620d7745bfde7f85" }
+      },
+      {
+        "name": "Trắng Ngọc Trai",
+        "code": "#f5f5f5",
+        "_id": { "$oid": "6986056b620d7745bfde7f86" }
+      },
+      {
+        "name": "Bạc Ánh Kim",
+        "code": "#c0c0c0",
+        "_id": { "$oid": "6986056b620d7745bfde7f87" }
+      },
+      {
+        "name": "Nâu Đồng",
+        "code": "#8b4513",
+        "_id": { "$oid": "6986056b620d7745bfde7f88" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "Base",
+        "price": 804927051,
+        "_id": { "$oid": "6986056b620d7745bfde7f89" }
+      },
+      {
+        "name": "Mid",
+        "price": 928012421,
+        "_id": { "$oid": "6986056b620d7745bfde7f8a" }
+      },
+      {
+        "name": "Top",
+        "price": 1042111641,
+        "_id": { "$oid": "6986056b620d7745bfde7f8b" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-5.jpg",
+      "/uploads/cars/sample-car-13.jpg",
+      "/uploads/cars/sample-car-9.jpg",
+      "/uploads/cars/sample-car-15.jpg"
+    ],
+    "description": "Hyundai Tucson - Mẫu xe coupe Hyundai với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "4909",
+      "width": "1920",
+      "height": "1683",
+      "wheelBase": "2859",
+      "horsepower": "384",
+      "torque": "454"
+    },
+    "stock": 4,
+    "viewCount": 3545,
+    "status": "available",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.037Z" },
+    "updatedAt": { "$date": "2026-02-07T04:53:14.677Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde7f8c" },
+    "name": "Hyundai Santa Fe",
+    "slug": "hyundai-santa-fe-1770390891014-17",
+    "brand": { "$oid": "6985d18f1645746fad37dd04" },
+    "category": { "$oid": "6985d2d8b9e0bd203be55723" },
+    "price": 10000000,
+    "discountPrice": 1000000,
+    "year": 2024,
+    "fuelType": "Hybrid",
+    "transmission": "Số sàn",
+    "seats": 8,
+    "engine": "2.4L Turbo",
+    "mileage": 15,
+    "colors": [
+      {
+        "name": "Bạc Ánh Kim",
+        "code": "#c0c0c0",
+        "_id": { "$oid": "6986056b620d7745bfde7f8d" }
+      },
+      {
+        "name": "Nâu Đồng",
+        "code": "#8b4513",
+        "_id": { "$oid": "6986056b620d7745bfde7f8e" }
+      },
+      {
+        "name": "Đen Obsidian",
+        "code": "#0d0d0d",
+        "_id": { "$oid": "6986056b620d7745bfde7f8f" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "G",
+        "price": 10000000,
+        "_id": { "$oid": "6986056b620d7745bfde7f90" }
+      },
+      {
+        "name": "V",
+        "price": 10000000,
+        "_id": { "$oid": "6986056b620d7745bfde7f91" }
+      },
+      {
+        "name": "Q",
+        "price": 10000000,
+        "_id": { "$oid": "6986056b620d7745bfde7f92" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-13.jpg",
+      "/uploads/cars/sample-car-11.jpg"
+    ],
+    "description": "Hyundai Santa Fe - Mẫu xe convertible / mui trần Hyundai với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "4400",
+      "width": "1871",
+      "height": "1720",
+      "wheelBase": "2633",
+      "horsepower": "586",
+      "torque": "166"
+    },
+    "stock": 8,
+    "viewCount": 767,
+    "status": "available",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.037Z" },
+    "updatedAt": { "$date": "2026-02-10T02:50:23.558Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde7f93" },
+    "name": "Hyundai Creta",
+    "slug": "hyundai-creta-1770390891014-18",
+    "brand": { "$oid": "6985d18f1645746fad37dd04" },
+    "category": { "$oid": "6985d2d8b9e0bd203be55720" },
+    "price": 1086832479,
+    "discountPrice": 0,
+    "year": 2025,
+    "fuelType": "Xăng",
+    "transmission": "Tự động",
+    "seats": 7,
+    "engine": "2.4L I4",
+    "mileage": 15,
+    "colors": [
+      {
+        "name": "Bạc Ánh Kim",
+        "code": "#c0c0c0",
+        "_id": { "$oid": "6986056b620d7745bfde7f94" }
+      },
+      {
+        "name": "Đỏ Ruby",
+        "code": "#9b111e",
+        "_id": { "$oid": "6986056b620d7745bfde7f95" }
+      },
+      {
+        "name": "Nâu Đồng",
+        "code": "#8b4513",
+        "_id": { "$oid": "6986056b620d7745bfde7f96" }
+      },
+      {
+        "name": "Xanh Dương",
+        "code": "#1e3a5f",
+        "_id": { "$oid": "6986056b620d7745bfde7f97" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "G",
+        "price": 1086832479,
+        "_id": { "$oid": "6986056b620d7745bfde7f98" }
+      },
+      {
+        "name": "V",
+        "price": 1208951960,
+        "_id": { "$oid": "6986056b620d7745bfde7f99" }
+      },
+      {
+        "name": "Q",
+        "price": 1372005439,
+        "_id": { "$oid": "6986056b620d7745bfde7f9a" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-11.jpg",
+      "/uploads/cars/sample-car-14.jpg"
+    ],
+    "description": "Hyundai Creta - Mẫu xe pickup / bán tải Hyundai với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "5024",
+      "width": "1922",
+      "height": "1685",
+      "wheelBase": "2953",
+      "horsepower": "496",
+      "torque": "594"
+    },
+    "stock": 1,
+    "viewCount": 1178,
+    "status": "available",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.037Z" },
+    "updatedAt": { "$date": "2026-02-06T15:14:51.037Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde7f9b" },
+    "name": "Hyundai Stargazer",
+    "slug": "hyundai-stargazer-1770390891014-19",
+    "brand": { "$oid": "6985d18f1645746fad37dd04" },
+    "category": { "$oid": "6985d2d8b9e0bd203be55722" },
+    "price": 738369432,
+    "discountPrice": 678853719,
+    "year": 2024,
+    "fuelType": "Dầu",
+    "transmission": "Số sàn",
+    "seats": 5,
+    "engine": "3.1L V8",
+    "mileage": 10,
+    "colors": [
+      {
+        "name": "Xanh Dương",
+        "code": "#1e3a5f",
+        "_id": { "$oid": "6986056b620d7745bfde7f9c" }
+      },
+      {
+        "name": "Nâu Đồng",
+        "code": "#8b4513",
+        "_id": { "$oid": "6986056b620d7745bfde7f9d" }
+      },
+      {
+        "name": "Xanh Lá",
+        "code": "#1a472a",
+        "_id": { "$oid": "6986056b620d7745bfde7f9e" }
+      },
+      {
+        "name": "Bạc Ánh Kim",
+        "code": "#c0c0c0",
+        "_id": { "$oid": "6986056b620d7745bfde7f9f" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "G",
+        "price": 738369432,
+        "_id": { "$oid": "6986056b620d7745bfde7fa0" }
+      },
+      {
+        "name": "V",
+        "price": 866988600,
+        "_id": { "$oid": "6986056b620d7745bfde7fa1" }
+      },
+      {
+        "name": "Q",
+        "price": 1025813464,
+        "_id": { "$oid": "6986056b620d7745bfde7fa2" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-9.jpg",
+      "/uploads/cars/sample-car-6.jpg",
+      "/uploads/cars/sample-car-14.jpg",
+      "/uploads/cars/sample-car-11.jpg"
+    ],
+    "description": "Hyundai Stargazer - Mẫu xe sport / thể thao Hyundai với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "4997",
+      "width": "1844",
+      "height": "1896",
+      "wheelBase": "2603",
+      "horsepower": "545",
+      "torque": "470"
+    },
+    "stock": 10,
+    "viewCount": 375,
+    "status": "available",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.037Z" },
+    "updatedAt": { "$date": "2026-02-06T15:14:51.037Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde7fa3" },
+    "name": "Hyundai Ioniq 5",
+    "slug": "hyundai-ioniq-5-1770390891014-20",
+    "brand": { "$oid": "6985d18f1645746fad37dd04" },
+    "category": { "$oid": "6985d2d8b9e0bd203be5571d" },
+    "price": 970317167,
+    "discountPrice": 912347064,
+    "year": 2025,
+    "fuelType": "Điện",
+    "transmission": "Tự động",
+    "seats": 8,
+    "engine": "397kW Electric Motor",
+    "mileage": 22,
+    "colors": [
+      {
+        "name": "Đen Obsidian",
+        "code": "#0d0d0d",
+        "_id": { "$oid": "6986056b620d7745bfde7fa4" }
+      },
+      {
+        "name": "Nâu Đồng",
+        "code": "#8b4513",
+        "_id": { "$oid": "6986056b620d7745bfde7fa5" }
+      },
+      {
+        "name": "Xám Titanium",
+        "code": "#5a5a5a",
+        "_id": { "$oid": "6986056b620d7745bfde7fa6" }
+      },
+      {
+        "name": "Đỏ Ruby",
+        "code": "#9b111e",
+        "_id": { "$oid": "6986056b620d7745bfde7fa7" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "G",
+        "price": 970317167,
+        "_id": { "$oid": "6986056b620d7745bfde7fa8" }
+      },
+      {
+        "name": "V",
+        "price": 1022283398,
+        "_id": { "$oid": "6986056b620d7745bfde7fa9" }
+      },
+      {
+        "name": "Q",
+        "price": 1237350127,
+        "_id": { "$oid": "6986056b620d7745bfde7faa" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-2.jpg",
+      "/uploads/cars/sample-car-9.jpg",
+      "/uploads/cars/sample-car-7.jpg",
+      "/uploads/cars/sample-car-15.jpg"
+    ],
+    "description": "Hyundai Ioniq 5 - Mẫu xe crossover Hyundai với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "5160",
+      "width": "1857",
+      "height": "1683",
+      "wheelBase": "3034",
+      "horsepower": "276",
+      "torque": "673"
+    },
+    "stock": 10,
+    "viewCount": 1579,
+    "status": "available",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.037Z" },
+    "updatedAt": { "$date": "2026-02-06T15:42:34.67Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde7fab" },
+    "name": "Kia Morning",
+    "slug": "kia-morning-1770390891014-21",
+    "brand": { "$oid": "6985d18f1645746fad37dd05" },
+    "category": { "$oid": "6985d2d8b9e0bd203be5571f" },
+    "price": 938274379,
+    "discountPrice": 917755527,
+    "year": 2022,
+    "fuelType": "Dầu",
+    "transmission": "Tự động",
+    "seats": 5,
+    "engine": "2.4L I4",
+    "mileage": 11,
+    "colors": [
+      {
+        "name": "Xanh Dương",
+        "code": "#1e3a5f",
+        "_id": { "$oid": "6986056b620d7745bfde7fac" }
+      },
+      {
+        "name": "Đỏ Ruby",
+        "code": "#9b111e",
+        "_id": { "$oid": "6986056b620d7745bfde7fad" }
+      },
+      {
+        "name": "Nâu Đồng",
+        "code": "#8b4513",
+        "_id": { "$oid": "6986056b620d7745bfde7fae" }
+      },
+      {
+        "name": "Đen Obsidian",
+        "code": "#0d0d0d",
+        "_id": { "$oid": "6986056b620d7745bfde7faf" }
+      },
+      {
+        "name": "Xanh Lá",
+        "code": "#1a472a",
+        "_id": { "$oid": "6986056b620d7745bfde7fb0" }
+      },
+      {
+        "name": "Xám Titanium",
+        "code": "#5a5a5a",
+        "_id": { "$oid": "6986056b620d7745bfde7fb1" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "Standard",
+        "price": 938274379,
+        "_id": { "$oid": "6986056b620d7745bfde7fb2" }
+      },
+      {
+        "name": "Premium",
+        "price": 1062634436,
+        "_id": { "$oid": "6986056b620d7745bfde7fb3" }
+      },
+      {
+        "name": "Luxury",
+        "price": 1081972941,
+        "_id": { "$oid": "6986056b620d7745bfde7fb4" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-13.jpg",
+      "/uploads/cars/sample-car-4.jpg",
+      "/uploads/cars/sample-car-13.jpg"
+    ],
+    "description": "Kia Morning - Mẫu xe mpv Kia với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "4707",
+      "width": "1789",
+      "height": "1431",
+      "wheelBase": "2851",
+      "horsepower": "575",
+      "torque": "268"
+    },
+    "stock": 3,
+    "viewCount": 1210,
+    "status": "available",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.037Z" },
+    "updatedAt": { "$date": "2026-02-06T15:14:51.037Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde7fb5" },
+    "name": "Kia Seltos",
+    "slug": "kia-seltos-1770390891014-22",
+    "brand": { "$oid": "6985d18f1645746fad37dd05" },
+    "category": { "$oid": "6985d2d8b9e0bd203be5571c" },
+    "price": 457026061,
+    "discountPrice": 0,
+    "year": 2022,
+    "fuelType": "Dầu",
+    "transmission": "Số sàn",
+    "seats": 5,
+    "engine": "3.9L Turbo",
+    "mileage": 13,
+    "colors": [
+      {
+        "name": "Bạc Ánh Kim",
+        "code": "#c0c0c0",
+        "_id": { "$oid": "6986056b620d7745bfde7fb6" }
+      },
+      {
+        "name": "Đen Obsidian",
+        "code": "#0d0d0d",
+        "_id": { "$oid": "6986056b620d7745bfde7fb7" }
+      },
+      {
+        "name": "Xám Titanium",
+        "code": "#5a5a5a",
+        "_id": { "$oid": "6986056b620d7745bfde7fb8" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "G",
+        "price": 457026061,
+        "_id": { "$oid": "6986056b620d7745bfde7fb9" }
+      },
+      {
+        "name": "V",
+        "price": 577025563,
+        "_id": { "$oid": "6986056b620d7745bfde7fba" }
+      },
+      {
+        "name": "Q",
+        "price": 716203835,
+        "_id": { "$oid": "6986056b620d7745bfde7fbb" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-10.jpg",
+      "/uploads/cars/sample-car-2.jpg"
+    ],
+    "description": "Kia Seltos - Mẫu xe suv Kia với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "4308",
+      "width": "1991",
+      "height": "1651",
+      "wheelBase": "2874",
+      "horsepower": "563",
+      "torque": "444"
+    },
+    "stock": 2,
+    "viewCount": 2759,
+    "status": "coming_soon",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.037Z" },
+    "updatedAt": { "$date": "2026-02-10T02:47:04.88Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde7fbc" },
+    "name": "Kia Sportage",
+    "slug": "kia-sportage-1770390891014-23",
+    "brand": { "$oid": "6985d18f1645746fad37dd05" },
+    "category": { "$oid": "6985d2d8b9e0bd203be5571c" },
+    "price": 565304851,
+    "discountPrice": 0,
+    "year": 2024,
+    "fuelType": "Hybrid",
+    "transmission": "Tự động",
+    "seats": 8,
+    "engine": "1.8L Turbo",
+    "mileage": 7,
+    "colors": [
+      {
+        "name": "Trắng Ngọc Trai",
+        "code": "#f5f5f5",
+        "_id": { "$oid": "6986056b620d7745bfde7fbd" }
+      },
+      {
+        "name": "Đỏ Ruby",
+        "code": "#9b111e",
+        "_id": { "$oid": "6986056b620d7745bfde7fbe" }
+      },
+      {
+        "name": "Xanh Dương",
+        "code": "#1e3a5f",
+        "_id": { "$oid": "6986056b620d7745bfde7fbf" }
+      },
+      {
+        "name": "Đen Obsidian",
+        "code": "#0d0d0d",
+        "_id": { "$oid": "6986056b620d7745bfde7fc0" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "Base",
+        "price": 565304851,
+        "_id": { "$oid": "6986056b620d7745bfde7fc1" }
+      },
+      {
+        "name": "Mid",
+        "price": 684969551,
+        "_id": { "$oid": "6986056b620d7745bfde7fc2" }
+      },
+      {
+        "name": "Top",
+        "price": 683696435,
+        "_id": { "$oid": "6986056b620d7745bfde7fc3" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-6.jpg",
+      "/uploads/cars/sample-car-4.jpg",
+      "/uploads/cars/sample-car-15.jpg"
+    ],
+    "description": "Kia Sportage - Mẫu xe suv Kia với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "4989",
+      "width": "1953",
+      "height": "1533",
+      "wheelBase": "2937",
+      "horsepower": "398",
+      "torque": "163"
+    },
+    "stock": 7,
+    "viewCount": 4632,
+    "status": "available",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.037Z" },
+    "updatedAt": { "$date": "2026-02-06T15:14:51.037Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde7fc4" },
+    "name": "Kia Sorento",
+    "slug": "kia-sorento-1770390891014-24",
+    "brand": { "$oid": "6985d18f1645746fad37dd05" },
+    "category": { "$oid": "6985d2d8b9e0bd203be55722" },
+    "price": 892408048,
+    "discountPrice": 0,
+    "year": 2025,
+    "fuelType": "Điện",
+    "transmission": "Số sàn",
+    "seats": 8,
+    "engine": "322kW Electric Motor",
+    "mileage": 15,
+    "colors": [
+      {
+        "name": "Xanh Dương",
+        "code": "#1e3a5f",
+        "_id": { "$oid": "6986056b620d7745bfde7fc5" }
+      },
+      {
+        "name": "Nâu Đồng",
+        "code": "#8b4513",
+        "_id": { "$oid": "6986056b620d7745bfde7fc6" }
+      },
+      {
+        "name": "Xám Titanium",
+        "code": "#5a5a5a",
+        "_id": { "$oid": "6986056b620d7745bfde7fc7" }
+      },
+      {
+        "name": "Đỏ Ruby",
+        "code": "#9b111e",
+        "_id": { "$oid": "6986056b620d7745bfde7fc8" }
+      },
+      {
+        "name": "Bạc Ánh Kim",
+        "code": "#c0c0c0",
+        "_id": { "$oid": "6986056b620d7745bfde7fc9" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "Base",
+        "price": 892408048,
+        "_id": { "$oid": "6986056b620d7745bfde7fca" }
+      },
+      {
+        "name": "Mid",
+        "price": 953515949,
+        "_id": { "$oid": "6986056b620d7745bfde7fcb" }
+      },
+      {
+        "name": "Top",
+        "price": 1102614332,
+        "_id": { "$oid": "6986056b620d7745bfde7fcc" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-14.jpg",
+      "/uploads/cars/sample-car-10.jpg"
+    ],
+    "description": "Kia Sorento - Mẫu xe sport / thể thao Kia với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "4744",
+      "width": "1764",
+      "height": "1480",
+      "wheelBase": "2763",
+      "horsepower": "523",
+      "torque": "643"
+    },
+    "stock": 9,
+    "viewCount": 4348,
+    "status": "available",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.037Z" },
+    "updatedAt": { "$date": "2026-02-06T15:14:51.037Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde7fcd" },
+    "name": "Kia Carnival",
+    "slug": "kia-carnival-1770390891014-25",
+    "brand": { "$oid": "6985d18f1645746fad37dd05" },
+    "category": { "$oid": "6985d2d8b9e0bd203be5571e" },
+    "price": 1481946348,
+    "discountPrice": 0,
+    "year": 2024,
+    "fuelType": "Hybrid",
+    "transmission": "Số sàn",
+    "seats": 4,
+    "engine": "3.3L V8",
+    "mileage": 11,
+    "colors": [
+      {
+        "name": "Bạc Ánh Kim",
+        "code": "#c0c0c0",
+        "_id": { "$oid": "6986056b620d7745bfde7fce" }
+      },
+      {
+        "name": "Trắng Ngọc Trai",
+        "code": "#f5f5f5",
+        "_id": { "$oid": "6986056b620d7745bfde7fcf" }
+      },
+      {
+        "name": "Xanh Lá",
+        "code": "#1a472a",
+        "_id": { "$oid": "6986056b620d7745bfde7fd0" }
+      },
+      {
+        "name": "Đen Obsidian",
+        "code": "#0d0d0d",
+        "_id": { "$oid": "6986056b620d7745bfde7fd1" }
+      },
+      {
+        "name": "Xanh Dương",
+        "code": "#1e3a5f",
+        "_id": { "$oid": "6986056b620d7745bfde7fd2" }
+      },
+      {
+        "name": "Nâu Đồng",
+        "code": "#8b4513",
+        "_id": { "$oid": "6986056b620d7745bfde7fd3" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "Sport",
+        "price": 1481946348,
+        "_id": { "$oid": "6986056b620d7745bfde7fd4" }
+      },
+      {
+        "name": "Elegance",
+        "price": 1614688996,
+        "_id": { "$oid": "6986056b620d7745bfde7fd5" }
+      },
+      {
+        "name": "Signature",
+        "price": 1604561820,
+        "_id": { "$oid": "6986056b620d7745bfde7fd6" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-13.jpg",
+      "/uploads/cars/sample-car-4.jpg",
+      "/uploads/cars/sample-car-8.jpg"
+    ],
+    "description": "Kia Carnival - Mẫu xe hatchback  Kia với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "4351",
+      "width": "1927",
+      "height": "1843",
+      "wheelBase": "2795",
+      "horsepower": "105",
+      "torque": "182"
+    },
+    "stock": 1,
+    "viewCount": 4198,
+    "status": "coming_soon",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.037Z" },
+    "updatedAt": { "$date": "2026-02-06T15:14:51.037Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde7fd7" },
+    "name": "Kia K3",
+    "slug": "kia-k3-1770390891014-26",
+    "brand": { "$oid": "6985d18f1645746fad37dd05" },
+    "category": { "$oid": "6985d2d8b9e0bd203be5571d" },
+    "price": 782441429,
+    "discountPrice": 0,
+    "year": 2023,
+    "fuelType": "Hybrid",
+    "transmission": "Số sàn",
+    "seats": 4,
+    "engine": "3.5L V8",
+    "mileage": 8,
+    "colors": [
+      {
+        "name": "Bạc Ánh Kim",
+        "code": "#c0c0c0",
+        "_id": { "$oid": "6986056b620d7745bfde7fd8" }
+      },
+      {
+        "name": "Nâu Đồng",
+        "code": "#8b4513",
+        "_id": { "$oid": "6986056b620d7745bfde7fd9" }
+      },
+      {
+        "name": "Đỏ Ruby",
+        "code": "#9b111e",
+        "_id": { "$oid": "6986056b620d7745bfde7fda" }
+      },
+      {
+        "name": "Đen Obsidian",
+        "code": "#0d0d0d",
+        "_id": { "$oid": "6986056b620d7745bfde7fdb" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "Sport",
+        "price": 782441429,
+        "_id": { "$oid": "6986056b620d7745bfde7fdc" }
+      },
+      {
+        "name": "Elegance",
+        "price": 895316836,
+        "_id": { "$oid": "6986056b620d7745bfde7fdd" }
+      },
+      {
+        "name": "Signature",
+        "price": 912727207,
+        "_id": { "$oid": "6986056b620d7745bfde7fde" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-2.jpg",
+      "/uploads/cars/sample-car-7.jpg",
+      "/uploads/cars/sample-car-5.jpg"
+    ],
+    "description": "Kia K3 - Mẫu xe crossover Kia với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "4687",
+      "width": "1787",
+      "height": "1899",
+      "wheelBase": "2989",
+      "horsepower": "594",
+      "torque": "472"
+    },
+    "stock": 1,
+    "viewCount": 1844,
+    "status": "available",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.037Z" },
+    "updatedAt": { "$date": "2026-02-06T15:14:51.037Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde7fdf" },
+    "name": "Kia K5",
+    "slug": "kia-k5-1770390891014-27",
+    "brand": { "$oid": "6985d18f1645746fad37dd05" },
+    "category": { "$oid": "6985d2d8b9e0bd203be55721" },
+    "price": 476233439,
+    "discountPrice": 0,
+    "year": 2023,
+    "fuelType": "Dầu",
+    "transmission": "Số sàn",
+    "seats": 8,
+    "engine": "2.5L I4",
+    "mileage": 11,
+    "colors": [
+      {
+        "name": "Xanh Lá",
+        "code": "#1a472a",
+        "_id": { "$oid": "6986056b620d7745bfde7fe0" }
+      },
+      {
+        "name": "Trắng Ngọc Trai",
+        "code": "#f5f5f5",
+        "_id": { "$oid": "6986056b620d7745bfde7fe1" }
+      },
+      {
+        "name": "Đỏ Ruby",
+        "code": "#9b111e",
+        "_id": { "$oid": "6986056b620d7745bfde7fe2" }
+      },
+      {
+        "name": "Nâu Đồng",
+        "code": "#8b4513",
+        "_id": { "$oid": "6986056b620d7745bfde7fe3" }
+      },
+      {
+        "name": "Xám Titanium",
+        "code": "#5a5a5a",
+        "_id": { "$oid": "6986056b620d7745bfde7fe4" }
+      },
+      {
+        "name": "Bạc Ánh Kim",
+        "code": "#c0c0c0",
+        "_id": { "$oid": "6986056b620d7745bfde7fe5" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "Sport",
+        "price": 476233439,
+        "_id": { "$oid": "6986056b620d7745bfde7fe6" }
+      },
+      {
+        "name": "Elegance",
+        "price": 552119334,
+        "_id": { "$oid": "6986056b620d7745bfde7fe7" }
+      },
+      {
+        "name": "Signature",
+        "price": 760801275,
+        "_id": { "$oid": "6986056b620d7745bfde7fe8" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-5.jpg",
+      "/uploads/cars/sample-car-9.jpg",
+      "/uploads/cars/sample-car-14.jpg",
+      "/uploads/cars/sample-car-13.jpg"
+    ],
+    "description": "Kia K5 - Mẫu xe coupe Kia với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "4262",
+      "width": "1905",
+      "height": "1753",
+      "wheelBase": "2732",
+      "horsepower": "457",
+      "torque": "529"
+    },
+    "stock": 3,
+    "viewCount": 4728,
+    "status": "available",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.037Z" },
+    "updatedAt": { "$date": "2026-02-06T15:14:51.037Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde7fe9" },
+    "name": "Mazda Mazda2",
+    "slug": "mazda-mazda2-1770390891014-28",
+    "brand": { "$oid": "6985d18f1645746fad37dd06" },
+    "category": { "$oid": "6985d2d8b9e0bd203be55724" },
+    "price": 1476013154,
+    "discountPrice": 0,
+    "year": 2022,
+    "fuelType": "Điện",
+    "transmission": "Tự động",
+    "seats": 8,
+    "engine": "190kW Electric Motor",
+    "mileage": 17,
+    "colors": [
+      {
+        "name": "Đen Obsidian",
+        "code": "#0d0d0d",
+        "_id": { "$oid": "6986056b620d7745bfde7fea" }
+      },
+      {
+        "name": "Nâu Đồng",
+        "code": "#8b4513",
+        "_id": { "$oid": "6986056b620d7745bfde7feb" }
+      },
+      {
+        "name": "Xanh Dương",
+        "code": "#1e3a5f",
+        "_id": { "$oid": "6986056b620d7745bfde7fec" }
+      },
+      {
+        "name": "Trắng Ngọc Trai",
+        "code": "#f5f5f5",
+        "_id": { "$oid": "6986056b620d7745bfde7fed" }
+      },
+      {
+        "name": "Đỏ Ruby",
+        "code": "#9b111e",
+        "_id": { "$oid": "6986056b620d7745bfde7fee" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "G",
+        "price": 1476013154,
+        "_id": { "$oid": "6986056b620d7745bfde7fef" }
+      },
+      {
+        "name": "V",
+        "price": 1531666756,
+        "_id": { "$oid": "6986056b620d7745bfde7ff0" }
+      },
+      {
+        "name": "Q",
+        "price": 1614118144,
+        "_id": { "$oid": "6986056b620d7745bfde7ff1" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-9.jpg",
+      "/uploads/cars/sample-car-9.jpg"
+    ],
+    "description": "Mazda Mazda2 - Mẫu xe electric / xe điện Mazda với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "4541",
+      "width": "1945",
+      "height": "1414",
+      "wheelBase": "2615",
+      "horsepower": "596",
+      "torque": "168"
+    },
+    "stock": 3,
+    "viewCount": 1598,
+    "status": "available",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.037Z" },
+    "updatedAt": { "$date": "2026-02-06T15:14:51.037Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde7ff2" },
+    "name": "Mazda Mazda3",
+    "slug": "mazda-mazda3-1770390891014-29",
+    "brand": { "$oid": "6985d18f1645746fad37dd06" },
+    "category": { "$oid": "6985d2d8b9e0bd203be55725" },
+    "price": 1091426289,
+    "discountPrice": 0,
+    "year": 2022,
+    "fuelType": "Hybrid",
+    "transmission": "Số sàn",
+    "seats": 4,
+    "engine": "2.7L I4",
+    "mileage": 7,
+    "colors": [
+      {
+        "name": "Trắng Ngọc Trai",
+        "code": "#f5f5f5",
+        "_id": { "$oid": "6986056b620d7745bfde7ff3" }
+      },
+      {
+        "name": "Xanh Lá",
+        "code": "#1a472a",
+        "_id": { "$oid": "6986056b620d7745bfde7ff4" }
+      },
+      {
+        "name": "Bạc Ánh Kim",
+        "code": "#c0c0c0",
+        "_id": { "$oid": "6986056b620d7745bfde7ff5" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "G",
+        "price": 1091426289,
+        "_id": { "$oid": "6986056b620d7745bfde7ff6" }
+      },
+      {
+        "name": "V",
+        "price": 1177202423,
+        "_id": { "$oid": "6986056b620d7745bfde7ff7" }
+      },
+      {
+        "name": "Q",
+        "price": 1331282499,
+        "_id": { "$oid": "6986056b620d7745bfde7ff8" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-8.jpg",
+      "/uploads/cars/sample-car-11.jpg",
+      "/uploads/cars/sample-car-12.jpg",
+      "/uploads/cars/sample-car-5.jpg"
+    ],
+    "description": "Mazda Mazda3 - Mẫu xe luxury / xe sang Mazda với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "4648",
+      "width": "1759",
+      "height": "1559",
+      "wheelBase": "2605",
+      "horsepower": "529",
+      "torque": "807"
+    },
+    "stock": 2,
+    "viewCount": 3524,
+    "status": "available",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.037Z" },
+    "updatedAt": { "$date": "2026-02-06T15:14:51.037Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde7ff9" },
+    "name": "Mazda Mazda6",
+    "slug": "mazda-mazda6-1770390891014-30",
+    "brand": { "$oid": "6985d18f1645746fad37dd06" },
+    "category": { "$oid": "6985d2d8b9e0bd203be55721" },
+    "price": 1045896790,
+    "discountPrice": 0,
+    "year": 2025,
+    "fuelType": "Hybrid",
+    "transmission": "Tự động",
+    "seats": 8,
+    "engine": "1.8L V8",
+    "mileage": 11,
+    "colors": [
+      {
+        "name": "Bạc Ánh Kim",
+        "code": "#c0c0c0",
+        "_id": { "$oid": "6986056b620d7745bfde7ffa" }
+      },
+      {
+        "name": "Đen Obsidian",
+        "code": "#0d0d0d",
+        "_id": { "$oid": "6986056b620d7745bfde7ffb" }
+      },
+      {
+        "name": "Trắng Ngọc Trai",
+        "code": "#f5f5f5",
+        "_id": { "$oid": "6986056b620d7745bfde7ffc" }
+      },
+      {
+        "name": "Xám Titanium",
+        "code": "#5a5a5a",
+        "_id": { "$oid": "6986056b620d7745bfde7ffd" }
+      },
+      {
+        "name": "Đỏ Ruby",
+        "code": "#9b111e",
+        "_id": { "$oid": "6986056b620d7745bfde7ffe" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "G",
+        "price": 1045896790,
+        "_id": { "$oid": "6986056b620d7745bfde7fff" }
+      },
+      {
+        "name": "V",
+        "price": 1158123276,
+        "_id": { "$oid": "6986056b620d7745bfde8000" }
+      },
+      {
+        "name": "Q",
+        "price": 1212905924,
+        "_id": { "$oid": "6986056b620d7745bfde8001" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-8.jpg",
+      "/uploads/cars/sample-car-6.jpg",
+      "/uploads/cars/sample-car-11.jpg",
+      "/uploads/cars/sample-car-14.jpg"
+    ],
+    "description": "Mazda Mazda6 - Mẫu xe coupe Mazda với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "5127",
+      "width": "1854",
+      "height": "1667",
+      "wheelBase": "2795",
+      "horsepower": "211",
+      "torque": "579"
+    },
+    "stock": 2,
+    "viewCount": 2342,
+    "status": "available",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.037Z" },
+    "updatedAt": { "$date": "2026-02-06T15:14:51.037Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde8002" },
+    "name": "Mazda CX-3",
+    "slug": "mazda-cx-3-1770390891014-31",
+    "brand": { "$oid": "6985d18f1645746fad37dd06" },
+    "category": { "$oid": "6985d2d8b9e0bd203be5571f" },
+    "price": 1027247054,
+    "discountPrice": 0,
+    "year": 2024,
+    "fuelType": "Dầu",
+    "transmission": "Số sàn",
+    "seats": 5,
+    "engine": "2.7L V8",
+    "mileage": 7,
+    "colors": [
+      {
+        "name": "Đỏ Ruby",
+        "code": "#9b111e",
+        "_id": { "$oid": "6986056b620d7745bfde8003" }
+      },
+      {
+        "name": "Xám Titanium",
+        "code": "#5a5a5a",
+        "_id": { "$oid": "6986056b620d7745bfde8004" }
+      },
+      {
+        "name": "Bạc Ánh Kim",
+        "code": "#c0c0c0",
+        "_id": { "$oid": "6986056b620d7745bfde8005" }
+      },
+      {
+        "name": "Đen Obsidian",
+        "code": "#0d0d0d",
+        "_id": { "$oid": "6986056b620d7745bfde8006" }
+      },
+      {
+        "name": "Xanh Lá",
+        "code": "#1a472a",
+        "_id": { "$oid": "6986056b620d7745bfde8007" }
+      },
+      {
+        "name": "Nâu Đồng",
+        "code": "#8b4513",
+        "_id": { "$oid": "6986056b620d7745bfde8008" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "G",
+        "price": 1027247054,
+        "_id": { "$oid": "6986056b620d7745bfde8009" }
+      },
+      {
+        "name": "V",
+        "price": 1100465906,
+        "_id": { "$oid": "6986056b620d7745bfde800a" }
+      },
+      {
+        "name": "Q",
+        "price": 1198706482,
+        "_id": { "$oid": "6986056b620d7745bfde800b" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-12.jpg",
+      "/uploads/cars/sample-car-14.jpg",
+      "/uploads/cars/sample-car-8.jpg",
+      "/uploads/cars/sample-car-3.jpg"
+    ],
+    "description": "Mazda CX-3 - Mẫu xe mpv Mazda với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "5051",
+      "width": "1775",
+      "height": "1502",
+      "wheelBase": "2604",
+      "horsepower": "376",
+      "torque": "845"
+    },
+    "stock": 8,
+    "viewCount": 3954,
+    "status": "coming_soon",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.037Z" },
+    "updatedAt": { "$date": "2026-02-06T15:14:51.037Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde800c" },
+    "name": "Mazda CX-5",
+    "slug": "mazda-cx-5-1770390891014-32",
+    "brand": { "$oid": "6985d18f1645746fad37dd06" },
+    "category": { "$oid": "6985d2d8b9e0bd203be55720" },
+    "price": 1489684298,
+    "discountPrice": 0,
+    "year": 2023,
+    "fuelType": "Xăng",
+    "transmission": "Tự động",
+    "seats": 5,
+    "engine": "3.3L V6",
+    "mileage": 8,
+    "colors": [
+      {
+        "name": "Xanh Lá",
+        "code": "#1a472a",
+        "_id": { "$oid": "6986056b620d7745bfde800d" }
+      },
+      {
+        "name": "Bạc Ánh Kim",
+        "code": "#c0c0c0",
+        "_id": { "$oid": "6986056b620d7745bfde800e" }
+      },
+      {
+        "name": "Nâu Đồng",
+        "code": "#8b4513",
+        "_id": { "$oid": "6986056b620d7745bfde800f" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "Base",
+        "price": 1489684298,
+        "_id": { "$oid": "6986056b620d7745bfde8010" }
+      },
+      {
+        "name": "Mid",
+        "price": 1620998128,
+        "_id": { "$oid": "6986056b620d7745bfde8011" }
+      },
+      {
+        "name": "Top",
+        "price": 1622159558,
+        "_id": { "$oid": "6986056b620d7745bfde8012" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-5.jpg",
+      "/uploads/cars/sample-car-11.jpg"
+    ],
+    "description": "Mazda CX-5 - Mẫu xe pickup / bán tải Mazda với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "5168",
+      "width": "1756",
+      "height": "1402",
+      "wheelBase": "3099",
+      "horsepower": "429",
+      "torque": "544"
+    },
+    "stock": 5,
+    "viewCount": 2114,
+    "status": "coming_soon",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.037Z" },
+    "updatedAt": { "$date": "2026-02-06T15:14:51.037Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde8013" },
+    "name": "Mazda CX-8",
+    "slug": "mazda-cx-8-1770390891014-33",
+    "brand": { "$oid": "6985d18f1645746fad37dd06" },
+    "category": { "$oid": "6985d2d8b9e0bd203be5571c" },
+    "price": 901608832,
+    "discountPrice": 0,
+    "year": 2023,
+    "fuelType": "Điện",
+    "transmission": "Tự động",
+    "seats": 7,
+    "engine": "308kW Electric Motor",
+    "mileage": 17,
+    "colors": [
+      {
+        "name": "Nâu Đồng",
+        "code": "#8b4513",
+        "_id": { "$oid": "6986056b620d7745bfde8014" }
+      },
+      {
+        "name": "Bạc Ánh Kim",
+        "code": "#c0c0c0",
+        "_id": { "$oid": "6986056b620d7745bfde8015" }
+      },
+      {
+        "name": "Trắng Ngọc Trai",
+        "code": "#f5f5f5",
+        "_id": { "$oid": "6986056b620d7745bfde8016" }
+      },
+      {
+        "name": "Xanh Dương",
+        "code": "#1e3a5f",
+        "_id": { "$oid": "6986056b620d7745bfde8017" }
+      },
+      {
+        "name": "Đen Obsidian",
+        "code": "#0d0d0d",
+        "_id": { "$oid": "6986056b620d7745bfde8018" }
+      },
+      {
+        "name": "Đỏ Ruby",
+        "code": "#9b111e",
+        "_id": { "$oid": "6986056b620d7745bfde8019" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "Base",
+        "price": 901608832,
+        "_id": { "$oid": "6986056b620d7745bfde801a" }
+      },
+      {
+        "name": "Mid",
+        "price": 1029777004,
+        "_id": { "$oid": "6986056b620d7745bfde801b" }
+      },
+      {
+        "name": "Top",
+        "price": 1137926596,
+        "_id": { "$oid": "6986056b620d7745bfde801c" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-5.jpg",
+      "/uploads/cars/sample-car-10.jpg",
+      "/uploads/cars/sample-car-1.jpg",
+      "/uploads/cars/sample-car-3.jpg"
+    ],
+    "description": "Mazda CX-8 - Mẫu xe suv Mazda với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "4415",
+      "width": "1896",
+      "height": "1442",
+      "wheelBase": "2885",
+      "horsepower": "140",
+      "torque": "839"
+    },
+    "stock": 2,
+    "viewCount": 975,
+    "status": "available",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.037Z" },
+    "updatedAt": { "$date": "2026-02-06T15:14:51.037Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde801d" },
+    "name": "Mazda CX-30",
+    "slug": "mazda-cx-30-1770390891014-34",
+    "brand": { "$oid": "6985d18f1645746fad37dd06" },
+    "category": { "$oid": "6985d2d8b9e0bd203be5571c" },
+    "price": 1322834387,
+    "discountPrice": 1240593511,
+    "year": 2025,
+    "fuelType": "Điện",
+    "transmission": "Tự động",
+    "seats": 4,
+    "engine": "227kW Electric Motor",
+    "mileage": 24,
+    "colors": [
+      {
+        "name": "Bạc Ánh Kim",
+        "code": "#c0c0c0",
+        "_id": { "$oid": "6986056b620d7745bfde801e" }
+      },
+      {
+        "name": "Trắng Ngọc Trai",
+        "code": "#f5f5f5",
+        "_id": { "$oid": "6986056b620d7745bfde801f" }
+      },
+      {
+        "name": "Đen Obsidian",
+        "code": "#0d0d0d",
+        "_id": { "$oid": "6986056b620d7745bfde8020" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "G",
+        "price": 1322834387,
+        "_id": { "$oid": "6986056b620d7745bfde8021" }
+      },
+      {
+        "name": "V",
+        "price": 1467672730,
+        "_id": { "$oid": "6986056b620d7745bfde8022" }
+      },
+      {
+        "name": "Q",
+        "price": 1594884425,
+        "_id": { "$oid": "6986056b620d7745bfde8023" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-15.jpg",
+      "/uploads/cars/sample-car-13.jpg"
+    ],
+    "description": "Mazda CX-30 - Mẫu xe suv Mazda với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "4289",
+      "width": "1911",
+      "height": "1514",
+      "wheelBase": "3067",
+      "horsepower": "425",
+      "torque": "841"
+    },
+    "stock": 5,
+    "viewCount": 4266,
+    "status": "available",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.037Z" },
+    "updatedAt": { "$date": "2026-02-06T15:14:51.037Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde8024" },
+    "name": "Ford Ranger",
+    "slug": "ford-ranger-1770390891014-35",
+    "brand": { "$oid": "6985d18f1645746fad37dd07" },
+    "category": { "$oid": "6985d2d8b9e0bd203be5571f" },
+    "price": 1043682940,
+    "discountPrice": 969630741,
+    "year": 2022,
+    "fuelType": "Điện",
+    "transmission": "Tự động",
+    "seats": 4,
+    "engine": "181kW Electric Motor",
+    "mileage": 25,
+    "colors": [
+      {
+        "name": "Đen Obsidian",
+        "code": "#0d0d0d",
+        "_id": { "$oid": "6986056b620d7745bfde8025" }
+      },
+      {
+        "name": "Xanh Dương",
+        "code": "#1e3a5f",
+        "_id": { "$oid": "6986056b620d7745bfde8026" }
+      },
+      {
+        "name": "Xanh Lá",
+        "code": "#1a472a",
+        "_id": { "$oid": "6986056b620d7745bfde8027" }
+      },
+      {
+        "name": "Đỏ Ruby",
+        "code": "#9b111e",
+        "_id": { "$oid": "6986056b620d7745bfde8028" }
+      },
+      {
+        "name": "Nâu Đồng",
+        "code": "#8b4513",
+        "_id": { "$oid": "6986056b620d7745bfde8029" }
+      },
+      {
+        "name": "Xám Titanium",
+        "code": "#5a5a5a",
+        "_id": { "$oid": "6986056b620d7745bfde802a" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "G",
+        "price": 1043682940,
+        "_id": { "$oid": "6986056b620d7745bfde802b" }
+      },
+      {
+        "name": "V",
+        "price": 1160822831,
+        "_id": { "$oid": "6986056b620d7745bfde802c" }
+      },
+      {
+        "name": "Q",
+        "price": 1300210398,
+        "_id": { "$oid": "6986056b620d7745bfde802d" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-13.jpg",
+      "/uploads/cars/sample-car-13.jpg"
+    ],
+    "description": "Ford Ranger - Mẫu xe mpv Ford với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "5064",
+      "width": "1953",
+      "height": "1801",
+      "wheelBase": "3062",
+      "horsepower": "312",
+      "torque": "676"
+    },
+    "stock": 7,
+    "viewCount": 1755,
+    "status": "available",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.037Z" },
+    "updatedAt": { "$date": "2026-02-06T15:14:51.037Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde802e" },
+    "name": "Ford Everest",
+    "slug": "ford-everest-1770390891014-36",
+    "brand": { "$oid": "6985d18f1645746fad37dd07" },
+    "category": { "$oid": "6985d2d8b9e0bd203be55724" },
+    "price": 476052943,
+    "discountPrice": 0,
+    "year": 2025,
+    "fuelType": "Điện",
+    "transmission": "Số sàn",
+    "seats": 8,
+    "engine": "201kW Electric Motor",
+    "mileage": 15,
+    "colors": [
+      {
+        "name": "Xanh Lá",
+        "code": "#1a472a",
+        "_id": { "$oid": "6986056b620d7745bfde802f" }
+      },
+      {
+        "name": "Xanh Dương",
+        "code": "#1e3a5f",
+        "_id": { "$oid": "6986056b620d7745bfde8030" }
+      },
+      {
+        "name": "Nâu Đồng",
+        "code": "#8b4513",
+        "_id": { "$oid": "6986056b620d7745bfde8031" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "Standard",
+        "price": 476052943,
+        "_id": { "$oid": "6986056b620d7745bfde8032" }
+      },
+      {
+        "name": "Premium",
+        "price": 596427172,
+        "_id": { "$oid": "6986056b620d7745bfde8033" }
+      },
+      {
+        "name": "Luxury",
+        "price": 608444849,
+        "_id": { "$oid": "6986056b620d7745bfde8034" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-14.jpg",
+      "/uploads/cars/sample-car-10.jpg",
+      "/uploads/cars/sample-car-5.jpg",
+      "/uploads/cars/sample-car-6.jpg"
+    ],
+    "description": "Ford Everest - Mẫu xe electric / xe điện Ford với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "4451",
+      "width": "1981",
+      "height": "1410",
+      "wheelBase": "2746",
+      "horsepower": "389",
+      "torque": "342"
+    },
+    "stock": 4,
+    "viewCount": 1839,
+    "status": "available",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.037Z" },
+    "updatedAt": { "$date": "2026-02-06T15:14:51.037Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde8035" },
+    "name": "Ford Territory",
+    "slug": "ford-territory-1770390891014-37",
+    "brand": { "$oid": "6985d18f1645746fad37dd07" },
+    "category": { "$oid": "6985d2d8b9e0bd203be55720" },
+    "price": 714310612,
+    "discountPrice": 638617728,
+    "year": 2024,
+    "fuelType": "Hybrid",
+    "transmission": "Số sàn",
+    "seats": 7,
+    "engine": "4.0L Turbo",
+    "mileage": 13,
+    "colors": [
+      {
+        "name": "Xanh Lá",
+        "code": "#1a472a",
+        "_id": { "$oid": "6986056b620d7745bfde8036" }
+      },
+      {
+        "name": "Đen Obsidian",
+        "code": "#0d0d0d",
+        "_id": { "$oid": "6986056b620d7745bfde8037" }
+      },
+      {
+        "name": "Xám Titanium",
+        "code": "#5a5a5a",
+        "_id": { "$oid": "6986056b620d7745bfde8038" }
+      },
+      {
+        "name": "Nâu Đồng",
+        "code": "#8b4513",
+        "_id": { "$oid": "6986056b620d7745bfde8039" }
+      },
+      {
+        "name": "Bạc Ánh Kim",
+        "code": "#c0c0c0",
+        "_id": { "$oid": "6986056b620d7745bfde803a" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "G",
+        "price": 714310612,
+        "_id": { "$oid": "6986056b620d7745bfde803b" }
+      },
+      {
+        "name": "V",
+        "price": 847592765,
+        "_id": { "$oid": "6986056b620d7745bfde803c" }
+      },
+      {
+        "name": "Q",
+        "price": 998427594,
+        "_id": { "$oid": "6986056b620d7745bfde803d" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-3.jpg",
+      "/uploads/cars/sample-car-5.jpg",
+      "/uploads/cars/sample-car-13.jpg"
+    ],
+    "description": "Ford Territory - Mẫu xe pickup / bán tải Ford với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "4500",
+      "width": "1751",
+      "height": "1674",
+      "wheelBase": "2626",
+      "horsepower": "504",
+      "torque": "247"
+    },
+    "stock": 7,
+    "viewCount": 3478,
+    "status": "available",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.037Z" },
+    "updatedAt": { "$date": "2026-02-06T15:14:51.037Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde803e" },
+    "name": "Ford Explorer",
+    "slug": "ford-explorer-1770390891014-38",
+    "brand": { "$oid": "6985d18f1645746fad37dd07" },
+    "category": { "$oid": "6985d2d8b9e0bd203be5571f" },
+    "price": 1293429227,
+    "discountPrice": 0,
+    "year": 2022,
+    "fuelType": "Hybrid",
+    "transmission": "Tự động",
+    "seats": 8,
+    "engine": "2.3L V6",
+    "mileage": 12,
+    "colors": [
+      {
+        "name": "Trắng Ngọc Trai",
+        "code": "#f5f5f5",
+        "_id": { "$oid": "6986056b620d7745bfde803f" }
+      },
+      {
+        "name": "Bạc Ánh Kim",
+        "code": "#c0c0c0",
+        "_id": { "$oid": "6986056b620d7745bfde8040" }
+      },
+      {
+        "name": "Đỏ Ruby",
+        "code": "#9b111e",
+        "_id": { "$oid": "6986056b620d7745bfde8041" }
+      },
+      {
+        "name": "Xám Titanium",
+        "code": "#5a5a5a",
+        "_id": { "$oid": "6986056b620d7745bfde8042" }
+      },
+      {
+        "name": "Đen Obsidian",
+        "code": "#0d0d0d",
+        "_id": { "$oid": "6986056b620d7745bfde8043" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "Sport",
+        "price": 1293429227,
+        "_id": { "$oid": "6986056b620d7745bfde8044" }
+      },
+      {
+        "name": "Elegance",
+        "price": 1397300489,
+        "_id": { "$oid": "6986056b620d7745bfde8045" }
+      },
+      {
+        "name": "Signature",
+        "price": 1459993627,
+        "_id": { "$oid": "6986056b620d7745bfde8046" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-13.jpg",
+      "/uploads/cars/sample-car-6.jpg",
+      "/uploads/cars/sample-car-15.jpg",
+      "/uploads/cars/sample-car-10.jpg"
+    ],
+    "description": "Ford Explorer - Mẫu xe mpv Ford với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "4247",
+      "width": "1878",
+      "height": "1852",
+      "wheelBase": "2820",
+      "horsepower": "193",
+      "torque": "786"
+    },
+    "stock": 10,
+    "viewCount": 4918,
+    "status": "available",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.037Z" },
+    "updatedAt": { "$date": "2026-02-06T15:14:51.037Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde8047" },
+    "name": "Mitsubishi Xpander",
+    "slug": "mitsubishi-xpander-1770390891014-39",
+    "brand": { "$oid": "6985d18f1645746fad37dd08" },
+    "category": { "$oid": "6985d2d8b9e0bd203be5571d" },
+    "price": 1085102405,
+    "discountPrice": 0,
+    "year": 2024,
+    "fuelType": "Điện",
+    "transmission": "Số sàn",
+    "seats": 4,
+    "engine": "296kW Electric Motor",
+    "mileage": 19,
+    "colors": [
+      {
+        "name": "Đỏ Ruby",
+        "code": "#9b111e",
+        "_id": { "$oid": "6986056b620d7745bfde8048" }
+      },
+      {
+        "name": "Xanh Lá",
+        "code": "#1a472a",
+        "_id": { "$oid": "6986056b620d7745bfde8049" }
+      },
+      {
+        "name": "Xanh Dương",
+        "code": "#1e3a5f",
+        "_id": { "$oid": "6986056b620d7745bfde804a" }
+      },
+      {
+        "name": "Đen Obsidian",
+        "code": "#0d0d0d",
+        "_id": { "$oid": "6986056b620d7745bfde804b" }
+      },
+      {
+        "name": "Nâu Đồng",
+        "code": "#8b4513",
+        "_id": { "$oid": "6986056b620d7745bfde804c" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "Base",
+        "price": 1085102405,
+        "_id": { "$oid": "6986056b620d7745bfde804d" }
+      },
+      {
+        "name": "Mid",
+        "price": 1219265636,
+        "_id": { "$oid": "6986056b620d7745bfde804e" }
+      },
+      {
+        "name": "Top",
+        "price": 1235959823,
+        "_id": { "$oid": "6986056b620d7745bfde804f" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-11.jpg",
+      "/uploads/cars/sample-car-8.jpg",
+      "/uploads/cars/sample-car-6.jpg",
+      "/uploads/cars/sample-car-1.jpg"
+    ],
+    "description": "Mitsubishi Xpander - Mẫu xe crossover Mitsubishi với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "4743",
+      "width": "1768",
+      "height": "1411",
+      "wheelBase": "2973",
+      "horsepower": "464",
+      "torque": "223"
+    },
+    "stock": 8,
+    "viewCount": 608,
+    "status": "available",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.037Z" },
+    "updatedAt": { "$date": "2026-02-06T15:14:51.037Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde8050" },
+    "name": "Mitsubishi Attrage",
+    "slug": "mitsubishi-attrage-1770390891014-40",
+    "brand": { "$oid": "6985d18f1645746fad37dd08" },
+    "category": { "$oid": "6985d2d8b9e0bd203be5571d" },
+    "price": 577659173,
+    "discountPrice": 0,
+    "year": 2025,
+    "fuelType": "Xăng",
+    "transmission": "Số sàn",
+    "seats": 5,
+    "engine": "3.8L I4",
+    "mileage": 11,
+    "colors": [
+      {
+        "name": "Xanh Dương",
+        "code": "#1e3a5f",
+        "_id": { "$oid": "6986056b620d7745bfde8051" }
+      },
+      {
+        "name": "Đỏ Ruby",
+        "code": "#9b111e",
+        "_id": { "$oid": "6986056b620d7745bfde8052" }
+      },
+      {
+        "name": "Bạc Ánh Kim",
+        "code": "#c0c0c0",
+        "_id": { "$oid": "6986056b620d7745bfde8053" }
+      },
+      {
+        "name": "Xanh Lá",
+        "code": "#1a472a",
+        "_id": { "$oid": "6986056b620d7745bfde8054" }
+      },
+      {
+        "name": "Đen Obsidian",
+        "code": "#0d0d0d",
+        "_id": { "$oid": "6986056b620d7745bfde8055" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "Standard",
+        "price": 577659173,
+        "_id": { "$oid": "6986056b620d7745bfde8056" }
+      },
+      {
+        "name": "Premium",
+        "price": 643216569,
+        "_id": { "$oid": "6986056b620d7745bfde8057" }
+      },
+      {
+        "name": "Luxury",
+        "price": 828496977,
+        "_id": { "$oid": "6986056b620d7745bfde8058" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-14.jpg",
+      "/uploads/cars/sample-car-14.jpg",
+      "/uploads/cars/sample-car-14.jpg"
+    ],
+    "description": "Mitsubishi Attrage - Mẫu xe crossover Mitsubishi với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "4922",
+      "width": "2000",
+      "height": "1777",
+      "wheelBase": "2787",
+      "horsepower": "524",
+      "torque": "782"
+    },
+    "stock": 6,
+    "viewCount": 1779,
+    "status": "available",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.037Z" },
+    "updatedAt": { "$date": "2026-02-06T15:14:51.037Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde8059" },
+    "name": "Mitsubishi Outlander",
+    "slug": "mitsubishi-outlander-1770390891014-41",
+    "brand": { "$oid": "6985d18f1645746fad37dd08" },
+    "category": { "$oid": "6985d2d8b9e0bd203be55725" },
+    "price": 823966142,
+    "discountPrice": 0,
+    "year": 2024,
+    "fuelType": "Hybrid",
+    "transmission": "Số sàn",
+    "seats": 4,
+    "engine": "2.6L V6",
+    "mileage": 7,
+    "colors": [
+      {
+        "name": "Xanh Dương",
+        "code": "#1e3a5f",
+        "_id": { "$oid": "6986056b620d7745bfde805a" }
+      },
+      {
+        "name": "Xám Titanium",
+        "code": "#5a5a5a",
+        "_id": { "$oid": "6986056b620d7745bfde805b" }
+      },
+      {
+        "name": "Nâu Đồng",
+        "code": "#8b4513",
+        "_id": { "$oid": "6986056b620d7745bfde805c" }
+      },
+      {
+        "name": "Trắng Ngọc Trai",
+        "code": "#f5f5f5",
+        "_id": { "$oid": "6986056b620d7745bfde805d" }
+      },
+      {
+        "name": "Đen Obsidian",
+        "code": "#0d0d0d",
+        "_id": { "$oid": "6986056b620d7745bfde805e" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "G",
+        "price": 823966142,
+        "_id": { "$oid": "6986056b620d7745bfde805f" }
+      },
+      {
+        "name": "V",
+        "price": 961131080,
+        "_id": { "$oid": "6986056b620d7745bfde8060" }
+      },
+      {
+        "name": "Q",
+        "price": 949154858,
+        "_id": { "$oid": "6986056b620d7745bfde8061" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-7.jpg",
+      "/uploads/cars/sample-car-12.jpg",
+      "/uploads/cars/sample-car-10.jpg",
+      "/uploads/cars/sample-car-12.jpg"
+    ],
+    "description": "Mitsubishi Outlander - Mẫu xe luxury / xe sang Mitsubishi với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "4245",
+      "width": "1858",
+      "height": "1696",
+      "wheelBase": "2627",
+      "horsepower": "303",
+      "torque": "872"
+    },
+    "stock": 2,
+    "viewCount": 149,
+    "status": "coming_soon",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.037Z" },
+    "updatedAt": { "$date": "2026-02-06T15:14:51.037Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde8062" },
+    "name": "Mitsubishi Pajero Sport",
+    "slug": "mitsubishi-pajero-sport-1770390891014-42",
+    "brand": { "$oid": "6985d18f1645746fad37dd08" },
+    "category": { "$oid": "6985d2d8b9e0bd203be5571b" },
+    "price": 935017270,
+    "discountPrice": 838739552,
+    "year": 2022,
+    "fuelType": "Dầu",
+    "transmission": "Tự động",
+    "seats": 5,
+    "engine": "1.9L V8",
+    "mileage": 9,
+    "colors": [
+      {
+        "name": "Xám Titanium",
+        "code": "#5a5a5a",
+        "_id": { "$oid": "6986056b620d7745bfde8063" }
+      },
+      {
+        "name": "Nâu Đồng",
+        "code": "#8b4513",
+        "_id": { "$oid": "6986056b620d7745bfde8064" }
+      },
+      {
+        "name": "Xanh Dương",
+        "code": "#1e3a5f",
+        "_id": { "$oid": "6986056b620d7745bfde8065" }
+      },
+      {
+        "name": "Trắng Ngọc Trai",
+        "code": "#f5f5f5",
+        "_id": { "$oid": "6986056b620d7745bfde8066" }
+      },
+      {
+        "name": "Đen Obsidian",
+        "code": "#0d0d0d",
+        "_id": { "$oid": "6986056b620d7745bfde8067" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "Base",
+        "price": 935017270,
+        "_id": { "$oid": "6986056b620d7745bfde8068" }
+      },
+      {
+        "name": "Mid",
+        "price": 1040022460,
+        "_id": { "$oid": "6986056b620d7745bfde8069" }
+      },
+      {
+        "name": "Top",
+        "price": 1115300218,
+        "_id": { "$oid": "6986056b620d7745bfde806a" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-14.jpg",
+      "/uploads/cars/sample-car-1.jpg"
+    ],
+    "description": "Mitsubishi Pajero Sport - Mẫu xe sedan Mitsubishi với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "4372",
+      "width": "1761",
+      "height": "1573",
+      "wheelBase": "3052",
+      "horsepower": "370",
+      "torque": "458"
+    },
+    "stock": 9,
+    "viewCount": 2165,
+    "status": "available",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.037Z" },
+    "updatedAt": { "$date": "2026-02-06T15:14:51.037Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde806b" },
+    "name": "Mitsubishi Triton",
+    "slug": "mitsubishi-triton-1770390891014-43",
+    "brand": { "$oid": "6985d18f1645746fad37dd08" },
+    "category": { "$oid": "6985d2d8b9e0bd203be55721" },
+    "price": 1106033207,
+    "discountPrice": 0,
+    "year": 2024,
+    "fuelType": "Xăng",
+    "transmission": "Số sàn",
+    "seats": 7,
+    "engine": "2.3L V8",
+    "mileage": 14,
+    "colors": [
+      {
+        "name": "Xám Titanium",
+        "code": "#5a5a5a",
+        "_id": { "$oid": "6986056b620d7745bfde806c" }
+      },
+      {
+        "name": "Xanh Lá",
+        "code": "#1a472a",
+        "_id": { "$oid": "6986056b620d7745bfde806d" }
+      },
+      {
+        "name": "Nâu Đồng",
+        "code": "#8b4513",
+        "_id": { "$oid": "6986056b620d7745bfde806e" }
+      },
+      {
+        "name": "Trắng Ngọc Trai",
+        "code": "#f5f5f5",
+        "_id": { "$oid": "6986056b620d7745bfde806f" }
+      },
+      {
+        "name": "Bạc Ánh Kim",
+        "code": "#c0c0c0",
+        "_id": { "$oid": "6986056b620d7745bfde8070" }
+      },
+      {
+        "name": "Đỏ Ruby",
+        "code": "#9b111e",
+        "_id": { "$oid": "6986056b620d7745bfde8071" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "Sport",
+        "price": 1106033207,
+        "_id": { "$oid": "6986056b620d7745bfde8072" }
+      },
+      {
+        "name": "Elegance",
+        "price": 1162673169,
+        "_id": { "$oid": "6986056b620d7745bfde8073" }
+      },
+      {
+        "name": "Signature",
+        "price": 1365782275,
+        "_id": { "$oid": "6986056b620d7745bfde8074" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-4.jpg",
+      "/uploads/cars/sample-car-2.jpg",
+      "/uploads/cars/sample-car-12.jpg"
+    ],
+    "description": "Mitsubishi Triton - Mẫu xe coupe Mitsubishi với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "5027",
+      "width": "1915",
+      "height": "1739",
+      "wheelBase": "2658",
+      "horsepower": "152",
+      "torque": "516"
+    },
+    "stock": 4,
+    "viewCount": 3149,
+    "status": "available",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.037Z" },
+    "updatedAt": { "$date": "2026-02-06T15:14:51.037Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde8075" },
+    "name": "VinFast VF3",
+    "slug": "vinfast-vf3-1770390891014-44",
+    "brand": { "$oid": "6985d18f1645746fad37dd09" },
+    "category": { "$oid": "6985d2d8b9e0bd203be55721" },
+    "price": 916886316,
+    "discountPrice": 0,
+    "year": 2023,
+    "fuelType": "Điện",
+    "transmission": "Tự động",
+    "seats": 7,
+    "engine": "326kW Electric Motor",
+    "mileage": 22,
+    "colors": [
+      {
+        "name": "Đỏ Ruby",
+        "code": "#9b111e",
+        "_id": { "$oid": "6986056b620d7745bfde8076" }
+      },
+      {
+        "name": "Xanh Lá",
+        "code": "#1a472a",
+        "_id": { "$oid": "6986056b620d7745bfde8077" }
+      },
+      {
+        "name": "Bạc Ánh Kim",
+        "code": "#c0c0c0",
+        "_id": { "$oid": "6986056b620d7745bfde8078" }
+      },
+      {
+        "name": "Đen Obsidian",
+        "code": "#0d0d0d",
+        "_id": { "$oid": "6986056b620d7745bfde8079" }
+      },
+      {
+        "name": "Xanh Dương",
+        "code": "#1e3a5f",
+        "_id": { "$oid": "6986056b620d7745bfde807a" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "Base",
+        "price": 916886316,
+        "_id": { "$oid": "6986056b620d7745bfde807b" }
+      },
+      {
+        "name": "Mid",
+        "price": 1014067637,
+        "_id": { "$oid": "6986056b620d7745bfde807c" }
+      },
+      {
+        "name": "Top",
+        "price": 1091782032,
+        "_id": { "$oid": "6986056b620d7745bfde807d" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-3.jpg",
+      "/uploads/cars/sample-car-14.jpg"
+    ],
+    "description": "VinFast VF3 - Mẫu xe coupe VinFast với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "4698",
+      "width": "1995",
+      "height": "1722",
+      "wheelBase": "2732",
+      "horsepower": "478",
+      "torque": "721"
+    },
+    "stock": 10,
+    "viewCount": 1742,
+    "status": "coming_soon",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.037Z" },
+    "updatedAt": { "$date": "2026-02-06T15:14:51.037Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde807e" },
+    "name": "VinFast VF5",
+    "slug": "vinfast-vf5-1770390891014-45",
+    "brand": { "$oid": "6985d18f1645746fad37dd09" },
+    "category": { "$oid": "6985d2d8b9e0bd203be55723" },
+    "price": 749685278,
+    "discountPrice": 0,
+    "year": 2025,
+    "fuelType": "Điện",
+    "transmission": "Số sàn",
+    "seats": 4,
+    "engine": "159kW Electric Motor",
+    "mileage": 21,
+    "colors": [
+      {
+        "name": "Xanh Dương",
+        "code": "#1e3a5f",
+        "_id": { "$oid": "6986056b620d7745bfde807f" }
+      },
+      {
+        "name": "Xanh Lá",
+        "code": "#1a472a",
+        "_id": { "$oid": "6986056b620d7745bfde8080" }
+      },
+      {
+        "name": "Bạc Ánh Kim",
+        "code": "#c0c0c0",
+        "_id": { "$oid": "6986056b620d7745bfde8081" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "Base",
+        "price": 749685278,
+        "_id": { "$oid": "6986056b620d7745bfde8082" }
+      },
+      {
+        "name": "Mid",
+        "price": 889215286,
+        "_id": { "$oid": "6986056b620d7745bfde8083" }
+      },
+      {
+        "name": "Top",
+        "price": 891837590,
+        "_id": { "$oid": "6986056b620d7745bfde8084" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-11.jpg",
+      "/uploads/cars/sample-car-13.jpg",
+      "/uploads/cars/sample-car-7.jpg"
+    ],
+    "description": "VinFast VF5 - Mẫu xe convertible / mui trần VinFast với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "4282",
+      "width": "1775",
+      "height": "1471",
+      "wheelBase": "3013",
+      "horsepower": "446",
+      "torque": "808"
+    },
+    "stock": 8,
+    "viewCount": 989,
+    "status": "available",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.037Z" },
+    "updatedAt": { "$date": "2026-02-06T15:14:51.037Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde8085" },
+    "name": "VinFast VF6",
+    "slug": "vinfast-vf6-1770390891015-46",
+    "brand": { "$oid": "6985d18f1645746fad37dd09" },
+    "category": { "$oid": "6985d2d8b9e0bd203be55723" },
+    "price": 606267386,
+    "discountPrice": 0,
+    "year": 2024,
+    "fuelType": "Điện",
+    "transmission": "Số sàn",
+    "seats": 5,
+    "engine": "218kW Electric Motor",
+    "mileage": 22,
+    "colors": [
+      {
+        "name": "Đen Obsidian",
+        "code": "#0d0d0d",
+        "_id": { "$oid": "6986056b620d7745bfde8086" }
+      },
+      {
+        "name": "Xanh Lá",
+        "code": "#1a472a",
+        "_id": { "$oid": "6986056b620d7745bfde8087" }
+      },
+      {
+        "name": "Đỏ Ruby",
+        "code": "#9b111e",
+        "_id": { "$oid": "6986056b620d7745bfde8088" }
+      },
+      {
+        "name": "Xanh Dương",
+        "code": "#1e3a5f",
+        "_id": { "$oid": "6986056b620d7745bfde8089" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "Sport",
+        "price": 606267386,
+        "_id": { "$oid": "6986056b620d7745bfde808a" }
+      },
+      {
+        "name": "Elegance",
+        "price": 692740562,
+        "_id": { "$oid": "6986056b620d7745bfde808b" }
+      },
+      {
+        "name": "Signature",
+        "price": 743876534,
+        "_id": { "$oid": "6986056b620d7745bfde808c" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-12.jpg",
+      "/uploads/cars/sample-car-3.jpg",
+      "/uploads/cars/sample-car-9.jpg"
+    ],
+    "description": "VinFast VF6 - Mẫu xe convertible / mui trần VinFast với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "4641",
+      "width": "1840",
+      "height": "1574",
+      "wheelBase": "2901",
+      "horsepower": "203",
+      "torque": "485"
+    },
+    "stock": 1,
+    "viewCount": 2779,
+    "status": "available",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.037Z" },
+    "updatedAt": { "$date": "2026-02-06T15:14:51.037Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde808d" },
+    "name": "VinFast VF7",
+    "slug": "vinfast-vf7-1770390891015-47",
+    "brand": { "$oid": "6985d18f1645746fad37dd09" },
+    "category": { "$oid": "6985d2d8b9e0bd203be55724" },
+    "price": 1355692516,
+    "discountPrice": 0,
+    "year": 2024,
+    "fuelType": "Điện",
+    "transmission": "Tự động",
+    "seats": 8,
+    "engine": "263kW Electric Motor",
+    "mileage": 15,
+    "colors": [
+      {
+        "name": "Trắng Ngọc Trai",
+        "code": "#f5f5f5",
+        "_id": { "$oid": "6986056b620d7745bfde808e" }
+      },
+      {
+        "name": "Nâu Đồng",
+        "code": "#8b4513",
+        "_id": { "$oid": "6986056b620d7745bfde808f" }
+      },
+      {
+        "name": "Xanh Dương",
+        "code": "#1e3a5f",
+        "_id": { "$oid": "6986056b620d7745bfde8090" }
+      },
+      {
+        "name": "Bạc Ánh Kim",
+        "code": "#c0c0c0",
+        "_id": { "$oid": "6986056b620d7745bfde8091" }
+      },
+      {
+        "name": "Đỏ Ruby",
+        "code": "#9b111e",
+        "_id": { "$oid": "6986056b620d7745bfde8092" }
+      },
+      {
+        "name": "Đen Obsidian",
+        "code": "#0d0d0d",
+        "_id": { "$oid": "6986056b620d7745bfde8093" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "Sport",
+        "price": 1355692516,
+        "_id": { "$oid": "6986056b620d7745bfde8094" }
+      },
+      {
+        "name": "Elegance",
+        "price": 1409490054,
+        "_id": { "$oid": "6986056b620d7745bfde8095" }
+      },
+      {
+        "name": "Signature",
+        "price": 1533290832,
+        "_id": { "$oid": "6986056b620d7745bfde8096" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-15.jpg",
+      "/uploads/cars/sample-car-15.jpg",
+      "/uploads/cars/sample-car-14.jpg",
+      "/uploads/cars/sample-car-2.jpg"
+    ],
+    "description": "VinFast VF7 - Mẫu xe electric / xe điện VinFast với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "4372",
+      "width": "1929",
+      "height": "1872",
+      "wheelBase": "2767",
+      "horsepower": "182",
+      "torque": "880"
+    },
+    "stock": 5,
+    "viewCount": 3571,
+    "status": "available",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.037Z" },
+    "updatedAt": { "$date": "2026-02-06T15:14:51.037Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde8097" },
+    "name": "VinFast VF8",
+    "slug": "vinfast-vf8-1770390891015-48",
+    "brand": { "$oid": "6985d18f1645746fad37dd09" },
+    "category": { "$oid": "6985d2d8b9e0bd203be5571c" },
+    "price": 1093383866,
+    "discountPrice": 0,
+    "year": 2024,
+    "fuelType": "Điện",
+    "transmission": "Số sàn",
+    "seats": 4,
+    "engine": "271kW Electric Motor",
+    "mileage": 18,
+    "colors": [
+      {
+        "name": "Xanh Dương",
+        "code": "#1e3a5f",
+        "_id": { "$oid": "6986056b620d7745bfde8098" }
+      },
+      {
+        "name": "Trắng Ngọc Trai",
+        "code": "#f5f5f5",
+        "_id": { "$oid": "6986056b620d7745bfde8099" }
+      },
+      {
+        "name": "Đỏ Ruby",
+        "code": "#9b111e",
+        "_id": { "$oid": "6986056b620d7745bfde809a" }
+      },
+      {
+        "name": "Xanh Lá",
+        "code": "#1a472a",
+        "_id": { "$oid": "6986056b620d7745bfde809b" }
+      },
+      {
+        "name": "Bạc Ánh Kim",
+        "code": "#c0c0c0",
+        "_id": { "$oid": "6986056b620d7745bfde809c" }
+      },
+      {
+        "name": "Xám Titanium",
+        "code": "#5a5a5a",
+        "_id": { "$oid": "6986056b620d7745bfde809d" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "Sport",
+        "price": 1093383866,
+        "_id": { "$oid": "6986056b620d7745bfde809e" }
+      },
+      {
+        "name": "Elegance",
+        "price": 1218295315,
+        "_id": { "$oid": "6986056b620d7745bfde809f" }
+      },
+      {
+        "name": "Signature",
+        "price": 1370512678,
+        "_id": { "$oid": "6986056b620d7745bfde80a0" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-12.jpg",
+      "/uploads/cars/sample-car-15.jpg",
+      "/uploads/cars/sample-car-8.jpg",
+      "/uploads/cars/sample-car-4.jpg"
+    ],
+    "description": "VinFast VF8 - Mẫu xe suv VinFast với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "4610",
+      "width": "1954",
+      "height": "1449",
+      "wheelBase": "2731",
+      "horsepower": "313",
+      "torque": "320"
+    },
+    "stock": 1,
+    "viewCount": 3328,
+    "status": "available",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.037Z" },
+    "updatedAt": { "$date": "2026-02-06T15:14:51.037Z" }
+  },
+  {
+    "_id": { "$oid": "6986056b620d7745bfde80a1" },
+    "name": "VinFast VF9",
+    "slug": "vinfast-vf9-1770390891015-49",
+    "brand": { "$oid": "6985d18f1645746fad37dd09" },
+    "category": { "$oid": "6985d2d8b9e0bd203be55722" },
+    "price": 1550534398,
+    "discountPrice": 0,
+    "year": 2025,
+    "fuelType": "Điện",
+    "transmission": "Số sàn",
+    "seats": 8,
+    "engine": "396kW Electric Motor",
+    "mileage": 19,
+    "colors": [
+      {
+        "name": "Xám Titanium",
+        "code": "#5a5a5a",
+        "_id": { "$oid": "6986056b620d7745bfde80a2" }
+      },
+      {
+        "name": "Xanh Lá",
+        "code": "#1a472a",
+        "_id": { "$oid": "6986056b620d7745bfde80a3" }
+      },
+      {
+        "name": "Đen Obsidian",
+        "code": "#0d0d0d",
+        "_id": { "$oid": "6986056b620d7745bfde80a4" }
+      }
+    ],
+    "versions": [
+      {
+        "name": "Base",
+        "price": 1550534398,
+        "_id": { "$oid": "6986056b620d7745bfde80a5" }
+      },
+      {
+        "name": "Mid",
+        "price": 1686159716,
+        "_id": { "$oid": "6986056b620d7745bfde80a6" }
+      },
+      {
+        "name": "Top",
+        "price": 1758711512,
+        "_id": { "$oid": "6986056b620d7745bfde80a7" }
+      }
+    ],
+    "images": [
+      "/uploads/cars/sample-car-12.jpg",
+      "/uploads/cars/sample-car-14.jpg"
+    ],
+    "description": "VinFast VF9 - Mẫu xe sport / thể thao VinFast với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "specifications": {
+      "length": "5109",
+      "width": "1872",
+      "height": "1571",
+      "wheelBase": "2910",
+      "horsepower": "117",
+      "torque": "801"
+    },
+    "stock": 1,
+    "viewCount": 2576,
+    "status": "available",
+    "__v": 0,
+    "createdAt": { "$date": "2026-02-06T15:14:51.037Z" },
+    "updatedAt": { "$date": "2026-02-10T04:03:24.289Z" }
+  }
+]
