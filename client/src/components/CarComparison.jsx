@@ -1,0 +1,847 @@
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+    ChevronDown,
+    Check,
+    Zap,
+    Gauge,
+    Ruler,
+    Fuel,
+    Shield,
+    Users,
+    Sparkles,
+    X,
+    Car,
+    DollarSign,
+    Heart,
+    Leaf,
+    Target,
+    TrendingUp,
+    MessageSquare,
+    Loader2,
+    ArrowRightLeft,
+    RefreshCw,
+} from 'lucide-react';
+import { request } from '../config/request';
+import carMercedes from '../assets/car-mercedes.png';
+import carBmw from '../assets/car-bmw.png';
+import carAudi from '../assets/car-audi.png';
+
+// Default cars for fallback
+const defaultCars = [
+    {
+        _id: '1',
+        name: 'Mercedes-AMG GT',
+        images: [carMercedes],
+        price: 2500000000,
+        power: '585 HP',
+        engine: '4.0L V8 Biturbo',
+        size: '4,544 x 1,939 mm',
+        fuelConsumption: '12.4L/100km',
+        seats: 2,
+        safety: ['ABS', 'ESP', 'Airbag 6'],
+    },
+    {
+        _id: '2',
+        name: 'BMW M4 Competition',
+        images: [carBmw],
+        price: 3200000000,
+        power: '510 HP',
+        engine: '3.0L I6 Twin-Turbo',
+        size: '4,794 x 1,887 mm',
+        fuelConsumption: '10.2L/100km',
+        seats: 4,
+        safety: ['ABS', 'DSC', 'Airbag 8', 'Lane Assist'],
+    },
+    {
+        _id: '3',
+        name: 'Audi RS e-tron GT',
+        images: [carAudi],
+        price: 5900000000,
+        power: '646 HP',
+        engine: 'Dual Motor Electric',
+        size: '4,989 x 1,964 mm',
+        fuelConsumption: '20.2 kWh/100km',
+        seats: 4,
+        safety: ['ABS', 'ESC', 'Airbag 10', 'Adaptive Cruise'],
+    },
+];
+
+// AI Analysis Modal Component
+const AIAnalysisModal = ({ isOpen, onClose, car1, car2 }) => {
+    const [selectedRequirements, setSelectedRequirements] = useState([]);
+    const [customRequirement, setCustomRequirement] = useState('');
+    const [isAnalyzing, setIsAnalyzing] = useState(false);
+    const [analysisResult, setAnalysisResult] = useState(null);
+
+    const requirements = [
+        {
+            id: 'family',
+            label: 'Phù hợp gia đình',
+            icon: Heart,
+            description: 'Đánh giá độ rộng rãi, an toàn cho gia đình',
+        },
+        {
+            id: 'fuel_efficiency',
+            label: 'Tiết kiệm nhiên liệu',
+            icon: Leaf,
+            description: 'So sánh mức tiêu hao nhiên liệu',
+        },
+        {
+            id: 'investment',
+            label: 'Đầu tư dài hạn',
+            icon: TrendingUp,
+            description: 'Phân tích giá trị giữ lại và chi phí bảo dưỡng',
+        },
+        {
+            id: 'performance',
+            label: 'Hiệu suất cao',
+            icon: Zap,
+            description: 'So sánh công suất, tốc độ và khả năng vận hành',
+        },
+        {
+            id: 'budget',
+            label: 'Phù hợp ngân sách',
+            icon: DollarSign,
+            description: 'Phân tích giá trị đồng tiền bỏ ra',
+        },
+        {
+            id: 'daily_use',
+            label: 'Sử dụng hàng ngày',
+            icon: Car,
+            description: 'Đánh giá sự tiện lợi trong di chuyển hàng ngày',
+        },
+    ];
+
+    const toggleRequirement = (id) => {
+        setSelectedRequirements((prev) => (prev.includes(id) ? prev.filter((r) => r !== id) : [...prev, id]));
+    };
+
+    const handleAnalyze = async () => {
+        if (selectedRequirements.length === 0 && !customRequirement.trim()) {
+            return;
+        }
+
+        setIsAnalyzing(true);
+        setAnalysisResult(null);
+
+        try {
+            const response = await request.post('/api/car/ai-analyze', {
+                car1Id: car1._id,
+                car2Id: car2._id,
+                requirements: selectedRequirements,
+                customRequirement: customRequirement.trim(),
+            });
+
+            // Extract analysis from response
+            const data = response.data?.metadata;
+            if (data?.success && data?.analysis) {
+                setAnalysisResult(data.analysis);
+            } else {
+                throw new Error('Invalid response format');
+            }
+        } catch (error) {
+            console.error('Error analyzing cars:', error);
+            // Fallback to basic message on error
+            setAnalysisResult({
+                summary: 'Đã xảy ra lỗi khi phân tích. Vui lòng thử lại sau.',
+                recommendation: null,
+                recommendationReason: '',
+                details: [],
+                prosAndCons: { car1: { pros: [], cons: [] }, car2: { pros: [], cons: [] } },
+                finalVerdict: 'Không thể hoàn thành phân tích.',
+            });
+        } finally {
+            setIsAnalyzing(false);
+        }
+    };
+
+    const resetAnalysis = () => {
+        setSelectedRequirements([]);
+        setCustomRequirement('');
+        setAnalysisResult(null);
+    };
+
+    if (!isOpen) return null;
+
+    return (
+        <AnimatePresence>
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+                onClick={onClose}
+            >
+                <motion.div
+                    initial={{ scale: 0.9, opacity: 0, y: 20 }}
+                    animate={{ scale: 1, opacity: 1, y: 0 }}
+                    exit={{ scale: 0.9, opacity: 0, y: 20 }}
+                    transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+                    className="w-full max-w-2xl max-h-[90vh] overflow-hidden bg-gradient-to-br from-[#111827] to-[#1a1f2e] rounded-2xl border border-white/10 shadow-2xl"
+                    onClick={(e) => e.stopPropagation()}
+                >
+                    {/* Header */}
+                    <div className="relative p-4 border-b border-white/10 bg-gradient-to-r from-[#0066FF]/10 to-purple-500/10">
+                        <div className="flex items-center gap-3">
+                            <div className="p-2 rounded-xl bg-gradient-to-br from-[#0066FF] to-purple-500">
+                                <Sparkles className="w-5 h-5 text-white" />
+                            </div>
+                            <div>
+                                <h3 className="text-lg font-bold text-white">AI Phân Tích So Sánh</h3>
+                                <p className="text-xs text-white/50">
+                                    So sánh thông minh giữa {car1?.name} và {car2?.name}
+                                </p>
+                            </div>
+                        </div>
+                        <button
+                            onClick={onClose}
+                            className="absolute top-4 right-4 p-2 rounded-lg text-white/50 hover:text-white hover:bg-white/10 transition-colors"
+                        >
+                            <X className="w-5 h-5" />
+                        </button>
+                    </div>
+
+                    {/* Content */}
+                    <div className="p-4 max-h-[60vh] overflow-y-auto custom-scrollbar">
+                        {!analysisResult ? (
+                            <>
+                                {/* Selected Cars Preview */}
+                                <div className="flex items-center justify-center gap-4 mb-6 p-3 bg-white/5 rounded-xl">
+                                    <div className="flex items-center gap-2">
+                                        <img
+                                            src={`${import.meta.env.VITE_API_URL}${car1?.images?.[0]}` || carMercedes}
+                                            alt={car1?.name}
+                                            className="w-16 h-10 object-cover rounded-lg"
+                                        />
+                                        <span className="text-sm text-white font-medium">{car1?.name}</span>
+                                    </div>
+                                    <ArrowRightLeft className="w-5 h-5 text-[#0066FF]" />
+                                    <div className="flex items-center gap-2">
+                                        <img
+                                            src={`${import.meta.env.VITE_API_URL}${car2?.images?.[0]}` || carBmw}
+                                            alt={car2?.name}
+                                            className="w-16 h-10 object-cover rounded-lg"
+                                        />
+                                        <span className="text-sm text-white font-medium">{car2?.name}</span>
+                                    </div>
+                                </div>
+
+                                {/* Requirements Selection */}
+                                <div className="mb-4">
+                                    <h4 className="text-sm font-semibold text-white mb-3">Chọn tiêu chí phân tích:</h4>
+                                    <div className="grid grid-cols-2 gap-2">
+                                        {requirements.map((req) => {
+                                            const isSelected = selectedRequirements.includes(req.id);
+                                            return (
+                                                <button
+                                                    key={req.id}
+                                                    onClick={() => toggleRequirement(req.id)}
+                                                    className={`p-3 rounded-xl border transition-all duration-300 text-left group ${
+                                                        isSelected
+                                                            ? 'bg-[#0066FF]/20 border-[#0066FF] shadow-lg shadow-[#0066FF]/20'
+                                                            : 'bg-white/5 border-white/10 hover:border-white/30'
+                                                    }`}
+                                                >
+                                                    <div className="flex items-start gap-2">
+                                                        <div
+                                                            className={`p-1.5 rounded-lg ${
+                                                                isSelected
+                                                                    ? 'bg-[#0066FF]'
+                                                                    : 'bg-white/10 group-hover:bg-white/20'
+                                                            }`}
+                                                        >
+                                                            <req.icon
+                                                                className={`w-3.5 h-3.5 ${
+                                                                    isSelected ? 'text-white' : 'text-white/60'
+                                                                }`}
+                                                            />
+                                                        </div>
+                                                        <div className="flex-1 min-w-0">
+                                                            <span
+                                                                className={`text-xs font-medium block ${
+                                                                    isSelected ? 'text-[#0066FF]' : 'text-white'
+                                                                }`}
+                                                            >
+                                                                {req.label}
+                                                            </span>
+                                                            <span className="text-[10px] text-white/40 line-clamp-1">
+                                                                {req.description}
+                                                            </span>
+                                                        </div>
+                                                        {isSelected && (
+                                                            <Check className="w-4 h-4 text-[#0066FF] flex-shrink-0" />
+                                                        )}
+                                                    </div>
+                                                </button>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+
+                                {/* Custom Requirement */}
+                                <div className="mb-4">
+                                    <h4 className="text-sm font-semibold text-white mb-2 flex items-center gap-2">
+                                        <MessageSquare className="w-4 h-4 text-[#0066FF]" />
+                                        Yêu cầu riêng (tùy chọn):
+                                    </h4>
+                                    <textarea
+                                        value={customRequirement}
+                                        onChange={(e) => setCustomRequirement(e.target.value)}
+                                        placeholder="Nhập yêu cầu cụ thể của bạn, ví dụ: 'Tôi thường đi công tác xa 500km/tuần, xe nào phù hợp hơn?'"
+                                        className="w-full h-20 px-3 py-2 bg-white/5 border border-white/10 rounded-xl text-sm text-white placeholder:text-white/30 resize-none focus:outline-none focus:border-[#0066FF] transition-colors"
+                                    />
+                                </div>
+                            </>
+                        ) : (
+                            /* Analysis Result */
+                            <div className="space-y-4">
+                                {/* Summary */}
+                                <div className="p-4 bg-gradient-to-r from-[#0066FF]/10 to-purple-500/10 rounded-xl border border-[#0066FF]/20">
+                                    <div className="flex items-center gap-2 mb-2">
+                                        <Target className="w-4 h-4 text-[#0066FF]" />
+                                        <span className="text-sm font-semibold text-white">Tóm tắt</span>
+                                    </div>
+                                    <p className="text-sm text-white/80 leading-relaxed">{analysisResult.summary}</p>
+                                </div>
+
+                                {/* Recommendation */}
+                                {analysisResult.recommendation && (
+                                    <div className="p-4 bg-green-500/10 rounded-xl border border-green-500/20">
+                                        <div className="flex items-center gap-2 mb-1">
+                                            <Check className="w-5 h-5 text-green-400" />
+                                            <span className="text-sm font-semibold text-white">Đề xuất của AI:</span>
+                                            <span className="text-sm text-green-400 font-bold">
+                                                {analysisResult.recommendation}
+                                            </span>
+                                        </div>
+                                        {analysisResult.recommendationReason && (
+                                            <p className="text-xs text-white/60 ml-7">
+                                                {analysisResult.recommendationReason}
+                                            </p>
+                                        )}
+                                    </div>
+                                )}
+
+                                {/* Detailed Analysis with Scores */}
+                                {analysisResult.details?.length > 0 && (
+                                    <div className="space-y-2">
+                                        <h5 className="text-sm font-semibold text-white mb-2">Phân tích chi tiết:</h5>
+                                        {analysisResult.details.map((detail, idx) => (
+                                            <div key={idx} className="p-3 bg-white/5 rounded-xl border border-white/10">
+                                                <div className="flex justify-between items-center mb-2">
+                                                    <span className="text-xs font-semibold text-white">
+                                                        {detail.category}
+                                                    </span>
+                                                    {detail.car1Score && detail.car2Score && (
+                                                        <div className="flex gap-2 text-[10px]">
+                                                            <span className="text-[#0066FF]">
+                                                                {car1?.name}: {detail.car1Score}/10
+                                                            </span>
+                                                            <span className="text-purple-400">
+                                                                {car2?.name}: {detail.car2Score}/10
+                                                            </span>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                                {/* Score Bars */}
+                                                {detail.car1Score && detail.car2Score && (
+                                                    <div className="flex gap-2 mb-2">
+                                                        <div className="flex-1 h-1.5 bg-white/10 rounded-full overflow-hidden">
+                                                            <div
+                                                                className="h-full bg-[#0066FF] rounded-full transition-all"
+                                                                style={{ width: `${detail.car1Score * 10}%` }}
+                                                            />
+                                                        </div>
+                                                        <div className="flex-1 h-1.5 bg-white/10 rounded-full overflow-hidden">
+                                                            <div
+                                                                className="h-full bg-purple-500 rounded-full transition-all"
+                                                                style={{ width: `${detail.car2Score * 10}%` }}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                )}
+                                                <p className="text-[11px] text-white/60 leading-relaxed">
+                                                    {detail.analysis}
+                                                </p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+
+                                {/* Pros and Cons */}
+                                {analysisResult.prosAndCons && (
+                                    <div className="grid grid-cols-2 gap-3">
+                                        {/* Car 1 */}
+                                        <div className="p-3 bg-white/5 rounded-xl border border-white/10">
+                                            <h6 className="text-xs font-semibold text-[#0066FF] mb-2">{car1?.name}</h6>
+                                            {analysisResult.prosAndCons.car1?.pros?.length > 0 && (
+                                                <div className="mb-2">
+                                                    <span className="text-[10px] text-green-400 font-medium">
+                                                        Ưu điểm:
+                                                    </span>
+                                                    <ul className="ml-2 mt-1 space-y-0.5">
+                                                        {analysisResult.prosAndCons.car1.pros.map((pro, i) => (
+                                                            <li key={i} className="text-[10px] text-white/60">
+                                                                • {pro}
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                            )}
+                                            {analysisResult.prosAndCons.car1?.cons?.length > 0 && (
+                                                <div>
+                                                    <span className="text-[10px] text-red-400 font-medium">
+                                                        Nhược điểm:
+                                                    </span>
+                                                    <ul className="ml-2 mt-1 space-y-0.5">
+                                                        {analysisResult.prosAndCons.car1.cons.map((con, i) => (
+                                                            <li key={i} className="text-[10px] text-white/60">
+                                                                • {con}
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                            )}
+                                        </div>
+                                        {/* Car 2 */}
+                                        <div className="p-3 bg-white/5 rounded-xl border border-white/10">
+                                            <h6 className="text-xs font-semibold text-purple-400 mb-2">{car2?.name}</h6>
+                                            {analysisResult.prosAndCons.car2?.pros?.length > 0 && (
+                                                <div className="mb-2">
+                                                    <span className="text-[10px] text-green-400 font-medium">
+                                                        Ưu điểm:
+                                                    </span>
+                                                    <ul className="ml-2 mt-1 space-y-0.5">
+                                                        {analysisResult.prosAndCons.car2.pros.map((pro, i) => (
+                                                            <li key={i} className="text-[10px] text-white/60">
+                                                                • {pro}
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                            )}
+                                            {analysisResult.prosAndCons.car2?.cons?.length > 0 && (
+                                                <div>
+                                                    <span className="text-[10px] text-red-400 font-medium">
+                                                        Nhược điểm:
+                                                    </span>
+                                                    <ul className="ml-2 mt-1 space-y-0.5">
+                                                        {analysisResult.prosAndCons.car2.cons.map((con, i) => (
+                                                            <li key={i} className="text-[10px] text-white/60">
+                                                                • {con}
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* Final Verdict */}
+                                {analysisResult.finalVerdict && (
+                                    <div className="p-4 bg-gradient-to-r from-yellow-500/10 to-orange-500/10 rounded-xl border border-yellow-500/20">
+                                        <div className="flex items-center gap-2 mb-2">
+                                            <Sparkles className="w-4 h-4 text-yellow-400" />
+                                            <span className="text-sm font-semibold text-white">Lời khuyên</span>
+                                        </div>
+                                        <p className="text-xs text-white/80 leading-relaxed">
+                                            {analysisResult.finalVerdict}
+                                        </p>
+                                    </div>
+                                )}
+
+                                {/* Reset Button */}
+                                <button
+                                    onClick={resetAnalysis}
+                                    className="w-full py-2 px-4 rounded-xl bg-white/5 border border-white/10 text-white/70 text-sm hover:bg-white/10 hover:text-white transition-all flex items-center justify-center gap-2"
+                                >
+                                    <RefreshCw className="w-4 h-4" />
+                                    Phân tích lại với tiêu chí khác
+                                </button>
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Footer */}
+                    {!analysisResult && (
+                        <div className="p-4 border-t border-white/10 bg-[#0a0d14]/50">
+                            <button
+                                onClick={handleAnalyze}
+                                disabled={
+                                    isAnalyzing || (selectedRequirements.length === 0 && !customRequirement.trim())
+                                }
+                                className={`w-full py-3 px-4 rounded-xl font-semibold text-sm transition-all duration-300 flex items-center justify-center gap-2 ${
+                                    isAnalyzing || (selectedRequirements.length === 0 && !customRequirement.trim())
+                                        ? 'bg-white/10 text-white/30 cursor-not-allowed'
+                                        : 'bg-gradient-to-r from-[#0066FF] to-purple-500 text-white hover:shadow-lg hover:shadow-[#0066FF]/30 hover:scale-[1.02]'
+                                }`}
+                            >
+                                {isAnalyzing ? (
+                                    <>
+                                        <Loader2 className="w-4 h-4 animate-spin" />
+                                        Đang phân tích...
+                                    </>
+                                ) : (
+                                    <>
+                                        <Sparkles className="w-4 h-4" />
+                                        Phân tích với AI
+                                    </>
+                                )}
+                            </button>
+                            <p className="text-center text-[10px] text-white/30 mt-2">
+                                AI sẽ phân tích dựa trên thông số kỹ thuật và tiêu chí bạn chọn
+                            </p>
+                        </div>
+                    )}
+                </motion.div>
+            </motion.div>
+        </AnimatePresence>
+    );
+};
+
+const CarComparison = () => {
+    const [allCars, setAllCars] = useState(defaultCars);
+    const [selectedCars, setSelectedCars] = useState([defaultCars[0], defaultCars[1]]);
+    const [loading, setLoading] = useState(true);
+    const [comparing, setComparing] = useState(false);
+    const [comparisonData, setComparisonData] = useState(null);
+    const [showAIModal, setShowAIModal] = useState(false);
+
+    // Fetch cars from API
+    useEffect(() => {
+        const fetchCars = async () => {
+            try {
+                const response = await request.get('/api/car');
+                if (response.data?.metadata?.cars?.length >= 2) {
+                    const cars = response.data.metadata.cars.map((car) => ({
+                        ...car,
+                        images: car.images || [carMercedes],
+                        power: car.power || 'N/A',
+                        engine: car.engine || 'N/A',
+                        size: car.size || 'N/A',
+                        fuelConsumption: car.fuelConsumption || 'N/A',
+                        seats: car.seats || 5,
+                        safety: car.safety || [],
+                    }));
+                    setAllCars(cars);
+                    setSelectedCars([cars[0], cars[1]]);
+                }
+            } catch (error) {
+                console.error('Error fetching cars:', error);
+                // Keep default cars on error
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchCars();
+    }, []);
+
+    // Compare cars when selection changes
+    useEffect(() => {
+        const compareCars = async () => {
+            if (!selectedCars[0] || !selectedCars[1]) return;
+
+            setComparing(true);
+            try {
+                // TODO: Call actual comparison API
+                // const response = await request.post('/api/car/compare', {
+                //     car1Id: selectedCars[0]._id,
+                //     car2Id: selectedCars[1]._id,
+                // });
+                // setComparisonData(response.data);
+
+                // For now, use local comparison
+                await new Promise((resolve) => setTimeout(resolve, 500));
+                setComparisonData({
+                    summary: 'So sánh hoàn tất',
+                    cars: selectedCars,
+                });
+            } catch (error) {
+                console.error('Error comparing cars:', error);
+            } finally {
+                setComparing(false);
+            }
+        };
+        compareCars();
+    }, [selectedCars]);
+
+    // Format price to Vietnamese format
+    const formatPrice = (price) => {
+        if (typeof price === 'string') return price;
+        if (price >= 1000000000) {
+            return `${(price / 1000000000).toFixed(1)} tỷ`;
+        }
+        return `${(price / 1000000).toFixed(0)} triệu`;
+    };
+
+    // Get size from specifications
+    const getSize = (car) => {
+        if (car.specifications) {
+            const { length, width, height } = car.specifications;
+            if (length && width && height) {
+                return `${length} x ${width} x ${height}`;
+            }
+            if (length && width) {
+                return `${length} x ${width}`;
+            }
+        }
+        return 'N/A';
+    };
+
+    // Get horsepower from specifications
+    const getHorsepower = (car) => {
+        return car.specifications?.horsepower || 'N/A';
+    };
+
+    // Get torque from specifications
+    const getTorque = (car) => {
+        return car.specifications?.torque || 'N/A';
+    };
+
+    const specs = [
+        { key: 'price', label: 'Giá bán', icon: Zap, format: formatPrice },
+        { key: 'year', label: 'Năm sản xuất', icon: Car },
+        { key: 'fuelType', label: 'Nhiên liệu', icon: Fuel },
+        { key: 'transmission', label: 'Hộp số', icon: Gauge },
+        { key: 'seats', label: 'Số chỗ ngồi', icon: Users },
+        { key: 'engine', label: 'Động cơ', icon: Fuel },
+        { key: 'mileage', label: 'Tiêu hao (L/100km)', icon: Fuel, format: (val) => (val ? `${val} L/100km` : 'N/A') },
+        { key: 'horsepower', label: 'Công suất', icon: Zap, getValue: getHorsepower },
+        { key: 'torque', label: 'Mô-men xoắn', icon: Gauge, getValue: getTorque },
+        { key: 'size', label: 'Kích thước (DxRxC)', icon: Ruler, getValue: getSize },
+    ];
+
+    const SelectDropdown = ({ value, onChange, excludeId }) => (
+        <div className="relative">
+            <select
+                value={value?._id}
+                onChange={(e) => onChange(allCars.find((c) => c._id === e.target.value))}
+                className="w-full h-8 px-2 pr-6 bg-[#1a1f2e] border border-white/10 rounded-lg text-white text-xs appearance-none cursor-pointer transition-all duration-300 hover:border-[#0066FF]/50 focus:outline-none focus:border-[#0066FF]"
+            >
+                {allCars
+                    .filter((c) => c._id !== excludeId)
+                    .map((car) => (
+                        <option key={car._id} value={car._id} className="bg-[#1a1f2e]">
+                            {car.name}
+                        </option>
+                    ))}
+            </select>
+            <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-3 h-3 text-white/40 pointer-events-none" />
+        </div>
+    );
+
+    return (
+        <section className="py-10 lg:py-14 bg-[#0a0d14]">
+            <div className="max-w-[1000px] mx-auto px-4">
+                {/* Section Header */}
+                <motion.div
+                    initial={{ opacity: 0, y: 15 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
+                    className="text-center mb-6"
+                >
+                    <div className="flex items-center justify-center gap-2 mb-2">
+                        <div className="w-6 h-[1px] bg-[#0066FF]" />
+                        <span className="text-[#0066FF] text-[10px] font-semibold tracking-[0.15em] uppercase">
+                            So sánh
+                        </span>
+                        <div className="w-6 h-[1px] bg-[#0066FF]" />
+                    </div>
+                    <h2 className="text-xl md:text-2xl font-bold text-white mb-1">So sánh xe</h2>
+                    <p className="text-white/50 text-xs">So sánh thông số để chọn xe phù hợp</p>
+                </motion.div>
+
+                {/* Comparison Table */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                    className="bg-[#111827] border border-white/5 rounded-xl overflow-hidden relative"
+                >
+                    {/* Loading Overlay */}
+                    {(loading || comparing) && (
+                        <div className="absolute inset-0 bg-[#111827]/80 backdrop-blur-sm z-10 flex items-center justify-center">
+                            <div className="flex items-center gap-2">
+                                <Loader2 className="w-5 h-5 text-[#0066FF] animate-spin" />
+                                <span className="text-white/70 text-sm">
+                                    {loading ? 'Đang tải...' : 'Đang so sánh...'}
+                                </span>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Header Row */}
+                    <div className="grid grid-cols-3 border-b border-white/5">
+                        <div className="p-3 bg-[#0F172A]">
+                            <span className="text-white/40 text-[10px] font-medium uppercase tracking-wider">
+                                Thông số
+                            </span>
+                        </div>
+                        {selectedCars.map((car, idx) => (
+                            <div key={car._id} className={`p-3 ${idx === 0 ? 'border-x border-white/5' : ''}`}>
+                                <div className="aspect-[16/10] mb-2 rounded-lg overflow-hidden bg-[#0a0d14]">
+                                    <img
+                                        src={`${import.meta.env.VITE_API_URL}${car.images?.[0]}` || carMercedes}
+                                        alt={car.name}
+                                        className="w-full h-full object-cover"
+                                    />
+                                </div>
+                                <SelectDropdown
+                                    value={car}
+                                    onChange={(newCar) => {
+                                        const newSelected = [...selectedCars];
+                                        newSelected[idx] = newCar;
+                                        setSelectedCars(newSelected);
+                                    }}
+                                    excludeId={selectedCars[1 - idx]?._id}
+                                />
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Spec Rows */}
+                    {specs.map((spec, idx) => (
+                        <div
+                            key={spec.key}
+                            className={`grid grid-cols-3 ${idx !== specs.length - 1 ? 'border-b border-white/5' : ''}`}
+                        >
+                            <div className="p-2.5 flex items-center gap-1.5 bg-[#0F172A]">
+                                <spec.icon className="w-3 h-3 text-[#0066FF]" />
+                                <span className="text-white/70 text-xs">{spec.label}</span>
+                            </div>
+                            {selectedCars.map((car, carIdx) => {
+                                // Get raw value - support getValue function for nested fields
+                                const rawValue = spec.getValue ? spec.getValue(car) : car[spec.key];
+                                const otherRawValue = spec.getValue
+                                    ? spec.getValue(selectedCars[1 - carIdx])
+                                    : selectedCars[1 - carIdx]?.[spec.key];
+
+                                // Format display value
+                                const displayValue = spec.format ? spec.format(rawValue) : rawValue || 'N/A';
+
+                                // Determine if this value is "better"
+                                const isBetter = (() => {
+                                    if (!rawValue || !otherRawValue) return false;
+                                    switch (spec.key) {
+                                        case 'price':
+                                        case 'mileage': // Lower is better
+                                            return parseFloat(rawValue) < parseFloat(otherRawValue);
+                                        case 'seats':
+                                        case 'year':
+                                        case 'horsepower': // Higher is better
+                                            return parseInt(rawValue) > parseInt(otherRawValue);
+                                        default:
+                                            return false;
+                                    }
+                                })();
+
+                                return (
+                                    <div
+                                        key={`${car._id}-${spec.key}`}
+                                        className={`p-2.5 flex items-center ${carIdx === 0 ? 'border-x border-white/5' : ''} ${isBetter ? 'bg-[#0066FF]/5' : ''}`}
+                                    >
+                                        <span
+                                            className={`text-xs ${isBetter ? 'text-[#0066FF] font-semibold' : 'text-white/80'}`}
+                                        >
+                                            {spec.key === 'seats' ? `${displayValue} chỗ` : displayValue}
+                                        </span>
+                                        {isBetter && <Check className="w-3 h-3 text-[#0066FF] ml-1.5" />}
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    ))}
+
+                    {/* Colors Row */}
+                    <div className="grid grid-cols-3 border-t border-white/5">
+                        <div className="p-2.5 flex items-center gap-1.5 bg-[#0F172A]">
+                            <Shield className="w-3 h-3 text-[#0066FF]" />
+                            <span className="text-white/70 text-xs">Màu sắc</span>
+                        </div>
+                        {selectedCars.map((car, carIdx) => (
+                            <div
+                                key={`${car._id}-colors`}
+                                className={`p-2.5 ${carIdx === 0 ? 'border-x border-white/5' : ''}`}
+                            >
+                                <div className="flex flex-wrap gap-1.5">
+                                    {(car.colors || []).map((color, colorIdx) => (
+                                        <div
+                                            key={`${color.name}-${colorIdx}`}
+                                            className="flex items-center gap-1 px-1.5 py-0.5 bg-white/5 rounded"
+                                        >
+                                            <div
+                                                className="w-3 h-3 rounded-full border border-white/20"
+                                                style={{ backgroundColor: color.code || '#888' }}
+                                            />
+                                            <span className="text-white/60 text-[9px]">{color.name}</span>
+                                        </div>
+                                    ))}
+                                    {(!car.colors || car.colors.length === 0) && (
+                                        <span className="text-white/40 text-[9px]">Không có thông tin</span>
+                                    )}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Versions Row */}
+                    <div className="grid grid-cols-3 border-t border-white/5">
+                        <div className="p-2.5 flex items-center gap-1.5 bg-[#0F172A]">
+                            <Car className="w-3 h-3 text-[#0066FF]" />
+                            <span className="text-white/70 text-xs">Phiên bản</span>
+                        </div>
+                        {selectedCars.map((car, carIdx) => (
+                            <div
+                                key={`${car._id}-versions`}
+                                className={`p-2.5 ${carIdx === 0 ? 'border-x border-white/5' : ''}`}
+                            >
+                                <div className="flex flex-wrap gap-1">
+                                    {(car.versions || []).map((version, versionIdx) => (
+                                        <span
+                                            key={`${version.name}-${versionIdx}`}
+                                            className="px-1.5 py-0.5 bg-[#0066FF]/10 border border-[#0066FF]/30 rounded text-[#0066FF] text-[9px]"
+                                        >
+                                            {version.name}
+                                            {version.price && ` - ${formatPrice(version.price)}`}
+                                        </span>
+                                    ))}
+                                    {(!car.versions || car.versions.length === 0) && (
+                                        <span className="text-white/40 text-[9px]">Không có thông tin</span>
+                                    )}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* AI Analysis Button */}
+                    <div className="p-4 border-t border-white/5 bg-gradient-to-r from-[#0F172A] to-[#111827]">
+                        <button
+                            onClick={() => setShowAIModal(true)}
+                            className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-[#0066FF] to-purple-500 text-white font-semibold text-sm hover:shadow-lg hover:shadow-[#0066FF]/30 transition-all duration-300 flex items-center justify-center gap-2 hover:scale-[1.02]"
+                        >
+                            <Sparkles className="w-4 h-4" />
+                            So sánh với AI
+                        </button>
+                        <p className="text-center text-[10px] text-white/30 mt-2">
+                            AI sẽ phân tích và đề xuất xe phù hợp với nhu cầu của bạn
+                        </p>
+                    </div>
+                </motion.div>
+            </div>
+
+            {/* AI Analysis Modal */}
+            <AIAnalysisModal
+                isOpen={showAIModal}
+                onClose={() => setShowAIModal(false)}
+                car1={selectedCars[0]}
+                car2={selectedCars[1]}
+            />
+        </section>
+    );
+};
+
+export default CarComparison;
