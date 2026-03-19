@@ -45,13 +45,13 @@ const carSchema = new Schema(
 
         fuelType: {
             type: String,
-            enum: ['Xăng', 'Dầu', 'Hybrid', 'Điện'],
+            enum: ['Gasoline', 'Diesel', 'Hybrid', 'Electric'],
             required: true,
         },
 
         transmission: {
             type: String,
-            enum: ['Số sàn', 'Tự động'],
+            enum: ['Manual', 'Automatic'],
             required: true,
         },
 

@@ -41,11 +41,19 @@ const upload = multer({
     fileFilter: fileFilter,
 });
 
-// Routes
+// Middleware to prevent caching for car data
+const noCacheMiddleware = (req, res, next) => {
+    res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0');
+    res.set('Pragma', 'no-cache');
+    res.set('Expires', '0');
+    next();
+};
+
+// Routes - Order matters! Specific routes before generic ones
 router.post('/create', upload.array('images', 10), asyncHandler(carController.createCar));
-router.get('/', asyncHandler(carController.getAllCars));
-router.get('/:id', asyncHandler(carController.getCarById));
-router.get('/slug/:slug', asyncHandler(carController.getCarBySlug));
+router.get('/slug/:slug', noCacheMiddleware, asyncHandler(carController.getCarBySlug));
+router.get('/', noCacheMiddleware, asyncHandler(carController.getAllCars));
+router.get('/:id', noCacheMiddleware, asyncHandler(carController.getCarById));
 router.put('/:id', upload.array('images', 10), asyncHandler(carController.updateCar));
 router.delete('/:id', asyncHandler(carController.deleteCar));
 router.post('/:id/delete-image', asyncHandler(carController.deleteImage));

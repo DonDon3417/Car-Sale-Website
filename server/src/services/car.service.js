@@ -10,6 +10,14 @@ class CarService {
             // Tạo slug từ tên xe
             data.slug = slugify(data.name, { lower: true, strict: true }) + '-' + Date.now();
 
+            // Convert price và discountPrice sang số (do FormData gửi lên dạng string)
+            if (data.price !== undefined) {
+                data.price = Number(data.price);
+            }
+            if (data.discountPrice !== undefined) {
+                data.discountPrice = Number(data.discountPrice) || 0;
+            }
+
             // Xử lý images từ multer
             if (files && files.length > 0) {
                 data.images = files.map((file) => `/uploads/cars/${file.filename}`);
@@ -21,6 +29,13 @@ class CarService {
             }
             if (typeof data.versions === 'string') {
                 data.versions = JSON.parse(data.versions);
+            }
+            // Ensure version prices are numbers
+            if (data.versions && Array.isArray(data.versions)) {
+                data.versions = data.versions.map((v) => ({
+                    ...v,
+                    price: Number(v.price) || 0,
+                }));
             }
             if (typeof data.specifications === 'string') {
                 data.specifications = JSON.parse(data.specifications);
@@ -214,6 +229,14 @@ class CarService {
                 data.slug = slugify(data.name, { lower: true, strict: true }) + '-' + Date.now();
             }
 
+            // Convert price và discountPrice sang số (do FormData gửi lên dạng string)
+            if (data.price !== undefined) {
+                data.price = Number(data.price);
+            }
+            if (data.discountPrice !== undefined) {
+                data.discountPrice = Number(data.discountPrice) || 0;
+            }
+
             // Xử lý images mới từ multer
             if (files && files.length > 0) {
                 const newImages = files.map((file) => `/uploads/cars/${file.filename}`);
@@ -237,6 +260,13 @@ class CarService {
             }
             if (typeof data.versions === 'string') {
                 data.versions = JSON.parse(data.versions);
+            }
+            // Ensure version prices are numbers
+            if (data.versions && Array.isArray(data.versions)) {
+                data.versions = data.versions.map((v) => ({
+                    ...v,
+                    price: Number(v.price) || 0,
+                }));
             }
             if (typeof data.specifications === 'string') {
                 data.specifications = JSON.parse(data.specifications);

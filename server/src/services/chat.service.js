@@ -152,9 +152,13 @@ class ChatService {
             }
 
             // Đổi status sang active nếu admin phản hồi
+            // CHỈ gán admin khi người gửi không phải là customer
             if (!isCustomerSending && conversation.status === 'pending') {
                 conversation.status = 'active';
-                conversation.admin = senderId;
+                // Chỉ gán admin nếu admin chưa được gán hoặc admin khác với customer
+                if (!conversation.admin || conversation.admin.toString() !== conversation.customer.toString()) {
+                    conversation.admin = senderId;
+                }
             }
 
             await conversation.save();
@@ -183,6 +187,11 @@ class ChatService {
 
             if (!conversation) {
                 throw new Error('Không tìm thấy cuộc hội thoại');
+            }
+
+            // Kiểm tra xem admin có phải là customer không
+            if (conversation.customer.toString() === adminId) {
+                throw new Error('Admin không thể tự nhận cuộc hội thoại của chính mình với vai trò khách hàng');
             }
 
             conversation.admin = adminId;
