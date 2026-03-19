@@ -28,7 +28,7 @@ const Topbar = ({ isCollapsed }) => {
                         type="text"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        placeholder="Tìm kiếm..."
+                        placeholder="Search..."
                         className="w-full h-10 pl-10 pr-4 bg-white/5 border border-white/10 rounded-xl text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-[#0066FF]/50 focus:bg-white/[0.07] transition-all"
                     />
                 </div>
@@ -58,7 +58,7 @@ const Topbar = ({ isCollapsed }) => {
                             )}
                             <div className="hidden sm:block text-left">
                                 <p className="text-white text-xs font-medium">{dataUser?.fullName || 'Admin'}</p>
-                                <p className="text-white/50 text-[10px]">Quản trị viên</p>
+                                <p className="text-white/50 text-[10px]">Administrator</p>
                             </div>
                             <ChevronDown
                                 className={`w-4 h-4 text-white/50 transition-transform ${isProfileOpen ? 'rotate-180' : ''}`}
@@ -88,14 +88,14 @@ const Topbar = ({ isCollapsed }) => {
                                             className="flex items-center gap-2 px-3 py-2 text-white/70 hover:text-white hover:bg-white/5 text-xs transition-colors"
                                         >
                                             <User className="w-4 h-4" />
-                                            <span>Hồ sơ cá nhân</span>
+                                            <span>Profile</span>
                                         </Link>
                                         <Link
                                             to="/admin/settings"
                                             className="flex items-center gap-2 px-3 py-2 text-white/70 hover:text-white hover:bg-white/5 text-xs transition-colors"
                                         >
                                             <Settings className="w-4 h-4" />
-                                            <span>Cài đặt</span>
+                                            <span>Settings</span>
                                         </Link>
                                     </div>
                                     <div className="border-t border-white/5 py-1">
@@ -104,7 +104,7 @@ const Topbar = ({ isCollapsed }) => {
                                             className="w-full flex items-center gap-2 px-3 py-2 text-red-400 hover:text-red-300 hover:bg-red-500/10 text-xs transition-colors"
                                         >
                                             <LogOut className="w-4 h-4" />
-                                            <span>Đăng xuất</span>
+                                            <span>Sign out</span>
                                         </button>
                                     </div>
                                 </motion.div>

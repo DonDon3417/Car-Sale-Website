@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+﻿import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     MessageCircle,
@@ -26,29 +26,42 @@ import CryptoJS from 'crypto-js';
 
 const statusConfig = {
     pending: {
-        label: 'Chờ tiếp nhận',
+        label: 'Pending intake',
         color: 'bg-yellow-500',
         textColor: 'text-yellow-400',
         icon: AlertCircle,
     },
     active: {
-        label: 'Đang xử lý',
+        label: 'Processing',
         color: 'bg-blue-500',
         textColor: 'text-blue-400',
         icon: Circle,
     },
     resolved: {
-        label: 'Đã giải quyết',
+        label: 'Resolved',
         color: 'bg-green-500',
         textColor: 'text-green-400',
         icon: CheckCircle2,
     },
     closed: {
-        label: 'Đã đóng',
+        label: 'Closed',
         color: 'bg-gray-500',
         textColor: 'text-gray-400',
         icon: XCircle,
     },
+};
+
+const buildAssetUrl = (assetPath, folder = '') => {
+    if (!assetPath) return '';
+    if (/^https?:\/\//i.test(assetPath)) return assetPath;
+
+    const baseUrl = (import.meta.env.VITE_URL_IMAGE || import.meta.env.VITE_API_URL || '').replace(/\/$/, '');
+
+    if (!baseUrl) return assetPath;
+    if (assetPath.startsWith('/')) return `${baseUrl}${assetPath}`;
+    if (folder) return `${baseUrl}/${folder}/${assetPath}`;
+
+    return `${baseUrl}/${assetPath}`;
 };
 
 const ChatManager = () => {
@@ -128,10 +141,10 @@ const ChatManager = () => {
             console.log('Admin socket connected');
         });
 
-        // Listen for new customer messages (chỉ refresh list, không thêm vào messages)
+        // Listen for new customer messages (only refresh list, do not append to messages)
         socketRef.current.on('new_customer_message', (data) => {
             fetchConversations();
-            // Không thêm message ở đây vì đã có new_message handler
+            // Do not append message here because new_message handler already handles it
         });
 
         socketRef.current.on('new_message', (data) => {
@@ -279,20 +292,20 @@ const ChatManager = () => {
         const diffDays = Math.floor((now - msgDate) / (1000 * 60 * 60 * 24));
 
         if (diffDays === 0) {
-            return msgDate.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
+            return msgDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
         } else if (diffDays === 1) {
-            return 'Hôm qua';
+            return 'Yesterday';
         } else {
-            return msgDate.toLocaleDateString('vi-VN');
+            return msgDate.toLocaleDateString('en-US');
         }
     };
 
     // Format price
     const formatPrice = (price) => {
         if (price >= 1000000000) {
-            return (price / 1000000000).toFixed(2) + ' tỷ';
+            return (price / 1000000000).toFixed(2) + ' billion';
         }
-        return (price / 1000000).toFixed(0) + ' triệu';
+        return (price / 1000000).toFixed(0) + ' million';
     };
 
     // Filter conversations
@@ -303,13 +316,15 @@ const ChatManager = () => {
         return customerName.includes(searchQuery.toLowerCase()) || title.includes(searchQuery.toLowerCase());
     });
 
+    const getCustomerAvatarUrl = (avatar) => buildAssetUrl(avatar, 'uploads/avatars');
+
     return (
         <div className="flex h-[calc(100vh-120px)] bg-[#0F172A] rounded-2xl overflow-hidden border border-white/10">
             {/* Sidebar - Conversations List */}
             <div className="w-[350px] border-r border-white/10 flex flex-col">
                 {/* Header */}
                 <div className="p-4 border-b border-white/10">
-                    <h2 className="text-xl font-bold text-white mb-4">Tin nhắn tư vấn</h2>
+                    <h2 className="text-xl font-bold text-white mb-4">Consultation messages</h2>
 
                     {/* Search */}
                     <div className="relative mb-3">
@@ -318,7 +333,7 @@ const ChatManager = () => {
                             type="text"
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            placeholder="Tìm kiếm..."
+                            placeholder="Search..."
                             className="w-full pl-10 pr-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white text-sm placeholder:text-white/40 focus:outline-none focus:border-[#0066FF]"
                         />
                     </div>
@@ -333,7 +348,7 @@ const ChatManager = () => {
                                     : 'bg-white/10 text-white/70 hover:bg-white/20'
                             }`}
                         >
-                            Tất cả
+                            All
                         </button>
                         {Object.entries(statusConfig).map(([key, config]) => (
                             <button
@@ -360,7 +375,7 @@ const ChatManager = () => {
                     ) : filteredConversations.length === 0 ? (
                         <div className="text-center py-12 text-white/50">
                             <MessageCircle className="w-12 h-12 mx-auto mb-3 opacity-50" />
-                            <p>Không có cuộc hội thoại nào</p>
+                            <p>No conversations</p>
                         </div>
                     ) : (
                         filteredConversations.map((conv) => {
@@ -381,7 +396,7 @@ const ChatManager = () => {
                                             <div className="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center">
                                                 {conv.customer?.avatar ? (
                                                     <img
-                                                        src={import.meta.env.VITE_API_URL + conv.customer.avatar}
+                                                        src={getCustomerAvatarUrl(conv.customer.avatar)}
                                                         alt=""
                                                         className="w-full h-full rounded-full object-cover"
                                                     />
@@ -400,7 +415,7 @@ const ChatManager = () => {
                                         <div className="flex-1 min-w-0">
                                             <div className="flex items-center justify-between mb-1">
                                                 <span className="text-white font-medium truncate">
-                                                    {conv.customer?.fullName || 'Khách hàng'}
+                                                    {conv.customer?.fullName || 'Customers'}
                                                 </span>
                                                 <span className="text-white/40 text-xs">
                                                     {formatTime(conv.lastMessage?.createdAt || conv.updatedAt)}
@@ -421,7 +436,7 @@ const ChatManager = () => {
                                                 {conv.type === 'loan_consultation' && (
                                                     <span className="flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-medium text-green-400 bg-green-500/10">
                                                         <Calculator className="w-3 h-3" />
-                                                        Trả góp
+                                                        Installment
                                                     </span>
                                                 )}
                                             </div>
@@ -440,7 +455,7 @@ const ChatManager = () => {
                     <div className="flex-1 flex items-center justify-center text-white/50">
                         <div className="text-center">
                             <MessageCircle className="w-16 h-16 mx-auto mb-4 opacity-30" />
-                            <p className="text-lg">Chọn một cuộc hội thoại để bắt đầu</p>
+                            <p className="text-lg">Select a conversation to start</p>
                         </div>
                     </div>
                 ) : (
@@ -451,7 +466,7 @@ const ChatManager = () => {
                                 <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center">
                                     {selectedConversation.customer?.avatar ? (
                                         <img
-                                            src={import.meta.env.VITE_API_URL + selectedConversation.customer.avatar}
+                                            src={getCustomerAvatarUrl(selectedConversation.customer.avatar)}
                                             alt=""
                                             className="w-full h-full rounded-full object-cover"
                                         />
@@ -486,7 +501,7 @@ const ChatManager = () => {
                                         onClick={handleAssign}
                                         className="px-4 py-2 bg-[#0066FF] hover:bg-[#0052cc] rounded-lg text-white text-sm font-medium transition-colors"
                                     >
-                                        Tiếp nhận
+                                        Take over
                                     </button>
                                 )}
                                 {selectedConversation.status === 'active' && (
@@ -494,7 +509,7 @@ const ChatManager = () => {
                                         onClick={handleResolve}
                                         className="px-4 py-2 bg-green-500 hover:bg-green-600 rounded-lg text-white text-sm font-medium transition-colors"
                                     >
-                                        Đánh dấu hoàn thành
+                                        Mark as completed
                                     </button>
                                 )}
                             </div>
@@ -519,7 +534,7 @@ const ChatManager = () => {
                                             {selectedConversation.relatedCar.name}
                                         </p>
                                         <p className="text-[#0066FF] text-xs font-semibold">
-                                            {formatPrice(selectedConversation.relatedCar.price)} VNĐ
+                                            {formatPrice(selectedConversation.relatedCar.price)} VND
                                         </p>
                                     </div>
                                 </div>
@@ -554,25 +569,25 @@ const ChatManager = () => {
                                                     </div>
                                                     <div className="grid grid-cols-2 gap-2 text-xs">
                                                         <div>
-                                                            <span className="opacity-70">Giá xe:</span>
+                                                            <span className="opacity-70">Car price:</span>
                                                             <p className="font-semibold">
                                                                 {formatPrice(msg.loanInfo.carPrice)}
                                                             </p>
                                                         </div>
                                                         <div>
-                                                            <span className="opacity-70">Trả trước:</span>
+                                                            <span className="opacity-70">Down payment:</span>
                                                             <p className="font-semibold">
                                                                 {msg.loanInfo.downPaymentPercent}%
                                                             </p>
                                                         </div>
                                                         <div>
-                                                            <span className="opacity-70">Kỳ hạn:</span>
+                                                            <span className="opacity-70">Term:</span>
                                                             <p className="font-semibold">
-                                                                {msg.loanInfo.loanTerm} tháng
+                                                                {msg.loanInfo.loanTerm} months
                                                             </p>
                                                         </div>
                                                         <div>
-                                                            <span className="opacity-70">Trả góp/tháng:</span>
+                                                            <span className="opacity-70">Installment/month:</span>
                                                             <p className="font-semibold text-green-300">
                                                                 {formatPrice(msg.loanInfo.monthlyPayment)}
                                                             </p>
@@ -616,7 +631,7 @@ const ChatManager = () => {
                                             style={{ animationDelay: '300ms' }}
                                         />
                                     </div>
-                                    <span>Đang nhập...</span>
+                                    <span>Typing...</span>
                                 </div>
                             )}
 
@@ -632,7 +647,7 @@ const ChatManager = () => {
                                         value={inputMessage}
                                         onChange={handleInputChange}
                                         onKeyPress={handleKeyPress}
-                                        placeholder="Nhập tin nhắn..."
+                                        placeholder="Enter a message..."
                                         className="flex-1 bg-white/10 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder:text-white/40 focus:outline-none focus:border-[#0066FF]"
                                     />
                                     <button
@@ -657,3 +672,4 @@ const ChatManager = () => {
 };
 
 export default ChatManager;
+

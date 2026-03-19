@@ -6,17 +6,17 @@ import dayjs from 'dayjs';
 import { requestGetMyDeposits } from '../../config/DepositRequest';
 
 const statusConfig = {
-    pending: { label: 'Chờ xác nhận', color: 'bg-yellow-500/15 text-yellow-400 border-yellow-500/20' },
-    confirmed: { label: 'Đã xác nhận', color: 'bg-green-500/15 text-green-400 border-green-500/20' },
-    cancelled: { label: 'Đã hủy', color: 'bg-red-500/15 text-red-400 border-red-500/20' },
-    completed: { label: 'Hoàn thành', color: 'bg-blue-500/15 text-blue-400 border-blue-500/20' },
+    pending: { label: 'Pending confirmation', color: 'bg-yellow-500/15 text-yellow-400 border-yellow-500/20' },
+    confirmed: { label: 'Confirmed', color: 'bg-green-500/15 text-green-400 border-green-500/20' },
+    cancelled: { label: 'Cancelled', color: 'bg-red-500/15 text-red-400 border-red-500/20' },
+    completed: { label: 'Completed', color: 'bg-blue-500/15 text-blue-400 border-blue-500/20' },
 };
 
 const paymentStatusConfig = {
-    pending: { label: 'Chưa thanh toán', color: 'text-yellow-400' },
-    completed: { label: 'Đã thanh toán', color: 'text-green-400' },
-    failed: { label: 'Thất bại', color: 'text-red-400' },
-    refunded: { label: 'Đã hoàn tiền', color: 'text-orange-400' },
+    pending: { label: 'Unpaid', color: 'text-yellow-400' },
+    completed: { label: 'Paid', color: 'text-green-400' },
+    failed: { label: 'Failed', color: 'text-red-400' },
+    refunded: { label: 'Refunded', color: 'text-orange-400' },
 };
 
 const MyDepositsPage = () => {
@@ -40,15 +40,15 @@ const MyDepositsPage = () => {
     };
 
     const formatPrice = (price) => {
-        return new Intl.NumberFormat('vi-VN').format(price) + 'đ';
+        return new Intl.NumberFormat('en-US').format(price) + 'đ';
     };
 
     if (loading) {
         return (
             <div className="space-y-4">
                 <div>
-                    <h1 className="text-xl font-bold text-white">Đơn xe đã cọc</h1>
-                    <p className="text-white/40 text-sm mt-1">Theo dõi các đơn đặt cọc xe của bạn</p>
+                    <h1 className="text-xl font-bold text-white">My Deposits</h1>
+                    <p className="text-white/40 text-sm mt-1">Track your car deposit orders</p>
                 </div>
                 {[1, 2, 3].map((i) => (
                     <div key={i} className="bg-[#111827]/80 border border-white/[0.06] rounded-2xl p-5 animate-pulse">
@@ -71,11 +71,11 @@ const MyDepositsPage = () => {
             {/* Page Title */}
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="text-xl font-bold text-white">Đơn xe đã cọc</h1>
+                    <h1 className="text-xl font-bold text-white">My Deposits</h1>
                     <p className="text-white/40 text-sm mt-1">
                         {deposits.length > 0
-                            ? `Bạn có ${deposits.length} đơn đặt cọc`
-                            : 'Theo dõi các đơn đặt cọc xe của bạn'}
+                            ? `You have ${deposits.length} deposits`
+                            : 'Track your car deposit orders'}
                     </p>
                 </div>
             </div>
@@ -90,8 +90,8 @@ const MyDepositsPage = () => {
                     <div className="w-16 h-16 bg-white/[0.04] rounded-2xl flex items-center justify-center mx-auto mb-4">
                         <Package className="w-8 h-8 text-white/20" />
                     </div>
-                    <p className="text-white/50 text-sm">Bạn chưa có đơn đặt cọc nào</p>
-                    <p className="text-white/30 text-xs mt-1">Hãy tìm kiếm và đặt cọc xe yêu thích của bạn</p>
+                    <p className="text-white/50 text-sm">Bạn chưa có deposits nào</p>
+                    <p className="text-white/30 text-xs mt-1">Search and reserve your favorite car</p>
                 </motion.div>
             )}
 
@@ -126,7 +126,7 @@ const MyDepositsPage = () => {
                                     <div className="flex items-start justify-between gap-3">
                                         <div className="min-w-0">
                                             <h3 className="text-white text-sm font-semibold truncate">
-                                                {car?.name || 'Xe không xác định'}
+                                                {car?.name || 'Unknown car'}
                                             </h3>
                                             <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1.5">
                                                 {deposit.carVersion && (
@@ -169,7 +169,7 @@ const MyDepositsPage = () => {
                                 <button
                                     onClick={() => setSelectedDeposit(deposit)}
                                     className="self-center p-2 rounded-lg text-white/30 hover:text-white hover:bg-white/[0.06] transition-all opacity-0 group-hover:opacity-100"
-                                    title="Xem chi tiết"
+                                    title="View details"
                                 >
                                     <Eye className="w-4 h-4" />
                                 </button>
@@ -198,7 +198,7 @@ const MyDepositsPage = () => {
                         >
                             {/* Modal Header */}
                             <div className="flex items-center justify-between p-5 border-b border-white/[0.06]">
-                                <h3 className="text-white text-base font-semibold">Chi tiết đơn cọc</h3>
+                                <h3 className="text-white text-base font-semibold">Details orders cọc</h3>
                                 <button
                                     onClick={() => setSelectedDeposit(null)}
                                     className="p-1.5 rounded-lg text-white/40 hover:text-white hover:bg-white/[0.06] transition-all"
@@ -234,37 +234,37 @@ const MyDepositsPage = () => {
                                 <div className="grid grid-cols-2 gap-3">
                                     {[
                                         {
-                                            label: 'Giá xe',
+                                            label: 'Car price',
                                             value: formatPrice(selectedDeposit.carPrice),
                                         },
                                         {
-                                            label: 'Tiền cọc',
+                                            label: 'Deposit amount',
                                             value: formatPrice(selectedDeposit.depositAmount),
                                             highlight: true,
                                         },
                                         {
-                                            label: 'Phương thức',
+                                            label: 'Method',
                                             value: selectedDeposit.paymentMethod,
                                         },
                                         {
-                                            label: 'Thanh toán',
+                                            label: 'Payment',
                                             value: paymentStatusConfig[selectedDeposit.paymentStatus]?.label || 'N/A',
                                             className: paymentStatusConfig[selectedDeposit.paymentStatus]?.color,
                                         },
                                         {
-                                            label: 'Trạng thái',
+                                            label: 'Status',
                                             value: statusConfig[selectedDeposit.status]?.label || 'N/A',
                                         },
                                         {
-                                            label: 'SĐT liên hệ',
-                                            value: selectedDeposit.customerPhone || 'Không có',
+                                            label: 'Contact phone',
+                                            value: selectedDeposit.customerPhone || 'N/A',
                                         },
                                         {
-                                            label: 'Ngày tạo',
+                                            label: 'Created date',
                                             value: dayjs(selectedDeposit.createdAt).format('DD/MM/YYYY HH:mm'),
                                         },
                                         {
-                                            label: 'Hạn đặt cọc',
+                                            label: 'Deposit deadline',
                                             value: dayjs(selectedDeposit.expiresAt).format('DD/MM/YYYY'),
                                         },
                                     ].map((item, i) => (
@@ -284,7 +284,7 @@ const MyDepositsPage = () => {
                                 {/* Note */}
                                 {selectedDeposit.note && (
                                     <div className="p-3 bg-white/[0.02] rounded-xl">
-                                        <p className="text-white/40 text-[11px] mb-1">Ghi chú</p>
+                                        <p className="text-white/40 text-[11px] mb-1">Note</p>
                                         <p className="text-white/70 text-sm">{selectedDeposit.note}</p>
                                     </div>
                                 )}
@@ -292,7 +292,7 @@ const MyDepositsPage = () => {
                                 {/* Transaction ID */}
                                 {selectedDeposit.transactionId && (
                                     <div className="p-3 bg-white/[0.02] rounded-xl">
-                                        <p className="text-white/40 text-[11px] mb-1">Mã giao dịch</p>
+                                        <p className="text-white/40 text-[11px] mb-1">Transaction ID</p>
                                         <p className="text-white/70 text-sm font-mono">
                                             {selectedDeposit.transactionId}
                                         </p>

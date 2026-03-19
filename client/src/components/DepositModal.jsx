@@ -72,21 +72,21 @@ const DepositModal = ({ isOpen, onClose, car, selectedVersion, selectedColor }) 
     const colorName = car?.colors?.[selectedColor]?.name || '';
 
     const formatPrice = (price) => {
-        return new Intl.NumberFormat('vi-VN').format(price) + ' VNĐ';
+        return new Intl.NumberFormat('en-US').format(price) + ' VND';
     };
 
     const formatPriceShort = (price) => {
         if (price >= 1000000000) {
-            return (price / 1000000000).toFixed(2) + ' tỷ';
+            return (price / 1000000000).toFixed(2) + ' billion';
         }
-        return (price / 1000000).toFixed(0) + ' triệu';
+        return (price / 1000000).toFixed(0) + ' million';
     };
 
     const paymentMethods = [
         {
             id: 'MOMO',
             name: 'MoMo',
-            description: 'Thanh toán qua ví MoMo',
+            description: 'Pay via MoMo wallet',
             icon: MomoIcon,
             color: 'from-pink-500 to-pink-600',
             bgColor: 'bg-pink-500/10',
@@ -95,7 +95,7 @@ const DepositModal = ({ isOpen, onClose, car, selectedVersion, selectedColor }) 
         {
             id: 'VNPAY',
             name: 'VNPay',
-            description: 'Thanh toán qua VNPay',
+            description: 'Pay via VNPay',
             icon: VnpayIcon,
             color: 'from-blue-500 to-blue-600',
             bgColor: 'bg-blue-500/10',
@@ -104,7 +104,7 @@ const DepositModal = ({ isOpen, onClose, car, selectedVersion, selectedColor }) 
         {
             id: 'PAYPAL',
             name: 'PayPal',
-            description: 'Thanh toán quốc tế',
+            description: 'International payment',
             icon: PaypalIcon,
             color: 'from-[#003087] to-[#009CDE]',
             bgColor: 'bg-blue-600/10',
@@ -114,17 +114,17 @@ const DepositModal = ({ isOpen, onClose, car, selectedVersion, selectedColor }) 
 
     const handleSubmit = async () => {
         if (!paymentMethod) {
-            setError('Vui lòng chọn phương thức thanh toán');
+            setError('Please select a payment method');
             return;
         }
 
         if (!phone) {
-            setError('Vui lòng nhập số điện thoại');
+            setError('Please enter phone number');
             return;
         }
 
         if (!note) {
-            setError('Vui lòng nhập ghi chú');
+            setError('Please enter a note');
             return;
         }
         const res = await requestCreateDeposit({
@@ -158,10 +158,10 @@ const DepositModal = ({ isOpen, onClose, car, selectedVersion, selectedColor }) 
             });
 
             setSuccess(true);
-            message.success('Thanh toán thành công');
+            message.success('Payment successful');
             setDepositResult(res.metadata);
         } catch (err) {
-            message.error(err.response?.data?.message || 'Có lỗi xảy ra. Vui lòng thử lại.');
+            message.error(err.response?.data?.message || 'An error occurred. Please try again.');
         } finally {
             setLoading(false);
         }
@@ -203,8 +203,8 @@ const DepositModal = ({ isOpen, onClose, car, selectedVersion, selectedColor }) 
                                     <CreditCard className="w-6 h-6 text-white" />
                                 </div>
                                 <div>
-                                    <h2 className="text-xl font-bold text-white">Đặt cọc giữ xe</h2>
-                                    <p className="text-white/70 text-sm">Đảm bảo quyền sở hữu xe yêu thích</p>
+                                    <h2 className="text-xl font-bold text-white">Car Deposits</h2>
+                                    <p className="text-white/70 text-sm">Secure your favorite car ownership</p>
                                 </div>
                             </div>
                             <button
@@ -221,24 +221,24 @@ const DepositModal = ({ isOpen, onClose, car, selectedVersion, selectedColor }) 
                                 <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
                                     <Check className="w-10 h-10 text-green-400" />
                                 </div>
-                                <h3 className="text-2xl font-bold text-white mb-2">Đặt cọc thành công!</h3>
+                                <h3 className="text-2xl font-bold text-white mb-2">Deposit successful!</h3>
                                 <p className="text-white/60 mb-6">
-                                    Đơn đặt cọc của bạn đã được tạo. Vui lòng hoàn tất thanh toán để xác nhận.
+                                    Your deposit order has been created. Please complete payment to confirm.
                                 </p>
 
                                 <div className="bg-white/5 rounded-xl p-4 text-left mb-6">
                                     <div className="flex justify-between py-2 border-b border-white/10">
-                                        <span className="text-white/50">Mã đơn</span>
+                                        <span className="text-white/50">Order ID</span>
                                         <span className="text-white font-medium">
                                             {depositResult?._id?.slice(-8).toUpperCase()}
                                         </span>
                                     </div>
                                     <div className="flex justify-between py-2 border-b border-white/10">
-                                        <span className="text-white/50">Số tiền</span>
+                                        <span className="text-white/50">Amount</span>
                                         <span className="text-green-400 font-bold">{formatPrice(depositAmount)}</span>
                                     </div>
                                     <div className="flex justify-between py-2">
-                                        <span className="text-white/50">Phương thức</span>
+                                        <span className="text-white/50">Method</span>
                                         <span className="text-white font-medium">{paymentMethod}</span>
                                     </div>
                                 </div>
@@ -246,8 +246,8 @@ const DepositModal = ({ isOpen, onClose, car, selectedVersion, selectedColor }) 
                                 <div className="flex items-start gap-2 p-3 bg-yellow-500/10 rounded-xl border border-yellow-500/20 text-left mb-6">
                                     <AlertCircle className="w-5 h-5 text-yellow-400 flex-shrink-0 mt-0.5" />
                                     <p className="text-yellow-200/80 text-sm">
-                                        Đơn đặt cọc sẽ được giữ trong 7 ngày. Vui lòng hoàn tất thanh toán và liên hệ
-                                        với chúng tôi để xác nhận.
+                                        Your deposit order will be held for 7 days. Please complete payment and contact
+                                        us for confirmation.
                                     </p>
                                 </div>
 
@@ -255,7 +255,7 @@ const DepositModal = ({ isOpen, onClose, car, selectedVersion, selectedColor }) 
                                     onClick={handleClose}
                                     className="w-full py-4 bg-gradient-to-r from-[#0066FF] to-[#0052cc] rounded-xl text-white font-semibold"
                                 >
-                                    Đóng
+                                    Close
                                 </button>
                             </div>
                         ) : (
@@ -300,7 +300,7 @@ const DepositModal = ({ isOpen, onClose, car, selectedVersion, selectedColor }) 
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center gap-2">
                                             <Wallet className="w-5 h-5 text-green-400" />
-                                            <span className="text-white/70">Số tiền đặt cọc (10%)</span>
+                                            <span className="text-white/70">Deposit amount (10%)</span>
                                         </div>
                                         <span className="text-green-400 text-2xl font-bold">
                                             {formatPriceShort(depositAmount)}
@@ -313,7 +313,7 @@ const DepositModal = ({ isOpen, onClose, car, selectedVersion, selectedColor }) 
                                 <div>
                                     <h4 className="text-white font-semibold mb-3 flex items-center gap-2">
                                         <CreditCard className="w-4 h-4 text-[#0066FF]" />
-                                        Chọn phương thức thanh toán
+                                        Select payment method
                                     </h4>
                                     <div className="space-y-2">
                                         {paymentMethods.map((method) => (
@@ -352,13 +352,13 @@ const DepositModal = ({ isOpen, onClose, car, selectedVersion, selectedColor }) 
                                 <div>
                                     <label className="text-white font-medium mb-2 flex items-center gap-2">
                                         <Phone className="w-4 h-4 text-[#0066FF]" />
-                                        Số điện thoại liên hệ
+                                        Contact phone number
                                     </label>
                                     <input
                                         type="tel"
                                         value={phone}
                                         onChange={(e) => setPhone(e.target.value)}
-                                        placeholder="Nhập số điện thoại"
+                                        placeholder="Enter phone number"
                                         className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-white/30 focus:outline-none focus:border-[#0066FF] transition-colors"
                                     />
                                 </div>
@@ -367,12 +367,12 @@ const DepositModal = ({ isOpen, onClose, car, selectedVersion, selectedColor }) 
                                 <div>
                                     <label className="text-white font-medium mb-2 flex items-center gap-2">
                                         <FileText className="w-4 h-4 text-[#0066FF]" />
-                                        Ghi chú (tùy chọn)
+                                        Note (optional)
                                     </label>
                                     <textarea
                                         value={note}
                                         onChange={(e) => setNote(e.target.value)}
-                                        placeholder="Nhập ghi chú hoặc yêu cầu đặc biệt..."
+                                        placeholder="Enter note or special request..."
                                         rows={2}
                                         className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-white/30 focus:outline-none focus:border-[#0066FF] transition-colors resize-none"
                                     />
@@ -390,11 +390,11 @@ const DepositModal = ({ isOpen, onClose, car, selectedVersion, selectedColor }) 
                                 <div className="flex items-start gap-2 p-3 bg-[#0066FF]/10 rounded-xl border border-[#0066FF]/20">
                                     <Shield className="w-5 h-5 text-[#0066FF] flex-shrink-0 mt-0.5" />
                                     <div className="text-white/60 text-xs">
-                                        <p className="font-medium text-white/80 mb-1">Chính sách đặt cọc:</p>
+                                        <p className="font-medium text-white/80 mb-1">Deposit policy:</p>
                                         <ul className="space-y-0.5">
-                                            <li>• Đặt cọc 10% giá trị xe để giữ chỗ</li>
-                                            <li>• Thời gian giữ xe: 7 ngày</li>
-                                            <li>• Hoàn tiền 100% nếu hủy trong 24h</li>
+                                            <li>• Deposit 10% of the car value to reserve your spot</li>
+                                            <li>• Reservation hold: 7 days</li>
+                                            <li>• 100% refund if cancelled within 24 hours</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -412,12 +412,12 @@ const DepositModal = ({ isOpen, onClose, car, selectedVersion, selectedColor }) 
                                     {loading ? (
                                         <>
                                             <Loader2 className="w-5 h-5 animate-spin" />
-                                            Đang xử lý...
+                                            Processing...
                                         </>
                                     ) : (
                                         <>
                                             <CreditCard className="w-5 h-5" />
-                                            Xác nhận đặt cọc - {formatPriceShort(depositAmount)}
+                                            Confirm deposit - {formatPriceShort(depositAmount)}
                                         </>
                                     )}
                                 </button>

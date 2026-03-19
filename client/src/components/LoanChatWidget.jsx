@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+﻿import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     MessageCircle,
@@ -117,7 +117,7 @@ const LoanChatWidget = ({ isOpen, onClose, car = null, loanInfo = null, onOpenCh
             const res = await request.post('/api/chat/conversation', {
                 type: 'loan_consultation',
                 relatedCarId: car?._id || null,
-                title: car ? `Tư vấn trả góp: ${car.name}` : 'Tư vấn trả góp',
+                title: car ? `Installment consultation: ${car.name}` : 'Installment consultation',
             });
 
             const conv = res.data?.metadata;
@@ -153,7 +153,7 @@ const LoanChatWidget = ({ isOpen, onClose, car = null, loanInfo = null, onOpenCh
         try {
             socketRef.current?.emit('send_message', {
                 conversationId: convId,
-                content: `Tôi muốn tư vấn trả góp cho xe ${car.name}`,
+                content: `I want installment consultation for ${car.name}`,
                 messageType: 'loan_info',
                 loanInfo: {
                     carId: car._id,
@@ -224,7 +224,7 @@ const LoanChatWidget = ({ isOpen, onClose, car = null, loanInfo = null, onOpenCh
 
     // Format time
     const formatTime = (date) => {
-        return new Date(date).toLocaleTimeString('vi-VN', {
+        return new Date(date).toLocaleTimeString('en-US', {
             hour: '2-digit',
             minute: '2-digit',
         });
@@ -233,9 +233,9 @@ const LoanChatWidget = ({ isOpen, onClose, car = null, loanInfo = null, onOpenCh
     // Format price
     const formatPrice = (price) => {
         if (price >= 1000000000) {
-            return (price / 1000000000).toFixed(2) + ' tỷ';
+            return (price / 1000000000).toFixed(2) + ' billion';
         }
-        return (price / 1000000).toFixed(0) + ' triệu';
+        return (price / 1000000).toFixed(0) + ' million';
     };
 
     if (!isOpen) return null;
@@ -260,13 +260,13 @@ const LoanChatWidget = ({ isOpen, onClose, car = null, loanInfo = null, onOpenCh
                             <Calculator className="w-5 h-5 text-white" />
                         </div>
                         <div>
-                            <h3 className="text-white font-semibold">Tư vấn trả góp</h3>
+                            <h3 className="text-white font-semibold">Installment consultation</h3>
                             <div className="flex items-center gap-1.5">
                                 <span
                                     className={`w-2 h-2 rounded-full ${isConnected ? 'bg-green-300' : 'bg-gray-400'}`}
                                 />
                                 <span className="text-white/80 text-xs">
-                                    {conversation?.admin ? conversation.admin.fullName : 'Đang kết nối...'}
+                                    {conversation?.admin ? conversation.admin.fullName : 'Connecting...'}
                                 </span>
                             </div>
                         </div>
@@ -302,7 +302,7 @@ const LoanChatWidget = ({ isOpen, onClose, car = null, loanInfo = null, onOpenCh
                                     <div className="flex-1 min-w-0">
                                         <p className="text-white text-sm font-medium truncate">{car.name}</p>
                                         <p className="text-[#0066FF] text-xs font-semibold">
-                                            {formatPrice(car.price)} VNĐ
+                                            {formatPrice(car.price)} VND
                                         </p>
                                     </div>
                                 </div>
@@ -318,18 +318,18 @@ const LoanChatWidget = ({ isOpen, onClose, car = null, loanInfo = null, onOpenCh
                             ) : !user ? (
                                 <div className="text-center py-8">
                                     <User className="w-12 h-12 text-white/30 mx-auto mb-3" />
-                                    <p className="text-white/60 text-sm">Vui lòng đăng nhập để chat với tư vấn viên</p>
+                                    <p className="text-white/60 text-sm">Please log in to chat with an advisor</p>
                                     <a
-                                        href="/login"
+                                        href="/account/login"
                                         className="inline-block mt-3 px-4 py-2 bg-[#0066FF] text-white text-sm font-medium rounded-lg hover:bg-[#0052cc] transition-colors"
                                     >
-                                        Đăng nhập
+                                        Log in
                                     </a>
                                 </div>
                             ) : messages.length === 0 ? (
                                 <div className="text-center py-8">
                                     <MessageCircle className="w-12 h-12 text-white/30 mx-auto mb-3" />
-                                    <p className="text-white/60 text-sm">Gửi tin nhắn để bắt đầu tư vấn</p>
+                                    <p className="text-white/60 text-sm">Send a message to start consultation</p>
                                 </div>
                             ) : (
                                 messages.map((msg, idx) => {
@@ -358,25 +358,25 @@ const LoanChatWidget = ({ isOpen, onClose, car = null, loanInfo = null, onOpenCh
                                                         </div>
                                                         <div className="grid grid-cols-2 gap-2 text-xs">
                                                             <div>
-                                                                <span className="opacity-70">Giá xe:</span>
+                                                                <span className="opacity-70">Car price:</span>
                                                                 <p className="font-semibold">
                                                                     {formatPrice(msg.loanInfo.carPrice)}
                                                                 </p>
                                                             </div>
                                                             <div>
-                                                                <span className="opacity-70">Trả trước:</span>
+                                                                <span className="opacity-70">Down payment:</span>
                                                                 <p className="font-semibold">
                                                                     {msg.loanInfo.downPaymentPercent}%
                                                                 </p>
                                                             </div>
                                                             <div>
-                                                                <span className="opacity-70">Kỳ hạn:</span>
+                                                                <span className="opacity-70">Term:</span>
                                                                 <p className="font-semibold">
-                                                                    {msg.loanInfo.loanTerm} tháng
+                                                                    {msg.loanInfo.loanTerm} months
                                                                 </p>
                                                             </div>
                                                             <div>
-                                                                <span className="opacity-70">Trả góp/tháng:</span>
+                                                                <span className="opacity-70">Installment/month:</span>
                                                                 <p className="font-semibold text-green-300">
                                                                     {formatPrice(msg.loanInfo.monthlyPayment)}
                                                                 </p>
@@ -421,7 +421,7 @@ const LoanChatWidget = ({ isOpen, onClose, car = null, loanInfo = null, onOpenCh
                                             style={{ animationDelay: '300ms' }}
                                         />
                                     </div>
-                                    <span>Đang nhập...</span>
+                                    <span>Typing...</span>
                                 </div>
                             )}
 
@@ -438,7 +438,7 @@ const LoanChatWidget = ({ isOpen, onClose, car = null, loanInfo = null, onOpenCh
                                         value={inputMessage}
                                         onChange={handleInputChange}
                                         onKeyPress={handleKeyPress}
-                                        placeholder="Nhập tin nhắn..."
+                                        placeholder="Enter a message..."
                                         className="flex-1 bg-white/10 border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm placeholder:text-white/40 focus:outline-none focus:border-[#0066FF]"
                                     />
                                     <button
@@ -463,3 +463,5 @@ const LoanChatWidget = ({ isOpen, onClose, car = null, loanInfo = null, onOpenCh
 };
 
 export default LoanChatWidget;
+
+

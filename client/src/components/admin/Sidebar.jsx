@@ -24,17 +24,17 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
     const location = useLocation();
 
     const menuItems = [
-        { name: 'Thống kê', icon: LayoutDashboard, path: '/admin' },
-        { name: 'Quản lý danh mục', icon: FolderTree, path: '/admin/categories' },
-        { name: 'Quản lý hãng xe', icon: Car, path: '/admin/brands' },
-        { name: 'Quản lý xe', icon: Car, path: '/admin/cars' },
-        { name: 'Chat tư vấn', icon: MessageCircle, path: '/admin/chat' },
-        { name: 'Đặt cọc giữ xe', icon: CreditCard, path: '/admin/deposits' },
-        { name: 'Khách hàng', icon: Users, path: '/admin/customers' },
-        { name: 'Quản lý liên hệ', icon: Mail, path: '/admin/contacts' },
-        { name: 'Tin tức', icon: Newspaper, path: '/admin/news' },
-        { name: 'Yêu cầu lái thử', icon: CarFront, path: '/admin/test-drives' },
-        { name: 'Thống kê Chatbot', icon: Bot, path: '/admin/chatbot-stats' },
+        { name: 'Dashboard', icon: LayoutDashboard, path: '/admin' },
+        { name: 'Category Management', icon: FolderTree, path: '/admin/categories' },
+        { name: 'Brand Management', icon: Car, path: '/admin/brands' },
+        { name: 'Car Management', icon: Car, path: '/admin/cars' },
+        { name: 'Consultation Chat', icon: MessageCircle, path: '/admin/chat' },
+        { name: 'Car Deposits', icon: CreditCard, path: '/admin/deposits' },
+        { name: 'Customers', icon: Users, path: '/admin/customers' },
+        { name: 'Contact Management', icon: Mail, path: '/admin/contacts' },
+        { name: 'News', icon: Newspaper, path: '/admin/news' },
+        { name: 'Test Drive Requests', icon: CarFront, path: '/admin/test-drives' },
+        { name: 'Dashboard Chatbot', icon: Bot, path: '/admin/chatbot-stats' },
     ];
 
     const isActive = (path) => {
@@ -132,7 +132,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                     <motion.div animate={{ rotate: isCollapsed ? 180 : 0 }} transition={{ duration: 0.3 }}>
                         <ChevronLeft className="w-5 h-5" />
                     </motion.div>
-                    {!isCollapsed && <span className="text-sm font-medium">Thu gọn</span>}
+                    {!isCollapsed && <span className="text-sm font-medium">Collapse</span>}
                 </button>
 
                 <Link
@@ -140,7 +140,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                     className="w-full flex items-center gap-2 px-3 py-2.5 mt-1 text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded-xl transition-all"
                 >
                     <LogOut className="w-5 h-5 flex-shrink-0" />
-                    {!isCollapsed && <span className="text-sm font-medium">Đăng xuất</span>}
+                    {!isCollapsed && <span className="text-sm font-medium">Sign out</span>}
                 </Link>
             </div>
         </motion.aside>

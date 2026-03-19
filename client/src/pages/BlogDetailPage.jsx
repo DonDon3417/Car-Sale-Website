@@ -32,7 +32,7 @@ const BlogDetailPage = () => {
     }, [id]);
 
     const formatDate = (d) =>
-        new Date(d).toLocaleDateString('vi-VN', {
+        new Date(d).toLocaleDateString('en-US', {
             day: 'numeric',
             month: 'long',
             year: 'numeric',
@@ -75,14 +75,14 @@ const BlogDetailPage = () => {
             <div className="min-h-screen bg-[#0a0a0f]">
                 <Header />
                 <div className="flex flex-col items-center justify-center pt-40 pb-20 text-center px-4">
-                    <h2 className="text-white text-2xl font-bold mb-2">Không tìm thấy bài viết</h2>
-                    <p className="text-white/50 mb-6">Bài viết này không tồn tại hoặc đã bị xóa.</p>
+                    <h2 className="text-white text-2xl font-bold mb-2">Article not found</h2>
+                    <p className="text-white/50 mb-6">This article does not exist or has been removed.</p>
                     <Link
                         to="/tin-tuc"
                         className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#0066FF] hover:bg-[#0052cc] text-white rounded-xl text-sm font-medium transition-colors"
                     >
                         <ArrowLeft className="w-4 h-4" />
-                        Quay lại tin tức
+                        Back to news
                     </Link>
                 </div>
                 <Footer />
@@ -119,7 +119,7 @@ const BlogDetailPage = () => {
                         className="inline-flex items-center gap-2 text-white/40 hover:text-white text-xs mb-6 transition-colors"
                     >
                         <ArrowLeft className="w-3.5 h-3.5" />
-                        Quay lại tin tức
+                        Back to news
                     </Link>
 
                     {/* Meta */}
@@ -130,14 +130,14 @@ const BlogDetailPage = () => {
                         </span>
                         <span className="flex items-center gap-1.5">
                             <Clock className="w-3.5 h-3.5" />
-                            {getReadingTime(blog.content)} phút đọc
+                            {getReadingTime(blog.content)} min read
                         </span>
                         <button
                             onClick={handleShare}
                             className="flex items-center gap-1.5 hover:text-[#0066FF] transition-colors ml-auto"
                         >
                             <Share2 className="w-3.5 h-3.5" />
-                            Chia sẻ
+                            Share
                         </button>
                     </div>
 
@@ -165,7 +165,7 @@ const BlogDetailPage = () => {
             {relatedBlogs.length > 0 && (
                 <section className="border-t border-white/5 py-16">
                     <div className="max-w-[1100px] mx-auto px-4">
-                        <h2 className="text-xl font-bold text-white mb-8">Bài viết liên quan</h2>
+                        <h2 className="text-xl font-bold text-white mb-8">Related articles</h2>
                         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                             {relatedBlogs.map((item, index) => (
                                 <motion.div

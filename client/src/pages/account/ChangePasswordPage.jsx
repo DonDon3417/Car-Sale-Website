@@ -31,22 +31,22 @@ const ChangePasswordPage = () => {
         e.preventDefault();
 
         if (!form.currentPassword || !form.newPassword || !form.confirmPassword) {
-            message.error('Vui lòng nhập đầy đủ thông tin');
+            message.error('Please fill in all required information');
             return;
         }
 
         if (form.newPassword.length < 6) {
-            message.error('Mật khẩu mới phải có ít nhất 6 ký tự');
+            message.error('New password must be at least 6 characters');
             return;
         }
 
         if (form.newPassword !== form.confirmPassword) {
-            message.error('Mật khẩu xác nhận không khớp');
+            message.error('Password confirmation does not match');
             return;
         }
 
         if (form.currentPassword === form.newPassword) {
-            message.error('Mật khẩu mới không được trùng mật khẩu hiện tại');
+            message.error('New password must be different from current password');
             return;
         }
 
@@ -56,10 +56,10 @@ const ChangePasswordPage = () => {
                 currentPassword: form.currentPassword,
                 newPassword: form.newPassword,
             });
-            message.success('Đổi mật khẩu thành công');
+            message.success('Password changed successfully');
             setForm({ currentPassword: '', newPassword: '', confirmPassword: '' });
         } catch (err) {
-            message.error(err?.response?.data?.message || 'Đổi mật khẩu thất bại');
+            message.error(err?.response?.data?.message || 'Failed to change password');
         } finally {
             setLoading(false);
         }
@@ -68,20 +68,20 @@ const ChangePasswordPage = () => {
     const passwordFields = [
         {
             name: 'currentPassword',
-            label: 'Mật khẩu hiện tại',
-            placeholder: 'Nhập mật khẩu hiện tại',
+            label: 'Current password',
+            placeholder: 'Enter current password',
             showKey: 'current',
         },
         {
             name: 'newPassword',
-            label: 'Mật khẩu mới',
-            placeholder: 'Nhập mật khẩu mới (ít nhất 6 ký tự)',
+            label: 'New password',
+            placeholder: 'Enter new password (at least 6 characters)',
             showKey: 'new',
         },
         {
             name: 'confirmPassword',
-            label: 'Xác nhận mật khẩu mới',
-            placeholder: 'Nhập lại mật khẩu mới',
+            label: 'Confirm new password',
+            placeholder: 'Re-enter new password',
             showKey: 'confirm',
         },
     ];
@@ -90,8 +90,8 @@ const ChangePasswordPage = () => {
         <div className="space-y-6">
             {/* Page Title */}
             <div>
-                <h1 className="text-xl font-bold text-white">Đổi mật khẩu</h1>
-                <p className="text-white/40 text-sm mt-1">Cập nhật mật khẩu để bảo vệ tài khoản của bạn</p>
+                <h1 className="text-xl font-bold text-white">Change Password</h1>
+                <p className="text-white/40 text-sm mt-1">Update your password to protect your account</p>
             </div>
 
             {/* Security Notice */}
@@ -103,7 +103,7 @@ const ChangePasswordPage = () => {
                 <Shield className="w-5 h-5 text-[#0066FF] shrink-0 mt-0.5" />
                 <div>
                     <p className="text-white/70 text-xs leading-relaxed">
-                        Mật khẩu nên có ít nhất 6 ký tự, bao gồm chữ hoa, chữ thường và số để đảm bảo an toàn.
+                        Password should have at least 6 characters, including uppercase, lowercase, and numbers for better security.
                     </p>
                 </div>
             </motion.div>
@@ -153,7 +153,7 @@ const ChangePasswordPage = () => {
                             className="flex items-center justify-center gap-2 px-6 py-3 bg-[#0066FF] hover:bg-[#0052cc] disabled:opacity-50 rounded-xl text-white text-sm font-semibold transition-colors w-full sm:w-auto cursor-pointer"
                         >
                             {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Lock className="w-4 h-4" />}
-                            <span>Đổi mật khẩu</span>
+                            <span>Change Password</span>
                         </motion.button>
                     </div>
                 </form>

@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+﻿import { motion } from 'framer-motion';
 import { ArrowRight, Calendar } from 'lucide-react';
 import newsTech from '../assets/news-tech.png';
 import newsEvent from '../assets/news-event.png';
@@ -9,25 +9,25 @@ const News = () => {
         {
             id: 1,
             image: newsTech,
-            tag: 'Công nghệ',
+            tag: 'Technology',
             tagColor: '#0066FF',
-            title: 'Công nghệ lái tự động Level 4 sẽ ra mắt năm 2027',
+            title: 'Level 4 autonomous driving technology will launch in 2027',
             date: '05/02/2026',
         },
         {
             id: 2,
             image: newsEvent,
-            tag: 'Sự kiện',
+            tag: 'Event',
             tagColor: '#E10600',
-            title: 'Triển lãm ô tô Việt Nam 2026 thu hút 50,000 khách',
+            title: 'Vietnam Auto Expo 2026 attracts 50,000 visitors',
             date: '01/02/2026',
         },
         {
             id: 3,
             image: newsReview,
-            tag: 'Đánh giá',
+            tag: 'Review',
             tagColor: '#10B981',
-            title: 'Top 5 xe SUV tốt nhất 2026: Lựa chọn nào?',
+            title: 'Top 5 best SUVs of 2026: Which one should you choose?',
             date: '28/01/2026',
         },
     ];
@@ -52,17 +52,17 @@ const News = () => {
                         <div className="flex items-center gap-2 mb-2">
                             <div className="w-6 h-[1px] bg-[#0066FF]" />
                             <span className="text-[#0066FF] text-[10px] font-semibold tracking-[0.15em] uppercase">
-                                Tin tức
+                                News
                             </span>
                         </div>
-                        <h2 className="text-xl md:text-2xl font-bold text-white mb-1">Tin tức ô tô</h2>
-                        <p className="text-white/50 text-xs">Cập nhật xu hướng và công nghệ mới nhất</p>
+                        <h2 className="text-xl md:text-2xl font-bold text-white mb-1">Automotive News</h2>
+                        <p className="text-white/50 text-xs">Latest trends and technology updates</p>
                     </div>
                     <motion.button
                         whileHover={{ scale: 1.02 }}
                         className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-white/20 hover:border-[#0066FF] rounded-lg text-white text-xs font-medium transition-all"
                     >
-                        <span>Xem tất cả</span>
+                        <span>View all</span>
                         <ArrowRight className="w-3 h-3" />
                     </motion.button>
                 </motion.div>
@@ -104,7 +104,7 @@ const News = () => {
                                     {article.title}
                                 </h3>
                                 <button className="inline-flex items-center gap-1 text-[#0066FF] text-xs font-medium group-hover:gap-2 transition-all">
-                                    <span>Đọc thêm</span>
+                                    <span>Read more</span>
                                     <ArrowRight className="w-3 h-3" />
                                 </button>
                             </div>

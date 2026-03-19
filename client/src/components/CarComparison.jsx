@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     ChevronDown,
@@ -77,39 +77,39 @@ const AIAnalysisModal = ({ isOpen, onClose, car1, car2 }) => {
     const requirements = [
         {
             id: 'family',
-            label: 'Phù hợp gia đình',
+            label: 'Family-friendly',
             icon: Heart,
-            description: 'Đánh giá độ rộng rãi, an toàn cho gia đình',
+            description: 'Evaluate cabin space and family safety',
         },
         {
             id: 'fuel_efficiency',
-            label: 'Tiết kiệm nhiên liệu',
+            label: 'Fuel-efficient',
             icon: Leaf,
-            description: 'So sánh mức tiêu hao nhiên liệu',
+            description: 'Compare fuel consumption',
         },
         {
             id: 'investment',
-            label: 'Đầu tư dài hạn',
+            label: 'Long-term value',
             icon: TrendingUp,
-            description: 'Phân tích giá trị giữ lại và chi phí bảo dưỡng',
+            description: 'Analyze resale value and maintenance costs',
         },
         {
             id: 'performance',
-            label: 'Hiệu suất cao',
+            label: 'High performance',
             icon: Zap,
-            description: 'So sánh công suất, tốc độ và khả năng vận hành',
+            description: 'Compare power, speed, and driving performance',
         },
         {
             id: 'budget',
-            label: 'Phù hợp ngân sách',
+            label: 'Budget fit',
             icon: DollarSign,
-            description: 'Phân tích giá trị đồng tiền bỏ ra',
+            description: 'Analyze value for money',
         },
         {
             id: 'daily_use',
-            label: 'Sử dụng hàng ngày',
+            label: 'Daily use',
             icon: Car,
-            description: 'Đánh giá sự tiện lợi trong di chuyển hàng ngày',
+            description: 'Evaluate convenience for daily commuting',
         },
     ];
 
@@ -144,12 +144,12 @@ const AIAnalysisModal = ({ isOpen, onClose, car1, car2 }) => {
             console.error('Error analyzing cars:', error);
             // Fallback to basic message on error
             setAnalysisResult({
-                summary: 'Đã xảy ra lỗi khi phân tích. Vui lòng thử lại sau.',
+                summary: 'An analysis error occurred. Please try again later.',
                 recommendation: null,
                 recommendationReason: '',
                 details: [],
                 prosAndCons: { car1: { pros: [], cons: [] }, car2: { pros: [], cons: [] } },
-                finalVerdict: 'Không thể hoàn thành phân tích.',
+                finalVerdict: 'Unable to complete analysis.',
             });
         } finally {
             setIsAnalyzing(false);
@@ -188,9 +188,9 @@ const AIAnalysisModal = ({ isOpen, onClose, car1, car2 }) => {
                                 <Sparkles className="w-5 h-5 text-white" />
                             </div>
                             <div>
-                                <h3 className="text-lg font-bold text-white">AI Phân Tích So Sánh</h3>
+                                <h3 className="text-lg font-bold text-white">AI Comparison Analysis</h3>
                                 <p className="text-xs text-white/50">
-                                    So sánh thông minh giữa {car1?.name} và {car2?.name}
+                                    Smart comparison between {car1?.name} and {car2?.name}
                                 </p>
                             </div>
                         </div>
@@ -229,7 +229,7 @@ const AIAnalysisModal = ({ isOpen, onClose, car1, car2 }) => {
 
                                 {/* Requirements Selection */}
                                 <div className="mb-4">
-                                    <h4 className="text-sm font-semibold text-white mb-3">Chọn tiêu chí phân tích:</h4>
+                                    <h4 className="text-sm font-semibold text-white mb-3">Choose analysis criteria:</h4>
                                     <div className="grid grid-cols-2 gap-2">
                                         {requirements.map((req) => {
                                             const isSelected = selectedRequirements.includes(req.id);
@@ -283,12 +283,12 @@ const AIAnalysisModal = ({ isOpen, onClose, car1, car2 }) => {
                                 <div className="mb-4">
                                     <h4 className="text-sm font-semibold text-white mb-2 flex items-center gap-2">
                                         <MessageSquare className="w-4 h-4 text-[#0066FF]" />
-                                        Yêu cầu riêng (tùy chọn):
+                                        Custom requirement (optional):
                                     </h4>
                                     <textarea
                                         value={customRequirement}
                                         onChange={(e) => setCustomRequirement(e.target.value)}
-                                        placeholder="Nhập yêu cầu cụ thể của bạn, ví dụ: 'Tôi thường đi công tác xa 500km/tuần, xe nào phù hợp hơn?'"
+                                        placeholder="Enter your specific requirement, e.g. 'I travel 500km weekly for business, which car is a better fit?'"
                                         className="w-full h-20 px-3 py-2 bg-white/5 border border-white/10 rounded-xl text-sm text-white placeholder:text-white/30 resize-none focus:outline-none focus:border-[#0066FF] transition-colors"
                                     />
                                 </div>
@@ -300,7 +300,7 @@ const AIAnalysisModal = ({ isOpen, onClose, car1, car2 }) => {
                                 <div className="p-4 bg-gradient-to-r from-[#0066FF]/10 to-purple-500/10 rounded-xl border border-[#0066FF]/20">
                                     <div className="flex items-center gap-2 mb-2">
                                         <Target className="w-4 h-4 text-[#0066FF]" />
-                                        <span className="text-sm font-semibold text-white">Tóm tắt</span>
+                                        <span className="text-sm font-semibold text-white">Summary</span>
                                     </div>
                                     <p className="text-sm text-white/80 leading-relaxed">{analysisResult.summary}</p>
                                 </div>
@@ -310,7 +310,7 @@ const AIAnalysisModal = ({ isOpen, onClose, car1, car2 }) => {
                                     <div className="p-4 bg-green-500/10 rounded-xl border border-green-500/20">
                                         <div className="flex items-center gap-2 mb-1">
                                             <Check className="w-5 h-5 text-green-400" />
-                                            <span className="text-sm font-semibold text-white">Đề xuất của AI:</span>
+                                            <span className="text-sm font-semibold text-white">AI recommendation:</span>
                                             <span className="text-sm text-green-400 font-bold">
                                                 {analysisResult.recommendation}
                                             </span>
@@ -326,7 +326,7 @@ const AIAnalysisModal = ({ isOpen, onClose, car1, car2 }) => {
                                 {/* Detailed Analysis with Scores */}
                                 {analysisResult.details?.length > 0 && (
                                     <div className="space-y-2">
-                                        <h5 className="text-sm font-semibold text-white mb-2">Phân tích chi tiết:</h5>
+                                        <h5 className="text-sm font-semibold text-white mb-2">Detailed analysis:</h5>
                                         {analysisResult.details.map((detail, idx) => (
                                             <div key={idx} className="p-3 bg-white/5 rounded-xl border border-white/10">
                                                 <div className="flex justify-between items-center mb-2">
@@ -378,7 +378,7 @@ const AIAnalysisModal = ({ isOpen, onClose, car1, car2 }) => {
                                             {analysisResult.prosAndCons.car1?.pros?.length > 0 && (
                                                 <div className="mb-2">
                                                     <span className="text-[10px] text-green-400 font-medium">
-                                                        Ưu điểm:
+                                                        Pros:
                                                     </span>
                                                     <ul className="ml-2 mt-1 space-y-0.5">
                                                         {analysisResult.prosAndCons.car1.pros.map((pro, i) => (
@@ -391,9 +391,7 @@ const AIAnalysisModal = ({ isOpen, onClose, car1, car2 }) => {
                                             )}
                                             {analysisResult.prosAndCons.car1?.cons?.length > 0 && (
                                                 <div>
-                                                    <span className="text-[10px] text-red-400 font-medium">
-                                                        Nhược điểm:
-                                                    </span>
+                                                    <span className="text-[10px] text-red-400 font-medium">Cons:</span>
                                                     <ul className="ml-2 mt-1 space-y-0.5">
                                                         {analysisResult.prosAndCons.car1.cons.map((con, i) => (
                                                             <li key={i} className="text-[10px] text-white/60">
@@ -410,7 +408,7 @@ const AIAnalysisModal = ({ isOpen, onClose, car1, car2 }) => {
                                             {analysisResult.prosAndCons.car2?.pros?.length > 0 && (
                                                 <div className="mb-2">
                                                     <span className="text-[10px] text-green-400 font-medium">
-                                                        Ưu điểm:
+                                                        Pros:
                                                     </span>
                                                     <ul className="ml-2 mt-1 space-y-0.5">
                                                         {analysisResult.prosAndCons.car2.pros.map((pro, i) => (
@@ -423,9 +421,7 @@ const AIAnalysisModal = ({ isOpen, onClose, car1, car2 }) => {
                                             )}
                                             {analysisResult.prosAndCons.car2?.cons?.length > 0 && (
                                                 <div>
-                                                    <span className="text-[10px] text-red-400 font-medium">
-                                                        Nhược điểm:
-                                                    </span>
+                                                    <span className="text-[10px] text-red-400 font-medium">Cons:</span>
                                                     <ul className="ml-2 mt-1 space-y-0.5">
                                                         {analysisResult.prosAndCons.car2.cons.map((con, i) => (
                                                             <li key={i} className="text-[10px] text-white/60">
@@ -444,7 +440,7 @@ const AIAnalysisModal = ({ isOpen, onClose, car1, car2 }) => {
                                     <div className="p-4 bg-gradient-to-r from-yellow-500/10 to-orange-500/10 rounded-xl border border-yellow-500/20">
                                         <div className="flex items-center gap-2 mb-2">
                                             <Sparkles className="w-4 h-4 text-yellow-400" />
-                                            <span className="text-sm font-semibold text-white">Lời khuyên</span>
+                                            <span className="text-sm font-semibold text-white">Advice</span>
                                         </div>
                                         <p className="text-xs text-white/80 leading-relaxed">
                                             {analysisResult.finalVerdict}
@@ -458,7 +454,7 @@ const AIAnalysisModal = ({ isOpen, onClose, car1, car2 }) => {
                                     className="w-full py-2 px-4 rounded-xl bg-white/5 border border-white/10 text-white/70 text-sm hover:bg-white/10 hover:text-white transition-all flex items-center justify-center gap-2"
                                 >
                                     <RefreshCw className="w-4 h-4" />
-                                    Phân tích lại với tiêu chí khác
+                                    Analyze again with different criteria
                                 </button>
                             </div>
                         )}
@@ -481,17 +477,17 @@ const AIAnalysisModal = ({ isOpen, onClose, car1, car2 }) => {
                                 {isAnalyzing ? (
                                     <>
                                         <Loader2 className="w-4 h-4 animate-spin" />
-                                        Đang phân tích...
+                                        Analyzing...
                                     </>
                                 ) : (
                                     <>
                                         <Sparkles className="w-4 h-4" />
-                                        Phân tích với AI
+                                        Analyze with AI
                                     </>
                                 )}
                             </button>
                             <p className="text-center text-[10px] text-white/30 mt-2">
-                                AI sẽ phân tích dựa trên thông số kỹ thuật và tiêu chí bạn chọn
+                                AI will analyze based on technical specifications and your selected criteria
                             </p>
                         </div>
                     )}
@@ -555,7 +551,7 @@ const CarComparison = () => {
                 // For now, use local comparison
                 await new Promise((resolve) => setTimeout(resolve, 500));
                 setComparisonData({
-                    summary: 'So sánh hoàn tất',
+                    summary: 'Comparison complete',
                     cars: selectedCars,
                 });
             } catch (error) {
@@ -571,9 +567,9 @@ const CarComparison = () => {
     const formatPrice = (price) => {
         if (typeof price === 'string') return price;
         if (price >= 1000000000) {
-            return `${(price / 1000000000).toFixed(1)} tỷ`;
+            return `${(price / 1000000000).toFixed(1)} billion`;
         }
-        return `${(price / 1000000).toFixed(0)} triệu`;
+        return `${(price / 1000000).toFixed(0)} million`;
     };
 
     // Get size from specifications
@@ -601,16 +597,21 @@ const CarComparison = () => {
     };
 
     const specs = [
-        { key: 'price', label: 'Giá bán', icon: Zap, format: formatPrice },
-        { key: 'year', label: 'Năm sản xuất', icon: Car },
-        { key: 'fuelType', label: 'Nhiên liệu', icon: Fuel },
-        { key: 'transmission', label: 'Hộp số', icon: Gauge },
-        { key: 'seats', label: 'Số chỗ ngồi', icon: Users },
-        { key: 'engine', label: 'Động cơ', icon: Fuel },
-        { key: 'mileage', label: 'Tiêu hao (L/100km)', icon: Fuel, format: (val) => (val ? `${val} L/100km` : 'N/A') },
-        { key: 'horsepower', label: 'Công suất', icon: Zap, getValue: getHorsepower },
-        { key: 'torque', label: 'Mô-men xoắn', icon: Gauge, getValue: getTorque },
-        { key: 'size', label: 'Kích thước (DxRxC)', icon: Ruler, getValue: getSize },
+        { key: 'price', label: 'Selling price', icon: Zap, format: formatPrice },
+        { key: 'year', label: 'Production year', icon: Car },
+        { key: 'fuelType', label: 'Fuel type', icon: Fuel },
+        { key: 'transmission', label: 'Transmission', icon: Gauge },
+        { key: 'seats', label: 'Seats', icon: Users },
+        { key: 'engine', label: 'Engine', icon: Fuel },
+        {
+            key: 'mileage',
+            label: 'Consumption (L/100km)',
+            icon: Fuel,
+            format: (val) => (val ? `${val} L/100km` : 'N/A'),
+        },
+        { key: 'horsepower', label: 'Power', icon: Zap, getValue: getHorsepower },
+        { key: 'torque', label: 'Torque', icon: Gauge, getValue: getTorque },
+        { key: 'size', label: 'Dimensions (LxWxH)', icon: Ruler, getValue: getSize },
     ];
 
     const SelectDropdown = ({ value, onChange, excludeId }) => (
@@ -646,12 +647,12 @@ const CarComparison = () => {
                     <div className="flex items-center justify-center gap-2 mb-2">
                         <div className="w-6 h-[1px] bg-[#0066FF]" />
                         <span className="text-[#0066FF] text-[10px] font-semibold tracking-[0.15em] uppercase">
-                            So sánh
+                            Compare
                         </span>
                         <div className="w-6 h-[1px] bg-[#0066FF]" />
                     </div>
-                    <h2 className="text-xl md:text-2xl font-bold text-white mb-1">So sánh xe</h2>
-                    <p className="text-white/50 text-xs">So sánh thông số để chọn xe phù hợp</p>
+                    <h2 className="text-xl md:text-2xl font-bold text-white mb-1">Compare cars</h2>
+                    <p className="text-white/50 text-xs">Compare specifications to choose the right car</p>
                 </motion.div>
 
                 {/* Comparison Table */}
@@ -667,9 +668,7 @@ const CarComparison = () => {
                         <div className="absolute inset-0 bg-[#111827]/80 backdrop-blur-sm z-10 flex items-center justify-center">
                             <div className="flex items-center gap-2">
                                 <Loader2 className="w-5 h-5 text-[#0066FF] animate-spin" />
-                                <span className="text-white/70 text-sm">
-                                    {loading ? 'Đang tải...' : 'Đang so sánh...'}
-                                </span>
+                                <span className="text-white/70 text-sm">{loading ? 'Loading...' : 'Comparing...'}</span>
                             </div>
                         </div>
                     )}
@@ -678,7 +677,7 @@ const CarComparison = () => {
                     <div className="grid grid-cols-3 border-b border-white/5">
                         <div className="p-3 bg-[#0F172A]">
                             <span className="text-white/40 text-[10px] font-medium uppercase tracking-wider">
-                                Thông số
+                                Specifications
                             </span>
                         </div>
                         {selectedCars.map((car, idx) => (
@@ -747,7 +746,7 @@ const CarComparison = () => {
                                         <span
                                             className={`text-xs ${isBetter ? 'text-[#0066FF] font-semibold' : 'text-white/80'}`}
                                         >
-                                            {spec.key === 'seats' ? `${displayValue} chỗ` : displayValue}
+                                            {spec.key === 'seats' ? `${displayValue} seats` : displayValue}
                                         </span>
                                         {isBetter && <Check className="w-3 h-3 text-[#0066FF] ml-1.5" />}
                                     </div>
@@ -760,7 +759,7 @@ const CarComparison = () => {
                     <div className="grid grid-cols-3 border-t border-white/5">
                         <div className="p-2.5 flex items-center gap-1.5 bg-[#0F172A]">
                             <Shield className="w-3 h-3 text-[#0066FF]" />
-                            <span className="text-white/70 text-xs">Màu sắc</span>
+                            <span className="text-white/70 text-xs">Colors</span>
                         </div>
                         {selectedCars.map((car, carIdx) => (
                             <div
@@ -781,7 +780,7 @@ const CarComparison = () => {
                                         </div>
                                     ))}
                                     {(!car.colors || car.colors.length === 0) && (
-                                        <span className="text-white/40 text-[9px]">Không có thông tin</span>
+                                        <span className="text-white/40 text-[9px]">No information</span>
                                     )}
                                 </div>
                             </div>
@@ -792,7 +791,7 @@ const CarComparison = () => {
                     <div className="grid grid-cols-3 border-t border-white/5">
                         <div className="p-2.5 flex items-center gap-1.5 bg-[#0F172A]">
                             <Car className="w-3 h-3 text-[#0066FF]" />
-                            <span className="text-white/70 text-xs">Phiên bản</span>
+                            <span className="text-white/70 text-xs">Version</span>
                         </div>
                         {selectedCars.map((car, carIdx) => (
                             <div
@@ -810,7 +809,7 @@ const CarComparison = () => {
                                         </span>
                                     ))}
                                     {(!car.versions || car.versions.length === 0) && (
-                                        <span className="text-white/40 text-[9px]">Không có thông tin</span>
+                                        <span className="text-white/40 text-[9px]">No information</span>
                                     )}
                                 </div>
                             </div>
@@ -824,10 +823,10 @@ const CarComparison = () => {
                             className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-[#0066FF] to-purple-500 text-white font-semibold text-sm hover:shadow-lg hover:shadow-[#0066FF]/30 transition-all duration-300 flex items-center justify-center gap-2 hover:scale-[1.02]"
                         >
                             <Sparkles className="w-4 h-4" />
-                            So sánh với AI
+                            Compare with AI
                         </button>
                         <p className="text-center text-[10px] text-white/30 mt-2">
-                            AI sẽ phân tích và đề xuất xe phù hợp với nhu cầu của bạn
+                            AI will analyze and recommend cars that match your needs
                         </p>
                     </div>
                 </motion.div>

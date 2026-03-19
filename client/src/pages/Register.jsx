@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Lock, Eye, EyeOff, ArrowRight, Car, User, Phone } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -18,7 +18,7 @@ const Register = () => {
         e.preventDefault();
         try {
             await requestRegister(formData);
-            message.success('Đăng ký thành công');
+            message.success('Subscribe successfully');
             setTimeout(() => {
                 window.location.reload();
             }, 1000);
@@ -54,21 +54,21 @@ const Register = () => {
                     {/* Card */}
                     <div className="bg-[#111827]/80 backdrop-blur-xl border border-white/5 rounded-2xl p-6">
                         <div className="text-center mb-5">
-                            <h1 className="text-xl font-bold text-white mb-1">Tạo tài khoản</h1>
-                            <p className="text-white/50 text-xs">Đăng ký để nhận ưu đãi độc quyền</p>
+                            <h1 className="text-xl font-bold text-white mb-1">Create account</h1>
+                            <p className="text-white/50 text-xs">Sign up to receive exclusive offers</p>
                         </div>
 
                         <form onSubmit={handleSubmit} className="space-y-3">
                             {/* Name */}
                             <div>
-                                <label className="block text-white/70 text-xs font-medium mb-1.5">Họ và tên</label>
+                                <label className="block text-white/70 text-xs font-medium mb-1.5">Full name</label>
                                 <div className="relative">
                                     <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
                                     <input
                                         type="text"
                                         value={formData.fullName}
                                         onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                                        placeholder="Nhập họ và tên"
+                                        placeholder="Nhập họ and tên"
                                         className="w-full h-10 pl-10 pr-4 bg-white/5 border border-white/10 rounded-lg text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-[#0066FF] transition-colors"
                                         required
                                     />
@@ -84,7 +84,7 @@ const Register = () => {
                                         type="email"
                                         value={formData.email}
                                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                        placeholder="Nhập email của bạn"
+                                        placeholder="Enter your email"
                                         className="w-full h-10 pl-10 pr-4 bg-white/5 border border-white/10 rounded-lg text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-[#0066FF] transition-colors"
                                         required
                                     />
@@ -93,14 +93,14 @@ const Register = () => {
 
                             {/* Phone */}
                             <div>
-                                <label className="block text-white/70 text-xs font-medium mb-1.5">Số điện thoại</label>
+                                <label className="block text-white/70 text-xs font-medium mb-1.5">Phone number</label>
                                 <div className="relative">
                                     <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
                                     <input
                                         type="tel"
                                         value={formData.phone}
                                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                                        placeholder="Nhập số điện thoại"
+                                        placeholder="Enter phone number"
                                         className="w-full h-10 pl-10 pr-4 bg-white/5 border border-white/10 rounded-lg text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-[#0066FF] transition-colors"
                                         required
                                     />
@@ -109,14 +109,14 @@ const Register = () => {
 
                             {/* Password */}
                             <div>
-                                <label className="block text-white/70 text-xs font-medium mb-1.5">Mật khẩu</label>
+                                <label className="block text-white/70 text-xs font-medium mb-1.5">Password</label>
                                 <div className="relative">
                                     <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
                                     <input
                                         type={showPassword ? 'text' : 'password'}
                                         value={formData.password}
                                         onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                                        placeholder="Tạo mật khẩu"
+                                        placeholder="Create a password"
                                         className="w-full h-10 pl-10 pr-10 bg-white/5 border border-white/10 rounded-lg text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-[#0066FF] transition-colors"
                                         required
                                     />
@@ -133,7 +133,7 @@ const Register = () => {
                             {/* Confirm Password */}
                             <div>
                                 <label className="block text-white/70 text-xs font-medium mb-1.5">
-                                    Xác nhận mật khẩu
+                                    Confirm password
                                 </label>
                                 <div className="relative">
                                     <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
@@ -141,7 +141,7 @@ const Register = () => {
                                         type={showPassword ? 'text' : 'password'}
                                         value={formData.confirmPassword}
                                         onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-                                        placeholder="Nhập lại mật khẩu"
+                                        placeholder="Re-enter password"
                                         className="w-full h-10 pl-10 pr-4 bg-white/5 border border-white/10 rounded-lg text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-[#0066FF] transition-colors"
                                         required
                                     />
@@ -157,13 +157,13 @@ const Register = () => {
                                     required
                                 />
                                 <label htmlFor="terms" className="text-white/50 text-[11px] leading-relaxed">
-                                    Tôi đồng ý với{' '}
+                                    I agree to the{' '}
                                     <a href="#" className="text-[#0066FF] hover:underline">
-                                        Điều khoản sử dụng
+                                        Terms of Use
                                     </a>{' '}
                                     và{' '}
                                     <a href="#" className="text-[#0066FF] hover:underline">
-                                        Chính sách bảo mật
+                                        Privacy Policy
                                     </a>
                                 </label>
                             </div>
@@ -175,7 +175,7 @@ const Register = () => {
                                 type="submit"
                                 className="w-full flex items-center justify-center gap-2 h-10 bg-[#0066FF] hover:bg-[#0052cc] rounded-lg text-white text-sm font-semibold transition-colors mt-4"
                             >
-                                <span>Đăng ký</span>
+                                <span>Subscribe</span>
                                 <ArrowRight className="w-4 h-4" />
                             </motion.button>
                         </form>
@@ -220,9 +220,9 @@ const Register = () => {
 
                         {/* Login Link */}
                         <p className="text-center text-white/50 text-xs mt-4">
-                            Đã có tài khoản?{' '}
+                            Already have an account?{' '}
                             <Link to="/account/login" className="text-[#0066FF] font-medium hover:underline">
-                                Đăng nhập
+                                Log in
                             </Link>
                         </p>
                     </div>
@@ -234,3 +234,4 @@ const Register = () => {
 };
 
 export default Register;
+

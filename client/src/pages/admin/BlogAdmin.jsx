@@ -82,10 +82,10 @@ const BlogAdmin = () => {
     const handleDelete = async (id) => {
         try {
             await requestDeleteBlog(id);
-            message.success('Xóa bài viết thành công');
+            message.success('Article deleted successfully');
             fetchBlogs();
         } catch (err) {
-            message.error('Xóa bài viết thất bại');
+            message.error('Failed to delete article');
         }
     };
 
@@ -93,7 +93,7 @@ const BlogAdmin = () => {
         const file = e.target.files?.[0];
         if (!file) return;
         if (file.size > 2 * 1024 * 1024) {
-            message.error('Hình ảnh phải nhỏ hơn 2MB');
+            message.error('Image must be smaller than 2MB');
             return;
         }
         setFileList(file);
@@ -104,15 +104,15 @@ const BlogAdmin = () => {
         const content = editorRef.current ? editorRef.current.getContent() : '';
 
         if (!form.title.trim()) {
-            message.error('Vui lòng nhập tiêu đề');
+            message.error('Please enter a title');
             return;
         }
         if (!content.trim()) {
-            message.error('Vui lòng nhập nội dung');
+            message.error('Please enter content');
             return;
         }
         if (!fileList && !editingBlog?.image) {
-            message.error('Vui lòng chọn hình ảnh');
+            message.error('Please select an image');
             return;
         }
 
@@ -131,16 +131,16 @@ const BlogAdmin = () => {
 
             if (editingBlog) {
                 await requestUpdateBlog(editingBlog._id, { id: editingBlog._id, ...blogData });
-                message.success('Cập nhật bài viết thành công');
+                message.success('Article updated successfully');
             } else {
                 await requestCreateBlog(blogData);
-                message.success('Thêm bài viết thành công');
+                message.success('Article created successfully');
             }
 
             setIsModalOpen(false);
             fetchBlogs();
         } catch (err) {
-            message.error('Có lỗi xảy ra');
+            message.error('An error occurred');
         } finally {
             setSubmitting(false);
         }
@@ -149,7 +149,7 @@ const BlogAdmin = () => {
     const filteredBlogs = blogs.filter((b) => b.title?.toLowerCase().includes(searchQuery.toLowerCase()));
 
     const formatDate = (d) =>
-        new Date(d).toLocaleDateString('vi-VN', {
+        new Date(d).toLocaleDateString('en-US', {
             day: 'numeric',
             month: 'numeric',
             year: 'numeric',
@@ -160,15 +160,15 @@ const BlogAdmin = () => {
             {/* Header */}
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="text-2xl font-bold text-white">Quản lý bài viết</h1>
-                    <p className="text-white/60 mt-1">Quản lý tin tức và bài viết</p>
+                    <h1 className="text-2xl font-bold text-white">Article Management</h1>
+                    <p className="text-white/60 mt-1">Manage news and articles</p>
                 </div>
                 <button
                     onClick={openAddModal}
                     className="flex items-center gap-2 px-4 py-2.5 bg-[#0066FF] hover:bg-[#0052cc] text-white rounded-xl text-sm font-medium transition-colors"
                 >
                     <Plus className="w-4 h-4" />
-                    Thêm bài viết
+                    Add Article
                 </button>
             </div>
 
@@ -180,7 +180,7 @@ const BlogAdmin = () => {
                             <Newspaper className="w-6 h-6 text-[#0066FF]" />
                         </div>
                         <div>
-                            <p className="text-white/60 text-sm">Tổng bài viết</p>
+                            <p className="text-white/60 text-sm">Total articles</p>
                             <p className="text-2xl font-bold text-white">{blogs.length}</p>
                         </div>
                     </div>
@@ -191,7 +191,7 @@ const BlogAdmin = () => {
                             <Calendar className="w-6 h-6 text-green-400" />
                         </div>
                         <div>
-                            <p className="text-white/60 text-sm">Bài viết hôm nay</p>
+                            <p className="text-white/60 text-sm">Articles today</p>
                             <p className="text-2xl font-bold text-white">
                                 {
                                     blogs.filter((b) => {
@@ -209,7 +209,7 @@ const BlogAdmin = () => {
                             <FileText className="w-6 h-6 text-purple-400" />
                         </div>
                         <div>
-                            <p className="text-white/60 text-sm">Tuần này</p>
+                            <p className="text-white/60 text-sm">This week</p>
                             <p className="text-2xl font-bold text-white">
                                 {
                                     blogs.filter((b) => {
@@ -232,7 +232,7 @@ const BlogAdmin = () => {
                         type="text"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        placeholder="Tìm kiếm bài viết..."
+                        placeholder="Search articles..."
                         className="w-full pl-10 pr-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white text-sm placeholder:text-white/40 focus:outline-none focus:border-[#0066FF]"
                     />
                 </div>
@@ -247,17 +247,17 @@ const BlogAdmin = () => {
                 ) : filteredBlogs.length === 0 ? (
                     <div className="text-center py-20 text-white/50">
                         <Newspaper className="w-12 h-12 mx-auto mb-3 opacity-50" />
-                        <p>Không có bài viết nào</p>
+                        <p>No articles found</p>
                     </div>
                 ) : (
                     <div className="overflow-x-auto">
                         <table className="w-full">
                             <thead>
                                 <tr className="border-b border-white/10">
-                                    <th className="text-left py-4 px-4 text-white/60 text-sm font-medium">Bài viết</th>
-                                    <th className="text-left py-4 px-4 text-white/60 text-sm font-medium">Ngày tạo</th>
-                                    <th className="text-left py-4 px-4 text-white/60 text-sm font-medium">Cập nhật</th>
-                                    <th className="text-right py-4 px-4 text-white/60 text-sm font-medium">Thao tác</th>
+                                    <th className="text-left py-4 px-4 text-white/60 text-sm font-medium">Article</th>
+                                    <th className="text-left py-4 px-4 text-white/60 text-sm font-medium">Created date</th>
+                                    <th className="text-left py-4 px-4 text-white/60 text-sm font-medium">Update</th>
+                                    <th className="text-right py-4 px-4 text-white/60 text-sm font-medium">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -293,27 +293,27 @@ const BlogAdmin = () => {
                                                 <button
                                                     onClick={() => openPreview(blog)}
                                                     className="p-2 text-white/60 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
-                                                    title="Xem"
+                                                    title="Carm"
                                                 >
                                                     <Eye className="w-4 h-4" />
                                                 </button>
                                                 <button
                                                     onClick={() => openEditModal(blog)}
                                                     className="p-2 text-[#0066FF] hover:bg-[#0066FF]/20 rounded-lg transition-colors"
-                                                    title="Sửa"
+                                                    title="Edit"
                                                 >
                                                     <Edit3 className="w-4 h-4" />
                                                 </button>
                                                 <Popconfirm
-                                                    title="Xóa bài viết"
-                                                    description="Bạn có chắc chắn muốn xóa?"
+                                                    title="Delete article"
+                                                    description="Are you sure you want to delete?"
                                                     onConfirm={() => handleDelete(blog._id)}
-                                                    okText="Xóa"
-                                                    cancelText="Hủy"
+                                                    okText="Delete"
+                                                    cancelText="Cancel"
                                                 >
                                                     <button
                                                         className="p-2 text-red-400 hover:bg-red-500/20 rounded-lg transition-colors"
-                                                        title="Xóa"
+                                                        title="Delete"
                                                     >
                                                         <Trash2 className="w-4 h-4" />
                                                     </button>
@@ -348,7 +348,7 @@ const BlogAdmin = () => {
                             {/* Modal Header */}
                             <div className="p-5 border-b border-white/10 flex items-center justify-between">
                                 <h3 className="text-lg font-bold text-white">
-                                    {editingBlog ? 'Chỉnh sửa bài viết' : 'Thêm bài viết mới'}
+                                    {editingBlog ? 'Edit article' : 'Add Article mới'}
                                 </h3>
                                 <button
                                     onClick={() => setIsModalOpen(false)}
@@ -363,13 +363,13 @@ const BlogAdmin = () => {
                                 {/* Title */}
                                 <div>
                                     <label className="block text-white/60 text-xs font-medium mb-2">
-                                        Tiêu đề <span className="text-red-400">*</span>
+                                        Title <span className="text-red-400">*</span>
                                     </label>
                                     <input
                                         type="text"
                                         value={form.title}
                                         onChange={(e) => setForm((f) => ({ ...f, title: e.target.value }))}
-                                        placeholder="Nhập tiêu đề bài viết"
+                                        placeholder="Enter article title"
                                         className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-[#0066FF]"
                                     />
                                 </div>
@@ -377,7 +377,7 @@ const BlogAdmin = () => {
                                 {/* Image Upload */}
                                 <div>
                                     <label className="block text-white/60 text-xs font-medium mb-2">
-                                        Hình ảnh <span className="text-red-400">*</span>
+                                        Image <span className="text-red-400">*</span>
                                     </label>
                                     <div
                                         onClick={() => fileInputRef.current?.click()}
@@ -391,14 +391,14 @@ const BlogAdmin = () => {
                                                     className="w-full h-48 object-cover rounded-lg"
                                                 />
                                                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 rounded-lg flex items-center justify-center transition-opacity">
-                                                    <p className="text-white text-sm">Nhấn để thay đổi</p>
+                                                    <p className="text-white text-sm">Click to change</p>
                                                 </div>
                                             </div>
                                         ) : (
                                             <div className="flex flex-col items-center gap-2 py-6 text-white/40">
                                                 <ImageIcon className="w-8 h-8" />
-                                                <p className="text-sm">Nhấn để chọn hình ảnh</p>
-                                                <p className="text-xs text-white/20">Tối đa 2MB</p>
+                                                <p className="text-sm">Click to select image</p>
+                                                <p className="text-xs text-white/20">Max 2MB</p>
                                             </div>
                                         )}
                                         <input
@@ -414,7 +414,7 @@ const BlogAdmin = () => {
                                 {/* Content Editor */}
                                 <div>
                                     <label className="block text-white/60 text-xs font-medium mb-2">
-                                        Nội dung <span className="text-red-400">*</span>
+                                        Content <span className="text-red-400">*</span>
                                     </label>
                                     <div className="rounded-xl overflow-hidden border border-white/10">
                                         <Editor
@@ -460,7 +460,7 @@ const BlogAdmin = () => {
                                     onClick={() => setIsModalOpen(false)}
                                     className="flex-1 py-2.5 bg-white/10 hover:bg-white/20 text-white rounded-xl transition-colors text-sm"
                                 >
-                                    Hủy
+                                    Cancel
                                 </button>
                                 <button
                                     onClick={handleSubmit}
@@ -472,7 +472,7 @@ const BlogAdmin = () => {
                                     ) : (
                                         <Save className="w-4 h-4" />
                                     )}
-                                    {editingBlog ? 'Cập nhật' : 'Thêm mới'}
+                                    {editingBlog ? 'Update' : 'Create'}
                                 </button>
                             </div>
                         </motion.div>
@@ -498,7 +498,7 @@ const BlogAdmin = () => {
                             className="bg-[#1a2332] rounded-2xl w-full max-w-2xl my-8 overflow-hidden"
                         >
                             <div className="p-5 border-b border-white/10 flex items-center justify-between">
-                                <h3 className="text-lg font-bold text-white">Xem trước bài viết</h3>
+                                <h3 className="text-lg font-bold text-white">Article preview</h3>
                                 <button
                                     onClick={() => setIsPreviewOpen(false)}
                                     className="p-1.5 text-white/40 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
@@ -518,9 +518,9 @@ const BlogAdmin = () => {
                                 <div className="flex items-center gap-4 text-white/40 text-xs">
                                     <span className="flex items-center gap-1">
                                         <Calendar className="w-3 h-3" />
-                                        Ngày tạo: {formatDate(previewBlog.createdAt)}
+                                        Created date: {formatDate(previewBlog.createdAt)}
                                     </span>
-                                    <span>Cập nhật: {formatDate(previewBlog.updatedAt)}</span>
+                                    <span>Update: {formatDate(previewBlog.updatedAt)}</span>
                                 </div>
                                 <div
                                     className="prose prose-invert prose-sm max-w-none text-white/80"
@@ -532,7 +532,7 @@ const BlogAdmin = () => {
                                     onClick={() => setIsPreviewOpen(false)}
                                     className="flex-1 py-2.5 bg-white/10 hover:bg-white/20 text-white rounded-xl transition-colors text-sm"
                                 >
-                                    Đóng
+                                    Close
                                 </button>
                                 <button
                                     onClick={() => {

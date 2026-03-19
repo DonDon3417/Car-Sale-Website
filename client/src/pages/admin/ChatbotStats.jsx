@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { MessageCircle, TrendingUp, Flame, Thermometer, Snowflake, BarChart3, Activity } from 'lucide-react';
 import {
@@ -85,7 +85,7 @@ const ChatbotStats = () => {
     }
 
     if (!stats) {
-        return <div className="text-center text-white/50 py-20">Không thể tải dữ liệu thống kê</div>;
+        return <div className="text-center text-white/50 py-20">Unable to load statistics data</div>;
     }
 
     // Prepare pie chart data
@@ -114,10 +114,10 @@ const ChatbotStats = () => {
                     <div className="w-10 h-10 bg-[#0066FF]/20 rounded-xl flex items-center justify-center">
                         <Activity className="w-5 h-5 text-[#0066FF]" />
                     </div>
-                    Thống Kê Chatbot AI
+                    AI Chatbot Statistics
                 </h1>
                 <p className="text-white/40 text-sm mt-1 ml-13">
-                    Phân tích mức độ quan tâm của khách hàng qua chatbot tư vấn
+                    Analyze customer interest levels through the consultation chatbot
                 </p>
             </motion.div>
 
@@ -125,14 +125,14 @@ const ChatbotStats = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
                 <StatCard
                     icon={MessageCircle}
-                    label="Tổng cuộc hội thoại"
+                    label="Total conversations"
                     value={stats.totalSessions}
                     color="bg-[#0066FF]"
                     delay={0}
                 />
                 <StatCard
                     icon={TrendingUp}
-                    label="Trung bình Interest"
+                    label="Average interest"
                     value={stats.avgInterestScore}
                     color="bg-emerald-500"
                     delay={0.05}
@@ -171,7 +171,7 @@ const ChatbotStats = () => {
                 >
                     <h3 className="text-white font-semibold text-sm mb-4 flex items-center gap-2">
                         <BarChart3 className="w-4 h-4 text-[#0066FF]" />
-                        Tỷ lệ Hot / Warm / Cold
+                        Hot / Warm / Cold ratio
                     </h3>
                     {pieData.length > 0 ? (
                         <ResponsiveContainer width="100%" height={240}>
@@ -196,7 +196,7 @@ const ChatbotStats = () => {
                         </ResponsiveContainer>
                     ) : (
                         <div className="flex items-center justify-center h-60 text-white/30 text-sm">
-                            Chưa có dữ liệu
+                            No data available
                         </div>
                     )}
                 </motion.div>
@@ -210,7 +210,7 @@ const ChatbotStats = () => {
                 >
                     <h3 className="text-white font-semibold text-sm mb-4 flex items-center gap-2">
                         <BarChart3 className="w-4 h-4 text-emerald-400" />
-                        Số cuộc chat theo ngày
+                        Number of chats by day
                     </h3>
                     {dailyCharts.length > 0 ? (
                         <ResponsiveContainer width="100%" height={240}>
@@ -221,7 +221,7 @@ const ChatbotStats = () => {
                                 <Tooltip content={<CustomTooltip />} />
                                 <Bar
                                     dataKey="count"
-                                    name="Số cuộc chat"
+                                    name="Number of chats"
                                     fill="#0066FF"
                                     radius={[6, 6, 0, 0]}
                                     maxBarSize={40}
@@ -230,7 +230,7 @@ const ChatbotStats = () => {
                         </ResponsiveContainer>
                     ) : (
                         <div className="flex items-center justify-center h-60 text-white/30 text-sm">
-                            Chưa có dữ liệu
+                            No data available
                         </div>
                     )}
                 </motion.div>
@@ -244,7 +244,7 @@ const ChatbotStats = () => {
                 >
                     <h3 className="text-white font-semibold text-sm mb-4 flex items-center gap-2">
                         <TrendingUp className="w-4 h-4 text-amber-400" />
-                        Xu hướng Interest Score
+                        Interest score trend
                     </h3>
                     {scoreTrend.length > 0 ? (
                         <ResponsiveContainer width="100%" height={240}>
@@ -266,7 +266,7 @@ const ChatbotStats = () => {
                         </ResponsiveContainer>
                     ) : (
                         <div className="flex items-center justify-center h-60 text-white/30 text-sm">
-                            Chưa có dữ liệu
+                            No data available
                         </div>
                     )}
                 </motion.div>
@@ -276,3 +276,4 @@ const ChatbotStats = () => {
 };
 
 export default ChatbotStats;
+

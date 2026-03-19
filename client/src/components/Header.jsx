@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+﻿import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     Menu,
@@ -97,8 +97,7 @@ const Header = () => {
     };
 
     const formatPrice = (price) => {
-        if (price >= 1000000000) return (price / 1000000000).toFixed(1) + ' tỷ';
-        return (price / 1000000).toFixed(0) + ' triệu';
+        return new Intl.NumberFormat('en-US').format(price) + ' VND';
     };
 
     return (
@@ -113,7 +112,7 @@ const Header = () => {
                     {/* Logo */}
                     <Link to="/" className="flex items-center flex-shrink-0">
                         <span className="text-white font-bold text-sm tracking-[0.12em] uppercase">
-                            <span className="text-white/80">LOGO</span>
+                            <span className="text-white/80">CarMart</span>
                         </span>
                     </Link>
 
@@ -127,7 +126,7 @@ const Header = () => {
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
                                     onFocus={() => searchQuery.trim() && setShowResults(true)}
-                                    placeholder="Tìm kiếm xe..."
+                                    placeholder="Search cars..."
                                     className="w-full pl-10 pr-4 py-2 bg-white/5 border border-white/10 rounded-full text-white text-xs placeholder-white/30 focus:outline-none focus:border-[#0066FF]/50 focus:bg-white/[0.08] transition-all duration-200"
                                 />
                                 {isSearching && (
@@ -178,13 +177,13 @@ const Header = () => {
                                                     onClick={(e) => handleSearch(e)}
                                                     className="w-full py-2 text-center text-[#0066FF] text-xs hover:underline"
                                                 >
-                                                    Xem tất cả kết quả
+                                                    View all results
                                                 </button>
                                             </div>
                                         </div>
                                     ) : (
                                         <div className="p-4 text-center text-white/50 text-sm">
-                                            Không tìm thấy xe phù hợp
+                                            No matching cars found
                                         </div>
                                     )}
                                 </motion.div>
@@ -199,13 +198,13 @@ const Header = () => {
                             to="/tin-tuc"
                             className="text-white/60 hover:text-white text-xs font-medium transition-colors duration-200"
                         >
-                            Tin tức
+                            News
                         </Link>
                         <Link
                             to="/lien-he"
                             className="text-white/60 hover:text-white text-xs font-medium transition-colors duration-200"
                         >
-                            Liên hệ
+                            Contact
                         </Link>
 
                         <div className="w-px h-4 bg-white/10" />
@@ -218,7 +217,7 @@ const Header = () => {
                                 className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-[#0066FF]/20 to-[#00C2FF]/20 hover:from-[#0066FF]/30 hover:to-[#00C2FF]/30 border border-[#0066FF]/30 rounded-lg text-[#00C2FF] text-xs font-medium transition-all"
                             >
                                 <Bot className="w-3.5 h-3.5" />
-                                <span>Tư vấn AI</span>
+                                <span>AI Advisor</span>
                             </motion.button>
                         </Link>
 
@@ -273,21 +272,21 @@ const Header = () => {
                                                     className="flex items-center gap-2 px-3 py-2 text-white/70 hover:text-white hover:bg-white/5 text-xs transition-colors"
                                                 >
                                                     <User className="w-3.5 h-3.5" />
-                                                    <span>Tài khoản của tôi</span>
+                                                    <span>My account</span>
                                                 </Link>
                                                 <Link
                                                     to="/account/favorites"
                                                     className="flex items-center gap-2 px-3 py-2 text-white/70 hover:text-white hover:bg-white/5 text-xs transition-colors"
                                                 >
                                                     <Heart className="w-3.5 h-3.5" />
-                                                    <span>Xe yêu thích</span>
+                                                    <span>Favorite cars</span>
                                                 </Link>
                                                 <Link
                                                     to="/account/settings"
                                                     className="flex items-center gap-2 px-3 py-2 text-white/70 hover:text-white hover:bg-white/5 text-xs transition-colors"
                                                 >
                                                     <Settings className="w-3.5 h-3.5" />
-                                                    <span>Cài đặt</span>
+                                                    <span>Settings</span>
                                                 </Link>
                                             </div>
                                             <div className="border-t border-white/5 py-1">
@@ -296,7 +295,7 @@ const Header = () => {
                                                     className="w-full flex items-center gap-2 px-3 py-2 text-red-400 hover:text-red-300 hover:bg-red-500/10 text-xs transition-colors"
                                                 >
                                                     <LogOut className="w-3.5 h-3.5" />
-                                                    <span>Đăng xuất</span>
+                                                    <span>Sign out</span>
                                                 </button>
                                             </div>
                                         </motion.div>
@@ -313,7 +312,7 @@ const Header = () => {
                                         className="flex items-center gap-1.5 px-3 py-1.5 bg-white/10 hover:bg-white/15 border border-white/20 rounded-lg text-white text-xs font-medium transition-all"
                                     >
                                         <LogIn className="w-3.5 h-3.5" />
-                                        <span>Đăng nhập</span>
+                                        <span>Log in</span>
                                     </motion.button>
                                 </Link>
                                 <Link to="/account/register">
@@ -323,7 +322,7 @@ const Header = () => {
                                         className="flex items-center gap-1.5 px-3 py-1.5 bg-[#0066FF] hover:bg-[#0052cc] rounded-lg text-white text-xs font-semibold transition-colors"
                                     >
                                         <UserPlus className="w-3.5 h-3.5" />
-                                        <span>Đăng ký</span>
+                                        <span>Subscribe</span>
                                     </motion.button>
                                 </Link>
                             </>
@@ -358,7 +357,7 @@ const Header = () => {
                                         type="text"
                                         value={searchQuery}
                                         onChange={(e) => setSearchQuery(e.target.value)}
-                                        placeholder="Tìm kiếm xe..."
+                                        placeholder="Search cars..."
                                         className="w-full pl-10 pr-4 py-2.5 bg-white/5 border border-white/10 rounded-full text-white text-sm placeholder-white/30 focus:outline-none focus:border-[#0066FF]/50 transition-all"
                                     />
                                 </div>
@@ -369,26 +368,26 @@ const Header = () => {
                                     to="/"
                                     className="py-2 text-white/70 hover:text-white text-sm font-medium transition-colors border-b border-white/5"
                                 >
-                                    Trang chủ
+                                    Home
                                 </Link>
                                 <Link
                                     to="/tin-tuc"
                                     className="py-2 text-white/70 hover:text-white text-sm font-medium transition-colors border-b border-white/5"
                                 >
-                                    Tin tức
+                                    News
                                 </Link>
                                 <Link
                                     to="/lien-he"
                                     className="py-2 text-white/70 hover:text-white text-sm font-medium transition-colors border-b border-white/5"
                                 >
-                                    Liên hệ
+                                    Contact
                                 </Link>
                                 <Link
                                     to="/chatbot"
                                     className="flex items-center gap-2 py-2 text-[#00C2FF] hover:text-white text-sm font-medium transition-colors border-b border-white/5"
                                 >
                                     <Bot className="w-4 h-4" />
-                                    Tư vấn AI
+                                    AI Advisor
                                 </Link>
                             </nav>
 
@@ -419,14 +418,14 @@ const Header = () => {
                                         className="flex items-center gap-2 py-2 text-white/70 hover:text-white text-sm transition-colors border-b border-white/5"
                                     >
                                         <User className="w-4 h-4" />
-                                        <span>Tài khoản của tôi</span>
+                                        <span>My account</span>
                                     </Link>
                                     <button
                                         onClick={handleLogout}
                                         className="w-full flex items-center justify-center gap-2 py-2.5 bg-red-500/20 hover:bg-red-500/30 rounded-lg text-red-400 text-sm font-medium transition-colors"
                                     >
                                         <LogOut className="w-4 h-4" />
-                                        <span>Đăng xuất</span>
+                                        <span>Sign out</span>
                                     </button>
                                 </div>
                             ) : (
@@ -437,7 +436,7 @@ const Header = () => {
                                             className="w-full flex items-center justify-center gap-1.5 py-2.5 bg-white/10 border border-white/20 rounded-lg text-white text-sm font-medium"
                                         >
                                             <LogIn className="w-4 h-4" />
-                                            <span>Đăng nhập</span>
+                                            <span>Log in</span>
                                         </motion.button>
                                     </Link>
                                     <Link to="/account/register" className="flex-1">
@@ -446,7 +445,7 @@ const Header = () => {
                                             className="w-full flex items-center justify-center gap-1.5 py-2.5 bg-[#0066FF] rounded-lg text-white text-sm font-semibold"
                                         >
                                             <UserPlus className="w-4 h-4" />
-                                            <span>Đăng ký</span>
+                                            <span>Subscribe</span>
                                         </motion.button>
                                     </Link>
                                 </div>
@@ -460,3 +459,5 @@ const Header = () => {
 };
 
 export default Header;
+
+

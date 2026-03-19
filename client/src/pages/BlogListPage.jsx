@@ -29,7 +29,7 @@ const BlogListPage = () => {
     const filteredBlogs = blogs.filter((b) => b.title?.toLowerCase().includes(searchQuery.toLowerCase()));
 
     const formatDate = (d) =>
-        new Date(d).toLocaleDateString('vi-VN', {
+        new Date(d).toLocaleDateString('en-US', {
             day: 'numeric',
             month: 'long',
             year: 'numeric',
@@ -57,13 +57,13 @@ const BlogListPage = () => {
                         transition={{ duration: 0.6 }}
                     >
                         <span className="inline-block px-4 py-1.5 bg-[#0066FF]/10 text-[#0066FF] text-xs font-medium rounded-full mb-4 border border-[#0066FF]/20">
-                            Tin tức & Bài viết
+                            News & Article
                         </span>
                         <h1 className="text-3xl md:text-5xl font-bold text-white mb-4">
-                            Tin Tức <span className="text-[#0066FF]">Ô Tô</span>
+                            Automotive <span className="text-[#0066FF]">News</span>
                         </h1>
                         <p className="text-white/50 text-sm md:text-base max-w-md mx-auto">
-                            Cập nhật những tin tức mới nhất về thị trường ô tô, đánh giá xe và xu hướng
+                            Get the latest updates on the car market, reviews, and trends
                         </p>
                     </motion.div>
 
@@ -80,7 +80,7 @@ const BlogListPage = () => {
                                 type="text"
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
-                                placeholder="Tìm kiếm bài viết..."
+                                placeholder="Search articles..."
                                 className="w-full pl-12 pr-4 py-3.5 bg-white/5 border border-white/10 rounded-2xl text-white placeholder:text-white/30 focus:outline-none focus:border-[#0066FF]/50 transition-colors backdrop-blur-sm"
                             />
                         </div>
@@ -97,7 +97,7 @@ const BlogListPage = () => {
                 ) : filteredBlogs.length === 0 ? (
                     <div className="text-center py-20">
                         <Newspaper className="w-16 h-16 mx-auto mb-4 text-white/20" />
-                        <p className="text-white/50 text-lg">Không tìm thấy bài viết nào</p>
+                        <p className="text-white/50 text-lg">No articles found</p>
                     </div>
                 ) : (
                     <>
@@ -120,7 +120,7 @@ const BlogListPage = () => {
                                                 />
                                                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent md:bg-gradient-to-r" />
                                                 <span className="absolute top-4 left-4 px-3 py-1 bg-[#0066FF] text-white text-[10px] font-bold rounded-full uppercase tracking-wider">
-                                                    Mới nhất
+                                                    Newest
                                                 </span>
                                             </div>
                                             <div className="p-6 md:p-8 flex flex-col justify-center">
@@ -135,7 +135,7 @@ const BlogListPage = () => {
                                                     {stripHtml(filteredBlogs[0].content)}
                                                 </p>
                                                 <div className="flex items-center gap-2 text-[#0066FF] text-sm font-medium group-hover:gap-3 transition-all">
-                                                    <span>Đọc tiếp</span>
+                                                    <span>Read more</span>
                                                     <ArrowRight className="w-4 h-4" />
                                                 </div>
                                             </div>
@@ -176,7 +176,7 @@ const BlogListPage = () => {
                                                     {stripHtml(blog.content)}
                                                 </p>
                                                 <div className="flex items-center gap-1 text-[#0066FF] text-xs font-medium group-hover:gap-2 transition-all">
-                                                    <span>Đọc tiếp</span>
+                                                    <span>Read more</span>
                                                     <ArrowRight className="w-3 h-3" />
                                                 </div>
                                             </div>

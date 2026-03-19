@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+﻿import { useState, useEffect, useCallback, useRef } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 
 import {
@@ -52,23 +52,23 @@ const CarSearch = () => {
         sortOrder: searchParams.get('sortOrder') || 'desc',
     });
 
-    const fuelTypes = ['Xăng', 'Dầu', 'Hybrid', 'Điện'];
-    const transmissions = ['Tự động', 'Số sàn'];
+    const fuelTypes = ['Gasoline', 'Diesel', 'Hybrid', 'Electric'];
+    const transmissions = ['Automatic', 'Manual'];
     const seatOptions = [2, 4, 5, 7, 8];
     const priceRanges = [
-        { label: 'Dưới 500 triệu', min: 0, max: 500000000 },
-        { label: '500 triệu - 1 tỷ', min: 500000000, max: 1000000000 },
-        { label: '1 tỷ - 2 tỷ', min: 1000000000, max: 2000000000 },
-        { label: '2 tỷ - 5 tỷ', min: 2000000000, max: 5000000000 },
-        { label: 'Trên 5 tỷ', min: 5000000000, max: '' },
+        { label: 'Under 500 million VND', min: 0, max: 500000000 },
+        { label: '500 million - 1 billion VND', min: 500000000, max: 1000000000 },
+        { label: '1 billion - 2 billion', min: 1000000000, max: 2000000000 },
+        { label: '2 billion - 5 billion', min: 2000000000, max: 5000000000 },
+        { label: 'Above 5 billion', min: 5000000000, max: '' },
     ];
     const sortOptions = [
-        { value: 'createdAt-desc', label: 'Mới nhất' },
-        { value: 'createdAt-asc', label: 'Cũ nhất' },
-        { value: 'price-asc', label: 'Giá thấp đến cao' },
-        { value: 'price-desc', label: 'Giá cao đến thấp' },
-        { value: 'year-desc', label: 'Năm mới nhất' },
-        { value: 'viewCount-desc', label: 'Xem nhiều nhất' },
+        { value: 'createdAt-desc', label: 'Newest' },
+        { value: 'createdAt-asc', label: 'Oldest' },
+        { value: 'price-asc', label: 'Price: low to high' },
+        { value: 'price-desc', label: 'Price: high to low' },
+        { value: 'year-desc', label: 'Latest model year' },
+        { value: 'viewCount-desc', label: 'Most viewed' },
     ];
 
     useEffect(() => {
@@ -206,8 +206,34 @@ const CarSearch = () => {
     ].filter(Boolean).length;
 
     const formatPrice = (price) => {
-        if (price >= 1000000000) return (price / 1000000000).toFixed(1) + ' tỷ';
-        return (price / 1000000).toFixed(0) + ' triệu';
+        return new Intl.NumberFormat('en-US').format(price) + ' VND';
+    };
+
+    const normalizeTextKey = (value = '') =>
+        value
+            .toString()
+            .trim()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/[đĐ]/g, 'd')
+            .toLowerCase();
+
+    const formatFuelType = (value) => {
+        const key = normalizeTextKey(value);
+        if (key === 'xang' || key === 'gasoline') return 'Gasoline';
+        if (key === 'dau' || key === 'diesel') return 'Diesel';
+        if (key === 'dien' || key === 'electric') return 'Electric';
+        if (key === 'hybrid') return 'Hybrid';
+        return value || '-';
+    };
+
+    const formatCategoryName = (value) => {
+        if (!value) return 'Car';
+        const parts = value
+            .split('/')
+            .map((part) => part.trim())
+            .filter(Boolean);
+        return parts[0] || value;
     };
 
     const FilterSection = ({ title, children, defaultOpen = true }) => {
@@ -253,7 +279,7 @@ const CarSearch = () => {
                             type="text"
                             value={filters.search}
                             onChange={(e) => handleFilterChange('search', e.target.value)}
-                            placeholder="Tìm kiếm xe theo tên, hãng..."
+                            placeholder="Search cars by name, brand..."
                             className="w-full pl-12 pr-4 py-4 bg-[#1a2332] border border-white/10 rounded-2xl text-white placeholder-white/40 focus:outline-none focus:border-[#0066FF] transition-colors"
                         />
                         {filters.search && (
@@ -275,7 +301,7 @@ const CarSearch = () => {
                             className="flex items-center gap-2 px-4 py-2 bg-[#1a2332] border border-white/10 rounded-xl text-white hover:border-[#0066FF] transition-colors"
                         >
                             <SlidersHorizontal className="w-4 h-4" />
-                            <span>Bộ lọc</span>
+                            <span>Filters</span>
                             {activeFilterCount > 0 && (
                                 <span className="w-5 h-5 bg-[#0066FF] rounded-full text-xs flex items-center justify-center">
                                     {activeFilterCount}
@@ -283,7 +309,7 @@ const CarSearch = () => {
                             )}
                         </button>
                         <span className="text-white/50">
-                            Tìm thấy <span className="text-white font-semibold">{pagination.total}</span> xe
+                            Found <span className="text-white font-semibold">{pagination.total}</span> cars
                         </span>
                     </div>
 
@@ -325,19 +351,19 @@ const CarSearch = () => {
                         <aside className="w-[280px] flex-shrink-0">
                             <div className="bg-[#1a2332] rounded-2xl p-5 sticky top-24 space-y-4">
                                 <div className="flex items-center justify-between">
-                                    <h3 className="text-white font-semibold">Bộ lọc</h3>
+                                    <h3 className="text-white font-semibold">Filters</h3>
                                     {activeFilterCount > 0 && (
                                         <button
                                             onClick={clearFilters}
                                             className="text-[#0066FF] text-sm hover:underline"
                                         >
-                                            Xóa tất cả
+                                            Clear all
                                         </button>
                                     )}
                                 </div>
 
                                 {/* Brand Filter */}
-                                <FilterSection title="Hãng xe">
+                                <FilterSection title="Brand">
                                     <div className="max-h-48 overflow-y-auto space-y-2">
                                         {brands.map((brand) => (
                                             <CheckboxItem
@@ -351,21 +377,21 @@ const CarSearch = () => {
                                 </FilterSection>
 
                                 {/* Category Filter */}
-                                <FilterSection title="Dòng xe">
+                                <FilterSection title="Cars">
                                     <div className="max-h-48 overflow-y-auto space-y-2">
                                         {categories.map((cat) => (
                                             <CheckboxItem
                                                 key={cat._id}
                                                 checked={filters.category.includes(cat._id)}
                                                 onClick={() => toggleArrayFilter('category', cat._id)}
-                                                label={cat.name}
+                                                label={formatCategoryName(cat.name)}
                                             />
                                         ))}
                                     </div>
                                 </FilterSection>
 
                                 {/* Price Range */}
-                                <FilterSection title="Mức giá">
+                                <FilterSection title="Price range">
                                     <div className="space-y-2">
                                         {priceRanges.map((range, idx) => (
                                             <button
@@ -384,7 +410,7 @@ const CarSearch = () => {
                                 </FilterSection>
 
                                 {/* Fuel Type */}
-                                <FilterSection title="Nhiên liệu">
+                                <FilterSection title="Fuel type">
                                     <div className="flex flex-wrap gap-2">
                                         {fuelTypes.map((type) => (
                                             <button
@@ -403,7 +429,7 @@ const CarSearch = () => {
                                 </FilterSection>
 
                                 {/* Transmission */}
-                                <FilterSection title="Hộp số">
+                                <FilterSection title="Transmission">
                                     <div className="flex gap-2">
                                         {transmissions.map((type) => (
                                             <button
@@ -427,7 +453,7 @@ const CarSearch = () => {
                                 </FilterSection>
 
                                 {/* Seats */}
-                                <FilterSection title="Số chỗ ngồi">
+                                <FilterSection title="Seats">
                                     <div className="flex flex-wrap gap-2">
                                         {seatOptions.map((seat) => (
                                             <button
@@ -439,27 +465,27 @@ const CarSearch = () => {
                                                         : 'bg-white/5 text-white/70 hover:bg-white/10'
                                                 }`}
                                             >
-                                                {seat} chỗ
+                                                {seat} seats
                                             </button>
                                         ))}
                                     </div>
                                 </FilterSection>
 
                                 {/* Year Range */}
-                                <FilterSection title="Năm sản xuất" defaultOpen={false}>
+                                <FilterSection title="Production year" defaultOpen={false}>
                                     <div className="flex gap-2">
                                         <input
                                             type="number"
                                             value={filters.minYear}
                                             onChange={(e) => handleFilterChange('minYear', e.target.value)}
-                                            placeholder="Từ năm"
+                                            placeholder="From year"
                                             className="flex-1 px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white text-sm focus:outline-none focus:border-[#0066FF]"
                                         />
                                         <input
                                             type="number"
                                             value={filters.maxYear}
                                             onChange={(e) => handleFilterChange('maxYear', e.target.value)}
-                                            placeholder="Đến năm"
+                                            placeholder="To year"
                                             className="flex-1 px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white text-sm focus:outline-none focus:border-[#0066FF]"
                                         />
                                     </div>
@@ -476,9 +502,9 @@ const CarSearch = () => {
                             </div>
                         ) : cars.length === 0 ? (
                             <div className="text-center py-20">
-                                <p className="text-white/50 text-lg mb-4">Không tìm thấy xe phù hợp</p>
+                                <p className="text-white/50 text-lg mb-4">No matching cars found</p>
                                 <button onClick={clearFilters} className="text-[#0066FF] hover:underline">
-                                    Xóa bộ lọc
+                                    Clear filters
                                 </button>
                             </div>
                         ) : (
@@ -514,7 +540,7 @@ const CarSearch = () => {
                                                 />
                                                 <div className="absolute inset-0 bg-gradient-to-t from-[#1a2332] via-transparent opacity-60" />
                                                 <span className="absolute top-2 left-2 px-2 py-1 bg-[#0066FF] rounded-lg text-white text-[10px] font-semibold">
-                                                    {car.category?.name}
+                                                    {formatCategoryName(car.category?.name)}
                                                 </span>
                                             </div>
 
@@ -538,11 +564,11 @@ const CarSearch = () => {
                                                     <div className="flex items-center gap-3 mt-3 text-white/50 text-xs">
                                                         <span className="flex items-center gap-1">
                                                             <Fuel className="w-3 h-3" />
-                                                            {car.fuelType}
+                                                            {formatFuelType(car.fuelType)}
                                                         </span>
                                                         <span className="flex items-center gap-1">
                                                             <Users className="w-3 h-3" />
-                                                            {car.seats} chỗ
+                                                            {car.seats} seats
                                                         </span>
                                                         <span className="flex items-center gap-1">
                                                             <Zap className="w-3 h-3" />
@@ -557,7 +583,7 @@ const CarSearch = () => {
                                                     </span>
                                                     <Link to={`/cars/${car.slug}`}>
                                                         <button className="flex items-center gap-1 px-3 py-1.5 bg-white/5 hover:bg-[#0066FF] rounded-lg text-white text-sm transition-colors">
-                                                            <span>Chi tiết</span>
+                                                            <span>Details</span>
                                                             <ArrowRight className="w-3 h-3" />
                                                         </button>
                                                     </Link>

@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+﻿import { useState, useEffect, useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -43,18 +43,53 @@ const CarDetail = () => {
     const [loading, setLoading] = useState(true);
     const [activeImage, setActiveImage] = useState(0);
     const [selectedColor, setSelectedColor] = useState(0);
-    const [selectedVersion, setSelectedVersion] = useState(0);
+    const [selectedVersion, setSelectedVersion] = useState(-1); // -1 = no version selected, show base price
     const [showGallery, setShowGallery] = useState(false);
     const [showLoanModal, setShowLoanModal] = useState(false);
     const [showChat, setShowChat] = useState(false);
     const [showTestDrive, setShowTestDrive] = useState(false);
     const [showDeposit, setShowDeposit] = useState(false);
 
+    const formatTransmission = (value) => {
+        if (!value) return '-';
+        const normalized = value.toLowerCase();
+        if (normalized.includes('tự động') || normalized.includes('tu dong')) return 'Automatic';
+        if (normalized.includes('số sàn') || normalized.includes('so san')) return 'Manual';
+        return value;
+    };
+
+    const normalizeTextKey = (value = '') =>
+        value
+            .toString()
+            .trim()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/[đĐ]/g, 'd')
+            .toLowerCase();
+
+    const formatFuelType = (value) => {
+        const key = normalizeTextKey(value);
+        if (key === 'xang' || key === 'gasoline') return 'Gasoline';
+        if (key === 'dau' || key === 'diesel') return 'Diesel';
+        if (key === 'dien' || key === 'electric') return 'Electric';
+        if (key === 'hybrid') return 'Hybrid';
+        return value || '-';
+    };
+
+    const formatCategoryName = (value) => {
+        if (!value) return 'Car';
+        const parts = value
+            .split('/')
+            .map((part) => part.trim())
+            .filter(Boolean);
+        return parts[0] || value;
+    };
+
     // Loan calculator state
     const [loanSettings, setLoanSettings] = useState({
-        downPaymentPercent: 30, // Tỷ lệ trả trước (%)
-        loanTerm: 60, // Kỳ hạn vay (tháng)
-        interestRate: 8, // Lãi suất (%/năm)
+        downPaymentPercent: 30, // Down payment ratio (%)
+        loanTerm: 60, // Loan term (months)
+        interestRate: 8, // Interest rate (%/year)
     });
 
     useEffect(() => {
@@ -64,26 +99,27 @@ const CarDetail = () => {
     const fetchCar = async () => {
         try {
             setLoading(true);
+            // Add cache-busting timestamp to ensure fresh data
             const res = await requestGetCarBySlug(slug);
             setCar(res.metadata);
             if (res.metadata?.colors?.length > 0) setSelectedColor(0);
-            if (res.metadata?.versions?.length > 0) setSelectedVersion(0);
+            setSelectedVersion(-1);
         } catch (error) {
-            console.error('Lỗi tải thông tin xe:', error);
+            console.error('Error loading car information:', error);
         } finally {
             setLoading(false);
         }
     };
 
     const formatPrice = (price) => {
-        return new Intl.NumberFormat('vi-VN').format(price) + ' VNĐ';
+        return new Intl.NumberFormat('en-US').format(price) + ' VND';
     };
 
     const formatPriceShort = (price) => {
         if (price >= 1000000000) {
-            return (price / 1000000000).toFixed(2) + ' tỷ';
+            return (price / 1000000000).toFixed(2) + ' billion';
         }
-        return (price / 1000000).toFixed(0) + ' triệu';
+        return (price / 1000000).toFixed(0) + ' million';
     };
 
     const nextImage = () => {
@@ -98,8 +134,11 @@ const CarDetail = () => {
         }
     };
 
-    // Calculate loan details
-    const currentPrice = car?.versions?.[selectedVersion]?.price || car?.price || 0;
+    // Calculate loan details - show base price by default, version price only when explicitly selected
+    const currentPrice =
+        selectedVersion >= 0 && car?.versions?.[selectedVersion]?.price
+            ? car.versions[selectedVersion].price
+            : car?.price || 0;
 
     const loanCalculation = useMemo(() => {
         const carPrice = currentPrice;
@@ -107,14 +146,14 @@ const CarDetail = () => {
         const loanTermMonths = loanSettings.loanTerm;
         const annualInterestRate = loanSettings.interestRate;
 
-        // Số tiền trả trước
+        // Down payment amount
         const downPayment = (carPrice * downPaymentPercent) / 100;
-        // Số tiền vay
+        // Loan amount
         const loanAmount = carPrice - downPayment;
-        // Lãi suất tháng
+        // Monthly interest rate
         const monthlyInterestRate = annualInterestRate / 100 / 12;
 
-        // Tính trả góp hàng tháng (công thức PMT)
+        // Calculate monthly installments (PMT formula)
         let monthlyPayment = 0;
         if (monthlyInterestRate > 0) {
             monthlyPayment =
@@ -124,9 +163,9 @@ const CarDetail = () => {
             monthlyPayment = loanAmount / loanTermMonths;
         }
 
-        // Tổng tiền phải trả
+        // Total amount payable
         const totalPayment = monthlyPayment * loanTermMonths + downPayment;
-        // Tổng tiền lãi
+        // Total interest
         const totalInterest = totalPayment - carPrice;
 
         return {
@@ -154,9 +193,9 @@ const CarDetail = () => {
     if (!car) {
         return (
             <div className="min-h-screen bg-[#0a0a0f] flex flex-col items-center justify-center">
-                <h1 className="text-white text-2xl mb-4">Không tìm thấy xe</h1>
+                <h1 className="text-white text-2xl mb-4">Not found cars</h1>
                 <Link to="/" className="text-[#0066FF] hover:underline">
-                    Quay về trang chủ
+                    Back to home
                 </Link>
             </div>
         );
@@ -170,11 +209,11 @@ const CarDetail = () => {
             <div className="max-w-[1200px] mx-auto px-4 py-4 pt-20">
                 <div className="flex items-center gap-2 text-sm">
                     <Link to="/" className="text-white/50 hover:text-white transition-colors">
-                        Trang chủ
+                        Home
                     </Link>
                     <span className="text-white/30">/</span>
                     <Link to="/cars" className="text-white/50 hover:text-white transition-colors">
-                        Xe
+                        Car
                     </Link>
                     <span className="text-white/30">/</span>
                     <span className="text-[#0066FF]">{car.name}</span>
@@ -235,11 +274,11 @@ const CarDetail = () => {
                             {/* Tags */}
                             <div className="absolute top-3 left-3 flex gap-2">
                                 <span className="px-3 py-1 bg-[#0066FF] rounded-lg text-white text-xs font-semibold">
-                                    {car.category?.name}
+                                    {formatCategoryName(car.category?.name)}
                                 </span>
                                 {car.status === 'coming_soon' && (
                                     <span className="px-3 py-1 bg-yellow-500 rounded-lg text-white text-xs font-semibold">
-                                        Sắp ra mắt
+                                        Coming soon
                                     </span>
                                 )}
                             </div>
@@ -282,7 +321,7 @@ const CarDetail = () => {
 
                             <div className="flex items-end gap-4">
                                 <span className="text-3xl font-bold text-[#0066FF]">{formatPrice(currentPrice)}</span>
-                                {car.discountPrice > 0 && car.discountPrice < currentPrice && (
+                                {car.discountPrice > 0 && car.discountPrice > currentPrice && (
                                     <span className="text-white/40 text-lg line-through">
                                         {formatPrice(car.discountPrice)}
                                     </span>
@@ -293,10 +332,10 @@ const CarDetail = () => {
                         {/* Quick Specs */}
                         <div className="grid grid-cols-4 gap-3">
                             {[
-                                { icon: Zap, label: 'Công suất', value: `${car.specifications?.horsepower || '-'} HP` },
-                                { icon: Fuel, label: 'Nhiên liệu', value: car.fuelType },
-                                { icon: Settings, label: 'Hộp số', value: car.transmission },
-                                { icon: Users, label: 'Số chỗ', value: `${car.seats} chỗ` },
+                                { icon: Zap, label: 'Power', value: `${car.specifications?.horsepower || '-'} HP` },
+                                { icon: Fuel, label: 'Fuel type', value: formatFuelType(car.fuelType) },
+                                { icon: Settings, label: 'Transmission', value: formatTransmission(car.transmission) },
+                                { icon: Users, label: 'Seats', value: `${car.seats} seats` },
                             ].map((spec, idx) => (
                                 <div key={idx} className="bg-white/5 rounded-xl p-3 text-center">
                                     <spec.icon className="w-5 h-5 text-[#0066FF] mx-auto mb-1" />
@@ -314,9 +353,9 @@ const CarDetail = () => {
                                         <Calculator className="w-5 h-5 text-green-400" />
                                     </div>
                                     <div>
-                                        <h3 className="text-white font-semibold">Ước tính trả góp</h3>
+                                        <h3 className="text-white font-semibold">Installment estimate</h3>
                                         <p className="text-white/50 text-xs">
-                                            Lãi suất từ {loanSettings.interestRate}%/năm
+                                            Interest rate from {loanSettings.interestRate}%/year
                                         </p>
                                     </div>
                                 </div>
@@ -324,21 +363,21 @@ const CarDetail = () => {
                                     onClick={() => setShowLoanModal(true)}
                                     className="text-green-400 text-sm font-medium hover:underline flex items-center gap-1"
                                 >
-                                    Chi tiết
+                                    Details
                                     <ChevronRight className="w-4 h-4" />
                                 </button>
                             </div>
 
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="bg-black/20 rounded-xl p-3">
-                                    <p className="text-white/50 text-xs mb-1">Trả góp hàng tháng</p>
+                                    <p className="text-white/50 text-xs mb-1">Monthly installment</p>
                                     <p className="text-green-400 text-xl font-bold">
                                         {formatPriceShort(loanCalculation.monthlyPayment)}
                                     </p>
                                 </div>
                                 <div className="bg-black/20 rounded-xl p-3">
                                     <p className="text-white/50 text-xs mb-1">
-                                        Trả trước ({loanSettings.downPaymentPercent}%)
+                                        Down payment ({loanSettings.downPaymentPercent}%)
                                     </p>
                                     <p className="text-white text-xl font-bold">
                                         {formatPriceShort(loanCalculation.downPayment)}
@@ -348,7 +387,7 @@ const CarDetail = () => {
 
                             <div className="mt-3 flex items-center gap-2 text-white/40 text-xs">
                                 <Info className="w-3 h-3" />
-                                <span>Kỳ hạn {loanSettings.loanTerm} tháng • Click "Chi tiết" để tùy chỉnh</span>
+                                <span>Term {loanSettings.loanTerm} months • Click "Details" to customize</span>
                             </div>
                         </div>
 
@@ -356,7 +395,7 @@ const CarDetail = () => {
                         {car.colors?.length > 0 && (
                             <div>
                                 <h3 className="text-white font-semibold mb-3">
-                                    Màu sắc: <span className="text-[#0066FF]">{car.colors[selectedColor]?.name}</span>
+                                    Colors: <span className="text-[#0066FF]">{car.colors[selectedColor]?.name}</span>
                                 </h3>
                                 <div className="flex gap-2">
                                     {car.colors.map((color, idx) => (
@@ -383,7 +422,7 @@ const CarDetail = () => {
                         {/* Versions */}
                         {car.versions?.length > 0 && (
                             <div>
-                                <h3 className="text-white font-semibold mb-3">Phiên bản</h3>
+                                <h3 className="text-white font-semibold mb-3">Version</h3>
                                 <div className="space-y-2">
                                     {car.versions.map((version, idx) => (
                                         <button
@@ -416,7 +455,7 @@ const CarDetail = () => {
                                 className="flex-1 flex items-center justify-center gap-2 py-4 bg-gradient-to-r from-[#0066FF] to-[#0052cc] rounded-xl text-white font-semibold shadow-lg shadow-[#0066FF]/30"
                             >
                                 <CreditCard className="w-5 h-5" />
-                                <span>Đặt cọc giữ xe</span>
+                                <span>Car Deposits</span>
                             </motion.button>
                             <motion.button
                                 whileHover={{ scale: 1.02 }}
@@ -425,12 +464,12 @@ const CarDetail = () => {
                                 className="flex-1 flex items-center justify-center gap-2 py-4 bg-white/10 hover:bg-white/20 rounded-xl text-white font-semibold transition-colors"
                             >
                                 <Calendar className="w-5 h-5" />
-                                <span>Đặt lịch lái thử</span>
+                                <span>Book a Test Drive</span>
                             </motion.button>
                             <div className="flex gap-3">
                                 <button className="flex items-center justify-center gap-2 px-4 py-3 bg-white/5 hover:bg-white/10 rounded-xl text-white/70 hover:text-white transition-colors">
                                     <Heart className="w-5 h-5" />
-                                    <span className="text-sm">Yêu thích</span>
+                                    <span className="text-sm">Favorite</span>
                                 </button>
                             </div>
                         </div>
@@ -441,36 +480,39 @@ const CarDetail = () => {
                 <div className="mt-12 grid lg:grid-cols-3 gap-8">
                     {/* Specifications */}
                     <div className="lg:col-span-2 space-y-6">
-                        <h2 className="text-2xl font-bold text-white">Thông số kỹ thuật</h2>
+                        <h2 className="text-2xl font-bold text-white">Technical specifications</h2>
                         <div className="bg-[#1a2332] rounded-2xl p-6">
                             <div className="grid md:grid-cols-2 gap-4">
                                 {[
-                                    { label: 'Động cơ', value: car.engine || '-' },
-                                    { label: 'Công suất', value: `${car.specifications?.horsepower || '-'} HP` },
-                                    { label: 'Mô-men xoắn', value: `${car.specifications?.torque || '-'} Nm` },
-                                    { label: 'Hộp số', value: car.transmission },
-                                    { label: 'Nhiên liệu', value: car.fuelType },
-                                    { label: 'Tiêu hao', value: car.mileage ? `${car.mileage} L/100km` : '-' },
-                                    { label: 'Số chỗ ngồi', value: `${car.seats} chỗ` },
+                                    { label: 'Engine', value: car.engine || '-' },
+                                    { label: 'Power', value: `${car.specifications?.horsepower || '-'} HP` },
+                                    { label: 'Torque', value: `${car.specifications?.torque || '-'} Nm` },
+                                    { label: 'Transmission', value: formatTransmission(car.transmission) },
+                                    { label: 'Fuel type', value: formatFuelType(car.fuelType) },
+                                    { label: 'Consumption', value: car.mileage ? `${car.mileage} L/100km` : '-' },
+                                    { label: 'Seats', value: `${car.seats} seats` },
                                     {
-                                        label: 'Chiều dài',
+                                        label: 'Length',
                                         value: car.specifications?.length ? `${car.specifications.length} mm` : '-',
                                     },
                                     {
-                                        label: 'Chiều rộng',
+                                        label: 'Width',
                                         value: car.specifications?.width ? `${car.specifications.width} mm` : '-',
                                     },
                                     {
-                                        label: 'Chiều cao',
+                                        label: 'Height',
                                         value: car.specifications?.height ? `${car.specifications.height} mm` : '-',
                                     },
                                     {
-                                        label: 'Chiều dài cơ sở',
+                                        label: 'Wheelbase',
                                         value: car.specifications?.wheelBase
                                             ? `${car.specifications.wheelBase} mm`
                                             : '-',
                                     },
-                                    { label: 'Tình trạng', value: car.stock > 0 ? `Còn ${car.stock} xe` : 'Hết hàng' },
+                                    {
+                                        label: 'Status',
+                                        value: car.stock > 0 ? `In stock: ${car.stock} cars` : 'Out of stock',
+                                    },
                                 ].map((item, idx) => (
                                     <div
                                         key={idx}
@@ -486,7 +528,7 @@ const CarDetail = () => {
                         {/* Description */}
                         {car.description && (
                             <>
-                                <h2 className="text-2xl font-bold text-white mt-8">Mô tả</h2>
+                                <h2 className="text-2xl font-bold text-white mt-8">Description</h2>
                                 <div className="bg-[#1a2332] rounded-2xl p-6">
                                     <p className="text-white/70 leading-relaxed whitespace-pre-line">
                                         {car.description}
@@ -499,7 +541,7 @@ const CarDetail = () => {
                     {/* Contact Card */}
                     <div className="lg:col-span-1">
                         <div className="bg-[#1a2332] rounded-2xl p-6 sticky top-24">
-                            <h3 className="text-xl font-bold text-white mb-4">Liên hệ tư vấn</h3>
+                            <h3 className="text-xl font-bold text-white mb-4">Contact advisor</h3>
                             <div className="space-y-4">
                                 <div className="flex items-center gap-3 p-4 bg-white/5 rounded-xl">
                                     <div className="w-12 h-12 bg-[#0066FF]/20 rounded-full flex items-center justify-center">
@@ -516,7 +558,7 @@ const CarDetail = () => {
                                     </div>
                                     <div>
                                         <p className="text-white/50 text-sm">Showroom</p>
-                                        <p className="text-white font-semibold">Hà Nội, Việt Nam</p>
+                                        <p className="text-white font-semibold">Hanoi, Vietnam</p>
                                     </div>
                                 </div>
                             </div>
@@ -524,20 +566,20 @@ const CarDetail = () => {
                             <div className="mt-6 p-4 bg-[#0066FF]/10 border border-[#0066FF]/30 rounded-xl">
                                 <div className="flex items-center gap-2 text-[#0066FF] mb-2">
                                     <Shield className="w-5 h-5" />
-                                    <span className="font-semibold">Cam kết</span>
+                                    <span className="font-semibold">Commitment</span>
                                 </div>
                                 <ul className="space-y-2 text-white/70 text-sm">
                                     <li className="flex items-center gap-2">
                                         <Check className="w-4 h-4 text-green-400" />
-                                        <span>Bảo hành chính hãng</span>
+                                        <span>Genuine warranty</span>
                                     </li>
                                     <li className="flex items-center gap-2">
                                         <Check className="w-4 h-4 text-green-400" />
-                                        <span>Hỗ trợ trả góp 0%</span>
+                                        <span>Installment Support 0%</span>
                                     </li>
                                     <li className="flex items-center gap-2">
                                         <Check className="w-4 h-4 text-green-400" />
-                                        <span>Miễn phí giao xe toàn quốc</span>
+                                        <span>Free nationwide car delivery</span>
                                     </li>
                                 </ul>
                             </div>
@@ -624,7 +666,7 @@ const CarDetail = () => {
                                         <Calculator className="w-5 h-5 text-green-400" />
                                     </div>
                                     <div>
-                                        <h2 className="text-xl font-bold text-white">Dự toán trả góp</h2>
+                                        <h2 className="text-xl font-bold text-white">Installment plan</h2>
                                         <p className="text-white/50 text-sm">{car.name}</p>
                                     </div>
                                 </div>
@@ -641,7 +683,7 @@ const CarDetail = () => {
                                 {/* Car Price */}
                                 <div className="bg-gradient-to-r from-[#0066FF]/10 to-purple-500/10 rounded-xl p-4 border border-[#0066FF]/20">
                                     <div className="flex items-center justify-between">
-                                        <span className="text-white/70">Giá xe</span>
+                                        <span className="text-white/70">Car price</span>
                                         <span className="text-[#0066FF] text-2xl font-bold">
                                             {formatPrice(currentPrice)}
                                         </span>
@@ -655,7 +697,7 @@ const CarDetail = () => {
                                         <div className="flex items-center justify-between mb-3">
                                             <label className="text-white font-medium flex items-center gap-2">
                                                 <Banknote className="w-4 h-4 text-[#0066FF]" />
-                                                Tỷ lệ trả trước
+                                                Down payment ratio
                                             </label>
                                             <span className="text-[#0066FF] font-bold">
                                                 {loanSettings.downPaymentPercent}%
@@ -691,10 +733,10 @@ const CarDetail = () => {
                                         <div className="flex items-center justify-between mb-3">
                                             <label className="text-white font-medium flex items-center gap-2">
                                                 <Clock className="w-4 h-4 text-[#0066FF]" />
-                                                Kỳ hạn vay
+                                                Term vay
                                             </label>
                                             <span className="text-[#0066FF] font-bold">
-                                                {loanSettings.loanTerm} tháng ({loanSettings.loanTerm / 12} năm)
+                                                {loanSettings.loanTerm} months ({loanSettings.loanTerm / 12} years)
                                             </span>
                                         </div>
                                         <div className="flex gap-2 flex-wrap">
@@ -710,7 +752,7 @@ const CarDetail = () => {
                                                             : 'bg-white/10 text-white/70 hover:bg-white/20'
                                                     }`}
                                                 >
-                                                    {months} tháng
+                                                    {months} months
                                                 </button>
                                             ))}
                                         </div>
@@ -721,7 +763,7 @@ const CarDetail = () => {
                                         <div className="flex items-center justify-between mb-3">
                                             <label className="text-white font-medium flex items-center gap-2">
                                                 <Percent className="w-4 h-4 text-[#0066FF]" />
-                                                Lãi suất (%/năm)
+                                                Interest rate (%/year)
                                             </label>
                                             <span className="text-[#0066FF] font-bold">
                                                 {loanSettings.interestRate}%
@@ -752,18 +794,18 @@ const CarDetail = () => {
                                 <div className="bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-xl p-5 border border-green-500/20 space-y-4">
                                     <h3 className="text-white font-semibold flex items-center gap-2">
                                         <TrendingUp className="w-5 h-5 text-green-400" />
-                                        Kết quả ước tính
+                                        Estimated result
                                     </h3>
 
                                     <div className="grid grid-cols-2 gap-4">
                                         <div className="bg-black/20 rounded-xl p-4">
-                                            <p className="text-white/50 text-sm mb-1">Trả góp hàng tháng</p>
+                                            <p className="text-white/50 text-sm mb-1">Monthly installment</p>
                                             <p className="text-green-400 text-2xl font-bold">
                                                 {formatPriceShort(loanCalculation.monthlyPayment)}
                                             </p>
                                         </div>
                                         <div className="bg-black/20 rounded-xl p-4">
-                                            <p className="text-white/50 text-sm mb-1">Số tiền vay</p>
+                                            <p className="text-white/50 text-sm mb-1">Loan amount</p>
                                             <p className="text-white text-2xl font-bold">
                                                 {formatPriceShort(loanCalculation.loanAmount)}
                                             </p>
@@ -772,13 +814,13 @@ const CarDetail = () => {
 
                                     <div className="grid grid-cols-2 gap-4">
                                         <div className="bg-black/20 rounded-xl p-4">
-                                            <p className="text-white/50 text-sm mb-1">Tổng tiền lãi</p>
+                                            <p className="text-white/50 text-sm mb-1">Total interest</p>
                                             <p className="text-orange-400 text-xl font-bold">
                                                 {formatPriceShort(loanCalculation.totalInterest)}
                                             </p>
                                         </div>
                                         <div className="bg-black/20 rounded-xl p-4">
-                                            <p className="text-white/50 text-sm mb-1">Tổng thanh toán</p>
+                                            <p className="text-white/50 text-sm mb-1">Total payment</p>
                                             <p className="text-white text-xl font-bold">
                                                 {formatPriceShort(loanCalculation.totalPayment)}
                                             </p>
@@ -788,23 +830,23 @@ const CarDetail = () => {
                                     {/* Payment Schedule Preview */}
                                     <div className="mt-4 pt-4 border-t border-green-500/20">
                                         <p className="text-white/60 text-sm">
-                                            <strong className="text-white">Bạn sẽ thanh toán:</strong>
+                                            <strong className="text-white">You will pay:</strong>
                                         </p>
                                         <ul className="mt-2 space-y-1 text-white/60 text-sm">
                                             <li className="flex items-center gap-2">
                                                 <Check className="w-4 h-4 text-green-400" />
-                                                Trả trước:{' '}
+                                                Down payment:{' '}
                                                 <strong className="text-white">
                                                     {formatPriceShort(loanCalculation.downPayment)}
                                                 </strong>
                                             </li>
                                             <li className="flex items-center gap-2">
                                                 <Check className="w-4 h-4 text-green-400" />
-                                                {loanSettings.loanTerm} kỳ x{' '}
+                                                {loanSettings.loanTerm} months x{' '}
                                                 <strong className="text-white">
                                                     {formatPriceShort(loanCalculation.monthlyPayment)}
                                                 </strong>
-                                                /tháng
+                                                /month
                                             </li>
                                         </ul>
                                     </div>
@@ -814,9 +856,9 @@ const CarDetail = () => {
                                 <div className="flex items-start gap-2 p-3 bg-yellow-500/10 rounded-xl border border-yellow-500/20">
                                     <Info className="w-5 h-5 text-yellow-400 flex-shrink-0 mt-0.5" />
                                     <p className="text-yellow-200/80 text-xs">
-                                        Số liệu trên chỉ mang tính chất tham khảo. Lãi suất và điều kiện vay thực tế có
-                                        thể khác biệt tùy thuộc vào ngân hàng và hồ sơ của bạn. Vui lòng liên hệ để được
-                                        tư vấn chi tiết.
+                                        The figures above are for reference only. Actual interest rates and loan terms
+                                        may vary depending on the bank and your profile. Please contact us for detailed
+                                        advice.
                                     </p>
                                 </div>
 
@@ -832,7 +874,7 @@ const CarDetail = () => {
                                         className="flex-1 flex items-center justify-center gap-2 py-4 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl text-white font-semibold shadow-lg shadow-green-500/30"
                                     >
                                         <MessageCircle className="w-5 h-5" />
-                                        <span>Chat tư vấn trả góp</span>
+                                        <span>Installment consultation chat</span>
                                     </motion.button>
                                     <motion.button
                                         whileHover={{ scale: 1.02 }}
@@ -840,7 +882,7 @@ const CarDetail = () => {
                                         onClick={() => setShowLoanModal(false)}
                                         className="px-6 py-4 bg-white/10 hover:bg-white/20 rounded-xl text-white font-semibold transition-colors"
                                     >
-                                        Đóng
+                                        Close
                                     </motion.button>
                                 </div>
                             </div>

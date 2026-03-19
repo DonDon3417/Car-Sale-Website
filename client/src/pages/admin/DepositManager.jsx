@@ -51,28 +51,28 @@ const paymentMethodIcons = {
 
 const statusConfig = {
     pending: {
-        label: 'Chờ xử lý',
+        label: 'Pending',
         color: 'bg-yellow-500',
         textColor: 'text-yellow-400',
         bgColor: 'bg-yellow-500/10',
         icon: AlertCircle,
     },
     confirmed: {
-        label: 'Đã xác nhận',
+        label: 'Confirmed',
         color: 'bg-blue-500',
         textColor: 'text-blue-400',
         bgColor: 'bg-blue-500/10',
         icon: CheckCircle,
     },
     completed: {
-        label: 'Hoàn thành',
+        label: 'Completed',
         color: 'bg-green-500',
         textColor: 'text-green-400',
         bgColor: 'bg-green-500/10',
         icon: CheckCircle,
     },
     cancelled: {
-        label: 'Đã hủy',
+        label: 'Cancelled',
         color: 'bg-red-500',
         textColor: 'text-red-400',
         bgColor: 'bg-red-500/10',
@@ -82,22 +82,22 @@ const statusConfig = {
 
 const paymentStatusConfig = {
     pending: {
-        label: 'Chưa thanh toán',
+        label: 'Unpaid',
         textColor: 'text-yellow-400',
         bgColor: 'bg-yellow-500/10',
     },
     completed: {
-        label: 'Đã thanh toán',
+        label: 'Paid',
         textColor: 'text-green-400',
         bgColor: 'bg-green-500/10',
     },
     failed: {
-        label: 'Thất bại',
+        label: 'Failed',
         textColor: 'text-red-400',
         bgColor: 'bg-red-500/10',
     },
     refunded: {
-        label: 'Đã hoàn tiền',
+        label: 'Refunded',
         textColor: 'text-purple-400',
         bgColor: 'bg-purple-500/10',
     },
@@ -171,7 +171,7 @@ const DepositManager = () => {
 
     // Format date
     const formatDate = (date) => {
-        return new Date(date).toLocaleDateString('vi-VN', {
+        return new Date(date).toLocaleDateString('en-US', {
             day: 'numeric',
             month: 'numeric',
             year: 'numeric',
@@ -183,13 +183,13 @@ const DepositManager = () => {
     // Format price
     const formatPrice = (price) => {
         if (price >= 1000000000) {
-            return (price / 1000000000).toFixed(2) + ' tỷ';
+            return (price / 1000000000).toFixed(2) + ' billion';
         }
-        return (price / 1000000).toFixed(0) + ' triệu';
+        return (price / 1000000).toFixed(0) + ' million';
     };
 
     const formatPriceFull = (price) => {
-        return new Intl.NumberFormat('vi-VN').format(price) + ' VNĐ';
+        return new Intl.NumberFormat('en-US').format(price) + ' VND';
     };
 
     // Filter deposits by search
@@ -209,8 +209,8 @@ const DepositManager = () => {
             {/* Header */}
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="text-2xl font-bold text-white">Quản lý đặt cọc</h1>
-                    <p className="text-white/60 mt-1">Quản lý các đơn đặt cọc giữ xe</p>
+                    <h1 className="text-2xl font-bold text-white">Deposit Management</h1>
+                    <p className="text-white/60 mt-1">Manage car deposit reservations</p>
                 </div>
                 <button
                     onClick={() => {
@@ -220,7 +220,7 @@ const DepositManager = () => {
                     className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-xl transition-colors"
                 >
                     <RefreshCw className="w-4 h-4" />
-                    Làm mới
+                    Refresh
                 </button>
             </div>
 
@@ -233,7 +233,7 @@ const DepositManager = () => {
                                 <CreditCard className="w-6 h-6 text-[#0066FF]" />
                             </div>
                             <div>
-                                <p className="text-white/60 text-sm">Tổng đơn</p>
+                                <p className="text-white/60 text-sm">Total orders</p>
                                 <p className="text-2xl font-bold text-white">{stats.totalDeposits}</p>
                             </div>
                         </div>
@@ -244,7 +244,7 @@ const DepositManager = () => {
                                 <AlertCircle className="w-6 h-6 text-yellow-400" />
                             </div>
                             <div>
-                                <p className="text-white/60 text-sm">Chờ xử lý</p>
+                                <p className="text-white/60 text-sm">Pending</p>
                                 <p className="text-2xl font-bold text-white">{stats.pendingDeposits}</p>
                             </div>
                         </div>
@@ -255,7 +255,7 @@ const DepositManager = () => {
                                 <CheckCircle className="w-6 h-6 text-blue-400" />
                             </div>
                             <div>
-                                <p className="text-white/60 text-sm">Đã xác nhận</p>
+                                <p className="text-white/60 text-sm">Confirmed</p>
                                 <p className="text-2xl font-bold text-white">{stats.confirmedDeposits}</p>
                             </div>
                         </div>
@@ -266,7 +266,7 @@ const DepositManager = () => {
                                 <Wallet className="w-6 h-6 text-green-400" />
                             </div>
                             <div>
-                                <p className="text-white/60 text-sm">Hoàn thành</p>
+                                <p className="text-white/60 text-sm">Completed</p>
                                 <p className="text-2xl font-bold text-white">{stats.completedDeposits}</p>
                             </div>
                         </div>
@@ -277,7 +277,7 @@ const DepositManager = () => {
                                 <DollarSign className="w-6 h-6 text-emerald-400" />
                             </div>
                             <div>
-                                <p className="text-white/60 text-sm">Tổng thu</p>
+                                <p className="text-white/60 text-sm">Total thu</p>
                                 <p className="text-xl font-bold text-emerald-400">{formatPrice(stats.totalRevenue)}</p>
                             </div>
                         </div>
@@ -296,7 +296,7 @@ const DepositManager = () => {
                                 type="text"
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
-                                placeholder="Tìm theo tên, SĐT, xe, mã đơn..."
+                                placeholder="Search theo tên, SĐT, cars, mã orders..."
                                 className="w-full pl-10 pr-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white text-sm placeholder:text-white/40 focus:outline-none focus:border-[#0066FF]"
                             />
                         </div>
@@ -308,11 +308,11 @@ const DepositManager = () => {
                         onChange={(e) => setFilterStatus(e.target.value)}
                         className="px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white text-sm focus:outline-none focus:border-[#0066FF]"
                     >
-                        <option value="">Tất cả trạng thái</option>
-                        <option value="pending">Chờ xử lý</option>
-                        <option value="confirmed">Đã xác nhận</option>
-                        <option value="completed">Hoàn thành</option>
-                        <option value="cancelled">Đã hủy</option>
+                        <option value="">All statuses</option>
+                        <option value="pending">Pending</option>
+                        <option value="confirmed">Confirmed</option>
+                        <option value="completed">Completed</option>
+                        <option value="cancelled">Cancelled</option>
                     </select>
 
                     {/* Payment method filter */}
@@ -321,7 +321,7 @@ const DepositManager = () => {
                         onChange={(e) => setFilterPaymentMethod(e.target.value)}
                         className="px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white text-sm focus:outline-none focus:border-[#0066FF]"
                     >
-                        <option value="">Tất cả PT thanh toán</option>
+                        <option value="">All payment methods</option>
                         <option value="MOMO">MoMo</option>
                         <option value="VNPAY">VNPay</option>
                         <option value="PAYPAL">PayPal</option>
@@ -338,26 +338,26 @@ const DepositManager = () => {
                 ) : filteredDeposits.length === 0 ? (
                     <div className="text-center py-20 text-white/50">
                         <CreditCard className="w-12 h-12 mx-auto mb-3 opacity-50" />
-                        <p>Không có đơn đặt cọc nào</p>
+                        <p>No deposits found</p>
                     </div>
                 ) : (
                     <div className="overflow-x-auto">
                         <table className="w-full">
                             <thead>
                                 <tr className="border-b border-white/10">
-                                    <th className="text-left py-4 px-4 text-white/60 text-sm font-medium">Mã đơn</th>
+                                    <th className="text-left py-4 px-4 text-white/60 text-sm font-medium">Order ID</th>
                                     <th className="text-left py-4 px-4 text-white/60 text-sm font-medium">
-                                        Khách hàng
+                                        Customers
                                     </th>
-                                    <th className="text-left py-4 px-4 text-white/60 text-sm font-medium">Xe</th>
-                                    <th className="text-left py-4 px-4 text-white/60 text-sm font-medium">Tiền cọc</th>
+                                    <th className="text-left py-4 px-4 text-white/60 text-sm font-medium">Car</th>
+                                    <th className="text-left py-4 px-4 text-white/60 text-sm font-medium">Deposit amount</th>
                                     <th className="text-left py-4 px-4 text-white/60 text-sm font-medium">
-                                        Thanh toán
+                                        Payment
                                     </th>
                                     <th className="text-left py-4 px-4 text-white/60 text-sm font-medium">
-                                        Trạng thái
+                                        Status
                                     </th>
-                                    <th className="text-right py-4 px-4 text-white/60 text-sm font-medium">Thao tác</th>
+                                    <th className="text-right py-4 px-4 text-white/60 text-sm font-medium">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -448,7 +448,7 @@ const DepositManager = () => {
                                                             setIsModalOpen(true);
                                                         }}
                                                         className="p-2 text-white/60 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
-                                                        title="Xem chi tiết"
+                                                        title="View details"
                                                     >
                                                         <Eye className="w-4 h-4" />
                                                     </button>
@@ -463,7 +463,7 @@ const DepositManager = () => {
                                                                 )
                                                             }
                                                             className="p-2 text-green-400 hover:bg-green-500/20 rounded-lg transition-colors"
-                                                            title="Xác nhận"
+                                                            title="Confirm"
                                                         >
                                                             <Check className="w-4 h-4" />
                                                         </button>
@@ -473,7 +473,7 @@ const DepositManager = () => {
                                                         <button
                                                             onClick={() => handleUpdateStatus(deposit._id, 'completed')}
                                                             className="p-2 text-blue-400 hover:bg-blue-500/20 rounded-lg transition-colors"
-                                                            title="Hoàn thành"
+                                                            title="Completed"
                                                         >
                                                             <CheckCircle className="w-4 h-4" />
                                                         </button>
@@ -485,7 +485,7 @@ const DepositManager = () => {
                                                                 handleUpdateStatus(deposit._id, 'cancelled', 'refunded')
                                                             }
                                                             className="p-2 text-red-400 hover:bg-red-500/20 rounded-lg transition-colors"
-                                                            title="Hủy"
+                                                            title="Cancel"
                                                         >
                                                             <X className="w-4 h-4" />
                                                         </button>
@@ -504,7 +504,7 @@ const DepositManager = () => {
                 {pagination.totalPages > 1 && (
                     <div className="flex items-center justify-between px-4 py-3 border-t border-white/10">
                         <p className="text-white/50 text-sm">
-                            Hiển thị {deposits.length} / {pagination.total} đơn
+                            Showing {deposits.length} / {pagination.total} orders
                         </p>
                         <div className="flex gap-2">
                             <button
@@ -512,7 +512,7 @@ const DepositManager = () => {
                                 disabled={pagination.page === 1}
                                 className="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white rounded-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed"
                             >
-                                Trước
+                                Previous
                             </button>
                             <span className="px-3 py-1.5 text-white text-sm">
                                 {pagination.page} / {pagination.totalPages}
@@ -542,7 +542,7 @@ const DepositManager = () => {
                         onClick={(e) => e.stopPropagation()}
                     >
                         <div className="p-6 border-b border-white/10 flex items-center justify-between">
-                            <h3 className="text-xl font-bold text-white">Chi tiết đặt cọc</h3>
+                            <h3 className="text-xl font-bold text-white">Details đặt cọc</h3>
                             <span className="text-white/50 font-mono text-sm">
                                 #{selectedDeposit._id?.slice(-8).toUpperCase()}
                             </span>
@@ -553,15 +553,15 @@ const DepositManager = () => {
                             <div className="bg-white/5 rounded-xl p-4 space-y-3">
                                 <h4 className="text-white font-medium flex items-center gap-2">
                                     <User className="w-4 h-4 text-[#0066FF]" />
-                                    Thông tin khách hàng
+                                    Customer information
                                 </h4>
                                 <div className="grid grid-cols-2 gap-3 text-sm">
                                     <div>
-                                        <p className="text-white/50">Họ tên</p>
+                                        <p className="text-white/50">Full name</p>
                                         <p className="text-white">{selectedDeposit.user?.fullName}</p>
                                     </div>
                                     <div>
-                                        <p className="text-white/50">Số điện thoại</p>
+                                        <p className="text-white/50">Phone number</p>
                                         <p className="text-white">
                                             {selectedDeposit.customerPhone || selectedDeposit.user?.phone}
                                         </p>
@@ -577,7 +577,7 @@ const DepositManager = () => {
                             <div className="bg-white/5 rounded-xl p-4 space-y-3">
                                 <h4 className="text-white font-medium flex items-center gap-2">
                                     <Car className="w-4 h-4 text-[#0066FF]" />
-                                    Thông tin xe
+                                    Car information
                                 </h4>
                                 <div className="flex items-center gap-3">
                                     {selectedDeposit.car?.images?.[0] && (
@@ -604,27 +604,27 @@ const DepositManager = () => {
                             <div className="bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-xl p-4 border border-green-500/20">
                                 <h4 className="text-white font-medium flex items-center gap-2 mb-3">
                                     <Wallet className="w-4 h-4 text-green-400" />
-                                    Thông tin đặt cọc
+                                    Deposit information
                                 </h4>
                                 <div className="grid grid-cols-2 gap-3 text-sm">
                                     <div>
-                                        <p className="text-white/50">Số tiền cọc (10%)</p>
+                                        <p className="text-white/50">Amount cọc (10%)</p>
                                         <p className="text-green-400 text-xl font-bold">
                                             {formatPriceFull(selectedDeposit.depositAmount)}
                                         </p>
                                     </div>
                                     <div>
-                                        <p className="text-white/50">Phương thức</p>
+                                        <p className="text-white/50">Method</p>
                                         <p className="text-white flex items-center gap-2">
                                             {selectedDeposit.paymentMethod}
                                         </p>
                                     </div>
                                     <div>
-                                        <p className="text-white/50">Thời hạn giữ xe</p>
+                                        <p className="text-white/50">Reservation hold period</p>
                                         <p className="text-white">{formatDate(selectedDeposit.expiresAt)}</p>
                                     </div>
                                     <div>
-                                        <p className="text-white/50">Thanh toán</p>
+                                        <p className="text-white/50">Payment</p>
                                         <span
                                             className={`text-sm ${paymentStatusConfig[selectedDeposit.paymentStatus]?.textColor}`}
                                         >
@@ -639,7 +639,7 @@ const DepositManager = () => {
                                 <div className="bg-white/5 rounded-xl p-4">
                                     <h4 className="text-white font-medium flex items-center gap-2 mb-2">
                                         <FileText className="w-4 h-4 text-[#0066FF]" />
-                                        Ghi chú
+                                        Note
                                     </h4>
                                     <p className="text-white/70 text-sm">{selectedDeposit.note}</p>
                                 </div>
@@ -647,7 +647,7 @@ const DepositManager = () => {
 
                             {/* Status */}
                             <div className="flex items-center justify-between">
-                                <span className="text-white/50 text-sm">Trạng thái</span>
+                                <span className="text-white/50 text-sm">Status</span>
                                 <span
                                     className={`px-3 py-1 rounded-full text-xs font-medium ${
                                         statusConfig[selectedDeposit.status]?.textColor
@@ -663,7 +663,7 @@ const DepositManager = () => {
                                 onClick={() => setIsModalOpen(false)}
                                 className="flex-1 py-2.5 bg-white/10 hover:bg-white/20 text-white rounded-xl transition-colors"
                             >
-                                Đóng
+                                Close
                             </button>
 
                             {selectedDeposit.status === 'pending' && (
@@ -677,7 +677,7 @@ const DepositManager = () => {
                                     ) : (
                                         <>
                                             <Check className="w-4 h-4" />
-                                            Xác nhận
+                                            Confirm
                                         </>
                                     )}
                                 </button>
@@ -694,7 +694,7 @@ const DepositManager = () => {
                                     ) : (
                                         <>
                                             <CheckCircle className="w-4 h-4" />
-                                            Hoàn thành
+                                            Completed
                                         </>
                                     )}
                                 </button>
