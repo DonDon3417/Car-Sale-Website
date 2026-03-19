@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Send, Loader2, User, MessageSquare } from 'lucide-react';
 import { requestCreateContact } from '../config/ContactRequest';
@@ -23,11 +23,11 @@ const ContactPage = () => {
         setLoading(true);
         try {
             await requestCreateContact(formData);
-            message.success('Gửi tin nhắn thành công! Chúng tôi sẽ liên hệ sớm.');
+            message.success('Message sent successfully! We will contact you soon.');
             setFormData({ fullName: '', email: '', phone: '', message: '' });
         } catch (error) {
             console.error(error);
-            message.error('Có lỗi xảy ra, vui lòng thử lại.');
+            message.error('An error occurred, please try again.');
         } finally {
             setLoading(false);
         }
@@ -47,10 +47,10 @@ const ContactPage = () => {
                     className="text-center mb-16"
                 >
                     <span className="text-[#0066FF] text-sm font-semibold tracking-wider uppercase mb-2 block">
-                        Liên hệ với chúng tôi
+                        Contact us
                     </span>
                     <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent mb-4">
-                        Chúng tôi luôn sẵn sàng hỗ trợ bạn
+                        We are always ready to support you
                     </h1>
                     <p className="text-white/60 max-w-2xl mx-auto">
                         Hãy để lại tin nhắn hoặc liên hệ trực tiếp qua số hotline. Đội ngũ tư vấn sẽ phản hồi trong thời
@@ -67,15 +67,15 @@ const ContactPage = () => {
                         className="space-y-8"
                     >
                         <div className="bg-[#1E293B]/50 backdrop-blur-xl border border-white/10 rounded-2xl p-8 space-y-6">
-                            <h3 className="text-2xl font-bold text-white mb-6">Thông tin liên hệ</h3>
+                            <h3 className="text-2xl font-bold text-white mb-6">Contact information</h3>
 
                             <div className="flex items-start gap-4 group">
                                 <div className="w-12 h-12 rounded-xl bg-[#0066FF]/20 flex items-center justify-center text-[#0066FF] group-hover:bg-[#0066FF] group-hover:text-white transition-all duration-300">
                                     <MapPin className="w-6 h-6" />
                                 </div>
                                 <div>
-                                    <h4 className="font-semibold text-white mb-1">Địa chỉ</h4>
-                                    <p className="text-white/60">123 Đường ABC, Quận XYZ, TP. Hồ Chí Minh</p>
+                                    <h4 className="font-semibold text-white mb-1">Address</h4>
+                                    <p className="text-white/60">123 ABC Street, XYZ District, Ho Chi Minh City</p>
                                 </div>
                             </div>
 
@@ -85,7 +85,7 @@ const ContactPage = () => {
                                 </div>
                                 <div>
                                     <h4 className="font-semibold text-white mb-1">Hotline</h4>
-                                    <p className="text-white/60">0123 456 789 (Hỗ trợ 24/7)</p>
+                                    <p className="text-white/60">0123 456 789 (24/7 support)</p>
                                 </div>
                             </div>
 
@@ -108,7 +108,7 @@ const ContactPage = () => {
                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                             />
                             <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                                <span className="text-white font-medium">Xem bản đồ</span>
+                                <span className="text-white font-medium">View map</span>
                             </div>
                         </div>
                     </motion.div>
@@ -125,14 +125,14 @@ const ContactPage = () => {
                         >
                             <div className="absolute top-0 right-0 w-32 h-32 bg-[#0066FF]/20 rounded-bl-[100px] -z-0 pointer-events-none" />
 
-                            <h3 className="text-2xl font-bold text-white mb-2">Gửi tin nhắn</h3>
+                            <h3 className="text-2xl font-bold text-white mb-2">Send a message</h3>
                             <p className="text-white/50 text-sm mb-6">
-                                Điền thông tin bên dưới, chúng tôi sẽ liên hệ lại ngay.
+                                Fill in the form below and we will get back to you shortly.
                             </p>
 
                             <div className="space-y-4 relative z-10">
                                 <div>
-                                    <label className="block text-sm font-medium text-white/70 mb-2">Họ và tên</label>
+                                    <label className="block text-sm font-medium text-white/70 mb-2">Full name</label>
                                     <div className="relative">
                                         <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/30" />
                                         <input
@@ -141,7 +141,7 @@ const ContactPage = () => {
                                             value={formData.fullName}
                                             onChange={handleChange}
                                             required
-                                            placeholder="Nhập họ tên của bạn"
+                                            placeholder="Enter your full name"
                                             className="w-full bg-[#0F172A] border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder:text-white/20 focus:outline-none focus:border-[#0066FF] transition-colors"
                                         />
                                     </div>
@@ -165,7 +165,7 @@ const ContactPage = () => {
                                     </div>
                                     <div>
                                         <label className="block text-sm font-medium text-white/70 mb-2">
-                                            Số điện thoại
+                                            Phone number
                                         </label>
                                         <div className="relative">
                                             <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/30" />
@@ -183,7 +183,7 @@ const ContactPage = () => {
                                 </div>
 
                                 <div>
-                                    <label className="block text-sm font-medium text-white/70 mb-2">Lời nhắn</label>
+                                    <label className="block text-sm font-medium text-white/70 mb-2">Message</label>
                                     <div className="relative">
                                         <MessageSquare className="absolute left-4 top-4 w-5 h-5 text-white/30" />
                                         <textarea
@@ -192,7 +192,7 @@ const ContactPage = () => {
                                             onChange={handleChange}
                                             required
                                             rows="4"
-                                            placeholder="Bạn cần tư vấn về..."
+                                            placeholder="What do you need advice on..."
                                             className="w-full bg-[#0F172A] border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder:text-white/20 focus:outline-none focus:border-[#0066FF] transition-colors resize-none"
                                         ></textarea>
                                     </div>
@@ -208,7 +208,7 @@ const ContactPage = () => {
                                     <Loader2 className="w-5 h-5 animate-spin" />
                                 ) : (
                                     <>
-                                        <span>Gửi ngay</span>
+                                        <span>Send now</span>
                                         <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                     </>
                                 )}
@@ -222,3 +222,4 @@ const ContactPage = () => {
 };
 
 export default ContactPage;
+

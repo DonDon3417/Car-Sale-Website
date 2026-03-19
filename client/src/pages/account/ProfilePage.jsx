@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { message } from 'antd';
 import { Camera, Save, User, Mail, Phone, MapPin, Calendar, Loader2 } from 'lucide-react';
@@ -43,7 +43,7 @@ const ProfilePage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!form.fullName.trim()) {
-            message.error('Vui lòng nhập họ tên');
+            message.error('Please enter your full name');
             return;
         }
         setLoading(true);
@@ -54,10 +54,10 @@ const ProfilePage = () => {
                 address: form.address.trim(),
                 birthDay: form.birthDay || null,
             });
-            message.success('Cập nhật thông tin thành công');
+            message.success('Profile updated successfully');
             await fetchAuth();
         } catch (err) {
-            message.error(err?.response?.data?.message || 'Cập nhật thất bại');
+            message.error(err?.response?.data?.message || 'Update failed');
         } finally {
             setLoading(false);
         }
@@ -68,11 +68,11 @@ const ProfilePage = () => {
         if (!file) return;
 
         if (!file.type.startsWith('image/')) {
-            message.error('Vui lòng chọn file ảnh');
+            message.error('Please select an image file');
             return;
         }
         if (file.size > 5 * 1024 * 1024) {
-            message.error('Kích thước ảnh tối đa 5MB');
+            message.error('Maximum image size is 5MB');
             return;
         }
 
@@ -82,10 +82,10 @@ const ProfilePage = () => {
         setAvatarLoading(true);
         try {
             await requestUploadAvatar(formData);
-            message.success('Cập nhật ảnh đại diện thành công');
+            message.success('Avatar updated successfully');
             await fetchAuth();
         } catch (err) {
-            message.error(err?.response?.data?.message || 'Upload ảnh thất bại');
+            message.error(err?.response?.data?.message || 'Avatar upload failed');
         } finally {
             setAvatarLoading(false);
         }
@@ -94,10 +94,10 @@ const ProfilePage = () => {
     const inputFields = [
         {
             name: 'fullName',
-            label: 'Họ và tên',
+            label: 'Full name',
             icon: User,
             type: 'text',
-            placeholder: 'Nhập họ và tên',
+            placeholder: 'Nhập họ and tên',
             required: true,
         },
         {
@@ -110,21 +110,21 @@ const ProfilePage = () => {
         },
         {
             name: 'phone',
-            label: 'Số điện thoại',
+            label: 'Phone number',
             icon: Phone,
             type: 'tel',
-            placeholder: 'Nhập số điện thoại',
+            placeholder: 'Enter phone number',
         },
         {
             name: 'address',
-            label: 'Địa chỉ',
+            label: 'Address',
             icon: MapPin,
             type: 'text',
-            placeholder: 'Nhập địa chỉ',
+            placeholder: 'Enter address',
         },
         {
             name: 'birthDay',
-            label: 'Ngày sinh',
+            label: 'Days sinh',
             icon: Calendar,
             type: 'date',
         },
@@ -134,8 +134,8 @@ const ProfilePage = () => {
         <div className="space-y-6">
             {/* Page Title */}
             <div>
-                <h1 className="text-xl font-bold text-white">Thông tin cá nhân</h1>
-                <p className="text-white/40 text-sm mt-1">Quản lý thông tin tài khoản của bạn</p>
+                <h1 className="text-xl font-bold text-white">Profile</h1>
+                <p className="text-white/40 text-sm mt-1">Manage your account information</p>
             </div>
 
             {/* Avatar Section */}
@@ -176,7 +176,7 @@ const ProfilePage = () => {
                         </label>
                     </div>
                     <div>
-                        <p className="text-white text-sm font-semibold">{dataUser?.fullName || 'Người dùng'}</p>
+                        <p className="text-white text-sm font-semibold">{dataUser?.fullName || 'User'}</p>
                         <p className="text-white/40 text-xs mt-0.5">{dataUser?.email || ''}</p>
                         <p className="text-white/30 text-[11px] mt-1">Nhấn vào ảnh để thay đổi • Tối đa 5MB</p>
                     </div>
@@ -229,7 +229,7 @@ const ProfilePage = () => {
                             className="flex items-center justify-center gap-2 px-6 py-3 bg-[#0066FF] hover:bg-[#0052cc] disabled:opacity-50 rounded-xl text-white text-sm font-semibold transition-colors w-full sm:w-auto cursor-pointer"
                         >
                             {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
-                            <span>Lưu thay đổi</span>
+                            <span>Save thay đổi</span>
                         </motion.button>
                     </div>
                 </form>
@@ -239,3 +239,4 @@ const ProfilePage = () => {
 };
 
 export default ProfilePage;
+

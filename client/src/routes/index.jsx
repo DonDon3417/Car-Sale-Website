@@ -28,6 +28,8 @@ import ChatbotStats from '../pages/admin/ChatbotStats';
 
 export const routes = [
     { path: '/', element: <App /> },
+    { path: '/login', element: <Navigate to="/account/login" replace /> },
+    { path: '/register', element: <Navigate to="/account/register" replace /> },
     { path: '/cars', element: <CarSearch /> },
     { path: '/cars/:slug', element: <CarDetail /> },
     { path: '/payment/success/:id', element: <PaymentSuccess /> },

@@ -9,6 +9,52 @@ const Banner = () => {
     const [slides, setSlides] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    const formatTransmission = (value) => {
+        if (!value) return 'Automatic';
+        const normalized = value.toLowerCase();
+        if (normalized.includes('tự động') || normalized.includes('tu dong')) return 'Automatic';
+        if (normalized.includes('số sàn') || normalized.includes('so san')) return 'Manual';
+        return value;
+    };
+
+    const normalizeTextKey = (value = '') =>
+        value
+            .toString()
+            .trim()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/[đĐ]/g, 'd')
+            .toLowerCase();
+
+    const formatFuelType = (value) => {
+        const key = normalizeTextKey(value);
+        if (key === 'xang' || key === 'gasoline') return 'Gasoline';
+        if (key === 'dau' || key === 'diesel') return 'Diesel';
+        if (key === 'dien' || key === 'electric') return 'Electric';
+        if (key === 'hybrid') return 'Hybrid';
+        return value || 'Gasoline';
+    };
+
+    const formatCategoryName = (value) => {
+        if (!value) return 'Car';
+        const parts = value
+            .split('/')
+            .map((part) => part.trim())
+            .filter(Boolean);
+        return parts[0] || value;
+    };
+
+    const formatDescription = (description, carName) => {
+        if (!description) return 'Breakthrough design - leading technology';
+        const hasVietnamese = /[àáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]/i.test(
+            description,
+        );
+        const cleaned = hasVietnamese
+            ? `${carName || 'This vehicle'} features modern styling, strong performance, and advanced safety technology.`
+            : description;
+        return cleaned.length > 100 ? `${cleaned.substring(0, 100)}...` : cleaned;
+    };
+
     useEffect(() => {
         const fetchCars = async () => {
             try {
@@ -27,16 +73,14 @@ const Banner = () => {
                             car.images && car.images.length > 0
                                 ? `${import.meta.env.VITE_URL_IMAGE}${car.images[0]}`
                                 : '',
-                        subtitle: `${car.brand?.name || 'Xe'} ${car.category?.name || 'mới'}`,
+                        subtitle: `${car.brand?.name || 'Car'} ${formatCategoryName(car.category?.name) || 'new'}`,
                         title: car.name,
-                        highlight: 'Đẳng cấp',
-                        description: car.description
-                            ? car.description.substring(0, 100) + '...'
-                            : 'Thiết kế đột phá – Công nghệ dẫn đầu',
+                        highlight: 'Premium',
+                        description: formatDescription(car.description, car.name),
                         features: [
-                            car.specifications?.horsepower ? `${car.specifications.horsepower} HP` : 'Mạnh mẽ',
-                            car.transmission || 'Tự động',
-                            car.fuelType || 'Xăng',
+                            car.specifications?.horsepower ? `${car.specifications.horsepower} HP` : 'Powerful',
+                            formatTransmission(car.transmission),
+                            formatFuelType(car.fuelType),
                         ],
                         price: car.price,
                     }));
@@ -117,7 +161,7 @@ const Banner = () => {
                             >
                                 <div className="absolute -inset-0.5 bg-[#0066FF] rounded-lg opacity-0 blur-md group-hover:opacity-50 transition-opacity" />
                                 <div className="relative flex items-center gap-1.5 px-4 py-2 bg-[#0066FF] hover:bg-[#0052cc] rounded-lg text-white text-xs font-semibold shadow-lg shadow-[#0066FF]/25 transition-all">
-                                    <span>Xem chi tiết</span>
+                                    <span>View details</span>
                                     <ChevronRight className="w-3.5 h-3.5" />
                                 </div>
                             </motion.button>
@@ -128,7 +172,7 @@ const Banner = () => {
                                 whileTap={{ scale: 0.97 }}
                                 className="flex items-center gap-1.5 px-4 py-2 bg-white/10 hover:bg-white/15 backdrop-blur-sm border border-white/20 rounded-lg text-white text-xs font-medium transition-all"
                             >
-                                <span>Nhận báo giá</span>
+                                <span>Get a quote</span>
                                 <ChevronRight className="w-3.5 h-3.5" />
                             </motion.button>
                         </Link>
@@ -163,7 +207,7 @@ const Banner = () => {
                 className="absolute bottom-6 right-6 z-20"
             >
                 <div className="flex flex-col items-center gap-1.5 text-white/40">
-                    <span className="text-[9px] uppercase tracking-wider">Cuộn</span>
+                    <span className="text-[9px] uppercase tracking-wider">Scroll</span>
                     <ChevronDown className="w-4 h-4" />
                 </div>
             </motion.div>

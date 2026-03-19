@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import {
     Calendar,
@@ -23,28 +23,28 @@ import { request } from '../../config/request';
 
 const statusConfig = {
     pending: {
-        label: 'Chờ xác nhận',
+        label: 'Pending confirmation',
         color: 'bg-yellow-500',
         textColor: 'text-yellow-400',
         bgColor: 'bg-yellow-500/10',
         icon: AlertCircle,
     },
     confirmed: {
-        label: 'Đã xác nhận',
+        label: 'Confirmed',
         color: 'bg-blue-500',
         textColor: 'text-blue-400',
         bgColor: 'bg-blue-500/10',
         icon: CheckCircle,
     },
     completed: {
-        label: 'Hoàn thành',
+        label: 'Completed',
         color: 'bg-green-500',
         textColor: 'text-green-400',
         bgColor: 'bg-green-500/10',
         icon: CheckCircle,
     },
     cancelled: {
-        label: 'Đã hủy',
+        label: 'Cancelled',
         color: 'bg-red-500',
         textColor: 'text-red-400',
         bgColor: 'bg-red-500/10',
@@ -127,10 +127,10 @@ const TestDriveManager = () => {
 
     // Cancel booking
     const handleCancel = async (bookingId) => {
-        const reason = window.prompt('Nhập lý do từ chối/hủy lịch hẹn (sẽ được gửi qua email cho khách):');
-        if (reason === null) return; // Người dùng ấn Cancel
+        const reason = window.prompt('Enter reason for rejecting/canceling the appointment (will be emailed to the customer):');
+        if (reason === null) return; // User clicked Cancel
         if (!reason.trim()) {
-            alert('Vui lòng nhập lý do!');
+            alert('Please enter a reason!');
             return;
         }
 
@@ -142,7 +142,7 @@ const TestDriveManager = () => {
             fetchBookings();
             fetchStats();
             setIsModalOpen(false);
-            alert('Đã hủy và gửi email thông báo cho khách hàng.');
+            alert('Cancelled and gửi email thông báo cho khách hàng.');
         } catch (error) {
             console.error('Error cancelling booking:', error);
         } finally {
@@ -152,7 +152,7 @@ const TestDriveManager = () => {
 
     // Format date
     const formatDate = (date) => {
-        return new Date(date).toLocaleDateString('vi-VN', {
+        return new Date(date).toLocaleDateString('en-US', {
             weekday: 'short',
             day: 'numeric',
             month: 'numeric',
@@ -163,9 +163,9 @@ const TestDriveManager = () => {
     // Format price
     const formatPrice = (price) => {
         if (price >= 1000000000) {
-            return (price / 1000000000).toFixed(2) + ' tỷ';
+            return (price / 1000000000).toFixed(2) + ' billion';
         }
-        return (price / 1000000).toFixed(0) + ' triệu';
+        return (price / 1000000).toFixed(0) + ' million';
     };
 
     // Filter bookings by search
@@ -184,8 +184,8 @@ const TestDriveManager = () => {
             {/* Header */}
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="text-2xl font-bold text-white">Quản lý lịch lái thử</h1>
-                    <p className="text-white/60 mt-1">Quản lý các yêu cầu đặt lịch lái thử xe</p>
+                    <h1 className="text-2xl font-bold text-white">Test Drive Management</h1>
+                    <p className="text-white/60 mt-1">Manage car test-drive requests</p>
                 </div>
                 <button
                     onClick={() => {
@@ -195,7 +195,7 @@ const TestDriveManager = () => {
                     className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-xl transition-colors"
                 >
                     <RefreshCw className="w-4 h-4" />
-                    Làm mới
+                    Refresh
                 </button>
             </div>
 
@@ -208,7 +208,7 @@ const TestDriveManager = () => {
                                 <Calendar className="w-6 h-6 text-[#0066FF]" />
                             </div>
                             <div>
-                                <p className="text-white/60 text-sm">Tổng lịch hẹn</p>
+                                <p className="text-white/60 text-sm">Total appointments</p>
                                 <p className="text-2xl font-bold text-white">{stats.total}</p>
                             </div>
                         </div>
@@ -219,7 +219,7 @@ const TestDriveManager = () => {
                                 <AlertCircle className="w-6 h-6 text-yellow-400" />
                             </div>
                             <div>
-                                <p className="text-white/60 text-sm">Chờ xác nhận</p>
+                                <p className="text-white/60 text-sm">Pending confirmation</p>
                                 <p className="text-2xl font-bold text-white">{stats.pending}</p>
                             </div>
                         </div>
@@ -230,7 +230,7 @@ const TestDriveManager = () => {
                                 <CheckCircle className="w-6 h-6 text-blue-400" />
                             </div>
                             <div>
-                                <p className="text-white/60 text-sm">Đã xác nhận</p>
+                                <p className="text-white/60 text-sm">Confirmed</p>
                                 <p className="text-2xl font-bold text-white">{stats.confirmed}</p>
                             </div>
                         </div>
@@ -241,7 +241,7 @@ const TestDriveManager = () => {
                                 <Clock className="w-6 h-6 text-green-400" />
                             </div>
                             <div>
-                                <p className="text-white/60 text-sm">Hôm nay</p>
+                                <p className="text-white/60 text-sm">Today</p>
                                 <p className="text-2xl font-bold text-white">{stats.todayBookings}</p>
                             </div>
                         </div>
@@ -260,7 +260,7 @@ const TestDriveManager = () => {
                                 type="text"
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
-                                placeholder="Tìm theo tên, SĐT, xe..."
+                                placeholder="Search by name, phone, car..."
                                 className="w-full pl-10 pr-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white text-sm placeholder:text-white/40 focus:outline-none focus:border-[#0066FF]"
                             />
                         </div>
@@ -272,11 +272,11 @@ const TestDriveManager = () => {
                         onChange={(e) => setFilterStatus(e.target.value)}
                         className="px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white text-sm focus:outline-none focus:border-[#0066FF]"
                     >
-                        <option value="">Tất cả trạng thái</option>
-                        <option value="pending">Chờ xác nhận</option>
-                        <option value="confirmed">Đã xác nhận</option>
-                        <option value="completed">Hoàn thành</option>
-                        <option value="cancelled">Đã hủy</option>
+                        <option value="">All statuses</option>
+                        <option value="pending">Pending confirmation</option>
+                        <option value="confirmed">Confirmed</option>
+                        <option value="completed">Completed</option>
+                        <option value="cancelled">Cancelled</option>
                     </select>
 
                     {/* Date filter */}
@@ -298,7 +298,7 @@ const TestDriveManager = () => {
                 ) : filteredBookings.length === 0 ? (
                     <div className="text-center py-20 text-white/50">
                         <Calendar className="w-12 h-12 mx-auto mb-3 opacity-50" />
-                        <p>Không có lịch hẹn nào</p>
+                        <p>No appointments</p>
                     </div>
                 ) : (
                     <div className="overflow-x-auto">
@@ -306,16 +306,16 @@ const TestDriveManager = () => {
                             <thead>
                                 <tr className="border-b border-white/10">
                                     <th className="text-left py-4 px-4 text-white/60 text-sm font-medium">
-                                        Khách hàng
+                                        Customers
                                     </th>
-                                    <th className="text-left py-4 px-4 text-white/60 text-sm font-medium">Xe</th>
+                                    <th className="text-left py-4 px-4 text-white/60 text-sm font-medium">Car</th>
                                     <th className="text-left py-4 px-4 text-white/60 text-sm font-medium">
-                                        Ngày & giờ
+                                        Date & time
                                     </th>
                                     <th className="text-left py-4 px-4 text-white/60 text-sm font-medium">
-                                        Trạng thái
+                                        Status
                                     </th>
-                                    <th className="text-right py-4 px-4 text-white/60 text-sm font-medium">Thao tác</th>
+                                    <th className="text-right py-4 px-4 text-white/60 text-sm font-medium">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -378,7 +378,7 @@ const TestDriveManager = () => {
                                                             setIsModalOpen(true);
                                                         }}
                                                         className="p-2 text-white/60 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
-                                                        title="Xem chi tiết"
+                                                        title="View details"
                                                     >
                                                         <Eye className="w-4 h-4" />
                                                     </button>
@@ -387,7 +387,7 @@ const TestDriveManager = () => {
                                                         <button
                                                             onClick={() => handleConfirm(booking._id)}
                                                             className="p-2 text-green-400 hover:bg-green-500/20 rounded-lg transition-colors"
-                                                            title="Xác nhận"
+                                                            title="Confirm"
                                                         >
                                                             <Check className="w-4 h-4" />
                                                         </button>
@@ -397,7 +397,7 @@ const TestDriveManager = () => {
                                                         <button
                                                             onClick={() => handleComplete(booking._id)}
                                                             className="p-2 text-blue-400 hover:bg-blue-500/20 rounded-lg transition-colors"
-                                                            title="Hoàn thành"
+                                                            title="Completed"
                                                         >
                                                             <CheckCircle className="w-4 h-4" />
                                                         </button>
@@ -407,7 +407,7 @@ const TestDriveManager = () => {
                                                         <button
                                                             onClick={() => handleCancel(booking._id)}
                                                             className="p-2 text-red-400 hover:bg-red-500/20 rounded-lg transition-colors"
-                                                            title="Hủy"
+                                                            title="Cancel"
                                                         >
                                                             <X className="w-4 h-4" />
                                                         </button>
@@ -436,7 +436,7 @@ const TestDriveManager = () => {
                         onClick={(e) => e.stopPropagation()}
                     >
                         <div className="p-6 border-b border-white/10">
-                            <h3 className="text-xl font-bold text-white">Chi tiết lịch hẹn</h3>
+                            <h3 className="text-xl font-bold text-white">Appointment details</h3>
                         </div>
 
                         <div className="p-6 space-y-4">
@@ -444,15 +444,15 @@ const TestDriveManager = () => {
                             <div className="bg-white/5 rounded-xl p-4 space-y-3">
                                 <h4 className="text-white font-medium flex items-center gap-2">
                                     <User className="w-4 h-4 text-[#0066FF]" />
-                                    Thông tin khách hàng
+                                    Customer information
                                 </h4>
                                 <div className="grid grid-cols-2 gap-3 text-sm">
                                     <div>
-                                        <p className="text-white/50">Họ tên</p>
+                                        <p className="text-white/50">Full name</p>
                                         <p className="text-white">{selectedBooking.fullName}</p>
                                     </div>
                                     <div>
-                                        <p className="text-white/50">Số điện thoại</p>
+                                        <p className="text-white/50">Phone number</p>
                                         <p className="text-white">{selectedBooking.phone}</p>
                                     </div>
                                     <div className="col-span-2">
@@ -466,19 +466,19 @@ const TestDriveManager = () => {
                             <div className="bg-white/5 rounded-xl p-4 space-y-3">
                                 <h4 className="text-white font-medium flex items-center gap-2">
                                     <Calendar className="w-4 h-4 text-[#0066FF]" />
-                                    Thông tin lịch hẹn
+                                    Appointment information
                                 </h4>
                                 <div className="grid grid-cols-2 gap-3 text-sm">
                                     <div>
-                                        <p className="text-white/50">Ngày</p>
+                                        <p className="text-white/50">Days</p>
                                         <p className="text-white">{formatDate(selectedBooking.date)}</p>
                                     </div>
                                     <div>
-                                        <p className="text-white/50">Giờ</p>
+                                        <p className="text-white/50">Hours</p>
                                         <p className="text-[#0066FF] font-semibold">{selectedBooking.timeSlot}</p>
                                     </div>
                                     <div className="col-span-2">
-                                        <p className="text-white/50">Xe</p>
+                                        <p className="text-white/50">Car</p>
                                         <p className="text-white">{selectedBooking.car?.name}</p>
                                     </div>
                                 </div>
@@ -489,7 +489,7 @@ const TestDriveManager = () => {
                                 <div className="bg-white/5 rounded-xl p-4">
                                     <h4 className="text-white font-medium flex items-center gap-2 mb-2">
                                         <FileText className="w-4 h-4 text-[#0066FF]" />
-                                        Ghi chú
+                                        Note
                                     </h4>
                                     <p className="text-white/70 text-sm">{selectedBooking.note}</p>
                                 </div>
@@ -497,7 +497,7 @@ const TestDriveManager = () => {
 
                             {/* Status */}
                             <div className="flex items-center justify-between">
-                                <span className="text-white/50 text-sm">Trạng thái</span>
+                                <span className="text-white/50 text-sm">Status</span>
                                 <span
                                     className={`px-3 py-1 rounded-full text-xs font-medium ${
                                         statusConfig[selectedBooking.status]?.textColor
@@ -513,7 +513,7 @@ const TestDriveManager = () => {
                                 onClick={() => setIsModalOpen(false)}
                                 className="flex-1 py-2.5 bg-white/10 hover:bg-white/20 text-white rounded-xl transition-colors"
                             >
-                                Đóng
+                                Close
                             </button>
 
                             {selectedBooking.status === 'pending' && (
@@ -527,7 +527,7 @@ const TestDriveManager = () => {
                                     ) : (
                                         <>
                                             <Check className="w-4 h-4" />
-                                            Xác nhận
+                                            Confirm
                                         </>
                                     )}
                                 </button>
@@ -544,7 +544,7 @@ const TestDriveManager = () => {
                                     ) : (
                                         <>
                                             <CheckCircle className="w-4 h-4" />
-                                            Hoàn thành
+                                            Completed
                                         </>
                                     )}
                                 </button>
@@ -558,3 +558,4 @@ const TestDriveManager = () => {
 };
 
 export default TestDriveManager;
+

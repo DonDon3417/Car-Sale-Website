@@ -118,7 +118,7 @@ class TestDriveService {
             .populate('customer', 'fullName email phone')
             .populate('car', 'name price images slug brand')
             .populate('processedBy', 'fullName')
-            .sort({ date: 1, timeSlot: 1 });
+            .sort({ createdAt: -1 });
     }
 
     // Lấy chi tiết booking

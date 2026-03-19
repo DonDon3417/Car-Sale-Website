@@ -61,20 +61,20 @@ const Promotions = () => {
                                         <Percent className="w-3 h-3 text-white" />
                                     </div>
                                     <span className="text-[#E10600] text-[10px] font-semibold tracking-[0.12em] uppercase">
-                                        Ưu đãi đặc biệt
+                                        Special Offer
                                     </span>
                                 </div>
 
                                 <h2 className="text-xl sm:text-2xl font-bold text-white mb-2">
-                                    Ưu đãi đặc biệt <span className="text-[#0066FF]">tháng này</span>
+                                    Special Offer <span className="text-[#0066FF]">this month</span>
                                 </h2>
 
                                 <p className="text-white/60 text-xs mb-4 max-w-sm">
-                                    Giảm đến 100 triệu khi mua xe. Tặng kèm gói bảo hiểm 2 năm và phụ kiện chính hãng.
+                                    Get up to 100 million VND off when buying a car. Includes a 2-year insurance package and genuine accessories.
                                 </p>
 
                                 <div className="flex flex-wrap gap-2 mb-4">
-                                    {['Giảm 100 triệu', 'Bảo hiểm 2 năm', 'Phụ kiện miễn phí'].map((benefit) => (
+                                    {['100 million VND off', '2-year insurance', 'Free accessories'].map((benefit) => (
                                         <div
                                             key={benefit}
                                             className="flex items-center gap-1 px-2 py-1 bg-white/5 border border-white/10 rounded-full"
@@ -92,7 +92,7 @@ const Promotions = () => {
                                 >
                                     <div className="absolute -inset-1 bg-[#E10600] rounded-lg opacity-0 blur-md group-hover:opacity-40 transition-opacity duration-300" />
                                     <div className="relative flex items-center gap-1.5 px-4 py-2 bg-[#E10600] hover:bg-[#c70500] rounded-lg text-white text-xs font-semibold shadow-lg shadow-[#E10600]/25 transition-all">
-                                        <span>Nhận ưu đãi ngay</span>
+                                        <span>Get Offer Now</span>
                                         <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
                                     </div>
                                 </motion.button>
@@ -102,17 +102,17 @@ const Promotions = () => {
                                 <div className="flex items-center gap-1.5 mb-2 lg:justify-end">
                                     <Clock className="w-3 h-3 text-white/50" />
                                     <span className="text-white/50 text-[10px] uppercase tracking-wider">
-                                        Kết thúc sau
+                                        Ends in
                                     </span>
                                 </div>
                                 <div className="flex items-center gap-1.5 sm:gap-2">
-                                    <TimeBlock value={timeLeft.days} label="Ngày" />
+                                    <TimeBlock value={timeLeft.days} label="Days" />
                                     <span className="text-white/30 text-lg font-light">:</span>
-                                    <TimeBlock value={timeLeft.hours} label="Giờ" />
+                                    <TimeBlock value={timeLeft.hours} label="Hours" />
                                     <span className="text-white/30 text-lg font-light">:</span>
-                                    <TimeBlock value={timeLeft.minutes} label="Phút" />
+                                    <TimeBlock value={timeLeft.minutes} label="Minutes" />
                                     <span className="text-white/30 text-lg font-light">:</span>
-                                    <TimeBlock value={timeLeft.seconds} label="Giây" />
+                                    <TimeBlock value={timeLeft.seconds} label="Seconds" />
                                 </div>
                             </div>
                         </div>

@@ -151,7 +151,8 @@ const seedCars = async () => {
                           ? random(1000000000, 2000000000) // VinFast cao cấp
                           : random(400000000, 1500000000); // Xe phổ thông
 
-                const fuelTypes = brand.name === 'VinFast' ? ['Điện'] : ['Xăng', 'Dầu', 'Hybrid', 'Điện'];
+                const fuelTypes =
+                    brand.name === 'VinFast' ? ['Electric'] : ['Gasoline', 'Diesel', 'Hybrid', 'Electric'];
                 const fuelType = randomItem(fuelTypes);
 
                 const versionSet = randomItem(sampleVersions);
@@ -189,17 +190,17 @@ const seedCars = async () => {
                     discountPrice: Math.random() > 0.7 ? basePrice - random(10000000, 100000000) : 0,
                     year: random(2022, 2025),
                     fuelType,
-                    transmission: randomItem(['Tự động', 'Số sàn']),
+                    transmission: randomItem(['Automatic', 'Manual']),
                     seats: randomItem([4, 5, 7, 8]),
                     engine:
-                        fuelType === 'Điện'
+                        fuelType === 'Electric'
                             ? `${random(150, 400)}kW Electric Motor`
                             : `${(random(15, 40) / 10).toFixed(1)}L ${randomItem(['I4', 'V6', 'V8', 'Turbo'])}`,
-                    mileage: fuelType === 'Điện' ? random(15, 25) : random(6, 15),
+                    mileage: fuelType === 'Electric' ? random(15, 25) : random(6, 15),
                     colors,
                     versions,
                     images,
-                    description: `${fullName} - Mẫu xe ${category.name.toLowerCase()} ${brand.name} với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.`,
+                    description: `${fullName} features modern styling, strong performance, advanced safety technologies, and a comfortable cabin for both daily commuting and long trips.`,
                     specifications: {
                         length: `${random(4200, 5200)}`,
                         width: `${random(1750, 2000)}`,

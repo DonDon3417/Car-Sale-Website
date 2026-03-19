@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import {
     User,
@@ -75,8 +75,8 @@ const UserManager = () => {
     const handleToggleBlock = async (user) => {
         if (user.isAdmin) return;
 
-        const action = user.isBlocked ? 'mở khóa' : 'khóa';
-        if (!window.confirm(`Bạn có chắc chắn muốn ${action} tài khoản ${user.fullName}?`)) return;
+        const action = user.isBlocked ? 'unblock' : 'block';
+        if (!window.confirm(`You have sure you want to ${action} account ${user.fullName}?`)) return;
 
         setIsProcessing(true);
         try {
@@ -84,7 +84,7 @@ const UserManager = () => {
             fetchUsers(pagination.page, searchQuery);
         } catch (error) {
             console.error('Error toggling block:', error);
-            alert(error.response?.data?.message || 'Có lỗi xảy ra');
+            alert(error.response?.data?.message || 'An error occurred');
         } finally {
             setIsProcessing(false);
         }
@@ -96,7 +96,7 @@ const UserManager = () => {
 
         if (
             !window.confirm(
-                `CẢNH BÁO: Bạn có chắc chắn muốn xóa vĩnh viễn tài khoản ${user.fullName}? Hành động này không thể hoàn tác!`,
+                `CẢNH BÁO: You have sure you want to xóa vĩnh viễn account ${user.fullName}? This action cannot be undone!`,
             )
         )
             return;
@@ -105,10 +105,10 @@ const UserManager = () => {
         try {
             await request.delete(`/api/users/admin/users/${user._id}`);
             fetchUsers(pagination.page, searchQuery);
-            alert('Đã xóa tài khoản thành công');
+            alert('Account deleted successfully');
         } catch (error) {
             console.error('Error deleting user:', error);
-            alert(error.response?.data?.message || 'Có lỗi xảy ra');
+            alert(error.response?.data?.message || 'An error occurred');
         } finally {
             setIsProcessing(false);
         }
@@ -117,7 +117,7 @@ const UserManager = () => {
     // Format date
     const formatDate = (date) => {
         if (!date) return '-';
-        return new Date(date).toLocaleDateString('vi-VN');
+        return new Date(date).toLocaleDateString('en-US');
     };
 
     return (
@@ -125,15 +125,15 @@ const UserManager = () => {
             {/* Header */}
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="text-2xl font-bold text-white">Quản lý người dùng</h1>
-                    <p className="text-white/60 mt-1">Quản lý danh sách khách hàng và tài khoản hệ thống</p>
+                    <h1 className="text-2xl font-bold text-white">User Management</h1>
+                    <p className="text-white/60 mt-1">Manage customer and system user accounts</p>
                 </div>
                 <button
                     onClick={() => fetchUsers(pagination.page, searchQuery)}
                     className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-xl transition-colors"
                 >
                     <RefreshCw className="w-4 h-4" />
-                    Làm mới
+                    Refresh
                 </button>
             </div>
 
@@ -148,7 +148,7 @@ const UserManager = () => {
                                 type="text"
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
-                                placeholder="Tìm theo tên, email, số điện thoại..."
+                                placeholder="Search by name, email, phone number..."
                                 className="w-full pl-10 pr-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white text-sm placeholder:text-white/40 focus:outline-none focus:border-[#0066FF]"
                             />
                         </div>
@@ -165,7 +165,7 @@ const UserManager = () => {
                 ) : users.length === 0 ? (
                     <div className="text-center py-20 text-white/50">
                         <User className="w-12 h-12 mx-auto mb-3 opacity-50" />
-                        <p>Không tìm thấy người dùng nào</p>
+                        <p>No users found</p>
                     </div>
                 ) : (
                     <div className="overflow-x-auto">
@@ -173,16 +173,16 @@ const UserManager = () => {
                             <thead>
                                 <tr className="border-b border-white/10">
                                     <th className="text-left py-4 px-4 text-white/60 text-sm font-medium">
-                                        Thông tin người dùng
+                                        User information
                                     </th>
-                                    <th className="text-left py-4 px-4 text-white/60 text-sm font-medium">Liên hệ</th>
+                                    <th className="text-left py-4 px-4 text-white/60 text-sm font-medium">Contact</th>
                                     <th className="text-left py-4 px-4 text-white/60 text-sm font-medium">
-                                        Vai trò & Trạng thái
+                                        Role & status
                                     </th>
                                     <th className="text-left py-4 px-4 text-white/60 text-sm font-medium">
-                                        Ngày tham gia
+                                        Days tham gia
                                     </th>
-                                    <th className="text-right py-4 px-4 text-white/60 text-sm font-medium">Thao tác</th>
+                                    <th className="text-right py-4 px-4 text-white/60 text-sm font-medium">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -240,7 +240,7 @@ const UserManager = () => {
                                                     }`}
                                                 >
                                                     <Shield className="w-3 h-3" />
-                                                    {user.isAdmin ? 'Admin' : 'Khách hàng'}
+                                                    {user.isAdmin ? 'Admin' : 'Customers'}
                                                 </span>
                                                 <span
                                                     className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium ${
@@ -252,12 +252,12 @@ const UserManager = () => {
                                                     {user.isBlocked ? (
                                                         <>
                                                             <Lock className="w-3 h-3" />
-                                                            Đang khóa
+                                                            Blocked
                                                         </>
                                                     ) : (
                                                         <>
                                                             <CheckCircle className="w-3 h-3" />
-                                                            Hoạt động
+                                                            Active
                                                         </>
                                                     )}
                                                 </span>
@@ -280,7 +280,7 @@ const UserManager = () => {
                                                                 ? 'text-green-400 hover:bg-green-500/20'
                                                                 : 'text-yellow-400 hover:bg-yellow-500/20'
                                                         }`}
-                                                        title={user.isBlocked ? 'Mở khóa tài khoản' : 'Khóa tài khoản'}
+                                                        title={user.isBlocked ? 'Unblock account' : 'Khóa account'}
                                                     >
                                                         {user.isBlocked ? (
                                                             <Unlock className="w-4 h-4" />
@@ -292,7 +292,7 @@ const UserManager = () => {
                                                         onClick={() => handleDelete(user)}
                                                         disabled={isProcessing}
                                                         className="p-2 text-red-400 hover:bg-red-500/20 rounded-lg transition-colors"
-                                                        title="Xóa tài khoản"
+                                                        title="Delete account"
                                                     >
                                                         <Trash2 className="w-4 h-4" />
                                                     </button>
@@ -310,7 +310,7 @@ const UserManager = () => {
                 {users.length > 0 && pagination.totalPages > 1 && (
                     <div className="p-4 border-t border-white/10 flex items-center justify-between">
                         <p className="text-white/50 text-sm">
-                            Hiển thị {users.length} trên tổng số {pagination.total} người dùng
+                            Showing {users.length} of {pagination.total} users
                         </p>
                         <div className="flex gap-2">
                             <button
@@ -318,11 +318,11 @@ const UserManager = () => {
                                 disabled={pagination.page === 1}
                                 className="px-3 py-1 bg-white/5 hover:bg-white/10 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg text-white text-sm transition-colors"
                             >
-                                Trước
+                                Previous
                             </button>
                             {[...Array(pagination.totalPages)].map((_, index) => {
                                 const page = index + 1;
-                                // Logic hiển thị page đơn giản (nếu quá nhiều page thì cần logic phức tạp hơn)
+                                // Logic hiển thị page orders giản (nếu quá nhiều page thì cần logic phức tạp hơn)
                                 if (
                                     page === 1 ||
                                     page === pagination.totalPages ||
@@ -367,3 +367,4 @@ const UserManager = () => {
 };
 
 export default UserManager;
+

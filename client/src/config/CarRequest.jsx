@@ -4,17 +4,25 @@ import { request } from './request';
 const apiCar = '/api/car';
 
 export const requestGetAllCars = async (params = {}) => {
-    const res = await request.get(`${apiCar}`, { params });
+    // Add cache-busting timestamp to ensure fresh data
+    const res = await request.get(`${apiCar}`, {
+        params: {
+            ...params,
+            t: Date.now(),
+        },
+    });
     return res.data;
 };
 
 export const requestGetCarById = async (id) => {
-    const res = await request.get(`${apiCar}/${id}`);
+    // Add cache-busting timestamp to ensure fresh data
+    const res = await request.get(`${apiCar}/${id}?t=${Date.now()}`);
     return res.data;
 };
 
 export const requestGetCarBySlug = async (slug) => {
-    const res = await request.get(`${apiCar}/slug/${slug}`);
+    // Add cache-busting timestamp to ensure fresh data
+    const res = await request.get(`${apiCar}/slug/${slug}?t=${Date.now()}`);
     return res.data;
 };
 

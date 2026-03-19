@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+﻿import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageCircle, Send, Plus, Trash2, Bot, User, Loader2, Sparkles, ArrowLeft } from 'lucide-react';
 import {
@@ -95,7 +95,7 @@ const ChatbotPage = () => {
             setSessions((prev) => [
                 {
                     _id: newSession._id,
-                    lastMessage: 'Cuộc hội thoại mới',
+                    lastMessage: 'New conversation',
                     messageCount: 0,
                     interestScore: 0,
                     level: 'Cold',
@@ -128,7 +128,7 @@ const ChatbotPage = () => {
 
     const handleDeleteSession = async (e, sessionId) => {
         e.stopPropagation();
-        if (!confirm('Xoá cuộc hội thoại này?')) return;
+        if (!confirm('Delete this conversation?')) return;
         try {
             await deleteChatbotSession(sessionId);
             setSessions((prev) => prev.filter((s) => s._id !== sessionId));
@@ -144,7 +144,7 @@ const ChatbotPage = () => {
     const handleSend = async () => {
         if (!input.trim() || typing) return;
 
-        // Tạo session mới nếu chưa có
+        // Create a new session if missing
         let sessionId = activeSession;
         if (!sessionId) {
             try {
@@ -181,7 +181,7 @@ const ChatbotPage = () => {
             setInterestScore(data.interestScore);
             setLevel(data.level);
 
-            // Cập nhật session trong list
+            // Update session trong list
             setSessions((prev) =>
                 prev.map((s) =>
                     s._id === sessionId
@@ -201,7 +201,7 @@ const ChatbotPage = () => {
                 ...prev,
                 {
                     role: 'assistant',
-                    content: 'Xin lỗi, có lỗi xảy ra. Vui lòng thử lại! 🙏',
+                    content: 'Sorry, an error occurred. Please try again!',
                     timestamp: new Date(),
                 },
             ]);
@@ -218,14 +218,14 @@ const ChatbotPage = () => {
     };
 
     const formatTime = (date) => {
-        return new Date(date).toLocaleTimeString('vi-VN', {
+        return new Date(date).toLocaleTimeString('en-US', {
             hour: '2-digit',
             minute: '2-digit',
         });
     };
 
     const formatDate = (date) => {
-        return new Date(date).toLocaleDateString('vi-VN', {
+        return new Date(date).toLocaleDateString('en-US', {
             day: '2-digit',
             month: '2-digit',
             year: 'numeric',
@@ -243,10 +243,8 @@ const ChatbotPage = () => {
                     animate={{ opacity: 1, y: 0 }}
                     className="text-center mb-8"
                 >
-                    <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">Trợ Lý AI Tư Vấn Mua Xe</h1>
-                    <p className="text-white/50 text-base">
-                        Hãy chia sẻ nhu cầu, chúng tôi sẽ tìm chiếc xe hoàn hảo cho bạn
-                    </p>
+                    <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">AI Car Buying Assistant</h1>
+                    <p className="text-white/50 text-base">Share your needs and we will find the perfect car for you</p>
                 </motion.div>
 
                 {/* Chat Container */}
@@ -271,7 +269,7 @@ const ChatbotPage = () => {
                                     className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-[#0066FF] to-[#0052CC] text-white rounded-xl font-medium hover:shadow-lg hover:shadow-[#0066FF]/25 transition-all duration-300 active:scale-[0.98]"
                                 >
                                     <Plus className="w-5 h-5" />
-                                    Cuộc hội thoại mới
+                                    New conversation
                                 </button>
                             </div>
 
@@ -281,7 +279,7 @@ const ChatbotPage = () => {
                                     {sessions.length === 0 ? (
                                         <div className="flex flex-col items-center justify-center h-full text-white/30 px-4">
                                             <MessageCircle className="w-10 h-10 mb-3" />
-                                            <p className="text-sm text-center">Chưa có cuộc hội thoại nào</p>
+                                            <p className="text-sm text-center">No conversations yet</p>
                                         </div>
                                     ) : (
                                         sessions.map((session) => (
@@ -343,7 +341,7 @@ const ChatbotPage = () => {
                                         <h3 className="text-white font-semibold text-sm">AutoBot AI</h3>
                                         <p className="text-green-400 text-xs flex items-center gap-1">
                                             <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span>
-                                            Đang hoạt động
+                                            Active
                                         </p>
                                     </div>
                                 </div>
@@ -357,18 +355,18 @@ const ChatbotPage = () => {
                                         <div className="w-20 h-20 rounded-full bg-[#0066FF]/10 flex items-center justify-center mb-4">
                                             <Bot className="w-10 h-10 text-[#0066FF]/60" />
                                         </div>
-                                        <h3 className="text-white/60 text-lg font-medium mb-2">Xin chào! 👋</h3>
+                                        <h3 className="text-white/60 text-lg font-medium mb-2">Hello! 👋</h3>
                                         <p className="text-sm text-center max-w-sm leading-relaxed">
-                                            Tôi là trợ lý AI tư vấn xe. Hãy cho tôi biết bạn đang tìm kiếm chiếc xe như
-                                            thế nào nhé!
+                                            I am your AI car assistant. Tell me what kind of car you are looking for and
+                                            I will help you find the right one.
                                         </p>
                                         {/* Quick suggestions */}
                                         <div className="flex flex-wrap gap-2 mt-6 justify-center max-w-md">
                                             {[
-                                                'Tôi muốn tìm xe gia đình',
-                                                'Xe dưới 800 triệu',
-                                                'Xe SUV 7 chỗ',
-                                                'So sánh xe cho tôi',
+                                                'I want a family car',
+                                                'Cars under 800 million VND',
+                                                '7-seat SUV',
+                                                'Compare cars for me',
                                             ].map((suggestion) => (
                                                 <button
                                                     key={suggestion}
@@ -446,7 +444,7 @@ const ChatbotPage = () => {
                                             value={input}
                                             onChange={(e) => setInput(e.target.value)}
                                             onKeyDown={handleKeyDown}
-                                            placeholder="Nhập tin nhắn..."
+                                            placeholder="Enter a message..."
                                             disabled={typing}
                                             className="w-full px-5 py-3.5 bg-white/5 border border-white/10 rounded-[999px] text-white text-sm placeholder-white/30 focus:outline-none focus:border-[#0066FF]/50 focus:bg-white/[0.08] transition-all duration-200 pr-14 disabled:opacity-50"
                                         />

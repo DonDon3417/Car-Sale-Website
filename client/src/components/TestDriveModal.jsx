@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     X,
@@ -19,7 +19,7 @@ import { request } from '../config/request';
 import CryptoJS from 'crypto-js';
 
 const TestDriveModal = ({ isOpen, onClose, car }) => {
-    const [step, setStep] = useState(1); // 1: Chọn ngày giờ, 2: Điền thông tin, 3: Xác nhận
+    const [step, setStep] = useState(1); // 1: Choose date/time, 2: Fill in details, 3: Confirm
     const [selectedDate, setSelectedDate] = useState(null);
     const [selectedSlot, setSelectedSlot] = useState(null);
     const [availableSlots, setAvailableSlots] = useState([]);
@@ -77,7 +77,7 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
             const res = await request.get(`/api/test-drive/available-slots?date=${formattedDate}`);
             setAvailableSlots(res.data?.metadata || []);
         } catch (error) {
-            setError(error.response?.data?.message || 'Không thể tải khung giờ');
+            setError(error.response?.data?.message || 'Unable to load time slots');
             setAvailableSlots([]);
         } finally {
             setIsLoading(false);
@@ -129,7 +129,7 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
     // Handle form submit
     const handleSubmit = async () => {
         if (!selectedDate || !selectedSlot || !formData.fullName || !formData.phone) {
-            setError('Vui lòng điền đầy đủ thông tin');
+            setError('Please fill in all information');
             return;
         }
 
@@ -150,7 +150,7 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
             setSuccess(true);
             setStep(3);
         } catch (error) {
-            setError(error.response?.data?.message || 'Có lỗi xảy ra, vui lòng thử lại');
+            setError(error.response?.data?.message || 'An error occurred, please try again');
         } finally {
             setIsSubmitting(false);
         }
@@ -159,7 +159,7 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
     // Format date display
     const formatDate = (date) => {
         if (!date) return '';
-        return date.toLocaleDateString('vi-VN', {
+        return date.toLocaleDateString('en-US', {
             weekday: 'long',
             day: 'numeric',
             month: 'numeric',
@@ -170,9 +170,9 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
     // Format price
     const formatPrice = (price) => {
         if (price >= 1000000000) {
-            return (price / 1000000000).toFixed(2) + ' tỷ';
+            return (price / 1000000000).toFixed(2) + ' billion';
         }
-        return (price / 1000000).toFixed(0) + ' triệu';
+        return (price / 1000000).toFixed(0) + ' million';
     };
 
     // Month navigation
@@ -217,7 +217,7 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
                                 <Car className="w-6 h-6 text-white" />
                             </div>
                             <div>
-                                <h2 className="text-xl font-bold text-white">Đặt lịch lái thử</h2>
+                                <h2 className="text-xl font-bold text-white">Book a Test Drive</h2>
                                 <p className="text-white/80 text-sm">{car?.name}</p>
                             </div>
                         </div>
@@ -247,7 +247,7 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
                                             {s}
                                         </div>
                                         <span className={`text-sm ${step >= s ? 'text-white' : 'text-white/50'}`}>
-                                            {s === 1 ? 'Chọn thời gian' : 'Thông tin'}
+                                            {s === 1 ? 'Choose time' : 'Thông tin'}
                                         </span>
                                         {s < 2 && (
                                             <div className={`w-8 h-0.5 ${step > s ? 'bg-[#0066FF]' : 'bg-white/20'}`} />
@@ -278,7 +278,7 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
                                             <ChevronLeft className="w-5 h-5" />
                                         </button>
                                         <h3 className="text-white font-semibold">
-                                            Tháng {currentMonth.getMonth() + 1}/{currentMonth.getFullYear()}
+                                            Month {currentMonth.getMonth() + 1}/{currentMonth.getFullYear()}
                                         </h3>
                                         <button
                                             onClick={nextMonth}
@@ -331,7 +331,7 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
                                     </div>
 
                                     <p className="text-white/50 text-xs mt-3 text-center">
-                                        * Không thể đặt lịch vào thứ 7 và Chủ nhật
+                                        * Weekend bookings are not available
                                     </p>
                                 </div>
 
@@ -340,7 +340,7 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
                                     <div>
                                         <h4 className="text-white font-medium mb-3 flex items-center gap-2">
                                             <Clock className="w-4 h-4 text-[#0066FF]" />
-                                            Chọn khung giờ - {formatDate(selectedDate)}
+                                            Choose time slot - {formatDate(selectedDate)}
                                         </h4>
 
                                         {isLoading ? (
@@ -376,7 +376,7 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
                                     disabled={!selectedDate || !selectedSlot}
                                     className="w-full py-3 bg-[#0066FF] hover:bg-[#0052cc] disabled:bg-white/10 disabled:text-white/30 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-colors"
                                 >
-                                    Tiếp tục
+                                    Continue
                                 </button>
                             </div>
                         )}
@@ -400,13 +400,13 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
                                     <div>
                                         <label className="block text-white/70 text-sm mb-2">
                                             <User className="w-4 h-4 inline mr-2" />
-                                            Họ tên *
+                                            Full name *
                                         </label>
                                         <input
                                             type="text"
                                             value={formData.fullName}
                                             onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                                            placeholder="Nhập họ tên"
+                                            placeholder="Enter full name"
                                             className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-white/40 focus:outline-none focus:border-[#0066FF]"
                                         />
                                     </div>
@@ -414,13 +414,13 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
                                     <div>
                                         <label className="block text-white/70 text-sm mb-2">
                                             <Phone className="w-4 h-4 inline mr-2" />
-                                            Số điện thoại *
+                                            Phone number *
                                         </label>
                                         <input
                                             type="tel"
                                             value={formData.phone}
                                             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                                            placeholder="Nhập số điện thoại"
+                                            placeholder="Enter phone number"
                                             className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-white/40 focus:outline-none focus:border-[#0066FF]"
                                         />
                                     </div>
@@ -434,7 +434,7 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
                                             type="email"
                                             value={formData.email}
                                             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                            placeholder="Nhập email"
+                                            placeholder="Enter email"
                                             className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-white/40 focus:outline-none focus:border-[#0066FF]"
                                         />
                                     </div>
@@ -442,12 +442,12 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
                                     <div>
                                         <label className="block text-white/70 text-sm mb-2">
                                             <FileText className="w-4 h-4 inline mr-2" />
-                                            Ghi chú
+                                            Note
                                         </label>
                                         <textarea
                                             value={formData.note}
                                             onChange={(e) => setFormData({ ...formData, note: e.target.value })}
-                                            placeholder="Nhập ghi chú (tùy chọn)"
+                                            placeholder="Enter note (optional)"
                                             rows={3}
                                             className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-white/40 focus:outline-none focus:border-[#0066FF] resize-none"
                                         />
@@ -460,7 +460,7 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
                                         onClick={() => setStep(1)}
                                         className="flex-1 py-3 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-xl transition-colors"
                                     >
-                                        Quay lại
+                                        Back
                                     </button>
                                     <button
                                         onClick={handleSubmit}
@@ -470,10 +470,10 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
                                         {isSubmitting ? (
                                             <>
                                                 <Loader2 className="w-5 h-5 animate-spin" />
-                                                Đang xử lý...
+                                                Processing...
                                             </>
                                         ) : (
-                                            'Xác nhận đặt lịch'
+                                            'Confirm booking'
                                         )}
                                     </button>
                                 </div>
@@ -482,9 +482,9 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
                                     <p className="text-center text-white/50 text-sm">
                                         Bạn cần{' '}
                                         <a href="/account/login" className="text-[#0066FF] underline">
-                                            đăng nhập
+                                            log in
                                         </a>{' '}
-                                        để đặt lịch lái thử
+                                        to book a test drive
                                     </p>
                                 )}
                             </div>
@@ -496,25 +496,25 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
                                 <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
                                     <CheckCircle className="w-10 h-10 text-green-400" />
                                 </div>
-                                <h3 className="text-2xl font-bold text-white mb-2">Đặt lịch thành công!</h3>
-                                <p className="text-white/70 mb-6">Chúng tôi sẽ liên hệ với bạn để xác nhận lịch hẹn.</p>
+                                <h3 className="text-2xl font-bold text-white mb-2">Booking successful!</h3>
+                                <p className="text-white/70 mb-6">We will contact you to confirm your appointment.</p>
 
                                 <div className="bg-white/5 rounded-xl p-4 text-left mb-6">
                                     <div className="grid grid-cols-2 gap-4 text-sm">
                                         <div>
-                                            <p className="text-white/50">Xe</p>
+                                            <p className="text-white/50">Car</p>
                                             <p className="text-white font-medium">{car?.name}</p>
                                         </div>
                                         <div>
-                                            <p className="text-white/50">Ngày</p>
+                                            <p className="text-white/50">Days</p>
                                             <p className="text-white font-medium">{formatDate(selectedDate)}</p>
                                         </div>
                                         <div>
-                                            <p className="text-white/50">Giờ</p>
+                                            <p className="text-white/50">Hours</p>
                                             <p className="text-white font-medium">{selectedSlot}</p>
                                         </div>
                                         <div>
-                                            <p className="text-white/50">Liên hệ</p>
+                                            <p className="text-white/50">Contact</p>
                                             <p className="text-white font-medium">{formData.phone}</p>
                                         </div>
                                     </div>
@@ -527,7 +527,7 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
                                     }}
                                     className="px-8 py-3 bg-[#0066FF] hover:bg-[#0052cc] text-white font-semibold rounded-xl transition-colors"
                                 >
-                                    Đóng
+                                    Close
                                 </button>
                             </div>
                         )}
@@ -539,3 +539,4 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
 };
 
 export default TestDriveModal;
+

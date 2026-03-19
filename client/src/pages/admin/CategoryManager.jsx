@@ -29,7 +29,7 @@ const CategoryManager = () => {
             const res = await requestGetAllCategories();
             setCategories(res.metadata || []);
         } catch (error) {
-            message.error('Không thể tải danh sách danh mục');
+            message.error('Unable to load categories');
         } finally {
             setLoading(false);
         }
@@ -59,7 +59,7 @@ const CategoryManager = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!formData.name.trim()) {
-            message.warning('Vui lòng nhập tên danh mục');
+            message.warning('Please enter category name');
             return;
         }
 
@@ -67,15 +67,15 @@ const CategoryManager = () => {
             setSubmitting(true);
             if (selectedCategory) {
                 await requestUpdateCategory(selectedCategory._id, formData);
-                message.success('Cập nhật danh mục thành công');
+                message.success('Category updated successfully');
             } else {
                 await requestCreateCategory(formData);
-                message.success('Thêm danh mục thành công');
+                message.success('Category created successfully');
             }
             handleCloseModal();
             fetchCategories();
         } catch (error) {
-            message.error(error.response?.data?.message || 'Có lỗi xảy ra');
+            message.error(error.response?.data?.message || 'An error occurred');
         } finally {
             setSubmitting(false);
         }
@@ -85,12 +85,12 @@ const CategoryManager = () => {
         try {
             setSubmitting(true);
             await requestDeleteCategory(selectedCategory._id);
-            message.success('Xóa danh mục thành công');
+            message.success('Category deleted successfully');
             setIsDeleteModalOpen(false);
             setSelectedCategory(null);
             fetchCategories();
         } catch (error) {
-            message.error(error.response?.data?.message || 'Có lỗi xảy ra');
+            message.error(error.response?.data?.message || 'An error occurred');
         } finally {
             setSubmitting(false);
         }
@@ -106,8 +106,8 @@ const CategoryManager = () => {
             {/* Header */}
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
-                    <h1 className="text-2xl font-bold text-white">Quản lý danh mục</h1>
-                    <p className="text-white/50 text-sm mt-1">Quản lý danh mục xe (Sedan, SUV, Sport...)</p>
+                    <h1 className="text-2xl font-bold text-white">Category Management</h1>
+                    <p className="text-white/50 text-sm mt-1">Category Management cars (Sedan, SUV, Sport...)</p>
                 </div>
                 <motion.button
                     whileHover={{ scale: 1.02 }}
@@ -116,7 +116,7 @@ const CategoryManager = () => {
                     className="flex items-center gap-2 px-4 py-2.5 bg-[#0066FF] hover:bg-[#0052cc] rounded-xl text-white text-sm font-semibold transition-colors"
                 >
                     <Plus className="w-4 h-4" />
-                    <span>Thêm danh mục</span>
+                    <span>Add Category</span>
                 </motion.button>
             </div>
 
@@ -127,7 +127,7 @@ const CategoryManager = () => {
                     type="text"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    placeholder="Tìm kiếm danh mục..."
+                    placeholder="Search categories..."
                     className="w-full h-10 pl-10 pr-4 bg-[#1E293B] border border-white/10 rounded-xl text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-[#0066FF]/50 transition-all"
                 />
             </div>
@@ -140,16 +140,16 @@ const CategoryManager = () => {
                     </div>
                 ) : filteredCategories.length === 0 ? (
                     <div className="text-center py-20">
-                        <p className="text-white/50">Chưa có danh mục nào</p>
+                        <p className="text-white/50">No categories found</p>
                     </div>
                 ) : (
                     <table className="w-full">
                         <thead>
                             <tr className="border-b border-white/5">
                                 <th className="text-left text-white/40 text-xs font-medium px-5 py-4">STT</th>
-                                <th className="text-left text-white/40 text-xs font-medium px-5 py-4">Tên danh mục</th>
-                                <th className="text-left text-white/40 text-xs font-medium px-5 py-4">Ngày tạo</th>
-                                <th className="text-right text-white/40 text-xs font-medium px-5 py-4">Thao tác</th>
+                                <th className="text-left text-white/40 text-xs font-medium px-5 py-4">Category name</th>
+                                <th className="text-left text-white/40 text-xs font-medium px-5 py-4">Created date</th>
+                                <th className="text-right text-white/40 text-xs font-medium px-5 py-4">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -166,7 +166,7 @@ const CategoryManager = () => {
                                         <span className="text-white text-sm font-medium">{category.name}</span>
                                     </td>
                                     <td className="px-5 py-4 text-white/50 text-sm">
-                                        {new Date(category.createdAt).toLocaleDateString('vi-VN')}
+                                        {new Date(category.createdAt).toLocaleDateString('en-US')}
                                     </td>
                                     <td className="px-5 py-4">
                                         <div className="flex items-center justify-end gap-2">
@@ -211,7 +211,7 @@ const CategoryManager = () => {
                             {/* Modal Header */}
                             <div className="flex items-center justify-between px-5 py-4 border-b border-white/5">
                                 <h2 className="text-white font-semibold">
-                                    {selectedCategory ? 'Chỉnh sửa danh mục' : 'Thêm danh mục mới'}
+                                    {selectedCategory ? 'Edit Category' : 'Add new category'}
                                 </h2>
                                 <button
                                     onClick={handleCloseModal}
@@ -225,7 +225,7 @@ const CategoryManager = () => {
                             <form onSubmit={handleSubmit} className="p-5 space-y-4">
                                 <div>
                                     <label className="block text-white/70 text-xs font-medium mb-1.5">
-                                        Tên danh mục *
+                                        Category name *
                                     </label>
                                     <input
                                         type="text"
@@ -244,7 +244,7 @@ const CategoryManager = () => {
                                         onClick={handleCloseModal}
                                         className="flex-1 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-white text-sm font-medium transition-all"
                                     >
-                                        Hủy
+                                        Cancel
                                     </button>
                                     <button
                                         type="submit"
@@ -252,7 +252,7 @@ const CategoryManager = () => {
                                         className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-[#0066FF] hover:bg-[#0052cc] disabled:opacity-50 rounded-xl text-white text-sm font-semibold transition-all"
                                     >
                                         {submitting && <Loader2 className="w-4 h-4 animate-spin" />}
-                                        <span>{selectedCategory ? 'Cập nhật' : 'Thêm mới'}</span>
+                                        <span>{selectedCategory ? 'Update' : 'Create'}</span>
                                     </button>
                                 </div>
                             </form>
@@ -281,9 +281,9 @@ const CategoryManager = () => {
                             <div className="w-14 h-14 bg-red-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <Trash2 className="w-6 h-6 text-red-400" />
                             </div>
-                            <h3 className="text-white font-semibold text-lg mb-2">Xóa danh mục?</h3>
+                            <h3 className="text-white font-semibold text-lg mb-2">Delete category?</h3>
                             <p className="text-white/50 text-sm mb-6">
-                                Bạn có chắc muốn xóa{' '}
+                                Are you sure you want to delete{' '}
                                 <span className="text-white font-medium">{selectedCategory?.name}</span>?
                             </p>
                             <div className="flex gap-3">
@@ -291,7 +291,7 @@ const CategoryManager = () => {
                                     onClick={() => setIsDeleteModalOpen(false)}
                                     className="flex-1 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-white text-sm font-medium transition-all"
                                 >
-                                    Hủy
+                                    Cancel
                                 </button>
                                 <button
                                     onClick={handleDelete}
@@ -299,7 +299,7 @@ const CategoryManager = () => {
                                     className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-red-500 hover:bg-red-600 disabled:opacity-50 rounded-xl text-white text-sm font-semibold transition-all"
                                 >
                                     {submitting && <Loader2 className="w-4 h-4 animate-spin" />}
-                                    <span>Xóa</span>
+                                    <span>Delete</span>
                                 </button>
                             </div>
                         </motion.div>

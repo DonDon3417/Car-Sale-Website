@@ -5,12 +5,12 @@ import { Mail, Phone, MapPin, Facebook, Youtube, Instagram, MessageCircle, Arrow
 const Footer = () => {
     const [email, setEmail] = useState('');
     const quickLinks = [
-        { name: 'Trang chủ', href: '/' },
-        { name: 'Dòng xe', href: '/dong-xe' },
-        { name: 'Giá & Khuyến mãi', href: '/gia-khuyen-mai' },
-        { name: 'Trả góp', href: '/tra-gop' },
-        { name: 'Tin tức', href: '/tin-tuc' },
-        { name: 'Liên hệ', href: '/lien-he' },
+        { name: 'Home', href: '/' },
+        { name: 'Cars', href: '/dong-xe' },
+        { name: 'Pricing & Offers', href: '/gia-khuyen-mai' },
+        { name: 'Installment', href: '/tra-gop' },
+        { name: 'News', href: '/tin-tuc' },
+        { name: 'Contact', href: '/lien-he' },
     ];
     const contactInfo = [
         { icon: Phone, text: '1900 1234', href: 'tel:19001234' },
@@ -35,7 +35,7 @@ const Footer = () => {
                             </span>
                         </a>
                         <p className="text-white/50 text-[11px] leading-relaxed mb-4">
-                            Showroom ô tô cao cấp với bộ sưu tập xe đẳng cấp từ các thương hiệu hàng đầu.
+                            Premium car showroom with a curated collection from top brands.
                         </p>
                         <div className="flex items-center gap-1.5">
                             {socials.map((social) => (
@@ -54,7 +54,7 @@ const Footer = () => {
 
                     <div>
                         <h4 className="text-white font-semibold text-xs mb-3 uppercase tracking-wider">
-                            Liên kết nhanh
+                            Quick links
                         </h4>
                         <ul className="space-y-2">
                             {quickLinks.map((link) => (
@@ -71,7 +71,7 @@ const Footer = () => {
                     </div>
 
                     <div>
-                        <h4 className="text-white font-semibold text-xs mb-3 uppercase tracking-wider">Liên hệ</h4>
+                        <h4 className="text-white font-semibold text-xs mb-3 uppercase tracking-wider">Contact</h4>
                         <ul className="space-y-2">
                             {contactInfo.map((item, idx) => (
                                 <li key={idx}>
@@ -86,16 +86,16 @@ const Footer = () => {
                             ))}
                         </ul>
                         <div className="mt-3 pt-3 border-t border-white/5">
-                            <p className="text-white/40 text-[10px] mb-0.5">Giờ làm việc</p>
+                            <p className="text-white/40 text-[10px] mb-0.5">Hours làm việc</p>
                             <p className="text-white/70 text-[11px]">08:00 - 20:00 (T2 - CN)</p>
                         </div>
                     </div>
 
                     <div>
                         <h4 className="text-white font-semibold text-xs mb-3 uppercase tracking-wider">
-                            Đăng ký tư vấn
+                            Request Consultation
                         </h4>
-                        <p className="text-white/50 text-[11px] mb-3">Nhận thông tin xe mới và ưu đãi đặc biệt</p>
+                        <p className="text-white/50 text-[11px] mb-3">Get updates on new cars and special offers</p>
                         <form
                             onSubmit={(e) => {
                                 e.preventDefault();
@@ -107,7 +107,7 @@ const Footer = () => {
                                 type="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                placeholder="Nhập email của bạn"
+                                placeholder="Enter your email"
                                 className="w-full h-8 px-3 bg-white/5 border border-white/10 rounded-lg text-white text-xs placeholder:text-white/30 focus:outline-none focus:border-[#0066FF] transition-colors"
                                 required
                             />
@@ -116,7 +116,7 @@ const Footer = () => {
                                 type="submit"
                                 className="w-full flex items-center justify-center gap-1.5 h-8 bg-[#0066FF] hover:bg-[#0052cc] rounded-lg text-white text-xs font-medium transition-colors"
                             >
-                                <span>Đăng ký</span>
+                                <span>Subscribe</span>
                                 <ArrowRight className="w-3 h-3" />
                             </motion.button>
                         </form>
@@ -128,15 +128,15 @@ const Footer = () => {
                 <div className="max-w-[1000px] mx-auto px-4 py-4">
                     <div className="flex flex-col sm:flex-row items-center justify-between gap-2">
                         <p className="text-white/40 text-[10px]">
-                            © 2026 AutoShow. Thiết kế bởi <span className="text-white/60">Premium Studio</span>
+                            © 2026 AutoShow. Designed by <span className="text-white/60">Premium Studio</span>
                         </p>
                         <div className="flex items-center gap-3">
                             <a href="#" className="text-white/40 hover:text-white/70 text-[10px] transition-colors">
-                                Chính sách bảo mật
+                                Privacy Policy
                             </a>
                             <span className="text-white/20">|</span>
                             <a href="#" className="text-white/40 hover:text-white/70 text-[10px] transition-colors">
-                                Điều khoản sử dụng
+                                Terms of Use
                             </a>
                         </div>
                     </div>

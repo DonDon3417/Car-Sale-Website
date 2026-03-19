@@ -29,7 +29,7 @@ const BrandManager = () => {
             const res = await requestGetAllBrands();
             setBrands(res.metadata || []);
         } catch (error) {
-            message.error('Không thể tải danh sách hãng xe');
+            message.error('Cannot load brand list');
         } finally {
             setLoading(false);
         }
@@ -57,7 +57,7 @@ const BrandManager = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!formData.name.trim()) {
-            message.warning('Vui lòng nhập tên hãng xe');
+            message.warning('Please enter brand name');
             return;
         }
 
@@ -65,15 +65,15 @@ const BrandManager = () => {
             setSubmitting(true);
             if (selectedBrand) {
                 await requestUpdateBrand(selectedBrand._id, formData);
-                message.success('Cập nhật hãng xe thành công');
+                message.success('Update brands successfully');
             } else {
                 await requestCreateBrand(formData);
-                message.success('Thêm hãng xe thành công');
+                message.success('Add brands successfully');
             }
             handleCloseModal();
             fetchBrands();
         } catch (error) {
-            message.error(error.response?.data?.message || 'Có lỗi xảy ra');
+            message.error(error.response?.data?.message || 'An error occurred');
         } finally {
             setSubmitting(false);
         }
@@ -83,12 +83,12 @@ const BrandManager = () => {
         try {
             setSubmitting(true);
             await requestDeleteBrand(selectedBrand._id);
-            message.success('Xóa hãng xe thành công');
+            message.success('Delete brands successfully');
             setIsDeleteModalOpen(false);
             setSelectedBrand(null);
             fetchBrands();
         } catch (error) {
-            message.error(error.response?.data?.message || 'Có lỗi xảy ra');
+            message.error(error.response?.data?.message || 'An error occurred');
         } finally {
             setSubmitting(false);
         }
@@ -104,8 +104,8 @@ const BrandManager = () => {
             {/* Header */}
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 <div>
-                    <h1 className="text-2xl font-bold text-white">Quản lý hãng xe</h1>
-                    <p className="text-white/50 text-sm mt-1">Quản lý danh sách các hãng xe trong hệ thống</p>
+                    <h1 className="text-2xl font-bold text-white">Brand Management</h1>
+                    <p className="text-white/50 text-sm mt-1">Manage the list of brands in the system</p>
                 </div>
                 <motion.button
                     whileHover={{ scale: 1.02 }}
@@ -114,7 +114,7 @@ const BrandManager = () => {
                     className="flex items-center gap-2 px-4 py-2.5 bg-[#0066FF] hover:bg-[#0052cc] rounded-xl text-white text-sm font-semibold transition-colors"
                 >
                     <Plus className="w-4 h-4" />
-                    <span>Thêm hãng xe</span>
+                    <span>Add brands</span>
                 </motion.button>
             </div>
 
@@ -125,7 +125,7 @@ const BrandManager = () => {
                     type="text"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    placeholder="Tìm kiếm hãng xe..."
+                    placeholder="Search brands..."
                     className="w-full h-10 pl-10 pr-4 bg-[#1E293B] border border-white/10 rounded-xl text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-[#0066FF]/50 transition-all"
                 />
             </div>
@@ -138,16 +138,16 @@ const BrandManager = () => {
                     </div>
                 ) : filteredBrands.length === 0 ? (
                     <div className="text-center py-20">
-                        <p className="text-white/50">Chưa có hãng xe nào</p>
+                        <p className="text-white/50">No brands found</p>
                     </div>
                 ) : (
                     <table className="w-full">
                         <thead>
                             <tr className="border-b border-white/5">
                                 <th className="text-left text-white/40 text-xs font-medium px-5 py-4">STT</th>
-                                <th className="text-left text-white/40 text-xs font-medium px-5 py-4">Tên hãng xe</th>
-                                <th className="text-left text-white/40 text-xs font-medium px-5 py-4">Ngày tạo</th>
-                                <th className="text-right text-white/40 text-xs font-medium px-5 py-4">Thao tác</th>
+                                <th className="text-left text-white/40 text-xs font-medium px-5 py-4">Brand name</th>
+                                <th className="text-left text-white/40 text-xs font-medium px-5 py-4">Created date</th>
+                                <th className="text-right text-white/40 text-xs font-medium px-5 py-4">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -164,7 +164,7 @@ const BrandManager = () => {
                                         <span className="text-white text-sm font-medium">{brand.name}</span>
                                     </td>
                                     <td className="px-5 py-4 text-white/50 text-sm">
-                                        {new Date(brand.createdAt).toLocaleDateString('vi-VN')}
+                                        {new Date(brand.createdAt).toLocaleDateString('en-US')}
                                     </td>
                                     <td className="px-5 py-4">
                                         <div className="flex items-center justify-end gap-2">
@@ -209,7 +209,7 @@ const BrandManager = () => {
                             {/* Modal Header */}
                             <div className="flex items-center justify-between px-5 py-4 border-b border-white/5">
                                 <h2 className="text-white font-semibold">
-                                    {selectedBrand ? 'Chỉnh sửa hãng xe' : 'Thêm hãng xe mới'}
+                                    {selectedBrand ? 'Edit brand' : 'Add new brand'}
                                 </h2>
                                 <button
                                     onClick={handleCloseModal}
@@ -223,7 +223,7 @@ const BrandManager = () => {
                             <form onSubmit={handleSubmit} className="p-5 space-y-4">
                                 <div>
                                     <label className="block text-white/70 text-xs font-medium mb-1.5">
-                                        Tên hãng xe *
+                                        Brand name *
                                     </label>
                                     <input
                                         type="text"
@@ -242,7 +242,7 @@ const BrandManager = () => {
                                         onClick={handleCloseModal}
                                         className="flex-1 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-white text-sm font-medium transition-all"
                                     >
-                                        Hủy
+                                        Cancel
                                     </button>
                                     <button
                                         type="submit"
@@ -250,7 +250,7 @@ const BrandManager = () => {
                                         className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-[#0066FF] hover:bg-[#0052cc] disabled:opacity-50 rounded-xl text-white text-sm font-semibold transition-all"
                                     >
                                         {submitting && <Loader2 className="w-4 h-4 animate-spin" />}
-                                        <span>{selectedBrand ? 'Cập nhật' : 'Thêm mới'}</span>
+                                        <span>{selectedBrand ? 'Update' : 'Create'}</span>
                                     </button>
                                 </div>
                             </form>
@@ -279,9 +279,9 @@ const BrandManager = () => {
                             <div className="w-14 h-14 bg-red-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <Trash2 className="w-6 h-6 text-red-400" />
                             </div>
-                            <h3 className="text-white font-semibold text-lg mb-2">Xóa hãng xe?</h3>
+                            <h3 className="text-white font-semibold text-lg mb-2">Delete brands?</h3>
                             <p className="text-white/50 text-sm mb-6">
-                                Bạn có chắc muốn xóa{' '}
+                                Are you sure you want to delete{' '}
                                 <span className="text-white font-medium">{selectedBrand?.name}</span>?
                             </p>
                             <div className="flex gap-3">
@@ -289,7 +289,7 @@ const BrandManager = () => {
                                     onClick={() => setIsDeleteModalOpen(false)}
                                     className="flex-1 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-white text-sm font-medium transition-all"
                                 >
-                                    Hủy
+                                    Cancel
                                 </button>
                                 <button
                                     onClick={handleDelete}
@@ -297,7 +297,7 @@ const BrandManager = () => {
                                     className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-red-500 hover:bg-red-600 disabled:opacity-50 rounded-xl text-white text-sm font-semibold transition-all"
                                 >
                                     {submitting && <Loader2 className="w-4 h-4 animate-spin" />}
-                                    <span>Xóa</span>
+                                    <span>Delete</span>
                                 </button>
                             </div>
                         </motion.div>

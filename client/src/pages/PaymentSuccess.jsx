@@ -32,7 +32,7 @@ const PaymentSuccess = () => {
                 const res = await requestGetDepositById(id);
                 setDeposit(res.metadata);
             } catch (err) {
-                setError(err.response?.data?.message || 'Không thể tải thông tin đơn đặt cọc');
+                setError(err.response?.data?.message || 'Cannot load deposit information');
             } finally {
                 setLoading(false);
             }
@@ -44,11 +44,11 @@ const PaymentSuccess = () => {
     }, [id]);
 
     const formatPrice = (price) => {
-        return new Intl.NumberFormat('vi-VN').format(price) + ' VNĐ';
+        return new Intl.NumberFormat('en-US').format(price) + ' VND';
     };
 
     const formatDate = (dateString) => {
-        return new Date(dateString).toLocaleDateString('vi-VN', {
+        return new Date(dateString).toLocaleDateString('en-US', {
             year: 'numeric',
             month: 'long',
             day: 'numeric',
@@ -69,10 +69,10 @@ const PaymentSuccess = () => {
 
     const getStatusText = (status) => {
         const texts = {
-            pending: 'Chờ xác nhận',
-            confirmed: 'Đã xác nhận',
-            completed: 'Hoàn thành',
-            cancelled: 'Đã hủy',
+            pending: 'Pending confirmation',
+            confirmed: 'Confirmed',
+            completed: 'Completed',
+            cancelled: 'Cancelled',
         };
         return texts[status] || status;
     };
@@ -89,10 +89,10 @@ const PaymentSuccess = () => {
 
     const getPaymentStatusText = (status) => {
         const texts = {
-            pending: 'Chờ thanh toán',
-            completed: 'Đã thanh toán',
-            failed: 'Thanh toán thất bại',
-            refunded: 'Đã hoàn tiền',
+            pending: 'Awaiting payment',
+            completed: 'Paid',
+            failed: 'Payment failed',
+            refunded: 'Refunded',
         };
         return texts[status] || status;
     };
@@ -104,7 +104,7 @@ const PaymentSuccess = () => {
                 <div className="flex items-center justify-center min-h-[60vh]">
                     <div className="text-center">
                         <Loader2 className="w-12 h-12 text-[#0066FF] animate-spin mx-auto mb-4" />
-                        <p className="text-white/60">Đang tải thông tin...</p>
+                        <p className="text-white/60">Loading information...</p>
                     </div>
                 </div>
                 <Footer />
@@ -119,14 +119,14 @@ const PaymentSuccess = () => {
                 <div className="flex items-center justify-center min-h-[60vh]">
                     <div className="text-center">
                         <AlertCircle className="w-16 h-16 text-red-400 mx-auto mb-4" />
-                        <h2 className="text-2xl font-bold text-white mb-2">Có lỗi xảy ra</h2>
+                        <h2 className="text-2xl font-bold text-white mb-2">An error occurred</h2>
                         <p className="text-white/60 mb-6">{error}</p>
                         <Link
                             to="/"
                             className="inline-flex items-center gap-2 px-6 py-3 bg-[#0066FF] hover:bg-[#0052cc] rounded-xl text-white font-medium transition-colors"
                         >
                             <ArrowLeft className="w-5 h-5" />
-                            Về trang chủ
+                            Back to home
                         </Link>
                     </div>
                 </div>
@@ -149,9 +149,9 @@ const PaymentSuccess = () => {
                     <div className="w-24 h-24 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
                         <CheckCircle className="w-14 h-14 text-green-400" />
                     </div>
-                    <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">Đặt cọc thành công!</h1>
+                    <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">Deposit successful!</h1>
                     <p className="text-white/60 text-lg">
-                        Cảm ơn bạn đã đặt cọc. Chúng tôi sẽ liên hệ với bạn sớm nhất.
+                        Thank you for your deposit. We will contact you as soon as possible.
                     </p>
                 </motion.div>
 
@@ -166,7 +166,7 @@ const PaymentSuccess = () => {
                     <div className="bg-gradient-to-r from-[#0066FF] to-[#0052cc] p-5">
                         <div className="flex items-center justify-between flex-wrap gap-4">
                             <div>
-                                <p className="text-white/70 text-sm">Mã đơn đặt cọc</p>
+                                <p className="text-white/70 text-sm">Deposit ID</p>
                                 <p className="text-white text-xl font-bold">#{deposit?._id?.slice(-8).toUpperCase()}</p>
                             </div>
                             <div className="flex gap-2">
@@ -189,7 +189,7 @@ const PaymentSuccess = () => {
                         <div className="bg-white/5 rounded-xl p-5 border border-white/10">
                             <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
                                 <Car className="w-5 h-5 text-[#0066FF]" />
-                                Thông tin xe
+                                Car information
                             </h3>
                             <div className="flex gap-5">
                                 <div className="w-32 h-24 rounded-xl overflow-hidden bg-white/10 flex-shrink-0">
@@ -210,19 +210,19 @@ const PaymentSuccess = () => {
                                     <div className="grid grid-cols-2 gap-2 text-sm">
                                         {deposit?.car?.brand?.name && (
                                             <p className="text-white/60">
-                                                Hãng: <span className="text-white">{deposit.car.brand.name}</span>
+                                                Brand: <span className="text-white">{deposit.car.brand.name}</span>
                                             </p>
                                         )}
                                         {deposit?.carVersion && (
                                             <p className="text-white/60 flex items-center gap-1">
                                                 <Settings className="w-3 h-3" />
-                                                Phiên bản: <span className="text-white ml-1">{deposit.carVersion}</span>
+                                                Version: <span className="text-white ml-1">{deposit.carVersion}</span>
                                             </p>
                                         )}
                                         {deposit?.carColor && (
                                             <p className="text-white/60 flex items-center gap-1">
                                                 <Palette className="w-3 h-3" />
-                                                Màu sắc: <span className="text-white ml-1">{deposit.carColor}</span>
+                                                Colors: <span className="text-white ml-1">{deposit.carColor}</span>
                                             </p>
                                         )}
                                     </div>
@@ -234,13 +234,13 @@ const PaymentSuccess = () => {
                         <div className="bg-white/5 rounded-xl p-5 border border-white/10">
                             <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
                                 <User className="w-5 h-5 text-[#0066FF]" />
-                                Thông tin khách hàng
+                                Customer information
                             </h3>
                             <div className="grid md:grid-cols-2 gap-4 text-sm">
                                 <div className="flex items-center gap-3">
                                     <User className="w-4 h-4 text-white/40" />
                                     <div>
-                                        <p className="text-white/50">Họ tên</p>
+                                        <p className="text-white/50">Full name</p>
                                         <p className="text-white font-medium">{deposit?.user?.fullName || 'N/A'}</p>
                                     </div>
                                 </div>
@@ -254,7 +254,7 @@ const PaymentSuccess = () => {
                                 <div className="flex items-center gap-3">
                                     <Phone className="w-4 h-4 text-white/40" />
                                     <div>
-                                        <p className="text-white/50">Số điện thoại liên hệ</p>
+                                        <p className="text-white/50">Contact phone number</p>
                                         <p className="text-white font-medium">{deposit?.customerPhone || 'N/A'}</p>
                                     </div>
                                 </div>
@@ -265,26 +265,26 @@ const PaymentSuccess = () => {
                         <div className="bg-white/5 rounded-xl p-5 border border-white/10">
                             <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
                                 <CreditCard className="w-5 h-5 text-[#0066FF]" />
-                                Thông tin thanh toán
+                                Payment information
                             </h3>
                             <div className="space-y-3 text-sm">
                                 <div className="flex justify-between py-2 border-b border-white/10">
-                                    <span className="text-white/50">Giá xe</span>
+                                    <span className="text-white/50">Car price</span>
                                     <span className="text-white font-medium">{formatPrice(deposit?.carPrice)}</span>
                                 </div>
                                 <div className="flex justify-between py-2 border-b border-white/10">
-                                    <span className="text-white/50">Số tiền đặt cọc (10%)</span>
+                                    <span className="text-white/50">Deposit amount (10%)</span>
                                     <span className="text-green-400 font-bold text-lg">
                                         {formatPrice(deposit?.depositAmount)}
                                     </span>
                                 </div>
                                 <div className="flex justify-between py-2 border-b border-white/10">
-                                    <span className="text-white/50">Phương thức thanh toán</span>
+                                    <span className="text-white/50">Payment method</span>
                                     <span className="text-white font-medium">{deposit?.paymentMethod}</span>
                                 </div>
                                 {deposit?.transactionId && (
                                     <div className="flex justify-between py-2 border-b border-white/10">
-                                        <span className="text-white/50">Mã giao dịch</span>
+                                        <span className="text-white/50">Transaction ID</span>
                                         <span className="text-white font-mono">{deposit.transactionId}</span>
                                     </div>
                                 )}
@@ -296,7 +296,7 @@ const PaymentSuccess = () => {
                             <div className="bg-white/5 rounded-xl p-5 border border-white/10">
                                 <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
                                     <FileText className="w-5 h-5 text-[#0066FF]" />
-                                    Ghi chú
+                                    Note
                                 </h3>
                                 <p className="text-white/70">{deposit.note}</p>
                             </div>
@@ -306,20 +306,20 @@ const PaymentSuccess = () => {
                         <div className="bg-white/5 rounded-xl p-5 border border-white/10">
                             <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
                                 <Calendar className="w-5 h-5 text-[#0066FF]" />
-                                Thời gian
+                                Timeline
                             </h3>
                             <div className="grid md:grid-cols-2 gap-4 text-sm">
                                 <div>
-                                    <p className="text-white/50">Ngày tạo đơn</p>
+                                    <p className="text-white/50">Order created at</p>
                                     <p className="text-white font-medium">{formatDate(deposit?.createdAt)}</p>
                                 </div>
                                 <div>
-                                    <p className="text-white/50">Hạn đặt cọc</p>
+                                    <p className="text-white/50">Deposit deadline</p>
                                     <p className="text-white font-medium">{formatDate(deposit?.expiresAt)}</p>
                                 </div>
                                 {deposit?.confirmedAt && (
                                     <div>
-                                        <p className="text-white/50">Ngày xác nhận</p>
+                                        <p className="text-white/50">Confirmed at</p>
                                         <p className="text-white font-medium">{formatDate(deposit.confirmedAt)}</p>
                                     </div>
                                 )}
@@ -340,14 +340,14 @@ const PaymentSuccess = () => {
                         className="flex items-center justify-center gap-2 px-8 py-4 bg-white/10 hover:bg-white/15 border border-white/20 rounded-xl text-white font-medium transition-all"
                     >
                         <ArrowLeft className="w-5 h-5" />
-                        Về trang chủ
+                        Back to home
                     </Link>
                     <Link
                         to="/cars"
                         className="flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-[#0066FF] to-[#0052cc] rounded-xl text-white font-semibold transition-all hover:shadow-lg hover:shadow-[#0066FF]/30"
                     >
                         <Car className="w-5 h-5" />
-                        Xem thêm xe khác
+                        Browse more cars
                     </Link>
                 </motion.div>
             </main>

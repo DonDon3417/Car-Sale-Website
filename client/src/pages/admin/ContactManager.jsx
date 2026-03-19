@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { Mail, Phone, MapPin, Search, Trash2, CheckCircle, Clock } from 'lucide-react';
 import { message } from 'antd';
 import { Table, Tag, Tooltip, Modal, Button } from 'antd';
@@ -22,7 +22,7 @@ const ContactManager = () => {
             });
         } catch (error) {
             console.error(error);
-            message.error('Lỗi khi tải danh sách liên hệ');
+            message.error('Error loading contacts');
         } finally {
             setLoading(false);
         }
@@ -44,27 +44,27 @@ const ContactManager = () => {
     const handleUpdateStatus = async (id, status) => {
         try {
             await requestUpdateContactStatus(id, status);
-            message.success('Cập nhật trạng thái thành công');
+            message.success('Status updated successfully');
             fetchContacts(pagination.current, searchText);
         } catch (error) {
-            message.error('Lỗi khi cập nhật trạng thái');
+            message.error('Error while updating status');
         }
     };
 
     const handleDelete = (id) => {
         Modal.confirm({
-            title: 'Xác nhận xóa',
-            content: 'Bạn có chắc chắn muốn xóa liên hệ này?',
-            okText: 'Xóa',
-            cancelText: 'Hủy',
+            title: 'Confirm deletion',
+            content: 'Are you sure you want to delete this contact?',
+            okText: 'Delete',
+            cancelText: 'Cancel',
             okType: 'danger',
             onOk: async () => {
                 try {
                     await requestDeleteContact(id);
-                    message.success('Xóa liên hệ thành công');
+                    message.success('Contact deleted successfully');
                     fetchContacts(pagination.current, searchText);
                 } catch (error) {
-                    message.error('Lỗi khi xóa liên hệ');
+                    message.error('Error deleting contact');
                 }
             },
         });
@@ -72,7 +72,7 @@ const ContactManager = () => {
 
     const columns = [
         {
-            title: 'Họ tên',
+            title: 'Full name',
             dataIndex: 'fullName',
             key: 'fullName',
             render: (text) => <span className="font-medium text-white">{text}</span>,
@@ -89,7 +89,7 @@ const ContactManager = () => {
             ),
         },
         {
-            title: 'Số điện thoại',
+            title: 'Phone number',
             dataIndex: 'phone',
             key: 'phone',
             render: (text) => (
@@ -100,14 +100,14 @@ const ContactManager = () => {
             ),
         },
         {
-            title: 'Lời nhắn',
+            title: 'Message',
             dataIndex: 'message',
             key: 'message',
             width: '30%',
             render: (text) => <p className="text-white/70 line-clamp-2">{text}</p>,
         },
         {
-            title: 'Trạng thái',
+            title: 'Status',
             dataIndex: 'status',
             key: 'status',
             render: (status, record) => (
@@ -117,27 +117,27 @@ const ContactManager = () => {
                 >
                     {status === 'pending' ? (
                         <Tag color="orange" icon={<Clock className="w-3 h-3" />}>
-                            Chờ xử lý
+                            Pending
                         </Tag>
                     ) : (
                         <Tag color="green" icon={<CheckCircle className="w-3 h-3" />}>
-                            Đã xử lý
+                            Processed
                         </Tag>
                     )}
                 </div>
             ),
         },
         {
-            title: 'Ngày gửi',
+            title: 'Sent at',
             dataIndex: 'createdAt',
             key: 'createdAt',
-            render: (date) => <span className="text-white/50">{new Date(date).toLocaleDateString('vi-VN')}</span>,
+            render: (date) => <span className="text-white/50">{new Date(date).toLocaleDateString('en-US')}</span>,
         },
         {
-            title: 'Hành động',
+            title: 'Action',
             key: 'action',
             render: (_, record) => (
-                <Tooltip title="Xóa">
+                <Tooltip title="Delete">
                     <button
                         onClick={() => handleDelete(record._id)}
                         className="p-2 bg-red-500/10 text-red-500 rounded-lg hover:bg-red-500/20 transition-colors"
@@ -153,14 +153,14 @@ const ContactManager = () => {
         <div className="space-y-6">
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="text-2xl font-bold text-white mb-1">Quản lý liên hệ</h1>
-                    <p className="text-white/50 text-sm">Xem và phản hồi tin nhắn từ khách hàng</p>
+                    <h1 className="text-2xl font-bold text-white mb-1">Contact Management</h1>
+                    <p className="text-white/50 text-sm">View and respond to customer messages</p>
                 </div>
                 <div className="relative">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
                     <input
                         type="text"
-                        placeholder="Tìm kiếm..."
+                        placeholder="Search..."
                         value={searchText}
                         onChange={handleSearch}
                         className="pl-9 pr-4 py-2 bg-[#1E293B] border border-white/10 rounded-lg text-white text-sm focus:outline-none focus:border-[#0066FF] w-64"

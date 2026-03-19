@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import {
     Car,
@@ -69,12 +69,12 @@ const Dashboard = () => {
 
     const formatPrice = (price) => {
         if (price >= 1000000000) {
-            return (price / 1000000000).toFixed(1) + ' tỷ';
+            return (price / 1000000000).toFixed(1) + ' billion';
         }
         return (price / 1000000).toFixed(0) + ' tr';
     };
 
-    const formatDate = (date) => new Date(date).toLocaleDateString('vi-VN');
+    const formatDate = (date) => new Date(date).toLocaleDateString('en-US');
 
     const COLORS = ['#0066FF', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6', '#EC4899', '#6366F1'];
 
@@ -98,7 +98,7 @@ const Dashboard = () => {
 
     const statCards = [
         {
-            title: 'Tổng doanh thu',
+            title: 'Total doanh thu',
             value: formatPrice(stats?.totalRevenue || 0),
             change: `${stats?.revenueGrowth}%`,
             isPositive: parseFloat(stats?.revenueGrowth) >= 0,
@@ -108,7 +108,7 @@ const Dashboard = () => {
             text: 'text-emerald-500',
         },
         {
-            title: 'Khách hàng',
+            title: 'Customers',
             value: stats?.totalUsers || 0,
             change: `${stats?.usersGrowth}%`,
             isPositive: parseFloat(stats?.usersGrowth) >= 0,
@@ -118,7 +118,7 @@ const Dashboard = () => {
             text: 'text-blue-500',
         },
         {
-            title: 'Đơn đặt cọc',
+            title: 'Deposit orders',
             value: stats?.totalDeposits || 0,
             change: `${stats?.depositsGrowth}%`,
             isPositive: parseFloat(stats?.depositsGrowth) >= 0,
@@ -128,7 +128,7 @@ const Dashboard = () => {
             text: 'text-amber-500',
         },
         {
-            title: 'Tổng xe',
+            title: 'Total cars',
             value: stats?.totalCars || 0,
             change: null,
             isPositive: true,
@@ -142,13 +142,13 @@ const Dashboard = () => {
     const depositStatusData = advancedStats?.depositsByStatus?.map((item) => ({
         name:
             item._id === 'pending'
-                ? 'Đợi duyệt'
+                ? 'Awaiting review'
                 : item._id === 'confirmed'
-                  ? 'Đã xác nhận'
+                  ? 'Confirmed'
                   : item._id === 'completed'
-                    ? 'Hoàn thành'
+                    ? 'Completed'
                     : item._id === 'cancelled'
-                      ? 'Đã hủy'
+                      ? 'Cancelled'
                       : item._id,
         value: item.count,
     }));
@@ -157,8 +157,8 @@ const Dashboard = () => {
         <div className="space-y-6">
             {/* Header */}
             <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-                <h1 className="text-2xl font-bold text-white mb-1">Xin chào, {dataUser?.fullName || 'Admin'}! 👋</h1>
-                <p className="text-white/50 text-sm">Báo cáo chi tiết hoạt động kinh doanh.</p>
+                <h1 className="text-2xl font-bold text-white mb-1">Hello, {dataUser?.fullName || 'Admin'}! 👋</h1>
+                <p className="text-white/50 text-sm">Detailed business activity report.</p>
             </motion.div>
 
             {/* Stats Grid */}
@@ -215,9 +215,9 @@ const Dashboard = () => {
                         <div>
                             <h2 className="text-white font-bold text-lg flex items-center gap-2">
                                 <TrendingUp className="w-5 h-5 text-[#0066FF]" />
-                                Biểu đồ doanh thu
+                                Revenue chart
                             </h2>
-                            <p className="text-white/40 text-xs mt-1">Doanh thu đặt cọc 6 tháng gần nhất</p>
+                            <p className="text-white/40 text-xs mt-1">Deposit revenue for the last 6 months</p>
                         </div>
                     </div>
                     <div className="h-[300px] w-full">
@@ -252,7 +252,7 @@ const Dashboard = () => {
                                         color: '#fff',
                                     }}
                                     itemStyle={{ color: '#fff' }}
-                                    formatter={(value) => [`${value.toLocaleString()} VNĐ`, 'Doanh thu']}
+                                    formatter={(value) => [`${value.toLocaleString()} VND`, 'Doanh thu']}
                                 />
                                 <Area
                                     type="monotone"
@@ -277,12 +277,12 @@ const Dashboard = () => {
                     <div className="p-6 border-b border-white/5">
                         <h2 className="text-white font-bold text-lg flex items-center gap-2">
                             <Activity className="w-5 h-5 text-purple-500" />
-                            Hoạt động gần đây
+                            Recent activity
                         </h2>
                     </div>
                     <div className="flex-1 overflow-y-auto max-h-[400px] p-4 space-y-4 custom-scrollbar">
                         {recentActivity.deposits.length === 0 && recentActivity.users.length === 0 ? (
-                            <div className="text-center text-white/30 py-8">Chưa có hoạt động nào</div>
+                            <div className="text-center text-white/30 py-8">No recent activity</div>
                         ) : (
                             <>
                                 {recentActivity.deposits.map((deposit) => (
@@ -298,7 +298,7 @@ const Dashboard = () => {
                                                 <span className="font-semibold text-[#0066FF]">
                                                     {deposit.user?.fullName}
                                                 </span>{' '}
-                                                đã đặt cọc xe <span className="text-white/70">{deposit.car?.name}</span>
+                                                placed a deposit for <span className="text-white/70">{deposit.car?.name}</span>
                                             </p>
                                             <div className="flex items-center gap-2 mt-1">
                                                 <span className="text-xs text-white/40">
@@ -322,7 +322,7 @@ const Dashboard = () => {
                                         <div>
                                             <p className="text-white text-sm">
                                                 <span className="font-semibold text-purple-400">{user.fullName}</span>{' '}
-                                                đã đăng ký tài khoản mới
+                                                registered a new account
                                             </p>
                                             <span className="text-xs text-white/40 mt-1 block">
                                                 {formatDate(user.createdAt)}
@@ -347,7 +347,7 @@ const Dashboard = () => {
                 >
                     <h2 className="text-white font-bold text-lg flex items-center gap-2 mb-6">
                         <PieChartIcon className="w-5 h-5 text-orange-500" />
-                        Trạng thái đơn hàng
+                        Order status
                     </h2>
                     <div className="h-[300px] w-full">
                         <ResponsiveContainer width="100%" height="100%">
@@ -389,7 +389,7 @@ const Dashboard = () => {
                 >
                     <h2 className="text-white font-bold text-lg flex items-center gap-2 mb-6">
                         <BarChartIcon className="w-5 h-5 text-blue-500" />
-                        Xe theo thương hiệu
+                        Cars by brand
                     </h2>
                     <div className="h-[300px] w-full">
                         <ResponsiveContainer width="100%" height="100%">
@@ -421,7 +421,7 @@ const Dashboard = () => {
                                     }}
                                     itemStyle={{ color: '#fff' }}
                                 />
-                                <Bar dataKey="count" name="Số lượng xe" fill="#3B82F6" radius={[4, 4, 0, 0]} />
+                                <Bar dataKey="count" name="Number of cars" fill="#3B82F6" radius={[4, 4, 0, 0]} />
                             </BarChart>
                         </ResponsiveContainer>
                     </div>
@@ -436,7 +436,7 @@ const Dashboard = () => {
                 >
                     <h2 className="text-white font-bold text-lg flex items-center gap-2 mb-6">
                         <Tag className="w-5 h-5 text-pink-500" />
-                        Xe theo loại
+                        Cars by category
                     </h2>
                     <div className="h-[300px] w-full">
                         <ResponsiveContainer width="100%" height="100%">
@@ -472,7 +472,7 @@ const Dashboard = () => {
                                     }}
                                     itemStyle={{ color: '#fff' }}
                                 />
-                                <Bar dataKey="count" name="Số lượng xe" fill="#EC4899" radius={[0, 4, 4, 0]} />
+                                <Bar dataKey="count" name="Number of cars" fill="#EC4899" radius={[0, 4, 4, 0]} />
                             </BarChart>
                         </ResponsiveContainer>
                     </div>
@@ -483,3 +483,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+

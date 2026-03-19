@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Lock, Eye, EyeOff, ArrowRight, Car } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -17,7 +17,7 @@ const Login = () => {
         e.preventDefault();
         try {
             await requestLogin(formData);
-            message.success('Đăng ký thành công');
+            message.success('Subscribe successfully');
             setTimeout(() => {
                 window.location.reload();
             }, 1000);
@@ -54,8 +54,8 @@ const Login = () => {
                     {/* Card */}
                     <div className="bg-[#111827]/80 backdrop-blur-xl border border-white/5 rounded-2xl p-6">
                         <div className="text-center mb-5">
-                            <h1 className="text-xl font-bold text-white mb-1">Đăng nhập</h1>
-                            <p className="text-white/50 text-xs">Chào mừng bạn quay trở lại</p>
+                            <h1 className="text-xl font-bold text-white mb-1">Log in</h1>
+                            <p className="text-white/50 text-xs">Welcome back</p>
                         </div>
 
                         <form onSubmit={handleSubmit} className="space-y-4">
@@ -68,7 +68,7 @@ const Login = () => {
                                         type="email"
                                         value={formData.email}
                                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                        placeholder="Nhập email của bạn"
+                                        placeholder="Enter your email"
                                         className="w-full h-10 pl-10 pr-4 bg-white/5 border border-white/10 rounded-lg text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-[#0066FF] transition-colors"
                                         required
                                     />
@@ -77,14 +77,14 @@ const Login = () => {
 
                             {/* Password */}
                             <div>
-                                <label className="block text-white/70 text-xs font-medium mb-1.5">Mật khẩu</label>
+                                <label className="block text-white/70 text-xs font-medium mb-1.5">Password</label>
                                 <div className="relative">
                                     <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
                                     <input
                                         type={showPassword ? 'text' : 'password'}
                                         value={formData.password}
                                         onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                                        placeholder="Nhập mật khẩu"
+                                        placeholder="Enter password"
                                         className="w-full h-10 pl-10 pr-10 bg-white/5 border border-white/10 rounded-lg text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-[#0066FF] transition-colors"
                                         required
                                     />
@@ -101,7 +101,7 @@ const Login = () => {
                             {/* Forgot Password */}
                             <div className="flex justify-end">
                                 <Link to="/forgot-password" className="text-[#0066FF] text-xs hover:underline">
-                                    Quên mật khẩu?
+                                    Forgot password?
                                 </Link>
                             </div>
 
@@ -112,7 +112,7 @@ const Login = () => {
                                 type="submit"
                                 className="w-full flex items-center justify-center gap-2 h-10 bg-[#0066FF] hover:bg-[#0052cc] rounded-lg text-white text-sm font-semibold transition-colors"
                             >
-                                <span>Đăng nhập</span>
+                                <span>Log in</span>
                                 <ArrowRight className="w-4 h-4" />
                             </motion.button>
                         </form>
@@ -120,7 +120,7 @@ const Login = () => {
                         {/* Divider */}
                         <div className="flex items-center gap-3 my-5">
                             <div className="flex-1 h-px bg-white/10" />
-                            <span className="text-white/40 text-xs">hoặc</span>
+                            <span className="text-white/40 text-xs">or</span>
                             <div className="flex-1 h-px bg-white/10" />
                         </div>
 
@@ -157,9 +157,9 @@ const Login = () => {
 
                         {/* Register Link */}
                         <p className="text-center text-white/50 text-xs mt-5">
-                            Chưa có tài khoản?{' '}
+                            Don't have an account?{' '}
                             <Link to="/account/register" className="text-[#0066FF] font-medium hover:underline">
-                                Đăng ký ngay
+                                Subscribe ngay
                             </Link>
                         </p>
                     </div>

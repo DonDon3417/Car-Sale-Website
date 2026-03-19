@@ -8,34 +8,34 @@
     "price": 1000001,
     "discountPrice": 1000000,
     "year": 2025,
-    "fuelType": "Điện",
-    "transmission": "Tự động",
+    "fuelType": "Electric",
+    "transmission": "Automatic",
     "seats": 7,
     "engine": "234kW Electric Motor",
     "mileage": 17,
     "colors": [
       {
-        "name": "Đỏ Ruby",
+        "name": "Ruby Red",
         "code": "#9b111e",
         "_id": { "$oid": "6986056b620d7745bfde7f03" }
       },
       {
-        "name": "Nâu Đồng",
+        "name": "Copper Brown",
         "code": "#8b4513",
         "_id": { "$oid": "6986056b620d7745bfde7f04" }
       },
       {
-        "name": "Xanh Lá",
+        "name": "Forest Green",
         "code": "#1a472a",
         "_id": { "$oid": "6986056b620d7745bfde7f05" }
       },
       {
-        "name": "Xám Titanium",
+        "name": "Titanium Gray",
         "code": "#5a5a5a",
         "_id": { "$oid": "6986056b620d7745bfde7f06" }
       },
       {
-        "name": "Đen Obsidian",
+        "name": "Obsidian Black",
         "code": "#0d0d0d",
         "_id": { "$oid": "6986056b620d7745bfde7f07" }
       }
@@ -62,7 +62,7 @@
       "/uploads/cars/sample-car-8.jpg",
       "/uploads/cars/sample-car-12.jpg"
     ],
-    "description": "Toyota Camry - Mẫu xe pickup / bán tải Toyota với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "4365",
       "width": "1891",
@@ -88,38 +88,38 @@
     "discountPrice": 0,
     "year": 2023,
     "fuelType": "Hybrid",
-    "transmission": "Số sàn",
+    "transmission": "Manual",
     "seats": 5,
     "engine": "2.3L Turbo",
     "mileage": 12,
     "colors": [
       {
-        "name": "Xanh Dương",
+        "name": "Ocean Blue",
         "code": "#1e3a5f",
         "_id": { "$oid": "6986056b620d7745bfde7f0c" }
       },
       {
-        "name": "Xanh Lá",
+        "name": "Forest Green",
         "code": "#1a472a",
         "_id": { "$oid": "6986056b620d7745bfde7f0d" }
       },
       {
-        "name": "Xám Titanium",
+        "name": "Titanium Gray",
         "code": "#5a5a5a",
         "_id": { "$oid": "6986056b620d7745bfde7f0e" }
       },
       {
-        "name": "Đỏ Ruby",
+        "name": "Ruby Red",
         "code": "#9b111e",
         "_id": { "$oid": "6986056b620d7745bfde7f0f" }
       },
       {
-        "name": "Bạc Ánh Kim",
+        "name": "Metallic Silver",
         "code": "#c0c0c0",
         "_id": { "$oid": "6986056b620d7745bfde7f10" }
       },
       {
-        "name": "Trắng Ngọc Trai",
+        "name": "Pearl White",
         "code": "#f5f5f5",
         "_id": { "$oid": "6986056b620d7745bfde7f11" }
       }
@@ -146,7 +146,7 @@
       "/uploads/cars/sample-car-11.jpg",
       "/uploads/cars/sample-car-15.jpg"
     ],
-    "description": "Toyota Corolla Cross - Mẫu xe luxury / xe sang Toyota với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "5122",
       "width": "1888",
@@ -171,24 +171,24 @@
     "price": 1057097578,
     "discountPrice": 980164367,
     "year": 2024,
-    "fuelType": "Điện",
-    "transmission": "Số sàn",
+    "fuelType": "Electric",
+    "transmission": "Manual",
     "seats": 7,
     "engine": "362kW Electric Motor",
     "mileage": 18,
     "colors": [
       {
-        "name": "Nâu Đồng",
+        "name": "Copper Brown",
         "code": "#8b4513",
         "_id": { "$oid": "6986056b620d7745bfde7f16" }
       },
       {
-        "name": "Xanh Dương",
+        "name": "Ocean Blue",
         "code": "#1e3a5f",
         "_id": { "$oid": "6986056b620d7745bfde7f17" }
       },
       {
-        "name": "Xám Titanium",
+        "name": "Titanium Gray",
         "code": "#5a5a5a",
         "_id": { "$oid": "6986056b620d7745bfde7f18" }
       }
@@ -215,7 +215,7 @@
       "/uploads/cars/sample-car-4.jpg",
       "/uploads/cars/sample-car-3.jpg"
     ],
-    "description": "Toyota Vios - Mẫu xe luxury / xe sang Toyota với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "5063",
       "width": "1937",
@@ -240,24 +240,24 @@
     "price": 978414760,
     "discountPrice": 919949830,
     "year": 2024,
-    "fuelType": "Dầu",
-    "transmission": "Tự động",
+    "fuelType": "Diesel",
+    "transmission": "Automatic",
     "seats": 8,
     "engine": "2.4L V6",
     "mileage": 8,
     "colors": [
       {
-        "name": "Trắng Ngọc Trai",
+        "name": "Pearl White",
         "code": "#f5f5f5",
         "_id": { "$oid": "6986056b620d7745bfde7f1d" }
       },
       {
-        "name": "Xanh Dương",
+        "name": "Ocean Blue",
         "code": "#1e3a5f",
         "_id": { "$oid": "6986056b620d7745bfde7f1e" }
       },
       {
-        "name": "Nâu Đồng",
+        "name": "Copper Brown",
         "code": "#8b4513",
         "_id": { "$oid": "6986056b620d7745bfde7f1f" }
       }
@@ -284,7 +284,7 @@
       "/uploads/cars/sample-car-8.jpg",
       "/uploads/cars/sample-car-4.jpg"
     ],
-    "description": "Toyota Fortuner - Mẫu xe suv Toyota với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "4861",
       "width": "1933",
@@ -309,34 +309,34 @@
     "price": 1430580889,
     "discountPrice": 0,
     "year": 2022,
-    "fuelType": "Dầu",
-    "transmission": "Số sàn",
+    "fuelType": "Diesel",
+    "transmission": "Manual",
     "seats": 5,
     "engine": "2.6L Turbo",
     "mileage": 10,
     "colors": [
       {
-        "name": "Đỏ Ruby",
+        "name": "Ruby Red",
         "code": "#9b111e",
         "_id": { "$oid": "6986056b620d7745bfde7f24" }
       },
       {
-        "name": "Đen Obsidian",
+        "name": "Obsidian Black",
         "code": "#0d0d0d",
         "_id": { "$oid": "6986056b620d7745bfde7f25" }
       },
       {
-        "name": "Xám Titanium",
+        "name": "Titanium Gray",
         "code": "#5a5a5a",
         "_id": { "$oid": "6986056b620d7745bfde7f26" }
       },
       {
-        "name": "Xanh Dương",
+        "name": "Ocean Blue",
         "code": "#1e3a5f",
         "_id": { "$oid": "6986056b620d7745bfde7f27" }
       },
       {
-        "name": "Bạc Ánh Kim",
+        "name": "Metallic Silver",
         "code": "#c0c0c0",
         "_id": { "$oid": "6986056b620d7745bfde7f28" }
       }
@@ -364,7 +364,7 @@
       "/uploads/cars/sample-car-12.jpg",
       "/uploads/cars/sample-car-3.jpg"
     ],
-    "description": "Toyota Land Cruiser - Mẫu xe suv Toyota với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "4852",
       "width": "1918",
@@ -390,23 +390,23 @@
     "discountPrice": 0,
     "year": 2022,
     "fuelType": "Hybrid",
-    "transmission": "Số sàn",
+    "transmission": "Manual",
     "seats": 5,
     "engine": "2.4L I4",
     "mileage": 12,
     "colors": [
       {
-        "name": "Bạc Ánh Kim",
+        "name": "Metallic Silver",
         "code": "#c0c0c0",
         "_id": { "$oid": "6986056b620d7745bfde7f2d" }
       },
       {
-        "name": "Đỏ Ruby",
+        "name": "Ruby Red",
         "code": "#9b111e",
         "_id": { "$oid": "6986056b620d7745bfde7f2e" }
       },
       {
-        "name": "Xám Titanium",
+        "name": "Titanium Gray",
         "code": "#5a5a5a",
         "_id": { "$oid": "6986056b620d7745bfde7f2f" }
       }
@@ -434,7 +434,7 @@
       "/uploads/cars/sample-car-6.jpg",
       "/uploads/cars/sample-car-1.jpg"
     ],
-    "description": "Toyota Veloz Cross - Mẫu xe coupe Toyota với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "4496",
       "width": "1980",
@@ -460,23 +460,23 @@
     "discountPrice": 0,
     "year": 2022,
     "fuelType": "Hybrid",
-    "transmission": "Tự động",
+    "transmission": "Automatic",
     "seats": 4,
     "engine": "1.5L V8",
     "mileage": 10,
     "colors": [
       {
-        "name": "Đen Obsidian",
+        "name": "Obsidian Black",
         "code": "#0d0d0d",
         "_id": { "$oid": "6986056b620d7745bfde7f34" }
       },
       {
-        "name": "Đỏ Ruby",
+        "name": "Ruby Red",
         "code": "#9b111e",
         "_id": { "$oid": "6986056b620d7745bfde7f35" }
       },
       {
-        "name": "Xanh Lá",
+        "name": "Forest Green",
         "code": "#1a472a",
         "_id": { "$oid": "6986056b620d7745bfde7f36" }
       }
@@ -504,7 +504,7 @@
       "/uploads/cars/sample-car-9.jpg",
       "/uploads/cars/sample-car-8.jpg"
     ],
-    "description": "Toyota Raize - Mẫu xe pickup / bán tải Toyota với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "4218",
       "width": "1979",
@@ -529,24 +529,24 @@
     "price": 404661319,
     "discountPrice": 0,
     "year": 2022,
-    "fuelType": "Dầu",
-    "transmission": "Tự động",
+    "fuelType": "Diesel",
+    "transmission": "Automatic",
     "seats": 7,
     "engine": "3.4L I4",
     "mileage": 8,
     "colors": [
       {
-        "name": "Bạc Ánh Kim",
+        "name": "Metallic Silver",
         "code": "#c0c0c0",
         "_id": { "$oid": "6986056b620d7745bfde7f3b" }
       },
       {
-        "name": "Trắng Ngọc Trai",
+        "name": "Pearl White",
         "code": "#f5f5f5",
         "_id": { "$oid": "6986056b620d7745bfde7f3c" }
       },
       {
-        "name": "Xanh Lá",
+        "name": "Forest Green",
         "code": "#1a472a",
         "_id": { "$oid": "6986056b620d7745bfde7f3d" }
       }
@@ -574,7 +574,7 @@
       "/uploads/cars/sample-car-15.jpg",
       "/uploads/cars/sample-car-8.jpg"
     ],
-    "description": "Toyota Innova Cross - Mẫu xe hatchback  Toyota với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "4216",
       "width": "1877",
@@ -600,23 +600,23 @@
     "discountPrice": 865289447,
     "year": 2024,
     "fuelType": "Hybrid",
-    "transmission": "Số sàn",
+    "transmission": "Manual",
     "seats": 4,
     "engine": "2.9L Turbo",
     "mileage": 10,
     "colors": [
       {
-        "name": "Trắng Ngọc Trai",
+        "name": "Pearl White",
         "code": "#f5f5f5",
         "_id": { "$oid": "6986056b620d7745bfde7f42" }
       },
       {
-        "name": "Nâu Đồng",
+        "name": "Copper Brown",
         "code": "#8b4513",
         "_id": { "$oid": "6986056b620d7745bfde7f43" }
       },
       {
-        "name": "Đỏ Ruby",
+        "name": "Ruby Red",
         "code": "#9b111e",
         "_id": { "$oid": "6986056b620d7745bfde7f44" }
       }
@@ -644,7 +644,7 @@
       "/uploads/cars/sample-car-13.jpg",
       "/uploads/cars/sample-car-6.jpg"
     ],
-    "description": "Honda City - Mẫu xe electric / xe điện Honda với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "4676",
       "width": "1786",
@@ -669,39 +669,39 @@
     "price": 1493615002,
     "discountPrice": 0,
     "year": 2023,
-    "fuelType": "Điện",
-    "transmission": "Tự động",
+    "fuelType": "Electric",
+    "transmission": "Automatic",
     "seats": 5,
     "engine": "168kW Electric Motor",
     "mileage": 25,
     "colors": [
       {
-        "name": "Xanh Lá",
+        "name": "Forest Green",
         "code": "#1a472a",
         "_id": { "$oid": "6986056b620d7745bfde7f49" }
       },
       {
-        "name": "Nâu Đồng",
+        "name": "Copper Brown",
         "code": "#8b4513",
         "_id": { "$oid": "6986056b620d7745bfde7f4a" }
       },
       {
-        "name": "Đỏ Ruby",
+        "name": "Ruby Red",
         "code": "#9b111e",
         "_id": { "$oid": "6986056b620d7745bfde7f4b" }
       },
       {
-        "name": "Bạc Ánh Kim",
+        "name": "Metallic Silver",
         "code": "#c0c0c0",
         "_id": { "$oid": "6986056b620d7745bfde7f4c" }
       },
       {
-        "name": "Xanh Dương",
+        "name": "Ocean Blue",
         "code": "#1e3a5f",
         "_id": { "$oid": "6986056b620d7745bfde7f4d" }
       },
       {
-        "name": "Đen Obsidian",
+        "name": "Obsidian Black",
         "code": "#0d0d0d",
         "_id": { "$oid": "6986056b620d7745bfde7f4e" }
       }
@@ -728,7 +728,7 @@
       "/uploads/cars/sample-car-12.jpg",
       "/uploads/cars/sample-car-2.jpg"
     ],
-    "description": "Honda Civic - Mẫu xe luxury / xe sang Honda với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "4468",
       "width": "1903",
@@ -753,24 +753,24 @@
     "price": 1183832731,
     "discountPrice": 0,
     "year": 2022,
-    "fuelType": "Điện",
-    "transmission": "Tự động",
+    "fuelType": "Electric",
+    "transmission": "Automatic",
     "seats": 7,
     "engine": "318kW Electric Motor",
     "mileage": 16,
     "colors": [
       {
-        "name": "Đen Obsidian",
+        "name": "Obsidian Black",
         "code": "#0d0d0d",
         "_id": { "$oid": "6986056b620d7745bfde7f53" }
       },
       {
-        "name": "Xám Titanium",
+        "name": "Titanium Gray",
         "code": "#5a5a5a",
         "_id": { "$oid": "6986056b620d7745bfde7f54" }
       },
       {
-        "name": "Xanh Lá",
+        "name": "Forest Green",
         "code": "#1a472a",
         "_id": { "$oid": "6986056b620d7745bfde7f55" }
       }
@@ -797,7 +797,7 @@
       "/uploads/cars/sample-car-1.jpg",
       "/uploads/cars/sample-car-4.jpg"
     ],
-    "description": "Honda CR-V - Mẫu xe coupe Honda với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "4824",
       "width": "1963",
@@ -822,39 +822,39 @@
     "price": 1221175500,
     "discountPrice": 0,
     "year": 2023,
-    "fuelType": "Dầu",
-    "transmission": "Số sàn",
+    "fuelType": "Diesel",
+    "transmission": "Manual",
     "seats": 8,
     "engine": "3.4L V8",
     "mileage": 11,
     "colors": [
       {
-        "name": "Nâu Đồng",
+        "name": "Copper Brown",
         "code": "#8b4513",
         "_id": { "$oid": "6986056b620d7745bfde7f5a" }
       },
       {
-        "name": "Xanh Dương",
+        "name": "Ocean Blue",
         "code": "#1e3a5f",
         "_id": { "$oid": "6986056b620d7745bfde7f5b" }
       },
       {
-        "name": "Bạc Ánh Kim",
+        "name": "Metallic Silver",
         "code": "#c0c0c0",
         "_id": { "$oid": "6986056b620d7745bfde7f5c" }
       },
       {
-        "name": "Xám Titanium",
+        "name": "Titanium Gray",
         "code": "#5a5a5a",
         "_id": { "$oid": "6986056b620d7745bfde7f5d" }
       },
       {
-        "name": "Đỏ Ruby",
+        "name": "Ruby Red",
         "code": "#9b111e",
         "_id": { "$oid": "6986056b620d7745bfde7f5e" }
       },
       {
-        "name": "Đen Obsidian",
+        "name": "Obsidian Black",
         "code": "#0d0d0d",
         "_id": { "$oid": "6986056b620d7745bfde7f5f" }
       }
@@ -882,7 +882,7 @@
       "/uploads/cars/sample-car-15.jpg",
       "/uploads/cars/sample-car-14.jpg"
     ],
-    "description": "Honda HR-V - Mẫu xe electric / xe điện Honda với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "4967",
       "width": "1786",
@@ -907,39 +907,39 @@
     "price": 1159619391,
     "discountPrice": 0,
     "year": 2022,
-    "fuelType": "Xăng",
-    "transmission": "Số sàn",
+    "fuelType": "Gasoline",
+    "transmission": "Manual",
     "seats": 4,
     "engine": "2.9L V6",
     "mileage": 10,
     "colors": [
       {
-        "name": "Đen Obsidian",
+        "name": "Obsidian Black",
         "code": "#0d0d0d",
         "_id": { "$oid": "6986056b620d7745bfde7f64" }
       },
       {
-        "name": "Bạc Ánh Kim",
+        "name": "Metallic Silver",
         "code": "#c0c0c0",
         "_id": { "$oid": "6986056b620d7745bfde7f65" }
       },
       {
-        "name": "Xanh Dương",
+        "name": "Ocean Blue",
         "code": "#1e3a5f",
         "_id": { "$oid": "6986056b620d7745bfde7f66" }
       },
       {
-        "name": "Trắng Ngọc Trai",
+        "name": "Pearl White",
         "code": "#f5f5f5",
         "_id": { "$oid": "6986056b620d7745bfde7f67" }
       },
       {
-        "name": "Xám Titanium",
+        "name": "Titanium Gray",
         "code": "#5a5a5a",
         "_id": { "$oid": "6986056b620d7745bfde7f68" }
       },
       {
-        "name": "Xanh Lá",
+        "name": "Forest Green",
         "code": "#1a472a",
         "_id": { "$oid": "6986056b620d7745bfde7f69" }
       }
@@ -966,7 +966,7 @@
       "/uploads/cars/sample-car-4.jpg",
       "/uploads/cars/sample-car-9.jpg"
     ],
-    "description": "Honda Accord - Mẫu xe convertible / mui trần Honda với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "4510",
       "width": "1904",
@@ -991,29 +991,29 @@
     "price": 564717586,
     "discountPrice": 0,
     "year": 2023,
-    "fuelType": "Điện",
-    "transmission": "Số sàn",
+    "fuelType": "Electric",
+    "transmission": "Manual",
     "seats": 4,
     "engine": "300kW Electric Motor",
     "mileage": 19,
     "colors": [
       {
-        "name": "Xanh Lá",
+        "name": "Forest Green",
         "code": "#1a472a",
         "_id": { "$oid": "6986056b620d7745bfde7f6e" }
       },
       {
-        "name": "Xanh Dương",
+        "name": "Ocean Blue",
         "code": "#1e3a5f",
         "_id": { "$oid": "6986056b620d7745bfde7f6f" }
       },
       {
-        "name": "Xám Titanium",
+        "name": "Titanium Gray",
         "code": "#5a5a5a",
         "_id": { "$oid": "6986056b620d7745bfde7f70" }
       },
       {
-        "name": "Trắng Ngọc Trai",
+        "name": "Pearl White",
         "code": "#f5f5f5",
         "_id": { "$oid": "6986056b620d7745bfde7f71" }
       }
@@ -1039,7 +1039,7 @@
       "/uploads/cars/sample-car-6.jpg",
       "/uploads/cars/sample-car-10.jpg"
     ],
-    "description": "Honda BR-V - Mẫu xe sport / thể thao Honda với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "4550",
       "width": "1932",
@@ -1065,28 +1065,28 @@
     "discountPrice": 0,
     "year": 2024,
     "fuelType": "Hybrid",
-    "transmission": "Tự động",
+    "transmission": "Automatic",
     "seats": 7,
     "engine": "3.1L V8",
     "mileage": 10,
     "colors": [
       {
-        "name": "Bạc Ánh Kim",
+        "name": "Metallic Silver",
         "code": "#c0c0c0",
         "_id": { "$oid": "6986056b620d7745bfde7f76" }
       },
       {
-        "name": "Xanh Lá",
+        "name": "Forest Green",
         "code": "#1a472a",
         "_id": { "$oid": "6986056b620d7745bfde7f77" }
       },
       {
-        "name": "Đỏ Ruby",
+        "name": "Ruby Red",
         "code": "#9b111e",
         "_id": { "$oid": "6986056b620d7745bfde7f78" }
       },
       {
-        "name": "Đen Obsidian",
+        "name": "Obsidian Black",
         "code": "#0d0d0d",
         "_id": { "$oid": "6986056b620d7745bfde7f79" }
       }
@@ -1113,7 +1113,7 @@
       "/uploads/cars/sample-car-11.jpg",
       "/uploads/cars/sample-car-6.jpg"
     ],
-    "description": "Hyundai Accent - Mẫu xe sport / thể thao Hyundai với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "4560",
       "width": "1796",
@@ -1138,24 +1138,24 @@
     "price": 877317151,
     "discountPrice": 0,
     "year": 2023,
-    "fuelType": "Xăng",
-    "transmission": "Số sàn",
+    "fuelType": "Gasoline",
+    "transmission": "Manual",
     "seats": 7,
     "engine": "1.9L Turbo",
     "mileage": 9,
     "colors": [
       {
-        "name": "Trắng Ngọc Trai",
+        "name": "Pearl White",
         "code": "#f5f5f5",
         "_id": { "$oid": "6986056b620d7745bfde7f7e" }
       },
       {
-        "name": "Bạc Ánh Kim",
+        "name": "Metallic Silver",
         "code": "#c0c0c0",
         "_id": { "$oid": "6986056b620d7745bfde7f7f" }
       },
       {
-        "name": "Xám Titanium",
+        "name": "Titanium Gray",
         "code": "#5a5a5a",
         "_id": { "$oid": "6986056b620d7745bfde7f80" }
       }
@@ -1182,7 +1182,7 @@
       "/uploads/cars/sample-car-10.jpg",
       "/uploads/cars/sample-car-3.jpg"
     ],
-    "description": "Hyundai Elantra - Mẫu xe mpv Hyundai với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "4263",
       "width": "1956",
@@ -1207,29 +1207,29 @@
     "price": 804927051,
     "discountPrice": 0,
     "year": 2022,
-    "fuelType": "Dầu",
-    "transmission": "Tự động",
+    "fuelType": "Diesel",
+    "transmission": "Automatic",
     "seats": 7,
     "engine": "4.0L I4",
     "mileage": 6,
     "colors": [
       {
-        "name": "Đen Obsidian",
+        "name": "Obsidian Black",
         "code": "#0d0d0d",
         "_id": { "$oid": "6986056b620d7745bfde7f85" }
       },
       {
-        "name": "Trắng Ngọc Trai",
+        "name": "Pearl White",
         "code": "#f5f5f5",
         "_id": { "$oid": "6986056b620d7745bfde7f86" }
       },
       {
-        "name": "Bạc Ánh Kim",
+        "name": "Metallic Silver",
         "code": "#c0c0c0",
         "_id": { "$oid": "6986056b620d7745bfde7f87" }
       },
       {
-        "name": "Nâu Đồng",
+        "name": "Copper Brown",
         "code": "#8b4513",
         "_id": { "$oid": "6986056b620d7745bfde7f88" }
       }
@@ -1257,7 +1257,7 @@
       "/uploads/cars/sample-car-9.jpg",
       "/uploads/cars/sample-car-15.jpg"
     ],
-    "description": "Hyundai Tucson - Mẫu xe coupe Hyundai với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "4909",
       "width": "1920",
@@ -1283,23 +1283,23 @@
     "discountPrice": 1000000,
     "year": 2024,
     "fuelType": "Hybrid",
-    "transmission": "Số sàn",
+    "transmission": "Manual",
     "seats": 8,
     "engine": "2.4L Turbo",
     "mileage": 15,
     "colors": [
       {
-        "name": "Bạc Ánh Kim",
+        "name": "Metallic Silver",
         "code": "#c0c0c0",
         "_id": { "$oid": "6986056b620d7745bfde7f8d" }
       },
       {
-        "name": "Nâu Đồng",
+        "name": "Copper Brown",
         "code": "#8b4513",
         "_id": { "$oid": "6986056b620d7745bfde7f8e" }
       },
       {
-        "name": "Đen Obsidian",
+        "name": "Obsidian Black",
         "code": "#0d0d0d",
         "_id": { "$oid": "6986056b620d7745bfde7f8f" }
       }
@@ -1325,7 +1325,7 @@
       "/uploads/cars/sample-car-13.jpg",
       "/uploads/cars/sample-car-11.jpg"
     ],
-    "description": "Hyundai Santa Fe - Mẫu xe convertible / mui trần Hyundai với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "4400",
       "width": "1871",
@@ -1350,29 +1350,29 @@
     "price": 1086832479,
     "discountPrice": 0,
     "year": 2025,
-    "fuelType": "Xăng",
-    "transmission": "Tự động",
+    "fuelType": "Gasoline",
+    "transmission": "Automatic",
     "seats": 7,
     "engine": "2.4L I4",
     "mileage": 15,
     "colors": [
       {
-        "name": "Bạc Ánh Kim",
+        "name": "Metallic Silver",
         "code": "#c0c0c0",
         "_id": { "$oid": "6986056b620d7745bfde7f94" }
       },
       {
-        "name": "Đỏ Ruby",
+        "name": "Ruby Red",
         "code": "#9b111e",
         "_id": { "$oid": "6986056b620d7745bfde7f95" }
       },
       {
-        "name": "Nâu Đồng",
+        "name": "Copper Brown",
         "code": "#8b4513",
         "_id": { "$oid": "6986056b620d7745bfde7f96" }
       },
       {
-        "name": "Xanh Dương",
+        "name": "Ocean Blue",
         "code": "#1e3a5f",
         "_id": { "$oid": "6986056b620d7745bfde7f97" }
       }
@@ -1398,7 +1398,7 @@
       "/uploads/cars/sample-car-11.jpg",
       "/uploads/cars/sample-car-14.jpg"
     ],
-    "description": "Hyundai Creta - Mẫu xe pickup / bán tải Hyundai với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "5024",
       "width": "1922",
@@ -1423,29 +1423,29 @@
     "price": 738369432,
     "discountPrice": 678853719,
     "year": 2024,
-    "fuelType": "Dầu",
-    "transmission": "Số sàn",
+    "fuelType": "Diesel",
+    "transmission": "Manual",
     "seats": 5,
     "engine": "3.1L V8",
     "mileage": 10,
     "colors": [
       {
-        "name": "Xanh Dương",
+        "name": "Ocean Blue",
         "code": "#1e3a5f",
         "_id": { "$oid": "6986056b620d7745bfde7f9c" }
       },
       {
-        "name": "Nâu Đồng",
+        "name": "Copper Brown",
         "code": "#8b4513",
         "_id": { "$oid": "6986056b620d7745bfde7f9d" }
       },
       {
-        "name": "Xanh Lá",
+        "name": "Forest Green",
         "code": "#1a472a",
         "_id": { "$oid": "6986056b620d7745bfde7f9e" }
       },
       {
-        "name": "Bạc Ánh Kim",
+        "name": "Metallic Silver",
         "code": "#c0c0c0",
         "_id": { "$oid": "6986056b620d7745bfde7f9f" }
       }
@@ -1473,7 +1473,7 @@
       "/uploads/cars/sample-car-14.jpg",
       "/uploads/cars/sample-car-11.jpg"
     ],
-    "description": "Hyundai Stargazer - Mẫu xe sport / thể thao Hyundai với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "4997",
       "width": "1844",
@@ -1498,29 +1498,29 @@
     "price": 970317167,
     "discountPrice": 912347064,
     "year": 2025,
-    "fuelType": "Điện",
-    "transmission": "Tự động",
+    "fuelType": "Electric",
+    "transmission": "Automatic",
     "seats": 8,
     "engine": "397kW Electric Motor",
     "mileage": 22,
     "colors": [
       {
-        "name": "Đen Obsidian",
+        "name": "Obsidian Black",
         "code": "#0d0d0d",
         "_id": { "$oid": "6986056b620d7745bfde7fa4" }
       },
       {
-        "name": "Nâu Đồng",
+        "name": "Copper Brown",
         "code": "#8b4513",
         "_id": { "$oid": "6986056b620d7745bfde7fa5" }
       },
       {
-        "name": "Xám Titanium",
+        "name": "Titanium Gray",
         "code": "#5a5a5a",
         "_id": { "$oid": "6986056b620d7745bfde7fa6" }
       },
       {
-        "name": "Đỏ Ruby",
+        "name": "Ruby Red",
         "code": "#9b111e",
         "_id": { "$oid": "6986056b620d7745bfde7fa7" }
       }
@@ -1548,7 +1548,7 @@
       "/uploads/cars/sample-car-7.jpg",
       "/uploads/cars/sample-car-15.jpg"
     ],
-    "description": "Hyundai Ioniq 5 - Mẫu xe crossover Hyundai với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "5160",
       "width": "1857",
@@ -1573,39 +1573,39 @@
     "price": 938274379,
     "discountPrice": 917755527,
     "year": 2022,
-    "fuelType": "Dầu",
-    "transmission": "Tự động",
+    "fuelType": "Diesel",
+    "transmission": "Automatic",
     "seats": 5,
     "engine": "2.4L I4",
     "mileage": 11,
     "colors": [
       {
-        "name": "Xanh Dương",
+        "name": "Ocean Blue",
         "code": "#1e3a5f",
         "_id": { "$oid": "6986056b620d7745bfde7fac" }
       },
       {
-        "name": "Đỏ Ruby",
+        "name": "Ruby Red",
         "code": "#9b111e",
         "_id": { "$oid": "6986056b620d7745bfde7fad" }
       },
       {
-        "name": "Nâu Đồng",
+        "name": "Copper Brown",
         "code": "#8b4513",
         "_id": { "$oid": "6986056b620d7745bfde7fae" }
       },
       {
-        "name": "Đen Obsidian",
+        "name": "Obsidian Black",
         "code": "#0d0d0d",
         "_id": { "$oid": "6986056b620d7745bfde7faf" }
       },
       {
-        "name": "Xanh Lá",
+        "name": "Forest Green",
         "code": "#1a472a",
         "_id": { "$oid": "6986056b620d7745bfde7fb0" }
       },
       {
-        "name": "Xám Titanium",
+        "name": "Titanium Gray",
         "code": "#5a5a5a",
         "_id": { "$oid": "6986056b620d7745bfde7fb1" }
       }
@@ -1632,7 +1632,7 @@
       "/uploads/cars/sample-car-4.jpg",
       "/uploads/cars/sample-car-13.jpg"
     ],
-    "description": "Kia Morning - Mẫu xe mpv Kia với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "4707",
       "width": "1789",
@@ -1657,24 +1657,24 @@
     "price": 457026061,
     "discountPrice": 0,
     "year": 2022,
-    "fuelType": "Dầu",
-    "transmission": "Số sàn",
+    "fuelType": "Diesel",
+    "transmission": "Manual",
     "seats": 5,
     "engine": "3.9L Turbo",
     "mileage": 13,
     "colors": [
       {
-        "name": "Bạc Ánh Kim",
+        "name": "Metallic Silver",
         "code": "#c0c0c0",
         "_id": { "$oid": "6986056b620d7745bfde7fb6" }
       },
       {
-        "name": "Đen Obsidian",
+        "name": "Obsidian Black",
         "code": "#0d0d0d",
         "_id": { "$oid": "6986056b620d7745bfde7fb7" }
       },
       {
-        "name": "Xám Titanium",
+        "name": "Titanium Gray",
         "code": "#5a5a5a",
         "_id": { "$oid": "6986056b620d7745bfde7fb8" }
       }
@@ -1700,7 +1700,7 @@
       "/uploads/cars/sample-car-10.jpg",
       "/uploads/cars/sample-car-2.jpg"
     ],
-    "description": "Kia Seltos - Mẫu xe suv Kia với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "4308",
       "width": "1991",
@@ -1726,28 +1726,28 @@
     "discountPrice": 0,
     "year": 2024,
     "fuelType": "Hybrid",
-    "transmission": "Tự động",
+    "transmission": "Automatic",
     "seats": 8,
     "engine": "1.8L Turbo",
     "mileage": 7,
     "colors": [
       {
-        "name": "Trắng Ngọc Trai",
+        "name": "Pearl White",
         "code": "#f5f5f5",
         "_id": { "$oid": "6986056b620d7745bfde7fbd" }
       },
       {
-        "name": "Đỏ Ruby",
+        "name": "Ruby Red",
         "code": "#9b111e",
         "_id": { "$oid": "6986056b620d7745bfde7fbe" }
       },
       {
-        "name": "Xanh Dương",
+        "name": "Ocean Blue",
         "code": "#1e3a5f",
         "_id": { "$oid": "6986056b620d7745bfde7fbf" }
       },
       {
-        "name": "Đen Obsidian",
+        "name": "Obsidian Black",
         "code": "#0d0d0d",
         "_id": { "$oid": "6986056b620d7745bfde7fc0" }
       }
@@ -1774,7 +1774,7 @@
       "/uploads/cars/sample-car-4.jpg",
       "/uploads/cars/sample-car-15.jpg"
     ],
-    "description": "Kia Sportage - Mẫu xe suv Kia với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "4989",
       "width": "1953",
@@ -1799,34 +1799,34 @@
     "price": 892408048,
     "discountPrice": 0,
     "year": 2025,
-    "fuelType": "Điện",
-    "transmission": "Số sàn",
+    "fuelType": "Electric",
+    "transmission": "Manual",
     "seats": 8,
     "engine": "322kW Electric Motor",
     "mileage": 15,
     "colors": [
       {
-        "name": "Xanh Dương",
+        "name": "Ocean Blue",
         "code": "#1e3a5f",
         "_id": { "$oid": "6986056b620d7745bfde7fc5" }
       },
       {
-        "name": "Nâu Đồng",
+        "name": "Copper Brown",
         "code": "#8b4513",
         "_id": { "$oid": "6986056b620d7745bfde7fc6" }
       },
       {
-        "name": "Xám Titanium",
+        "name": "Titanium Gray",
         "code": "#5a5a5a",
         "_id": { "$oid": "6986056b620d7745bfde7fc7" }
       },
       {
-        "name": "Đỏ Ruby",
+        "name": "Ruby Red",
         "code": "#9b111e",
         "_id": { "$oid": "6986056b620d7745bfde7fc8" }
       },
       {
-        "name": "Bạc Ánh Kim",
+        "name": "Metallic Silver",
         "code": "#c0c0c0",
         "_id": { "$oid": "6986056b620d7745bfde7fc9" }
       }
@@ -1852,7 +1852,7 @@
       "/uploads/cars/sample-car-14.jpg",
       "/uploads/cars/sample-car-10.jpg"
     ],
-    "description": "Kia Sorento - Mẫu xe sport / thể thao Kia với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "4744",
       "width": "1764",
@@ -1878,38 +1878,38 @@
     "discountPrice": 0,
     "year": 2024,
     "fuelType": "Hybrid",
-    "transmission": "Số sàn",
+    "transmission": "Manual",
     "seats": 4,
     "engine": "3.3L V8",
     "mileage": 11,
     "colors": [
       {
-        "name": "Bạc Ánh Kim",
+        "name": "Metallic Silver",
         "code": "#c0c0c0",
         "_id": { "$oid": "6986056b620d7745bfde7fce" }
       },
       {
-        "name": "Trắng Ngọc Trai",
+        "name": "Pearl White",
         "code": "#f5f5f5",
         "_id": { "$oid": "6986056b620d7745bfde7fcf" }
       },
       {
-        "name": "Xanh Lá",
+        "name": "Forest Green",
         "code": "#1a472a",
         "_id": { "$oid": "6986056b620d7745bfde7fd0" }
       },
       {
-        "name": "Đen Obsidian",
+        "name": "Obsidian Black",
         "code": "#0d0d0d",
         "_id": { "$oid": "6986056b620d7745bfde7fd1" }
       },
       {
-        "name": "Xanh Dương",
+        "name": "Ocean Blue",
         "code": "#1e3a5f",
         "_id": { "$oid": "6986056b620d7745bfde7fd2" }
       },
       {
-        "name": "Nâu Đồng",
+        "name": "Copper Brown",
         "code": "#8b4513",
         "_id": { "$oid": "6986056b620d7745bfde7fd3" }
       }
@@ -1936,7 +1936,7 @@
       "/uploads/cars/sample-car-4.jpg",
       "/uploads/cars/sample-car-8.jpg"
     ],
-    "description": "Kia Carnival - Mẫu xe hatchback  Kia với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "4351",
       "width": "1927",
@@ -1962,28 +1962,28 @@
     "discountPrice": 0,
     "year": 2023,
     "fuelType": "Hybrid",
-    "transmission": "Số sàn",
+    "transmission": "Manual",
     "seats": 4,
     "engine": "3.5L V8",
     "mileage": 8,
     "colors": [
       {
-        "name": "Bạc Ánh Kim",
+        "name": "Metallic Silver",
         "code": "#c0c0c0",
         "_id": { "$oid": "6986056b620d7745bfde7fd8" }
       },
       {
-        "name": "Nâu Đồng",
+        "name": "Copper Brown",
         "code": "#8b4513",
         "_id": { "$oid": "6986056b620d7745bfde7fd9" }
       },
       {
-        "name": "Đỏ Ruby",
+        "name": "Ruby Red",
         "code": "#9b111e",
         "_id": { "$oid": "6986056b620d7745bfde7fda" }
       },
       {
-        "name": "Đen Obsidian",
+        "name": "Obsidian Black",
         "code": "#0d0d0d",
         "_id": { "$oid": "6986056b620d7745bfde7fdb" }
       }
@@ -2010,7 +2010,7 @@
       "/uploads/cars/sample-car-7.jpg",
       "/uploads/cars/sample-car-5.jpg"
     ],
-    "description": "Kia K3 - Mẫu xe crossover Kia với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "4687",
       "width": "1787",
@@ -2035,39 +2035,39 @@
     "price": 476233439,
     "discountPrice": 0,
     "year": 2023,
-    "fuelType": "Dầu",
-    "transmission": "Số sàn",
+    "fuelType": "Diesel",
+    "transmission": "Manual",
     "seats": 8,
     "engine": "2.5L I4",
     "mileage": 11,
     "colors": [
       {
-        "name": "Xanh Lá",
+        "name": "Forest Green",
         "code": "#1a472a",
         "_id": { "$oid": "6986056b620d7745bfde7fe0" }
       },
       {
-        "name": "Trắng Ngọc Trai",
+        "name": "Pearl White",
         "code": "#f5f5f5",
         "_id": { "$oid": "6986056b620d7745bfde7fe1" }
       },
       {
-        "name": "Đỏ Ruby",
+        "name": "Ruby Red",
         "code": "#9b111e",
         "_id": { "$oid": "6986056b620d7745bfde7fe2" }
       },
       {
-        "name": "Nâu Đồng",
+        "name": "Copper Brown",
         "code": "#8b4513",
         "_id": { "$oid": "6986056b620d7745bfde7fe3" }
       },
       {
-        "name": "Xám Titanium",
+        "name": "Titanium Gray",
         "code": "#5a5a5a",
         "_id": { "$oid": "6986056b620d7745bfde7fe4" }
       },
       {
-        "name": "Bạc Ánh Kim",
+        "name": "Metallic Silver",
         "code": "#c0c0c0",
         "_id": { "$oid": "6986056b620d7745bfde7fe5" }
       }
@@ -2095,7 +2095,7 @@
       "/uploads/cars/sample-car-14.jpg",
       "/uploads/cars/sample-car-13.jpg"
     ],
-    "description": "Kia K5 - Mẫu xe coupe Kia với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "4262",
       "width": "1905",
@@ -2120,34 +2120,34 @@
     "price": 1476013154,
     "discountPrice": 0,
     "year": 2022,
-    "fuelType": "Điện",
-    "transmission": "Tự động",
+    "fuelType": "Electric",
+    "transmission": "Automatic",
     "seats": 8,
     "engine": "190kW Electric Motor",
     "mileage": 17,
     "colors": [
       {
-        "name": "Đen Obsidian",
+        "name": "Obsidian Black",
         "code": "#0d0d0d",
         "_id": { "$oid": "6986056b620d7745bfde7fea" }
       },
       {
-        "name": "Nâu Đồng",
+        "name": "Copper Brown",
         "code": "#8b4513",
         "_id": { "$oid": "6986056b620d7745bfde7feb" }
       },
       {
-        "name": "Xanh Dương",
+        "name": "Ocean Blue",
         "code": "#1e3a5f",
         "_id": { "$oid": "6986056b620d7745bfde7fec" }
       },
       {
-        "name": "Trắng Ngọc Trai",
+        "name": "Pearl White",
         "code": "#f5f5f5",
         "_id": { "$oid": "6986056b620d7745bfde7fed" }
       },
       {
-        "name": "Đỏ Ruby",
+        "name": "Ruby Red",
         "code": "#9b111e",
         "_id": { "$oid": "6986056b620d7745bfde7fee" }
       }
@@ -2173,7 +2173,7 @@
       "/uploads/cars/sample-car-9.jpg",
       "/uploads/cars/sample-car-9.jpg"
     ],
-    "description": "Mazda Mazda2 - Mẫu xe electric / xe điện Mazda với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "4541",
       "width": "1945",
@@ -2199,23 +2199,23 @@
     "discountPrice": 0,
     "year": 2022,
     "fuelType": "Hybrid",
-    "transmission": "Số sàn",
+    "transmission": "Manual",
     "seats": 4,
     "engine": "2.7L I4",
     "mileage": 7,
     "colors": [
       {
-        "name": "Trắng Ngọc Trai",
+        "name": "Pearl White",
         "code": "#f5f5f5",
         "_id": { "$oid": "6986056b620d7745bfde7ff3" }
       },
       {
-        "name": "Xanh Lá",
+        "name": "Forest Green",
         "code": "#1a472a",
         "_id": { "$oid": "6986056b620d7745bfde7ff4" }
       },
       {
-        "name": "Bạc Ánh Kim",
+        "name": "Metallic Silver",
         "code": "#c0c0c0",
         "_id": { "$oid": "6986056b620d7745bfde7ff5" }
       }
@@ -2243,7 +2243,7 @@
       "/uploads/cars/sample-car-12.jpg",
       "/uploads/cars/sample-car-5.jpg"
     ],
-    "description": "Mazda Mazda3 - Mẫu xe luxury / xe sang Mazda với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "4648",
       "width": "1759",
@@ -2269,33 +2269,33 @@
     "discountPrice": 0,
     "year": 2025,
     "fuelType": "Hybrid",
-    "transmission": "Tự động",
+    "transmission": "Automatic",
     "seats": 8,
     "engine": "1.8L V8",
     "mileage": 11,
     "colors": [
       {
-        "name": "Bạc Ánh Kim",
+        "name": "Metallic Silver",
         "code": "#c0c0c0",
         "_id": { "$oid": "6986056b620d7745bfde7ffa" }
       },
       {
-        "name": "Đen Obsidian",
+        "name": "Obsidian Black",
         "code": "#0d0d0d",
         "_id": { "$oid": "6986056b620d7745bfde7ffb" }
       },
       {
-        "name": "Trắng Ngọc Trai",
+        "name": "Pearl White",
         "code": "#f5f5f5",
         "_id": { "$oid": "6986056b620d7745bfde7ffc" }
       },
       {
-        "name": "Xám Titanium",
+        "name": "Titanium Gray",
         "code": "#5a5a5a",
         "_id": { "$oid": "6986056b620d7745bfde7ffd" }
       },
       {
-        "name": "Đỏ Ruby",
+        "name": "Ruby Red",
         "code": "#9b111e",
         "_id": { "$oid": "6986056b620d7745bfde7ffe" }
       }
@@ -2323,7 +2323,7 @@
       "/uploads/cars/sample-car-11.jpg",
       "/uploads/cars/sample-car-14.jpg"
     ],
-    "description": "Mazda Mazda6 - Mẫu xe coupe Mazda với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "5127",
       "width": "1854",
@@ -2348,39 +2348,39 @@
     "price": 1027247054,
     "discountPrice": 0,
     "year": 2024,
-    "fuelType": "Dầu",
-    "transmission": "Số sàn",
+    "fuelType": "Diesel",
+    "transmission": "Manual",
     "seats": 5,
     "engine": "2.7L V8",
     "mileage": 7,
     "colors": [
       {
-        "name": "Đỏ Ruby",
+        "name": "Ruby Red",
         "code": "#9b111e",
         "_id": { "$oid": "6986056b620d7745bfde8003" }
       },
       {
-        "name": "Xám Titanium",
+        "name": "Titanium Gray",
         "code": "#5a5a5a",
         "_id": { "$oid": "6986056b620d7745bfde8004" }
       },
       {
-        "name": "Bạc Ánh Kim",
+        "name": "Metallic Silver",
         "code": "#c0c0c0",
         "_id": { "$oid": "6986056b620d7745bfde8005" }
       },
       {
-        "name": "Đen Obsidian",
+        "name": "Obsidian Black",
         "code": "#0d0d0d",
         "_id": { "$oid": "6986056b620d7745bfde8006" }
       },
       {
-        "name": "Xanh Lá",
+        "name": "Forest Green",
         "code": "#1a472a",
         "_id": { "$oid": "6986056b620d7745bfde8007" }
       },
       {
-        "name": "Nâu Đồng",
+        "name": "Copper Brown",
         "code": "#8b4513",
         "_id": { "$oid": "6986056b620d7745bfde8008" }
       }
@@ -2408,7 +2408,7 @@
       "/uploads/cars/sample-car-8.jpg",
       "/uploads/cars/sample-car-3.jpg"
     ],
-    "description": "Mazda CX-3 - Mẫu xe mpv Mazda với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "5051",
       "width": "1775",
@@ -2433,24 +2433,24 @@
     "price": 1489684298,
     "discountPrice": 0,
     "year": 2023,
-    "fuelType": "Xăng",
-    "transmission": "Tự động",
+    "fuelType": "Gasoline",
+    "transmission": "Automatic",
     "seats": 5,
     "engine": "3.3L V6",
     "mileage": 8,
     "colors": [
       {
-        "name": "Xanh Lá",
+        "name": "Forest Green",
         "code": "#1a472a",
         "_id": { "$oid": "6986056b620d7745bfde800d" }
       },
       {
-        "name": "Bạc Ánh Kim",
+        "name": "Metallic Silver",
         "code": "#c0c0c0",
         "_id": { "$oid": "6986056b620d7745bfde800e" }
       },
       {
-        "name": "Nâu Đồng",
+        "name": "Copper Brown",
         "code": "#8b4513",
         "_id": { "$oid": "6986056b620d7745bfde800f" }
       }
@@ -2476,7 +2476,7 @@
       "/uploads/cars/sample-car-5.jpg",
       "/uploads/cars/sample-car-11.jpg"
     ],
-    "description": "Mazda CX-5 - Mẫu xe pickup / bán tải Mazda với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "5168",
       "width": "1756",
@@ -2501,39 +2501,39 @@
     "price": 901608832,
     "discountPrice": 0,
     "year": 2023,
-    "fuelType": "Điện",
-    "transmission": "Tự động",
+    "fuelType": "Electric",
+    "transmission": "Automatic",
     "seats": 7,
     "engine": "308kW Electric Motor",
     "mileage": 17,
     "colors": [
       {
-        "name": "Nâu Đồng",
+        "name": "Copper Brown",
         "code": "#8b4513",
         "_id": { "$oid": "6986056b620d7745bfde8014" }
       },
       {
-        "name": "Bạc Ánh Kim",
+        "name": "Metallic Silver",
         "code": "#c0c0c0",
         "_id": { "$oid": "6986056b620d7745bfde8015" }
       },
       {
-        "name": "Trắng Ngọc Trai",
+        "name": "Pearl White",
         "code": "#f5f5f5",
         "_id": { "$oid": "6986056b620d7745bfde8016" }
       },
       {
-        "name": "Xanh Dương",
+        "name": "Ocean Blue",
         "code": "#1e3a5f",
         "_id": { "$oid": "6986056b620d7745bfde8017" }
       },
       {
-        "name": "Đen Obsidian",
+        "name": "Obsidian Black",
         "code": "#0d0d0d",
         "_id": { "$oid": "6986056b620d7745bfde8018" }
       },
       {
-        "name": "Đỏ Ruby",
+        "name": "Ruby Red",
         "code": "#9b111e",
         "_id": { "$oid": "6986056b620d7745bfde8019" }
       }
@@ -2561,7 +2561,7 @@
       "/uploads/cars/sample-car-1.jpg",
       "/uploads/cars/sample-car-3.jpg"
     ],
-    "description": "Mazda CX-8 - Mẫu xe suv Mazda với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "4415",
       "width": "1896",
@@ -2586,24 +2586,24 @@
     "price": 1322834387,
     "discountPrice": 1240593511,
     "year": 2025,
-    "fuelType": "Điện",
-    "transmission": "Tự động",
+    "fuelType": "Electric",
+    "transmission": "Automatic",
     "seats": 4,
     "engine": "227kW Electric Motor",
     "mileage": 24,
     "colors": [
       {
-        "name": "Bạc Ánh Kim",
+        "name": "Metallic Silver",
         "code": "#c0c0c0",
         "_id": { "$oid": "6986056b620d7745bfde801e" }
       },
       {
-        "name": "Trắng Ngọc Trai",
+        "name": "Pearl White",
         "code": "#f5f5f5",
         "_id": { "$oid": "6986056b620d7745bfde801f" }
       },
       {
-        "name": "Đen Obsidian",
+        "name": "Obsidian Black",
         "code": "#0d0d0d",
         "_id": { "$oid": "6986056b620d7745bfde8020" }
       }
@@ -2629,7 +2629,7 @@
       "/uploads/cars/sample-car-15.jpg",
       "/uploads/cars/sample-car-13.jpg"
     ],
-    "description": "Mazda CX-30 - Mẫu xe suv Mazda với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "4289",
       "width": "1911",
@@ -2654,39 +2654,39 @@
     "price": 1043682940,
     "discountPrice": 969630741,
     "year": 2022,
-    "fuelType": "Điện",
-    "transmission": "Tự động",
+    "fuelType": "Electric",
+    "transmission": "Automatic",
     "seats": 4,
     "engine": "181kW Electric Motor",
     "mileage": 25,
     "colors": [
       {
-        "name": "Đen Obsidian",
+        "name": "Obsidian Black",
         "code": "#0d0d0d",
         "_id": { "$oid": "6986056b620d7745bfde8025" }
       },
       {
-        "name": "Xanh Dương",
+        "name": "Ocean Blue",
         "code": "#1e3a5f",
         "_id": { "$oid": "6986056b620d7745bfde8026" }
       },
       {
-        "name": "Xanh Lá",
+        "name": "Forest Green",
         "code": "#1a472a",
         "_id": { "$oid": "6986056b620d7745bfde8027" }
       },
       {
-        "name": "Đỏ Ruby",
+        "name": "Ruby Red",
         "code": "#9b111e",
         "_id": { "$oid": "6986056b620d7745bfde8028" }
       },
       {
-        "name": "Nâu Đồng",
+        "name": "Copper Brown",
         "code": "#8b4513",
         "_id": { "$oid": "6986056b620d7745bfde8029" }
       },
       {
-        "name": "Xám Titanium",
+        "name": "Titanium Gray",
         "code": "#5a5a5a",
         "_id": { "$oid": "6986056b620d7745bfde802a" }
       }
@@ -2712,7 +2712,7 @@
       "/uploads/cars/sample-car-13.jpg",
       "/uploads/cars/sample-car-13.jpg"
     ],
-    "description": "Ford Ranger - Mẫu xe mpv Ford với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "5064",
       "width": "1953",
@@ -2737,24 +2737,24 @@
     "price": 476052943,
     "discountPrice": 0,
     "year": 2025,
-    "fuelType": "Điện",
-    "transmission": "Số sàn",
+    "fuelType": "Electric",
+    "transmission": "Manual",
     "seats": 8,
     "engine": "201kW Electric Motor",
     "mileage": 15,
     "colors": [
       {
-        "name": "Xanh Lá",
+        "name": "Forest Green",
         "code": "#1a472a",
         "_id": { "$oid": "6986056b620d7745bfde802f" }
       },
       {
-        "name": "Xanh Dương",
+        "name": "Ocean Blue",
         "code": "#1e3a5f",
         "_id": { "$oid": "6986056b620d7745bfde8030" }
       },
       {
-        "name": "Nâu Đồng",
+        "name": "Copper Brown",
         "code": "#8b4513",
         "_id": { "$oid": "6986056b620d7745bfde8031" }
       }
@@ -2782,7 +2782,7 @@
       "/uploads/cars/sample-car-5.jpg",
       "/uploads/cars/sample-car-6.jpg"
     ],
-    "description": "Ford Everest - Mẫu xe electric / xe điện Ford với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "4451",
       "width": "1981",
@@ -2808,33 +2808,33 @@
     "discountPrice": 638617728,
     "year": 2024,
     "fuelType": "Hybrid",
-    "transmission": "Số sàn",
+    "transmission": "Manual",
     "seats": 7,
     "engine": "4.0L Turbo",
     "mileage": 13,
     "colors": [
       {
-        "name": "Xanh Lá",
+        "name": "Forest Green",
         "code": "#1a472a",
         "_id": { "$oid": "6986056b620d7745bfde8036" }
       },
       {
-        "name": "Đen Obsidian",
+        "name": "Obsidian Black",
         "code": "#0d0d0d",
         "_id": { "$oid": "6986056b620d7745bfde8037" }
       },
       {
-        "name": "Xám Titanium",
+        "name": "Titanium Gray",
         "code": "#5a5a5a",
         "_id": { "$oid": "6986056b620d7745bfde8038" }
       },
       {
-        "name": "Nâu Đồng",
+        "name": "Copper Brown",
         "code": "#8b4513",
         "_id": { "$oid": "6986056b620d7745bfde8039" }
       },
       {
-        "name": "Bạc Ánh Kim",
+        "name": "Metallic Silver",
         "code": "#c0c0c0",
         "_id": { "$oid": "6986056b620d7745bfde803a" }
       }
@@ -2861,7 +2861,7 @@
       "/uploads/cars/sample-car-5.jpg",
       "/uploads/cars/sample-car-13.jpg"
     ],
-    "description": "Ford Territory - Mẫu xe pickup / bán tải Ford với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "4500",
       "width": "1751",
@@ -2887,33 +2887,33 @@
     "discountPrice": 0,
     "year": 2022,
     "fuelType": "Hybrid",
-    "transmission": "Tự động",
+    "transmission": "Automatic",
     "seats": 8,
     "engine": "2.3L V6",
     "mileage": 12,
     "colors": [
       {
-        "name": "Trắng Ngọc Trai",
+        "name": "Pearl White",
         "code": "#f5f5f5",
         "_id": { "$oid": "6986056b620d7745bfde803f" }
       },
       {
-        "name": "Bạc Ánh Kim",
+        "name": "Metallic Silver",
         "code": "#c0c0c0",
         "_id": { "$oid": "6986056b620d7745bfde8040" }
       },
       {
-        "name": "Đỏ Ruby",
+        "name": "Ruby Red",
         "code": "#9b111e",
         "_id": { "$oid": "6986056b620d7745bfde8041" }
       },
       {
-        "name": "Xám Titanium",
+        "name": "Titanium Gray",
         "code": "#5a5a5a",
         "_id": { "$oid": "6986056b620d7745bfde8042" }
       },
       {
-        "name": "Đen Obsidian",
+        "name": "Obsidian Black",
         "code": "#0d0d0d",
         "_id": { "$oid": "6986056b620d7745bfde8043" }
       }
@@ -2941,7 +2941,7 @@
       "/uploads/cars/sample-car-15.jpg",
       "/uploads/cars/sample-car-10.jpg"
     ],
-    "description": "Ford Explorer - Mẫu xe mpv Ford với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "4247",
       "width": "1878",
@@ -2966,34 +2966,34 @@
     "price": 1085102405,
     "discountPrice": 0,
     "year": 2024,
-    "fuelType": "Điện",
-    "transmission": "Số sàn",
+    "fuelType": "Electric",
+    "transmission": "Manual",
     "seats": 4,
     "engine": "296kW Electric Motor",
     "mileage": 19,
     "colors": [
       {
-        "name": "Đỏ Ruby",
+        "name": "Ruby Red",
         "code": "#9b111e",
         "_id": { "$oid": "6986056b620d7745bfde8048" }
       },
       {
-        "name": "Xanh Lá",
+        "name": "Forest Green",
         "code": "#1a472a",
         "_id": { "$oid": "6986056b620d7745bfde8049" }
       },
       {
-        "name": "Xanh Dương",
+        "name": "Ocean Blue",
         "code": "#1e3a5f",
         "_id": { "$oid": "6986056b620d7745bfde804a" }
       },
       {
-        "name": "Đen Obsidian",
+        "name": "Obsidian Black",
         "code": "#0d0d0d",
         "_id": { "$oid": "6986056b620d7745bfde804b" }
       },
       {
-        "name": "Nâu Đồng",
+        "name": "Copper Brown",
         "code": "#8b4513",
         "_id": { "$oid": "6986056b620d7745bfde804c" }
       }
@@ -3021,7 +3021,7 @@
       "/uploads/cars/sample-car-6.jpg",
       "/uploads/cars/sample-car-1.jpg"
     ],
-    "description": "Mitsubishi Xpander - Mẫu xe crossover Mitsubishi với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "4743",
       "width": "1768",
@@ -3046,34 +3046,34 @@
     "price": 577659173,
     "discountPrice": 0,
     "year": 2025,
-    "fuelType": "Xăng",
-    "transmission": "Số sàn",
+    "fuelType": "Gasoline",
+    "transmission": "Manual",
     "seats": 5,
     "engine": "3.8L I4",
     "mileage": 11,
     "colors": [
       {
-        "name": "Xanh Dương",
+        "name": "Ocean Blue",
         "code": "#1e3a5f",
         "_id": { "$oid": "6986056b620d7745bfde8051" }
       },
       {
-        "name": "Đỏ Ruby",
+        "name": "Ruby Red",
         "code": "#9b111e",
         "_id": { "$oid": "6986056b620d7745bfde8052" }
       },
       {
-        "name": "Bạc Ánh Kim",
+        "name": "Metallic Silver",
         "code": "#c0c0c0",
         "_id": { "$oid": "6986056b620d7745bfde8053" }
       },
       {
-        "name": "Xanh Lá",
+        "name": "Forest Green",
         "code": "#1a472a",
         "_id": { "$oid": "6986056b620d7745bfde8054" }
       },
       {
-        "name": "Đen Obsidian",
+        "name": "Obsidian Black",
         "code": "#0d0d0d",
         "_id": { "$oid": "6986056b620d7745bfde8055" }
       }
@@ -3100,7 +3100,7 @@
       "/uploads/cars/sample-car-14.jpg",
       "/uploads/cars/sample-car-14.jpg"
     ],
-    "description": "Mitsubishi Attrage - Mẫu xe crossover Mitsubishi với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "4922",
       "width": "2000",
@@ -3126,33 +3126,33 @@
     "discountPrice": 0,
     "year": 2024,
     "fuelType": "Hybrid",
-    "transmission": "Số sàn",
+    "transmission": "Manual",
     "seats": 4,
     "engine": "2.6L V6",
     "mileage": 7,
     "colors": [
       {
-        "name": "Xanh Dương",
+        "name": "Ocean Blue",
         "code": "#1e3a5f",
         "_id": { "$oid": "6986056b620d7745bfde805a" }
       },
       {
-        "name": "Xám Titanium",
+        "name": "Titanium Gray",
         "code": "#5a5a5a",
         "_id": { "$oid": "6986056b620d7745bfde805b" }
       },
       {
-        "name": "Nâu Đồng",
+        "name": "Copper Brown",
         "code": "#8b4513",
         "_id": { "$oid": "6986056b620d7745bfde805c" }
       },
       {
-        "name": "Trắng Ngọc Trai",
+        "name": "Pearl White",
         "code": "#f5f5f5",
         "_id": { "$oid": "6986056b620d7745bfde805d" }
       },
       {
-        "name": "Đen Obsidian",
+        "name": "Obsidian Black",
         "code": "#0d0d0d",
         "_id": { "$oid": "6986056b620d7745bfde805e" }
       }
@@ -3180,7 +3180,7 @@
       "/uploads/cars/sample-car-10.jpg",
       "/uploads/cars/sample-car-12.jpg"
     ],
-    "description": "Mitsubishi Outlander - Mẫu xe luxury / xe sang Mitsubishi với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "4245",
       "width": "1858",
@@ -3205,34 +3205,34 @@
     "price": 935017270,
     "discountPrice": 838739552,
     "year": 2022,
-    "fuelType": "Dầu",
-    "transmission": "Tự động",
+    "fuelType": "Diesel",
+    "transmission": "Automatic",
     "seats": 5,
     "engine": "1.9L V8",
     "mileage": 9,
     "colors": [
       {
-        "name": "Xám Titanium",
+        "name": "Titanium Gray",
         "code": "#5a5a5a",
         "_id": { "$oid": "6986056b620d7745bfde8063" }
       },
       {
-        "name": "Nâu Đồng",
+        "name": "Copper Brown",
         "code": "#8b4513",
         "_id": { "$oid": "6986056b620d7745bfde8064" }
       },
       {
-        "name": "Xanh Dương",
+        "name": "Ocean Blue",
         "code": "#1e3a5f",
         "_id": { "$oid": "6986056b620d7745bfde8065" }
       },
       {
-        "name": "Trắng Ngọc Trai",
+        "name": "Pearl White",
         "code": "#f5f5f5",
         "_id": { "$oid": "6986056b620d7745bfde8066" }
       },
       {
-        "name": "Đen Obsidian",
+        "name": "Obsidian Black",
         "code": "#0d0d0d",
         "_id": { "$oid": "6986056b620d7745bfde8067" }
       }
@@ -3258,7 +3258,7 @@
       "/uploads/cars/sample-car-14.jpg",
       "/uploads/cars/sample-car-1.jpg"
     ],
-    "description": "Mitsubishi Pajero Sport - Mẫu xe sedan Mitsubishi với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "4372",
       "width": "1761",
@@ -3283,39 +3283,39 @@
     "price": 1106033207,
     "discountPrice": 0,
     "year": 2024,
-    "fuelType": "Xăng",
-    "transmission": "Số sàn",
+    "fuelType": "Gasoline",
+    "transmission": "Manual",
     "seats": 7,
     "engine": "2.3L V8",
     "mileage": 14,
     "colors": [
       {
-        "name": "Xám Titanium",
+        "name": "Titanium Gray",
         "code": "#5a5a5a",
         "_id": { "$oid": "6986056b620d7745bfde806c" }
       },
       {
-        "name": "Xanh Lá",
+        "name": "Forest Green",
         "code": "#1a472a",
         "_id": { "$oid": "6986056b620d7745bfde806d" }
       },
       {
-        "name": "Nâu Đồng",
+        "name": "Copper Brown",
         "code": "#8b4513",
         "_id": { "$oid": "6986056b620d7745bfde806e" }
       },
       {
-        "name": "Trắng Ngọc Trai",
+        "name": "Pearl White",
         "code": "#f5f5f5",
         "_id": { "$oid": "6986056b620d7745bfde806f" }
       },
       {
-        "name": "Bạc Ánh Kim",
+        "name": "Metallic Silver",
         "code": "#c0c0c0",
         "_id": { "$oid": "6986056b620d7745bfde8070" }
       },
       {
-        "name": "Đỏ Ruby",
+        "name": "Ruby Red",
         "code": "#9b111e",
         "_id": { "$oid": "6986056b620d7745bfde8071" }
       }
@@ -3342,7 +3342,7 @@
       "/uploads/cars/sample-car-2.jpg",
       "/uploads/cars/sample-car-12.jpg"
     ],
-    "description": "Mitsubishi Triton - Mẫu xe coupe Mitsubishi với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "5027",
       "width": "1915",
@@ -3367,34 +3367,34 @@
     "price": 916886316,
     "discountPrice": 0,
     "year": 2023,
-    "fuelType": "Điện",
-    "transmission": "Tự động",
+    "fuelType": "Electric",
+    "transmission": "Automatic",
     "seats": 7,
     "engine": "326kW Electric Motor",
     "mileage": 22,
     "colors": [
       {
-        "name": "Đỏ Ruby",
+        "name": "Ruby Red",
         "code": "#9b111e",
         "_id": { "$oid": "6986056b620d7745bfde8076" }
       },
       {
-        "name": "Xanh Lá",
+        "name": "Forest Green",
         "code": "#1a472a",
         "_id": { "$oid": "6986056b620d7745bfde8077" }
       },
       {
-        "name": "Bạc Ánh Kim",
+        "name": "Metallic Silver",
         "code": "#c0c0c0",
         "_id": { "$oid": "6986056b620d7745bfde8078" }
       },
       {
-        "name": "Đen Obsidian",
+        "name": "Obsidian Black",
         "code": "#0d0d0d",
         "_id": { "$oid": "6986056b620d7745bfde8079" }
       },
       {
-        "name": "Xanh Dương",
+        "name": "Ocean Blue",
         "code": "#1e3a5f",
         "_id": { "$oid": "6986056b620d7745bfde807a" }
       }
@@ -3420,7 +3420,7 @@
       "/uploads/cars/sample-car-3.jpg",
       "/uploads/cars/sample-car-14.jpg"
     ],
-    "description": "VinFast VF3 - Mẫu xe coupe VinFast với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "4698",
       "width": "1995",
@@ -3445,24 +3445,24 @@
     "price": 749685278,
     "discountPrice": 0,
     "year": 2025,
-    "fuelType": "Điện",
-    "transmission": "Số sàn",
+    "fuelType": "Electric",
+    "transmission": "Manual",
     "seats": 4,
     "engine": "159kW Electric Motor",
     "mileage": 21,
     "colors": [
       {
-        "name": "Xanh Dương",
+        "name": "Ocean Blue",
         "code": "#1e3a5f",
         "_id": { "$oid": "6986056b620d7745bfde807f" }
       },
       {
-        "name": "Xanh Lá",
+        "name": "Forest Green",
         "code": "#1a472a",
         "_id": { "$oid": "6986056b620d7745bfde8080" }
       },
       {
-        "name": "Bạc Ánh Kim",
+        "name": "Metallic Silver",
         "code": "#c0c0c0",
         "_id": { "$oid": "6986056b620d7745bfde8081" }
       }
@@ -3489,7 +3489,7 @@
       "/uploads/cars/sample-car-13.jpg",
       "/uploads/cars/sample-car-7.jpg"
     ],
-    "description": "VinFast VF5 - Mẫu xe convertible / mui trần VinFast với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "4282",
       "width": "1775",
@@ -3514,29 +3514,29 @@
     "price": 606267386,
     "discountPrice": 0,
     "year": 2024,
-    "fuelType": "Điện",
-    "transmission": "Số sàn",
+    "fuelType": "Electric",
+    "transmission": "Manual",
     "seats": 5,
     "engine": "218kW Electric Motor",
     "mileage": 22,
     "colors": [
       {
-        "name": "Đen Obsidian",
+        "name": "Obsidian Black",
         "code": "#0d0d0d",
         "_id": { "$oid": "6986056b620d7745bfde8086" }
       },
       {
-        "name": "Xanh Lá",
+        "name": "Forest Green",
         "code": "#1a472a",
         "_id": { "$oid": "6986056b620d7745bfde8087" }
       },
       {
-        "name": "Đỏ Ruby",
+        "name": "Ruby Red",
         "code": "#9b111e",
         "_id": { "$oid": "6986056b620d7745bfde8088" }
       },
       {
-        "name": "Xanh Dương",
+        "name": "Ocean Blue",
         "code": "#1e3a5f",
         "_id": { "$oid": "6986056b620d7745bfde8089" }
       }
@@ -3563,7 +3563,7 @@
       "/uploads/cars/sample-car-3.jpg",
       "/uploads/cars/sample-car-9.jpg"
     ],
-    "description": "VinFast VF6 - Mẫu xe convertible / mui trần VinFast với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "4641",
       "width": "1840",
@@ -3588,39 +3588,39 @@
     "price": 1355692516,
     "discountPrice": 0,
     "year": 2024,
-    "fuelType": "Điện",
-    "transmission": "Tự động",
+    "fuelType": "Electric",
+    "transmission": "Automatic",
     "seats": 8,
     "engine": "263kW Electric Motor",
     "mileage": 15,
     "colors": [
       {
-        "name": "Trắng Ngọc Trai",
+        "name": "Pearl White",
         "code": "#f5f5f5",
         "_id": { "$oid": "6986056b620d7745bfde808e" }
       },
       {
-        "name": "Nâu Đồng",
+        "name": "Copper Brown",
         "code": "#8b4513",
         "_id": { "$oid": "6986056b620d7745bfde808f" }
       },
       {
-        "name": "Xanh Dương",
+        "name": "Ocean Blue",
         "code": "#1e3a5f",
         "_id": { "$oid": "6986056b620d7745bfde8090" }
       },
       {
-        "name": "Bạc Ánh Kim",
+        "name": "Metallic Silver",
         "code": "#c0c0c0",
         "_id": { "$oid": "6986056b620d7745bfde8091" }
       },
       {
-        "name": "Đỏ Ruby",
+        "name": "Ruby Red",
         "code": "#9b111e",
         "_id": { "$oid": "6986056b620d7745bfde8092" }
       },
       {
-        "name": "Đen Obsidian",
+        "name": "Obsidian Black",
         "code": "#0d0d0d",
         "_id": { "$oid": "6986056b620d7745bfde8093" }
       }
@@ -3648,7 +3648,7 @@
       "/uploads/cars/sample-car-14.jpg",
       "/uploads/cars/sample-car-2.jpg"
     ],
-    "description": "VinFast VF7 - Mẫu xe electric / xe điện VinFast với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "4372",
       "width": "1929",
@@ -3673,39 +3673,39 @@
     "price": 1093383866,
     "discountPrice": 0,
     "year": 2024,
-    "fuelType": "Điện",
-    "transmission": "Số sàn",
+    "fuelType": "Electric",
+    "transmission": "Manual",
     "seats": 4,
     "engine": "271kW Electric Motor",
     "mileage": 18,
     "colors": [
       {
-        "name": "Xanh Dương",
+        "name": "Ocean Blue",
         "code": "#1e3a5f",
         "_id": { "$oid": "6986056b620d7745bfde8098" }
       },
       {
-        "name": "Trắng Ngọc Trai",
+        "name": "Pearl White",
         "code": "#f5f5f5",
         "_id": { "$oid": "6986056b620d7745bfde8099" }
       },
       {
-        "name": "Đỏ Ruby",
+        "name": "Ruby Red",
         "code": "#9b111e",
         "_id": { "$oid": "6986056b620d7745bfde809a" }
       },
       {
-        "name": "Xanh Lá",
+        "name": "Forest Green",
         "code": "#1a472a",
         "_id": { "$oid": "6986056b620d7745bfde809b" }
       },
       {
-        "name": "Bạc Ánh Kim",
+        "name": "Metallic Silver",
         "code": "#c0c0c0",
         "_id": { "$oid": "6986056b620d7745bfde809c" }
       },
       {
-        "name": "Xám Titanium",
+        "name": "Titanium Gray",
         "code": "#5a5a5a",
         "_id": { "$oid": "6986056b620d7745bfde809d" }
       }
@@ -3733,7 +3733,7 @@
       "/uploads/cars/sample-car-8.jpg",
       "/uploads/cars/sample-car-4.jpg"
     ],
-    "description": "VinFast VF8 - Mẫu xe suv VinFast với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "4610",
       "width": "1954",
@@ -3758,24 +3758,24 @@
     "price": 1550534398,
     "discountPrice": 0,
     "year": 2025,
-    "fuelType": "Điện",
-    "transmission": "Số sàn",
+    "fuelType": "Electric",
+    "transmission": "Manual",
     "seats": 8,
     "engine": "396kW Electric Motor",
     "mileage": 19,
     "colors": [
       {
-        "name": "Xám Titanium",
+        "name": "Titanium Gray",
         "code": "#5a5a5a",
         "_id": { "$oid": "6986056b620d7745bfde80a2" }
       },
       {
-        "name": "Xanh Lá",
+        "name": "Forest Green",
         "code": "#1a472a",
         "_id": { "$oid": "6986056b620d7745bfde80a3" }
       },
       {
-        "name": "Đen Obsidian",
+        "name": "Obsidian Black",
         "code": "#0d0d0d",
         "_id": { "$oid": "6986056b620d7745bfde80a4" }
       }
@@ -3801,7 +3801,7 @@
       "/uploads/cars/sample-car-12.jpg",
       "/uploads/cars/sample-car-14.jpg"
     ],
-    "description": "VinFast VF9 - Mẫu xe sport / thể thao VinFast với thiết kế hiện đại, động cơ mạnh mẽ và nhiều tính năng an toàn tiên tiến. Phù hợp cho cả gia đình và doanh nhân.",
+    "description": "Modern design, strong performance, advanced safety features, and a comfortable cabin for daily commuting and long trips.",
     "specifications": {
       "length": "5109",
       "width": "1872",
@@ -3818,3 +3818,4 @@
     "updatedAt": { "$date": "2026-02-10T04:03:24.289Z" }
   }
 ]
+

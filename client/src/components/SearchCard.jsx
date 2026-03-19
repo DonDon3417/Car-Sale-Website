@@ -23,20 +23,20 @@ const SearchCard = () => {
 
     // Static options
     const priceRanges = [
-        { label: 'Tất cả giá', value: '' },
-        { label: 'Dưới 500 triệu', value: '0-500000000' },
-        { label: '500 triệu - 1 tỷ', value: '500000000-1000000000' },
-        { label: '1 - 2 tỷ', value: '1000000000-2000000000' },
-        { label: '2 - 3 tỷ', value: '2000000000-3000000000' },
-        { label: 'Trên 3 tỷ', value: '3000000000-999999999999' },
+        { label: 'All prices', value: '' },
+        { label: 'Under 500 million VND', value: '0-500000000' },
+        { label: '500 million - 1 billion VND', value: '500000000-1000000000' },
+        { label: '1 - 2 billion VND', value: '1000000000-2000000000' },
+        { label: '2 - 3 billion VND', value: '2000000000-3000000000' },
+        { label: 'Over 3 billion VND', value: '3000000000-999999999999' },
     ];
 
     const fuelTypes = [
-        { label: 'Tất cả nhiên liệu', value: '' },
-        { label: 'Xăng', value: 'Xăng' },
-        { label: 'Dầu', value: 'Dầu' },
+        { label: 'All fuel types', value: '' },
+        { label: 'Gasoline', value: 'Gasoline' },
+        { label: 'Diesel', value: 'Diesel' },
         { label: 'Hybrid', value: 'Hybrid' },
-        { label: 'Điện', value: 'Điện' },
+        { label: 'Electric', value: 'Electric' },
     ];
 
     // Fetch brands and categories on mount
@@ -117,7 +117,7 @@ const SearchCard = () => {
                 className="w-full h-9 pl-8 pr-7 bg-[#1a1f2e] border border-white/10 rounded-lg text-white text-xs appearance-none cursor-pointer transition-all duration-300 hover:border-[#0066FF]/50 hover:bg-[#1e2438] focus:outline-none focus:border-[#0066FF] focus:ring-1 focus:ring-[#0066FF]/30 disabled:opacity-50 disabled:cursor-not-allowed"
             >
                 <option value="" className="bg-[#1a1f2e]">
-                    {isLoading ? 'Đang tải...' : label}
+                    {isLoading ? 'Loading...' : label}
                 </option>
                 {options.map((opt) => (
                     <option
@@ -151,7 +151,7 @@ const SearchCard = () => {
                 <div className="flex items-center gap-1.5 mb-3">
                     <div className="w-0.5 h-3 bg-[#0066FF] rounded-full" />
                     <span className="text-white/60 text-[10px] font-medium tracking-wide uppercase">
-                        Tìm xe phù hợp
+                        Find Your Perfect Car
                     </span>
                 </div>
 
@@ -159,7 +159,7 @@ const SearchCard = () => {
                 <div className="flex flex-wrap lg:flex-nowrap items-center gap-2">
                     <SelectField
                         icon={Car}
-                        label="Chọn hãng xe"
+                        label="Select brand"
                         options={brands}
                         value={filters.brand}
                         onChange={(val) => setFilters({ ...filters, brand: val })}
@@ -168,7 +168,7 @@ const SearchCard = () => {
 
                     <SelectField
                         icon={DollarSign}
-                        label="Khoảng giá"
+                        label="Price range"
                         options={priceRanges}
                         value={filters.priceRange}
                         onChange={(val) => setFilters({ ...filters, priceRange: val })}
@@ -176,7 +176,7 @@ const SearchCard = () => {
 
                     <SelectField
                         icon={LayoutGrid}
-                        label="Loại xe"
+                        label="Car type"
                         options={categories}
                         value={filters.category}
                         onChange={(val) => setFilters({ ...filters, category: val })}
@@ -185,7 +185,7 @@ const SearchCard = () => {
 
                     <SelectField
                         icon={Fuel}
-                        label="Nhiên liệu"
+                        label="Fuel type"
                         options={fuelTypes}
                         value={filters.fuelType}
                         onChange={(val) => setFilters({ ...filters, fuelType: val })}
@@ -206,7 +206,7 @@ const SearchCard = () => {
                             ) : (
                                 <Search className="w-3.5 h-3.5" />
                             )}
-                            <span>{isSearching ? 'Đang tìm...' : 'Tìm xe'}</span>
+                            <span>{isSearching ? 'Searching...' : 'Search cars'}</span>
                         </div>
                     </motion.button>
                 </div>
@@ -215,17 +215,17 @@ const SearchCard = () => {
                 <div className="flex items-center gap-4 mt-3 pt-3 border-t border-white/5">
                     <div className="flex items-center gap-1.5">
                         <span className="text-[#0066FF] font-bold text-sm">{loading ? '...' : stats.totalCars}</span>
-                        <span className="text-white/40 text-[10px]">xe có sẵn</span>
+                        <span className="text-white/40 text-[10px]">cars available</span>
                     </div>
                     <div className="w-px h-3 bg-white/10" />
                     <div className="flex items-center gap-1.5">
                         <span className="text-[#0066FF] font-bold text-sm">{loading ? '...' : stats.totalBrands}</span>
-                        <span className="text-white/40 text-[10px]">hãng xe</span>
+                        <span className="text-white/40 text-[10px]">brands</span>
                     </div>
                     <div className="w-px h-3 bg-white/10" />
                     <div className="flex items-center gap-1.5">
                         <span className="text-[#0066FF] font-bold text-sm">24/7</span>
-                        <span className="text-white/40 text-[10px]">hỗ trợ</span>
+                        <span className="text-white/40 text-[10px]">support</span>
                     </div>
                 </div>
             </motion.div>

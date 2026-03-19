@@ -1,20 +1,20 @@
-import { motion } from 'framer-motion';
+﻿import { motion } from 'framer-motion';
 import { CreditCard, Shield, Car, Wrench } from 'lucide-react';
 
 const Services = () => {
     const services = [
         {
             icon: CreditCard,
-            title: 'Hỗ trợ trả góp',
-            description: 'Lãi suất 0% trong 12 tháng đầu. Thủ tục nhanh trong 24h.',
+            title: 'Installment Support',
+            description: '0% interest for the first 12 months. Fast approval within 24 hours.',
         },
         {
             icon: Shield,
-            title: 'Bảo hành chính hãng',
-            description: 'Bảo hành 5 năm hoặc 150,000 km với đội ngũ chuyên nghiệp.',
+            title: 'Genuine warranty',
+            description: '5-year or 150,000 km warranty with a professional team.',
         },
-        { icon: Car, title: 'Lái thử tận nhà', description: 'Đặt lịch lái thử miễn phí. Chuyên viên đến tận nơi.' },
-        { icon: Wrench, title: 'Bảo dưỡng định kỳ', description: 'Nhắc nhở tự động. Ưu đãi 20% phụ tùng chính hãng.' },
+        { icon: Car, title: 'Home Test Drive', description: 'Book a free test drive. Our specialist comes to your location.' },
+        { icon: Wrench, title: 'Periodic maintenance', description: 'Automatic reminders. 20% off genuine parts.' },
     ];
 
     const containerVariants = {
@@ -39,12 +39,12 @@ const Services = () => {
                     <div className="flex items-center justify-center gap-2 mb-2">
                         <div className="w-6 h-[1px] bg-[#0066FF]" />
                         <span className="text-[#0066FF] text-[10px] font-semibold tracking-[0.15em] uppercase">
-                            Dịch vụ
+                            Services
                         </span>
                         <div className="w-6 h-[1px] bg-[#0066FF]" />
                     </div>
-                    <h2 className="text-xl md:text-2xl font-bold text-white mb-1">Dịch vụ showroom</h2>
-                    <p className="text-white/50 text-xs">Trải nghiệm dịch vụ cao cấp chuẩn quốc tế</p>
+                    <h2 className="text-xl md:text-2xl font-bold text-white mb-1">Showroom services</h2>
+                    <p className="text-white/50 text-xs">Experience premium international-standard service</p>
                 </motion.div>
 
                 <motion.div
@@ -77,3 +77,4 @@ const Services = () => {
 };
 
 export default Services;
+

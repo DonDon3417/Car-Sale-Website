@@ -71,7 +71,7 @@ ${carCatalog}
 - Nếu khách muốn lái thử, hướng dẫn đặt lịch
 
 ## BẮT BUỘC: ĐÁNH GIÁ KHẢ NĂNG MUA XE
-Sau MỖII phản hồi, bạn PHẢI thêm một block JSON ở cuối cùng (sau nội dung trả lời), được bao bọc trong tag <INTEREST_JSON> như sau:
+Sau MỖI phản hồi, bạn PHẢI thêm một block JSON ở cuối cùng (sau nội dung trả lời), được bao bọc trong tag <INTEREST_JSON> như sau:
 
 <INTEREST_JSON>
 {"interestScore": number, "level": "Cold | Warm | Hot", "reason": "Giải thích ngắn gọn"}

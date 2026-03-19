@@ -12,6 +12,7 @@ export class ApiClient {
         });
 
         this.isRefreshing = false;
+        this.isHandlingAuthFailure = false;
         this.failedQueue = [];
 
         this.setupInterceptors();
@@ -29,7 +30,24 @@ export class ApiClient {
             (response) => response,
             async (error) => {
                 const originalRequest = error.config;
+
+                if (!originalRequest) {
+                    return Promise.reject(error);
+                }
+
+                const requestUrl = originalRequest.url || '';
+                const isAuthEndpoint =
+                    requestUrl.includes('/api/users/login') ||
+                    requestUrl.includes('/api/users/register') ||
+                    requestUrl.includes('/api/users/refresh-token') ||
+                    requestUrl.includes('/api/users/logout');
+
                 if (error.response?.status === 401 && !originalRequest._retry) {
+                    // Do not retry auth endpoints to avoid recursion.
+                    if (isAuthEndpoint) {
+                        return Promise.reject(error);
+                    }
+
                     if (!this.isLoggedIn()) {
                         this.handleAuthFailure();
                         return Promise.reject(error);
@@ -87,8 +105,15 @@ export class ApiClient {
     }
 
     handleAuthFailure() {
+        if (this.isHandlingAuthFailure) return;
+        this.isHandlingAuthFailure = true;
+
+        Cookies.remove('logged');
+
         this.logout().finally(() => {
-            window.location.href = '/login';
+            if (window.location.pathname !== '/account/login') {
+                window.location.replace('/account/login');
+            }
         });
     }
 
@@ -98,7 +123,8 @@ export class ApiClient {
 
     async logout() {
         try {
-            await this.axiosInstance.get('/api/users/logout');
+            // Use a plain request (without this interceptor) to avoid 401 recursion.
+            await axios.get(`${this.baseURL}/api/users/logout`, { withCredentials: true });
         } catch (error) {
             console.error('Logout error:', error);
         }
