@@ -276,7 +276,7 @@ const BlogAdmin = () => {
                                                     />
                                                 )}
                                                 <div className="min-w-0">
-                                                    <p className="text-white font-medium text-sm truncate max-w-[300px]">
+                                                    <p className="text-white font-medium text-sm truncate max-w-75">
                                                         {blog.title}
                                                     </p>
                                                 </div>
@@ -348,7 +348,7 @@ const BlogAdmin = () => {
                             {/* Modal Header */}
                             <div className="p-5 border-b border-white/10 flex items-center justify-between">
                                 <h3 className="text-lg font-bold text-white">
-                                    {editingBlog ? 'Edit article' : 'Add Article mới'}
+                                    {editingBlog ? 'Edit article' : 'Add new article'}
                                 </h3>
                                 <button
                                     onClick={() => setIsModalOpen(false)}
@@ -512,7 +512,7 @@ const BlogAdmin = () => {
                                     <img
                                         src={`${import.meta.env.VITE_URL_IMAGE}/uploads/blogs/${previewBlog.image}`}
                                         alt={previewBlog.title}
-                                        className="w-full rounded-xl object-cover max-h-[300px]"
+                                        className="w-full rounded-xl object-cover max-h-75"
                                     />
                                 )}
                                 <div className="flex items-center gap-4 text-white/40 text-xs">
@@ -542,7 +542,7 @@ const BlogAdmin = () => {
                                     className="flex-1 py-2.5 bg-[#0066FF] hover:bg-[#0052cc] text-white rounded-xl transition-colors text-sm font-medium flex items-center justify-center gap-2"
                                 >
                                     <Edit3 className="w-4 h-4" />
-                                    Chỉnh sửa
+                                    Edit
                                 </button>
                             </div>
                         </motion.div>

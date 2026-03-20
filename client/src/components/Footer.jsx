@@ -15,7 +15,7 @@ const Footer = () => {
     const contactInfo = [
         { icon: Phone, text: '1900 1234', href: 'tel:19001234' },
         { icon: Mail, text: 'info@autoshowroom.vn', href: 'mailto:info@autoshowroom.vn' },
-        { icon: MapPin, text: '123 Nguyễn Văn Linh, Q.7, TP.HCM', href: '#' },
+        { icon: MapPin, text: '123 Nguyen Van Linh, District 7, Ho Chi Minh City', href: '#' },
     ];
     const socials = [
         { icon: Facebook, href: '#', label: 'Facebook' },
@@ -26,7 +26,7 @@ const Footer = () => {
 
     return (
         <footer className="bg-[#070a0f] border-t border-white/5">
-            <div className="max-w-[1000px] mx-auto px-4 py-8 lg:py-10">
+            <div className="max-w-250 mx-auto px-4 py-8 lg:py-10">
                 <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
                     <div>
                         <a href="/" className="inline-block mb-3">
@@ -86,8 +86,8 @@ const Footer = () => {
                             ))}
                         </ul>
                         <div className="mt-3 pt-3 border-t border-white/5">
-                            <p className="text-white/40 text-[10px] mb-0.5">Hours làm việc</p>
-                            <p className="text-white/70 text-[11px]">08:00 - 20:00 (T2 - CN)</p>
+                            <p className="text-white/40 text-[10px] mb-0.5">Working hours</p>
+                            <p className="text-white/70 text-[11px]">08:00 - 20:00 (Mon - Sun)</p>
                         </div>
                     </div>
 
@@ -125,7 +125,7 @@ const Footer = () => {
             </div>
 
             <div className="border-t border-white/5">
-                <div className="max-w-[1000px] mx-auto px-4 py-4">
+                <div className="max-w-250 mx-auto px-4 py-4">
                     <div className="flex flex-col sm:flex-row items-center justify-between gap-2">
                         <p className="text-white/40 text-[10px]">
                             © 2026 AutoShow. Designed by <span className="text-white/60">Premium Studio</span>

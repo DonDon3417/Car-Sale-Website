@@ -1,5 +1,6 @@
 const modelUser = require('../models/users.model');
 const modelApiKey = require('../models/apiKey.model');
+const modelCar = require('../models/cars.model');
 // const modelOtp = require('../models/otp.model');
 // const modelMessageChatbot = require('../models/messageChatbot.model');
 // const { askHotelAssistant } = require('../utils/chatbot');
@@ -197,6 +198,56 @@ class UserService {
         user.avatar = filename;
         await user.save();
         return user;
+    }
+
+    async getFavoriteCars(id) {
+        const user = await modelUser
+            .findById(id)
+            .populate({
+                path: 'favorites',
+                populate: [
+                    { path: 'brand', select: 'name' },
+                    { path: 'category', select: 'name' },
+                ],
+            })
+            .lean();
+
+        if (!user) {
+            throw new BadRequestError('Người dùng không tồn tại');
+        }
+
+        return user.favorites || [];
+    }
+
+    async toggleFavoriteCar(id, carId) {
+        const [user, car] = await Promise.all([modelUser.findById(id), modelCar.findById(carId)]);
+
+        if (!user) {
+            throw new BadRequestError('Người dùng không tồn tại');
+        }
+
+        if (!car) {
+            throw new BadRequestError('Xe không tồn tại');
+        }
+
+        const favoriteIndex = user.favorites.findIndex((favoriteId) => favoriteId.toString() === carId);
+        let isFavorite = false;
+
+        if (favoriteIndex >= 0) {
+            user.favorites.splice(favoriteIndex, 1);
+            isFavorite = false;
+        } else {
+            user.favorites.push(car._id);
+            isFavorite = true;
+        }
+
+        await user.save();
+
+        return {
+            isFavorite,
+            favoritesCount: user.favorites.length,
+            favoriteCarIds: user.favorites.map((favoriteId) => favoriteId.toString()),
+        };
     }
 
     async loginGoogle(credential) {

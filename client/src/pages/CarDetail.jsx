@@ -1,5 +1,5 @@
 ﻿import { useState, useEffect, useMemo } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     ArrowLeft,
@@ -36,9 +36,14 @@ import LoanChatWidget from '../components/LoanChatWidget';
 import TestDriveModal from '../components/TestDriveModal';
 import DepositModal from '../components/DepositModal';
 import { requestGetCarBySlug } from '../config/CarRequest';
+import { requestToggleFavoriteCar } from '../config/UserRequest';
+import { useStore } from '../hooks/useStore';
+import cookies from 'js-cookie';
 
 const CarDetail = () => {
     const { slug } = useParams();
+    const navigate = useNavigate();
+    const { dataUser, fetchAuth } = useStore();
     const [car, setCar] = useState(null);
     const [loading, setLoading] = useState(true);
     const [activeImage, setActiveImage] = useState(0);
@@ -49,6 +54,8 @@ const CarDetail = () => {
     const [showChat, setShowChat] = useState(false);
     const [showTestDrive, setShowTestDrive] = useState(false);
     const [showDeposit, setShowDeposit] = useState(false);
+    const [isFavorite, setIsFavorite] = useState(false);
+    const [favoriteLoading, setFavoriteLoading] = useState(false);
 
     const formatTransmission = (value) => {
         if (!value) return '-';
@@ -96,6 +103,19 @@ const CarDetail = () => {
         fetchCar();
     }, [slug]);
 
+    useEffect(() => {
+        if (!car?._id) {
+            setIsFavorite(false);
+            return;
+        }
+
+        const favoriteCarIds = (dataUser?.favorites || [])
+            .map((favorite) => (typeof favorite === 'string' ? favorite : favorite?._id))
+            .filter(Boolean);
+
+        setIsFavorite(favoriteCarIds.includes(car._id));
+    }, [car, dataUser]);
+
     const fetchCar = async () => {
         try {
             setLoading(true);
@@ -131,6 +151,26 @@ const CarDetail = () => {
     const prevImage = () => {
         if (car?.images?.length > 0) {
             setActiveImage((prev) => (prev - 1 + car.images.length) % car.images.length);
+        }
+    };
+
+    const handleToggleFavorite = async () => {
+        if (!car?._id || favoriteLoading) return;
+
+        if (!cookies.get('logged')) {
+            navigate('/account/login');
+            return;
+        }
+
+        try {
+            setFavoriteLoading(true);
+            const res = await requestToggleFavoriteCar(car._id);
+            setIsFavorite(Boolean(res?.metadata?.isFavorite));
+            await fetchAuth();
+        } catch (error) {
+            console.error('Error updating favorite car:', error);
+        } finally {
+            setFavoriteLoading(false);
         }
     };
 
@@ -202,11 +242,11 @@ const CarDetail = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-[#0a0a0f] via-[#0d1520] to-[#0a1628]">
+        <div className="min-h-screen bg-linear-to-b from-[#0a0a0f] via-[#0d1520] to-[#0a1628]">
             <Header />
 
             {/* Breadcrumb */}
-            <div className="max-w-[1200px] mx-auto px-4 py-4 pt-20">
+            <div className="max-w-300 mx-auto px-4 py-4 pt-20">
                 <div className="flex items-center gap-2 text-sm">
                     <Link to="/" className="text-white/50 hover:text-white transition-colors">
                         Home
@@ -221,7 +261,7 @@ const CarDetail = () => {
             </div>
 
             {/* Main Content */}
-            <div className="max-w-[1200px] mx-auto px-4 pb-20">
+            <div className="max-w-300 mx-auto px-4 pb-20">
                 <div className="grid lg:grid-cols-2 gap-8">
                     {/* Left: Image Gallery */}
                     <div className="space-y-4">
@@ -229,7 +269,7 @@ const CarDetail = () => {
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
-                            className="relative aspect-[16/10] bg-[#1a2332] rounded-2xl overflow-hidden group cursor-pointer"
+                            className="relative aspect-16/10 bg-[#1a2332] rounded-2xl overflow-hidden group cursor-pointer"
                             onClick={() => setShowGallery(true)}
                         >
                             <img
@@ -291,7 +331,7 @@ const CarDetail = () => {
                                     <button
                                         key={idx}
                                         onClick={() => setActiveImage(idx)}
-                                        className={`flex-shrink-0 w-20 h-14 rounded-lg overflow-hidden border-2 transition-all ${
+                                        className={`shrink-0 w-20 h-14 rounded-lg overflow-hidden border-2 transition-all ${
                                             activeImage === idx
                                                 ? 'border-[#0066FF]'
                                                 : 'border-transparent opacity-60 hover:opacity-100'
@@ -346,7 +386,7 @@ const CarDetail = () => {
                         </div>
 
                         {/* Loan Calculator Preview */}
-                        <div className="bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-500/20 rounded-2xl p-5">
+                        <div className="bg-linear-to-r from-green-500/10 to-emerald-500/10 border border-green-500/20 rounded-2xl p-5">
                             <div className="flex items-center justify-between mb-4">
                                 <div className="flex items-center gap-2">
                                     <div className="w-10 h-10 bg-green-500/20 rounded-xl flex items-center justify-center">
@@ -452,7 +492,7 @@ const CarDetail = () => {
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
                                 onClick={() => setShowDeposit(true)}
-                                className="flex-1 flex items-center justify-center gap-2 py-4 bg-gradient-to-r from-[#0066FF] to-[#0052cc] rounded-xl text-white font-semibold shadow-lg shadow-[#0066FF]/30"
+                                className="flex-1 flex items-center justify-center gap-2 py-4 bg-linear-to-r from-[#0066FF] to-[#0052cc] rounded-xl text-white font-semibold shadow-lg shadow-[#0066FF]/30"
                             >
                                 <CreditCard className="w-5 h-5" />
                                 <span>Car Deposits</span>
@@ -467,9 +507,21 @@ const CarDetail = () => {
                                 <span>Book a Test Drive</span>
                             </motion.button>
                             <div className="flex gap-3">
-                                <button className="flex items-center justify-center gap-2 px-4 py-3 bg-white/5 hover:bg-white/10 rounded-xl text-white/70 hover:text-white transition-colors">
-                                    <Heart className="w-5 h-5" />
-                                    <span className="text-sm">Favorite</span>
+                                <button
+                                    onClick={handleToggleFavorite}
+                                    disabled={favoriteLoading}
+                                    className={`flex items-center justify-center gap-2 px-4 py-3 rounded-xl transition-colors ${
+                                        isFavorite
+                                            ? 'bg-red-500/15 text-red-400 hover:bg-red-500/20'
+                                            : 'bg-white/5 hover:bg-white/10 text-white/70 hover:text-white'
+                                    } ${favoriteLoading ? 'opacity-70 cursor-not-allowed' : ''}`}
+                                >
+                                    {favoriteLoading ? (
+                                        <Loader2 className="w-5 h-5 animate-spin" />
+                                    ) : (
+                                        <Heart className={`w-5 h-5 ${isFavorite ? 'fill-current' : ''}`} />
+                                    )}
+                                    <span className="text-sm">{isFavorite ? 'Saved' : 'Favorite'}</span>
                                 </button>
                             </div>
                         </div>
@@ -681,7 +733,7 @@ const CarDetail = () => {
                             {/* Modal Body */}
                             <div className="p-5 space-y-6">
                                 {/* Car Price */}
-                                <div className="bg-gradient-to-r from-[#0066FF]/10 to-purple-500/10 rounded-xl p-4 border border-[#0066FF]/20">
+                                <div className="bg-linear-to-r from-[#0066FF]/10 to-purple-500/10 rounded-xl p-4 border border-[#0066FF]/20">
                                     <div className="flex items-center justify-between">
                                         <span className="text-white/70">Car price</span>
                                         <span className="text-[#0066FF] text-2xl font-bold">
@@ -791,7 +843,7 @@ const CarDetail = () => {
                                 </div>
 
                                 {/* Results */}
-                                <div className="bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-xl p-5 border border-green-500/20 space-y-4">
+                                <div className="bg-linear-to-r from-green-500/10 to-emerald-500/10 rounded-xl p-5 border border-green-500/20 space-y-4">
                                     <h3 className="text-white font-semibold flex items-center gap-2">
                                         <TrendingUp className="w-5 h-5 text-green-400" />
                                         Estimated result
@@ -854,7 +906,7 @@ const CarDetail = () => {
 
                                 {/* Disclaimer */}
                                 <div className="flex items-start gap-2 p-3 bg-yellow-500/10 rounded-xl border border-yellow-500/20">
-                                    <Info className="w-5 h-5 text-yellow-400 flex-shrink-0 mt-0.5" />
+                                    <Info className="w-5 h-5 text-yellow-400 shrink-0 mt-0.5" />
                                     <p className="text-yellow-200/80 text-xs">
                                         The figures above are for reference only. Actual interest rates and loan terms
                                         may vary depending on the bank and your profile. Please contact us for detailed
@@ -871,7 +923,7 @@ const CarDetail = () => {
                                             setShowLoanModal(false);
                                             setShowChat(true);
                                         }}
-                                        className="flex-1 flex items-center justify-center gap-2 py-4 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl text-white font-semibold shadow-lg shadow-green-500/30"
+                                        className="flex-1 flex items-center justify-center gap-2 py-4 bg-linear-to-r from-green-500 to-emerald-500 rounded-xl text-white font-semibold shadow-lg shadow-green-500/30"
                                     >
                                         <MessageCircle className="w-5 h-5" />
                                         <span>Installment consultation chat</span>

@@ -37,8 +37,8 @@ const ContactPage = () => {
         <div className="min-h-screen bg-[#0F172A] text-white pt-24 pb-12 px-4 relative overflow-hidden">
             <Header />
             {/* Background Gradients */}
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#0066FF]/10 rounded-full blur-[100px] -z-10" />
-            <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-[100px] -z-10" />
+            <div className="absolute top-0 right-0 w-125 h-125 bg-[#0066FF]/10 rounded-full blur-[100px] -z-10" />
+            <div className="absolute bottom-0 left-0 w-125 h-125 bg-purple-500/10 rounded-full blur-[100px] -z-10" />
 
             <div className="max-w-6xl mx-auto">
                 <motion.div
@@ -49,12 +49,12 @@ const ContactPage = () => {
                     <span className="text-[#0066FF] text-sm font-semibold tracking-wider uppercase mb-2 block">
                         Contact us
                     </span>
-                    <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent mb-4">
+                    <h1 className="text-4xl md:text-5xl font-bold bg-linear-to-r from-white to-white/60 bg-clip-text text-transparent mb-4">
                         We are always ready to support you
                     </h1>
                     <p className="text-white/60 max-w-2xl mx-auto">
-                        Hãy để lại tin nhắn hoặc liên hệ trực tiếp qua số hotline. Đội ngũ tư vấn sẽ phản hồi trong thời
-                        gian sớm nhất.
+                        Leave us a message or contact us directly via hotline. Our advisors will respond as soon as
+                        possible.
                     </p>
                 </motion.div>
 
@@ -123,7 +123,7 @@ const ContactPage = () => {
                             onSubmit={handleSubmit}
                             className="bg-[#1E293B] border border-white/10 rounded-2xl p-8 space-y-6 relative overflow-hidden"
                         >
-                            <div className="absolute top-0 right-0 w-32 h-32 bg-[#0066FF]/20 rounded-bl-[100px] -z-0 pointer-events-none" />
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-[#0066FF]/20 rounded-bl-[100px] z-0 pointer-events-none" />
 
                             <h3 className="text-2xl font-bold text-white mb-2">Send a message</h3>
                             <p className="text-white/50 text-sm mb-6">

@@ -71,7 +71,7 @@ const Dashboard = () => {
         if (price >= 1000000000) {
             return (price / 1000000000).toFixed(1) + ' billion';
         }
-        return (price / 1000000).toFixed(0) + ' tr';
+        return (price / 1000000).toFixed(0) + ' million';
     };
 
     const formatDate = (date) => new Date(date).toLocaleDateString('en-US');
@@ -98,7 +98,7 @@ const Dashboard = () => {
 
     const statCards = [
         {
-            title: 'Total doanh thu',
+            title: 'Total revenue',
             value: formatPrice(stats?.totalRevenue || 0),
             change: `${stats?.revenueGrowth}%`,
             isPositive: parseFloat(stats?.revenueGrowth) >= 0,
@@ -220,7 +220,7 @@ const Dashboard = () => {
                             <p className="text-white/40 text-xs mt-1">Deposit revenue for the last 6 months</p>
                         </div>
                     </div>
-                    <div className="h-[300px] w-full">
+                    <div className="h-75 w-full">
                         <ResponsiveContainer width="100%" height="100%">
                             <AreaChart data={chartData}>
                                 <defs>
@@ -252,7 +252,7 @@ const Dashboard = () => {
                                         color: '#fff',
                                     }}
                                     itemStyle={{ color: '#fff' }}
-                                    formatter={(value) => [`${value.toLocaleString()} VND`, 'Doanh thu']}
+                                    formatter={(value) => [`${value.toLocaleString()} VND`, 'Revenue']}
                                 />
                                 <Area
                                     type="monotone"
@@ -280,7 +280,7 @@ const Dashboard = () => {
                             Recent activity
                         </h2>
                     </div>
-                    <div className="flex-1 overflow-y-auto max-h-[400px] p-4 space-y-4 custom-scrollbar">
+                    <div className="flex-1 overflow-y-auto max-h-100 p-4 space-y-4 custom-scrollbar">
                         {recentActivity.deposits.length === 0 && recentActivity.users.length === 0 ? (
                             <div className="text-center text-white/30 py-8">No recent activity</div>
                         ) : (
@@ -349,7 +349,7 @@ const Dashboard = () => {
                         <PieChartIcon className="w-5 h-5 text-orange-500" />
                         Order status
                     </h2>
-                    <div className="h-[300px] w-full">
+                    <div className="h-75 w-full">
                         <ResponsiveContainer width="100%" height="100%">
                             <PieChart>
                                 <Pie
@@ -391,7 +391,7 @@ const Dashboard = () => {
                         <BarChartIcon className="w-5 h-5 text-blue-500" />
                         Cars by brand
                     </h2>
-                    <div className="h-[300px] w-full">
+                    <div className="h-75 w-full">
                         <ResponsiveContainer width="100%" height="100%">
                             <BarChart data={advancedStats?.carsByBrand}>
                                 <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />
@@ -438,7 +438,7 @@ const Dashboard = () => {
                         <Tag className="w-5 h-5 text-pink-500" />
                         Cars by category
                     </h2>
-                    <div className="h-[300px] w-full">
+                    <div className="h-75 w-full">
                         <ResponsiveContainer width="100%" height="100%">
                             <BarChart data={advancedStats?.carsByCategory} layout="vertical">
                                 <CartesianGrid

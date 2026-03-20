@@ -58,6 +58,16 @@ export const requestUploadAvatar = async (data) => {
     return res.data;
 };
 
+export const requestGetFavoriteCars = async () => {
+    const res = await apiClient.get(`${apiUser}/favorites`);
+    return res.data;
+};
+
+export const requestToggleFavoriteCar = async (carId) => {
+    const res = await apiClient.post(`${apiUser}/favorites/${carId}/toggle`);
+    return res.data;
+};
+
 export const requestChatbot = async (data) => {
     const res = await apiClient.post(`${apiUser}/chatbot`, data);
     return res.data;

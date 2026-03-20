@@ -211,7 +211,7 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
                     onClick={(e) => e.stopPropagation()}
                 >
                     {/* Header */}
-                    <div className="bg-gradient-to-r from-[#0066FF] to-[#00D4FF] p-5 flex items-center justify-between">
+                    <div className="bg-linear-to-r from-[#0066FF] to-[#00D4FF] p-5 flex items-center justify-between">
                         <div className="flex items-center gap-3">
                             <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
                                 <Car className="w-6 h-6 text-white" />
@@ -247,7 +247,7 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
                                             {s}
                                         </div>
                                         <span className={`text-sm ${step >= s ? 'text-white' : 'text-white/50'}`}>
-                                            {s === 1 ? 'Choose time' : 'Thông tin'}
+                                            {s === 1 ? 'Choose time' : 'Details'}
                                         </span>
                                         {s < 2 && (
                                             <div className={`w-8 h-0.5 ${step > s ? 'bg-[#0066FF]' : 'bg-white/20'}`} />
@@ -260,7 +260,7 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
                         {/* Error message */}
                         {error && (
                             <div className="mb-4 p-3 bg-red-500/10 border border-red-500/20 rounded-xl flex items-center gap-2 text-red-400">
-                                <AlertCircle className="w-5 h-5 flex-shrink-0" />
+                                <AlertCircle className="w-5 h-5 shrink-0" />
                                 <span className="text-sm">{error}</span>
                             </div>
                         )}
@@ -290,7 +290,7 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
 
                                     {/* Day names */}
                                     <div className="grid grid-cols-7 gap-2 mb-2">
-                                        {['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'].map((day) => (
+                                        {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
                                             <div key={day} className="text-center text-white/50 text-sm py-2">
                                                 {day}
                                             </div>
@@ -480,7 +480,7 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
 
                                 {!user && (
                                     <p className="text-center text-white/50 text-sm">
-                                        Bạn cần{' '}
+                                        You need to{' '}
                                         <a href="/account/login" className="text-[#0066FF] underline">
                                             log in
                                         </a>{' '}

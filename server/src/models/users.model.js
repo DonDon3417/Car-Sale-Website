@@ -14,6 +14,12 @@ const modelUser = new Schema(
         typeLogin: { type: String, enum: ['email', 'google'] },
         avatar: { type: String, require: false, default: '' },
         isBlocked: { type: Boolean, default: false },
+        favorites: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Car',
+            },
+        ],
     },
     {
         timestamps: true,

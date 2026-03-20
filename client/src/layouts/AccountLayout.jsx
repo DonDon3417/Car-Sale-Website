@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Outlet, NavLink, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { User, Car, Lock, LogOut, ChevronRight } from 'lucide-react';
+import { User, Car, Heart, Lock, LogOut, ChevronRight } from 'lucide-react';
 import cookies from 'js-cookie';
 
 import Header from '../components/Header';
@@ -18,6 +18,11 @@ const sidebarItems = [
         label: 'My Deposits',
         path: '/account/deposits',
         icon: Car,
+    },
+    {
+        label: 'Favorite Cars',
+        path: '/account/favorites',
+        icon: Heart,
     },
     {
         label: 'Change Password',
@@ -37,21 +42,21 @@ const AccountLayout = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-[#0a0a0f] via-[#0d1520] to-[#0a1628]">
+        <div className="min-h-screen bg-linear-to-b from-[#0a0a0f] via-[#0d1520] to-[#0a1628]">
             <Header />
 
-            <div className="max-w-[1100px] mx-auto px-4 pt-24 pb-16">
+            <div className="max-w-275 mx-auto px-4 pt-24 pb-16">
                 <div className="flex flex-col lg:flex-row gap-6">
                     {/* Sidebar */}
                     <motion.aside
                         initial={{ opacity: 0, x: -30 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.4 }}
-                        className="w-full lg:w-[280px] shrink-0"
+                        className="w-full lg:w-70 shrink-0"
                     >
-                        <div className="bg-[#111827]/80 backdrop-blur-sm border border-white/[0.06] rounded-2xl overflow-hidden sticky top-20">
+                        <div className="bg-[#111827]/80 backdrop-blur-sm border border-white/6 rounded-2xl overflow-hidden sticky top-20">
                             {/* User Info */}
-                            <div className="p-5 border-b border-white/[0.06]">
+                            <div className="p-5 border-b border-white/6">
                                 <div className="flex items-center gap-3">
                                     {dataUser?.avatar ? (
                                         <img
@@ -60,7 +65,7 @@ const AccountLayout = () => {
                                             className="w-12 h-12 rounded-full object-cover ring-2 ring-[#0066FF]/30"
                                         />
                                     ) : (
-                                        <div className="w-12 h-12 bg-gradient-to-br from-[#0066FF] to-[#0044cc] rounded-full flex items-center justify-center ring-2 ring-[#0066FF]/30">
+                                        <div className="w-12 h-12 bg-linear-to-br from-[#0066FF] to-[#0044cc] rounded-full flex items-center justify-center ring-2 ring-[#0066FF]/30">
                                             <span className="text-white text-lg font-bold">
                                                 {dataUser?.fullName?.charAt(0)?.toUpperCase() || 'U'}
                                             </span>
@@ -87,11 +92,11 @@ const AccountLayout = () => {
                                                 `flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 group ${
                                                     isActive
                                                         ? 'bg-[#0066FF]/10 text-[#0066FF] border border-[#0066FF]/20'
-                                                        : 'text-white/60 hover:text-white hover:bg-white/[0.04] border border-transparent'
+                                                        : 'text-white/60 hover:text-white hover:bg-white/4 border border-transparent'
                                                 }`
                                             }
                                         >
-                                            <Icon className="w-[18px] h-[18px] shrink-0" />
+                                            <Icon className="w-4.5 h-4.5 shrink-0" />
                                             <span className="flex-1">{item.label}</span>
                                             <ChevronRight className="w-4 h-4 opacity-0 group-hover:opacity-60 transition-opacity" />
                                         </NavLink>
@@ -101,9 +106,9 @@ const AccountLayout = () => {
                                 {/* Logout Button */}
                                 <button
                                     onClick={handleLogout}
-                                    className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-red-400 hover:text-red-300 hover:bg-red-500/[0.08] transition-all duration-200 mt-1"
+                                    className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-red-400 hover:text-red-300 hover:bg-red-500/8 transition-all duration-200 mt-1"
                                 >
-                                    <LogOut className="w-[18px] h-[18px] shrink-0" />
+                                    <LogOut className="w-4.5 h-4.5 shrink-0" />
                                     <span className="flex-1 text-left">Sign out</span>
                                 </button>
                             </nav>

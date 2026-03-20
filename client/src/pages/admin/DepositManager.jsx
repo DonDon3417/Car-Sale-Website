@@ -277,7 +277,7 @@ const DepositManager = () => {
                                 <DollarSign className="w-6 h-6 text-emerald-400" />
                             </div>
                             <div>
-                                <p className="text-white/60 text-sm">Total thu</p>
+                                <p className="text-white/60 text-sm">Total revenue</p>
                                 <p className="text-xl font-bold text-emerald-400">{formatPrice(stats.totalRevenue)}</p>
                             </div>
                         </div>
@@ -289,14 +289,14 @@ const DepositManager = () => {
             <div className="bg-[#0F172A] border border-white/10 rounded-2xl p-4">
                 <div className="flex flex-wrap gap-4">
                     {/* Search */}
-                    <div className="flex-1 min-w-[200px]">
+                    <div className="flex-1 min-w-50">
                         <div className="relative">
                             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
                             <input
                                 type="text"
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
-                                placeholder="Search theo tên, SĐT, cars, mã orders..."
+                                placeholder="Search by name, phone, car, order ID..."
                                 className="w-full pl-10 pr-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white text-sm placeholder:text-white/40 focus:outline-none focus:border-[#0066FF]"
                             />
                         </div>
@@ -417,7 +417,7 @@ const DepositManager = () => {
                                                         {formatPrice(deposit.depositAmount)}
                                                     </p>
                                                     <p className="text-white/40 text-xs">
-                                                        10% của {formatPrice(deposit.carPrice)}
+                                                        10% of {formatPrice(deposit.carPrice)}
                                                     </p>
                                                 </div>
                                             </td>
@@ -522,7 +522,7 @@ const DepositManager = () => {
                                 disabled={pagination.page === pagination.totalPages}
                                 className="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white rounded-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed"
                             >
-                                Sau
+                                Next
                             </button>
                         </div>
                     </div>
@@ -542,7 +542,7 @@ const DepositManager = () => {
                         onClick={(e) => e.stopPropagation()}
                     >
                         <div className="p-6 border-b border-white/10 flex items-center justify-between">
-                            <h3 className="text-xl font-bold text-white">Details đặt cọc</h3>
+                            <h3 className="text-xl font-bold text-white">Deposit details</h3>
                             <span className="text-white/50 font-mono text-sm">
                                 #{selectedDeposit._id?.slice(-8).toUpperCase()}
                             </span>
@@ -601,14 +601,14 @@ const DepositManager = () => {
                             </div>
 
                             {/* Deposit info */}
-                            <div className="bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-xl p-4 border border-green-500/20">
+                            <div className="bg-linear-to-r from-green-500/10 to-emerald-500/10 rounded-xl p-4 border border-green-500/20">
                                 <h4 className="text-white font-medium flex items-center gap-2 mb-3">
                                     <Wallet className="w-4 h-4 text-green-400" />
                                     Deposit information
                                 </h4>
                                 <div className="grid grid-cols-2 gap-3 text-sm">
                                     <div>
-                                        <p className="text-white/50">Amount cọc (10%)</p>
+                                        <p className="text-white/50">Deposit amount (10%)</p>
                                         <p className="text-green-400 text-xl font-bold">
                                             {formatPriceFull(selectedDeposit.depositAmount)}
                                         </p>

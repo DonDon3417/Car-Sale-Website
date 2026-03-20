@@ -142,7 +142,7 @@ const TestDriveManager = () => {
             fetchBookings();
             fetchStats();
             setIsModalOpen(false);
-            alert('Cancelled and gửi email thông báo cho khách hàng.');
+            alert('Cancelled and sent an email notification to the customer.');
         } catch (error) {
             console.error('Error cancelling booking:', error);
         } finally {
@@ -253,7 +253,7 @@ const TestDriveManager = () => {
             <div className="bg-[#0F172A] border border-white/10 rounded-2xl p-4">
                 <div className="flex flex-wrap gap-4">
                     {/* Search */}
-                    <div className="flex-1 min-w-[200px]">
+                    <div className="flex-1 min-w-50">
                         <div className="relative">
                             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
                             <input

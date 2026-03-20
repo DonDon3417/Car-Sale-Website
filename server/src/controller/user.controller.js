@@ -3,10 +3,12 @@ const { OK } = require('../core/success.response');
 const UserService = require('../services/users.service');
 
 function setCookie(res, token, refreshToken) {
+    const isProduction = process.env.NODE_ENV === 'production';
+
     // Cookie token
     res.cookie('token', token, {
         httpOnly: true,
-        secure: true,
+        secure: isProduction,
         sameSite: 'Strict',
         maxAge: 15 * 60 * 1000,
     });
@@ -14,7 +16,7 @@ function setCookie(res, token, refreshToken) {
     // Cookie trạng thái login
     res.cookie('logged', 1, {
         httpOnly: false,
-        secure: true,
+        secure: isProduction,
         sameSite: 'Strict',
         maxAge: 7 * 24 * 60 * 60 * 1000,
     });
@@ -22,7 +24,7 @@ function setCookie(res, token, refreshToken) {
     // Cookie refreshToken
     res.cookie('refreshToken', refreshToken, {
         httpOnly: true,
-        secure: true,
+        secure: isProduction,
         sameSite: 'Strict',
         maxAge: 7 * 24 * 60 * 60 * 1000,
     });
@@ -85,6 +87,7 @@ class UserController {
     }
 
     async refreshToken(req, res) {
+        const isProduction = process.env.NODE_ENV === 'production';
         const { refreshToken } = req.cookies;
         if (!refreshToken) {
             throw new BadRequestError('Vui lòng đăng nhập lại');
@@ -93,14 +96,14 @@ class UserController {
 
         res.cookie('token', token, {
             httpOnly: true, // Chặn truy cập từ JavaScript (bảo mật hơn)
-            secure: true, // Chỉ gửi trên HTTPS (để đảm bảo an toàn)
+            secure: isProduction, // Chỉ gửi trên HTTPS ở production
             sameSite: 'Strict', // Chống tấn công CSRF
             maxAge: 15 * 60 * 1000, // 15 phút
         });
 
         res.cookie('logged', 1, {
             httpOnly: false, // Chặn truy cập từ JavaScript (bảo mật hơn)
-            secure: true, // Chỉ gửi trên HTTPS (để đảm bảo an toàn)
+            secure: isProduction, // Chỉ gửi trên HTTPS ở production
             sameSite: 'Strict', // Chống tấn công CSRF
             maxAge: 7 * 24 * 60 * 60 * 1000, // 7 ngày
         });
@@ -171,6 +174,19 @@ class UserController {
         new OK({ message: 'success', metadata: data }).send(res);
     }
 
+    async getFavoriteCars(req, res) {
+        const { id } = req.user;
+        const data = await UserService.getFavoriteCars(id);
+        new OK({ message: 'success', metadata: data }).send(res);
+    }
+
+    async toggleFavoriteCar(req, res) {
+        const { id } = req.user;
+        const { carId } = req.params;
+        const data = await UserService.toggleFavoriteCar(id, carId);
+        new OK({ message: 'success', metadata: data }).send(res);
+    }
+
     async getDashboard(req, res) {
         try {
             const data = await UserService.getDashboard();
@@ -188,11 +204,12 @@ class UserController {
     }
 
     async forgotPassword(req, res) {
+        const isProduction = process.env.NODE_ENV === 'production';
         const { email } = req.body;
         const { token, otp } = await UserService.forgotPassword(email);
         res.cookie('tokenResetPassword', token, {
             httpOnly: false,
-            secure: true,
+            secure: isProduction,
             sameSite: 'Strict',
             maxAge: 10 * 60 * 1000,
         });

@@ -52,7 +52,7 @@ const FeaturedCars = () => {
             const res = await requestGetAllCars({ limit: 6, status: 'available' });
             setCars(res.metadata?.cars || []);
         } catch (error) {
-            console.error('Error tải cars:', error);
+            console.error('Error loading cars:', error);
         } finally {
             setLoading(false);
         }
@@ -81,7 +81,7 @@ const FeaturedCars = () => {
 
     return (
         <section className="py-16 lg:py-24">
-            <div className="max-w-[1200px] mx-auto px-4">
+            <div className="max-w-300 mx-auto px-4">
                 {/* Section Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 15 }}
@@ -91,9 +91,9 @@ const FeaturedCars = () => {
                     className="text-center mb-12"
                 >
                     <div className="flex items-center justify-center gap-2 mb-3">
-                        <div className="w-8 h-[2px] bg-gradient-to-r from-transparent to-[#0066FF]" />
+                        <div className="w-8 h-0.5 bg-linear-to-r from-transparent to-[#0066FF]" />
                         <span className="text-[#0066FF] text-xs font-semibold tracking-[0.2em] uppercase">Explore</span>
-                        <div className="w-8 h-[2px] bg-gradient-to-l from-transparent to-[#0066FF]" />
+                        <div className="w-8 h-0.5 bg-linear-to-l from-transparent to-[#0066FF]" />
                     </div>
                     <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">Featured Cars</h2>
                     <p className="text-white/50 text-sm max-w-lg mx-auto">
@@ -121,10 +121,10 @@ const FeaturedCars = () => {
                                     key={car._id}
                                     variants={cardVariants}
                                     whileHover={{ y: -8 }}
-                                    className="group relative bg-gradient-to-b from-[#1a2332] to-[#111827] border border-white/5 rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-[#0066FF]/20 hover:border-[#0066FF]/30"
+                                    className="group relative bg-linear-to-b from-[#1a2332] to-[#111827] border border-white/5 rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-[#0066FF]/20 hover:border-[#0066FF]/30"
                                 >
                                     {/* Image Container */}
-                                    <div className="relative aspect-[16/10] overflow-hidden">
+                                    <div className="relative aspect-16/10 overflow-hidden">
                                         <img
                                             src={
                                                 car.images?.[0]
@@ -134,7 +134,7 @@ const FeaturedCars = () => {
                                             alt={car.name}
                                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                         />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-[#111827] via-transparent to-transparent opacity-80" />
+                                        <div className="absolute inset-0 bg-linear-to-t from-[#111827] via-transparent to-transparent opacity-80" />
 
                                         {/* Tags */}
                                         <div className="absolute top-3 left-3 flex gap-2">
@@ -242,7 +242,7 @@ const FeaturedCars = () => {
                                             <motion.button
                                                 whileHover={{ scale: 1.02 }}
                                                 whileTap={{ scale: 0.98 }}
-                                                className="w-full flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-[#0066FF] to-[#0052cc] hover:from-[#0052cc] hover:to-[#003d99] rounded-xl text-white text-sm font-semibold transition-all duration-300 shadow-lg shadow-[#0066FF]/20"
+                                                className="w-full flex items-center justify-center gap-2 py-3 bg-linear-to-r from-[#0066FF] to-[#0052cc] hover:from-[#0052cc] hover:to-[#003d99] rounded-xl text-white text-sm font-semibold transition-all duration-300 shadow-lg shadow-[#0066FF]/20"
                                             >
                                                 <span>View details</span>
                                                 <ArrowRight className="w-4 h-4" />

@@ -23,6 +23,7 @@ import BlogAdmin from '../pages/admin/BlogAdmin';
 import ContactManager from '../pages/admin/ContactManager';
 import ContactPage from '../pages/ContactPage';
 import ChangePasswordPage from '../pages/account/ChangePasswordPage';
+import FavoriteCarsPage from '../pages/account/FavoriteCarsPage';
 import ChatbotPage from '../pages/ChatbotPage';
 import ChatbotStats from '../pages/admin/ChatbotStats';
 
@@ -46,6 +47,7 @@ export const routes = [
             { index: true, element: <Navigate to="/account/profile" replace /> },
             { path: 'profile', element: <ProfilePage /> },
             { path: 'deposits', element: <MyDepositsPage /> },
+            { path: 'favorites', element: <FavoriteCarsPage /> },
             { path: 'change-password', element: <ChangePasswordPage /> },
         ],
     },

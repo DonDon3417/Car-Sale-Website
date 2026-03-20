@@ -30,25 +30,25 @@ const Register = () => {
 
     return (
         <>
-            <div className="min-h-screen bg-gradient-to-br from-[#0a0a0f] via-[#0d1520] to-[#0a1628] flex items-center justify-center px-4 py-10">
+            <div className="min-h-screen bg-linear-to-br from-[#0a0a0f] via-[#0d1520] to-[#0a1628] flex items-center justify-center px-4 py-10">
                 <Header />
                 <div className="fixed inset-0 overflow-hidden pointer-events-none">
-                    <div className="absolute top-0 left-1/2 w-[500px] h-[500px] bg-[#0066FF]/5 rounded-full blur-[150px]" />
-                    <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-[#E10600]/5 rounded-full blur-[120px]" />
+                    <div className="absolute top-0 left-1/2 w-125 h-125 bg-[#0066FF]/5 rounded-full blur-[150px]" />
+                    <div className="absolute bottom-0 right-0 w-100 h-100 bg-[#E10600]/5 rounded-full blur-[120px]" />
                 </div>
 
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="relative w-full max-w-[400px]"
+                    className="relative w-full max-w-100"
                 >
                     {/* Logo */}
                     <Link to="/" className="flex items-center justify-center gap-2 mb-6">
                         <div className="w-8 h-8 flex items-center justify-center bg-[#0066FF] rounded-lg">
                             <Car className="w-4 h-4 text-white" />
                         </div>
-                        <span className="text-white font-bold text-sm tracking-[0.1em] uppercase">AUTOSHOW</span>
+                        <span className="text-white font-bold text-sm tracking-widest uppercase">AUTOSHOW</span>
                     </Link>
 
                     {/* Card */}
@@ -68,7 +68,7 @@ const Register = () => {
                                         type="text"
                                         value={formData.fullName}
                                         onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                                        placeholder="Nhập họ and tên"
+                                        placeholder="Enter full name"
                                         className="w-full h-10 pl-10 pr-4 bg-white/5 border border-white/10 rounded-lg text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-[#0066FF] transition-colors"
                                         required
                                     />
@@ -161,7 +161,7 @@ const Register = () => {
                                     <a href="#" className="text-[#0066FF] hover:underline">
                                         Terms of Use
                                     </a>{' '}
-                                    và{' '}
+                                    and{' '}
                                     <a href="#" className="text-[#0066FF] hover:underline">
                                         Privacy Policy
                                     </a>
@@ -183,7 +183,7 @@ const Register = () => {
                         {/* Divider */}
                         <div className="flex items-center gap-3 my-4">
                             <div className="flex-1 h-px bg-white/10" />
-                            <span className="text-white/40 text-xs">hoặc</span>
+                            <span className="text-white/40 text-xs">or</span>
                             <div className="flex-1 h-px bg-white/10" />
                         </div>
 

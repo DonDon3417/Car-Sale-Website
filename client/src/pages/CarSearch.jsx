@@ -267,10 +267,10 @@ const CarSearch = () => {
     );
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-[#0a0a0f] via-[#0d1520] to-[#0a1628]">
+        <div className="min-h-screen bg-linear-to-b from-[#0a0a0f] via-[#0d1520] to-[#0a1628]">
             <Header />
 
-            <div className="max-w-[1400px] mx-auto px-4 pt-24 pb-20">
+            <div className="max-w-350 mx-auto px-4 pt-24 pb-20">
                 {/* Search Bar */}
                 <div className="mb-8">
                     <div className="relative max-w-2xl mx-auto">
@@ -348,7 +348,7 @@ const CarSearch = () => {
                 <div className="flex gap-6">
                     {/* Sidebar Filters */}
                     {showFilters && (
-                        <aside className="w-[280px] flex-shrink-0">
+                        <aside className="w-70 shrink-0">
                             <div className="bg-[#1a2332] rounded-2xl p-5 sticky top-24 space-y-4">
                                 <div className="flex items-center justify-between">
                                     <h3 className="text-white font-semibold">Filters</h3>
@@ -527,7 +527,7 @@ const CarSearch = () => {
                                         >
                                             {/* Image */}
                                             <div
-                                                className={`relative overflow-hidden ${viewMode === 'list' ? 'w-64 flex-shrink-0' : 'aspect-[16/10]'}`}
+                                                className={`relative overflow-hidden ${viewMode === 'list' ? 'w-64 shrink-0' : 'aspect-16/10'}`}
                                             >
                                                 <img
                                                     src={
@@ -538,7 +538,7 @@ const CarSearch = () => {
                                                     alt={car.name}
                                                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                                                 />
-                                                <div className="absolute inset-0 bg-gradient-to-t from-[#1a2332] via-transparent opacity-60" />
+                                                <div className="absolute inset-0 bg-linear-to-t from-[#1a2332] via-transparent opacity-60" />
                                                 <span className="absolute top-2 left-2 px-2 py-1 bg-[#0066FF] rounded-lg text-white text-[10px] font-semibold">
                                                     {formatCategoryName(car.category?.name)}
                                                 </span>

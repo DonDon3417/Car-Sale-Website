@@ -30,6 +30,8 @@ router.post('/forgot-password', asyncHandler(userController.forgotPassword));
 router.post('/reset-password', asyncHandler(userController.resetPassword));
 router.put('/update', authUser, asyncHandler(userController.updateUser));
 router.post('/upload-avatar', authUser, upload.single('avatar'), asyncHandler(userController.uploadAvatar));
+router.get('/favorites', authUser, asyncHandler(userController.getFavoriteCars));
+router.post('/favorites/:carId/toggle', authUser, asyncHandler(userController.toggleFavoriteCar));
 router.post('/chatbot', authUser, asyncHandler(userController.chatbot));
 router.get('/message-chatbot', authUser, asyncHandler(userController.getMessageChatbot));
 

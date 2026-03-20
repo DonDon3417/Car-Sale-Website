@@ -76,7 +76,7 @@ const UserManager = () => {
         if (user.isAdmin) return;
 
         const action = user.isBlocked ? 'unblock' : 'block';
-        if (!window.confirm(`You have sure you want to ${action} account ${user.fullName}?`)) return;
+        if (!window.confirm(`Are you sure you want to ${action} account ${user.fullName}?`)) return;
 
         setIsProcessing(true);
         try {
@@ -96,7 +96,7 @@ const UserManager = () => {
 
         if (
             !window.confirm(
-                `CẢNH BÁO: You have sure you want to xóa vĩnh viễn account ${user.fullName}? This action cannot be undone!`,
+                `WARNING: Are you sure you want to permanently delete account ${user.fullName}? This action cannot be undone!`,
             )
         )
             return;
@@ -141,7 +141,7 @@ const UserManager = () => {
             <div className="bg-[#0F172A] border border-white/10 rounded-2xl p-4">
                 <div className="flex flex-wrap gap-4">
                     {/* Search */}
-                    <div className="flex-1 min-w-[200px]">
+                    <div className="flex-1 min-w-50">
                         <div className="relative">
                             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
                             <input
@@ -180,7 +180,7 @@ const UserManager = () => {
                                         Role & status
                                     </th>
                                     <th className="text-left py-4 px-4 text-white/60 text-sm font-medium">
-                                        Days tham gia
+                                        Join date
                                     </th>
                                     <th className="text-right py-4 px-4 text-white/60 text-sm font-medium">Actions</th>
                                 </tr>
@@ -193,7 +193,7 @@ const UserManager = () => {
                                     >
                                         <td className="py-4 px-4">
                                             <div className="flex items-center gap-3">
-                                                <div className="w-10 h-10 rounded-full bg-white/10 overflow-hidden flex-shrink-0">
+                                                <div className="w-10 h-10 rounded-full bg-white/10 overflow-hidden shrink-0">
                                                     {user.avatar ? (
                                                         <img
                                                             src={
@@ -280,7 +280,7 @@ const UserManager = () => {
                                                                 ? 'text-green-400 hover:bg-green-500/20'
                                                                 : 'text-yellow-400 hover:bg-yellow-500/20'
                                                         }`}
-                                                        title={user.isBlocked ? 'Unblock account' : 'Khóa account'}
+                                                        title={user.isBlocked ? 'Unblock account' : 'Block account'}
                                                     >
                                                         {user.isBlocked ? (
                                                             <Unlock className="w-4 h-4" />
@@ -322,7 +322,7 @@ const UserManager = () => {
                             </button>
                             {[...Array(pagination.totalPages)].map((_, index) => {
                                 const page = index + 1;
-                                // Logic hiển thị page orders giản (nếu quá nhiều page thì cần logic phức tạp hơn)
+                                // Keep pagination compact while still showing nearby pages.
                                 if (
                                     page === 1 ||
                                     page === pagination.totalPages ||
@@ -356,7 +356,7 @@ const UserManager = () => {
                                 disabled={pagination.page === pagination.totalPages}
                                 className="px-3 py-1 bg-white/5 hover:bg-white/10 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg text-white text-sm transition-colors"
                             >
-                                Sau
+                                Next
                             </button>
                         </div>
                     </div>
