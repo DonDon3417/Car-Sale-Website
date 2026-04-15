@@ -4,8 +4,10 @@ import { Mail, Lock, Eye, EyeOff, ArrowRight, Car } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { requestLogin } from '../config/UserRequest';
+import { requestLogin, requestAuth } from '../config/UserRequest';
 import { message } from 'antd';
+import CryptoJS from 'crypto-js';
+import { setAuthSession } from '../config/authSession';
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -16,60 +18,86 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await requestLogin(formData);
-            message.success('Subscribe successfully');
-            setTimeout(() => {
-                window.location.reload();
-            }, 1000);
-            navigate('/');
+            const normalizedFormData = {
+                ...formData,
+                email: formData.email.trim().toLowerCase(),
+            };
+
+            const loginRes = await requestLogin(normalizedFormData);
+            setAuthSession({
+                accessToken: loginRes?.metadata?.token,
+                refreshToken: loginRes?.metadata?.refreshToken,
+            });
+
+            let redirectPath = '/';
+
+            try {
+                const res = await requestAuth();
+                const bytes = CryptoJS.AES.decrypt(res.metadata, import.meta.env.VITE_SECRET_CRYPTO);
+                const originalText = bytes.toString(CryptoJS.enc.Utf8);
+
+                if (originalText) {
+                    const user = JSON.parse(originalText);
+                    if (user?.isAdmin) {
+                        redirectPath = '/admin';
+                    }
+                }
+            } catch (authError) {
+                console.error('Auth decode error:', authError);
+            }
+
+            message.success('Đăng nhập thành công');
+            navigate(redirectPath, { replace: true });
         } catch (error) {
-            message.error(error.response.data.message);
+            message.error(error?.response?.data?.message || 'Đăng nhập thất bại');
         }
     };
 
     return (
         <>
-            <div className="min-h-screen bg-gradient-to-br from-[#0a0a0f] via-[#0d1520] to-[#0a1628] flex items-center justify-center px-4 py-10">
+            <div className="min-h-screen customer-page flex items-center justify-center px-4 py-10 transition-colors duration-300">
                 <Header />
                 {/* Background decoration */}
                 <div className="fixed inset-0 overflow-hidden pointer-events-none">
-                    <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#0066FF]/5 rounded-full blur-[150px]" />
-                    <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#E10600]/5 rounded-full blur-[120px]" />
+                    <div className="absolute top-0 right-0 w-125 h-125 bg-[#0066FF]/5 rounded-full blur-[150px]" />
+                    <div className="absolute bottom-0 left-0 w-100 h-100 bg-[#E10600]/5 rounded-full blur-[120px]" />
                 </div>
 
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="relative w-full max-w-[380px]"
+                    className="relative w-full max-w-95"
                 >
                     {/* Logo */}
                     <Link to="/" className="flex items-center justify-center gap-2 mb-6">
                         <div className="w-8 h-8 flex items-center justify-center bg-[#0066FF] rounded-lg">
                             <Car className="w-4 h-4 text-white" />
                         </div>
-                        <span className="text-white font-bold text-sm tracking-[0.1em] uppercase">AUTOSHOW</span>
+                        <span className="text-(--app-text) font-bold text-sm tracking-widest uppercase">AUTOSHOW</span>
                     </Link>
 
                     {/* Card */}
-                    <div className="bg-[#111827]/80 backdrop-blur-xl border border-white/5 rounded-2xl p-6">
+                    <div className="customer-surface rounded-2xl p-6">
                         <div className="text-center mb-5">
-                            <h1 className="text-xl font-bold text-white mb-1">Log in</h1>
-                            <p className="text-white/50 text-xs">Welcome back</p>
+                            <h1 className="text-xl font-bold text-(--app-text) mb-1">Log in</h1>
+                            <p className="text-(--app-text-muted) text-xs">Welcome back</p>
                         </div>
 
                         <form onSubmit={handleSubmit} className="space-y-4">
                             {/* Email */}
                             <div>
-                                <label className="block text-white/70 text-xs font-medium mb-1.5">Email</label>
+                                <label className="block text-(--app-text-muted) text-xs font-medium mb-1.5">
+                                    Email
+                                </label>
                                 <div className="relative">
-                                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
+                                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-(--app-text-muted)" />
                                     <input
                                         type="email"
                                         value={formData.email}
                                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                                         placeholder="Enter your email"
-                                        className="w-full h-10 pl-10 pr-4 bg-white/5 border border-white/10 rounded-lg text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-[#0066FF] transition-colors"
+                                        className="w-full h-10 pl-10 pr-4 bg-(--app-input-bg) border border-(--app-border) rounded-lg text-(--app-text) text-sm placeholder:text-(--app-text-muted) focus:outline-none focus:border-[#0066FF] transition-colors"
                                         required
                                     />
                                 </div>
@@ -77,21 +105,23 @@ const Login = () => {
 
                             {/* Password */}
                             <div>
-                                <label className="block text-white/70 text-xs font-medium mb-1.5">Password</label>
+                                <label className="block text-(--app-text-muted) text-xs font-medium mb-1.5">
+                                    Password
+                                </label>
                                 <div className="relative">
-                                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
+                                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-(--app-text-muted)" />
                                     <input
                                         type={showPassword ? 'text' : 'password'}
                                         value={formData.password}
                                         onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                                         placeholder="Enter password"
-                                        className="w-full h-10 pl-10 pr-10 bg-white/5 border border-white/10 rounded-lg text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-[#0066FF] transition-colors"
+                                        className="w-full h-10 pl-10 pr-10 bg-(--app-input-bg) border border-(--app-border) rounded-lg text-(--app-text) text-sm placeholder:text-(--app-text-muted) focus:outline-none focus:border-[#0066FF] transition-colors"
                                         required
                                     />
                                     <button
                                         type="button"
                                         onClick={() => setShowPassword(!showPassword)}
-                                        className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white/70 transition-colors"
+                                        className="absolute right-3 top-1/2 -translate-y-1/2 text-(--app-text-muted) hover:text-(--app-text) transition-colors"
                                     >
                                         {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                                     </button>
@@ -119,14 +149,14 @@ const Login = () => {
 
                         {/* Divider */}
                         <div className="flex items-center gap-3 my-5">
-                            <div className="flex-1 h-px bg-white/10" />
-                            <span className="text-white/40 text-xs">or</span>
-                            <div className="flex-1 h-px bg-white/10" />
+                            <div className="flex-1 h-px bg-(--app-border)" />
+                            <span className="text-(--app-text-muted) text-xs">or</span>
+                            <div className="flex-1 h-px bg-(--app-border)" />
                         </div>
 
                         {/* Social Login */}
                         <div className="flex gap-2">
-                            <button className="flex-1 flex items-center justify-center gap-2 h-9 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-white text-xs font-medium transition-colors">
+                            <button className="flex-1 flex items-center justify-center gap-2 h-9 bg-(--app-surface-soft) hover:bg-(--app-input-bg) border border-(--app-border) rounded-lg text-(--app-text) text-xs font-medium transition-colors">
                                 <svg className="w-4 h-4" viewBox="0 0 24 24">
                                     <path
                                         fill="currentColor"
@@ -147,7 +177,7 @@ const Login = () => {
                                 </svg>
                                 <span>Google</span>
                             </button>
-                            <button className="flex-1 flex items-center justify-center gap-2 h-9 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-white text-xs font-medium transition-colors">
+                            <button className="flex-1 flex items-center justify-center gap-2 h-9 bg-(--app-surface-soft) hover:bg-(--app-input-bg) border border-(--app-border) rounded-lg text-(--app-text) text-xs font-medium transition-colors">
                                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
                                     <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                                 </svg>
@@ -156,10 +186,10 @@ const Login = () => {
                         </div>
 
                         {/* Register Link */}
-                        <p className="text-center text-white/50 text-xs mt-5">
+                        <p className="text-center text-(--app-text-muted) text-xs mt-5">
                             Don't have an account?{' '}
                             <Link to="/account/register" className="text-[#0066FF] font-medium hover:underline">
-                                Subscribe ngay
+                                Sign in
                             </Link>
                         </p>
                     </div>

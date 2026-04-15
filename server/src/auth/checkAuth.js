@@ -2,6 +2,15 @@ const { AuthFailureError, BadRequestError } = require('../core/error.response');
 const { verifyToken } = require('../utils/jwt');
 const modelUser = require('../models/users.model');
 
+const getTokenFromRequest = (req) => {
+    const authHeader = req.headers.authorization || '';
+    if (authHeader.startsWith('Bearer ')) {
+        return authHeader.slice(7).trim();
+    }
+
+    return req.cookies.token;
+};
+
 const asyncHandler = (fn) => {
     return (req, res, next) => {
         fn(req, res, next).catch(next);
@@ -10,9 +19,8 @@ const asyncHandler = (fn) => {
 
 const authUser = async (req, res, next) => {
     try {
-        const user = req.cookies.token;
-        if (!user) throw new AuthFailureError('Vui lòng đăng nhập');
-        const token = user;
+        const token = getTokenFromRequest(req);
+        if (!token) throw new AuthFailureError('Vui lòng đăng nhập');
         const decoded = await verifyToken(token);
         req.user = decoded;
         next();
@@ -23,9 +31,8 @@ const authUser = async (req, res, next) => {
 
 const authAdmin = async (req, res, next) => {
     try {
-        const user = req.cookies.token;
-        if (!user) throw new AuthFailureError('Bạn không có quyền truy cập');
-        const token = user;
+        const token = getTokenFromRequest(req);
+        if (!token) throw new AuthFailureError('Bạn không có quyền truy cập');
         const decoded = await verifyToken(token);
         const { id } = decoded;
         const findUser = await modelUser.findOne({ _id: id });

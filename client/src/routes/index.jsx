@@ -26,6 +26,7 @@ import ChangePasswordPage from '../pages/account/ChangePasswordPage';
 import FavoriteCarsPage from '../pages/account/FavoriteCarsPage';
 import ChatbotPage from '../pages/ChatbotPage';
 import ChatbotStats from '../pages/admin/ChatbotStats';
+import SettingsPage from '../pages/account/SettingsPage';
 
 export const routes = [
     { path: '/', element: <App /> },
@@ -49,6 +50,7 @@ export const routes = [
             { path: 'deposits', element: <MyDepositsPage /> },
             { path: 'favorites', element: <FavoriteCarsPage /> },
             { path: 'change-password', element: <ChangePasswordPage /> },
+            { path: 'settings', element: <SettingsPage /> },
         ],
     },
     {

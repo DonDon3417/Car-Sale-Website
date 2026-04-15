@@ -18,8 +18,14 @@ export const requestAuth = async () => {
     return res.data;
 };
 
-export const requestRefreshToken = async () => {
-    const res = await request.get(`${apiUser}/refresh-token`);
+export const requestRefreshToken = async (refreshToken) => {
+    const res = await request.get(`${apiUser}/refresh-token`, {
+        headers: refreshToken
+            ? {
+                  'x-refresh-token': refreshToken,
+              }
+            : {},
+    });
     return res.data;
 };
 
@@ -100,5 +106,15 @@ export const requestGetDashboardAdmin = async () => {
 
 export const requestChangePassword = async (data) => {
     const res = await apiClient.put(`${apiUser}/change-password`, data);
+    return res.data;
+};
+
+export const requestGetNotificationReadState = async () => {
+    const res = await apiClient.get(`${apiUser}/notification-read-state`);
+    return res.data;
+};
+
+export const requestUpdateNotificationReadState = async (readMap) => {
+    const res = await apiClient.put(`${apiUser}/notification-read-state`, { readMap });
     return res.data;
 };

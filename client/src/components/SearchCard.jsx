@@ -106,30 +106,30 @@ const SearchCard = () => {
     };
 
     const SelectField = ({ icon: Icon, label, options, value, onChange, isLoading }) => (
-        <div className="relative flex-1 min-w-[140px]">
-            <div className="absolute left-2.5 top-1/2 -translate-y-1/2 text-white/40">
+        <div className="relative flex-1 min-w-35">
+            <div className="absolute left-2.5 top-1/2 -translate-y-1/2 text-(--app-text-muted)">
                 <Icon className="w-3.5 h-3.5" />
             </div>
             <select
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
                 disabled={isLoading}
-                className="w-full h-9 pl-8 pr-7 bg-[#1a1f2e] border border-white/10 rounded-lg text-white text-xs appearance-none cursor-pointer transition-all duration-300 hover:border-[#0066FF]/50 hover:bg-[#1e2438] focus:outline-none focus:border-[#0066FF] focus:ring-1 focus:ring-[#0066FF]/30 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full h-9 pl-8 pr-7 bg-(--app-input-bg) border border-(--app-border) rounded-lg text-(--app-text) text-xs appearance-none cursor-pointer transition-all duration-300 hover:border-[#0066FF]/50 focus:outline-none focus:border-[#0066FF] focus:ring-1 focus:ring-[#0066FF]/20 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-                <option value="" className="bg-[#1a1f2e]">
+                <option value="" className="bg-(--app-surface-strong)">
                     {isLoading ? 'Loading...' : label}
                 </option>
                 {options.map((opt) => (
                     <option
                         key={opt.value || opt._id || opt}
                         value={opt.value || opt._id || opt}
-                        className="bg-[#1a1f2e]"
+                        className="bg-(--app-surface-strong)"
                     >
                         {opt.label || opt.name || opt}
                     </option>
                 ))}
             </select>
-            <div className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-white/40">
+            <div className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-(--app-text-muted)">
                 {isLoading ? <Loader2 className="w-3 h-3 animate-spin" /> : <ChevronDown className="w-3 h-3" />}
             </div>
         </div>
@@ -140,17 +140,17 @@ const SearchCard = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2, ease: 'easeOut' }}
-            className="relative z-30 max-w-[1000px] mx-auto px-4 -mt-10"
+            className="relative z-30 max-w-250 mx-auto px-4 -mt-10"
         >
             <motion.div
                 whileHover={{ y: -2 }}
                 transition={{ duration: 0.3 }}
-                className="bg-[#0F172A] border border-white/5 rounded-xl p-4 shadow-xl shadow-black/30"
+                className="customer-surface rounded-xl p-4"
             >
                 {/* Header */}
                 <div className="flex items-center gap-1.5 mb-3">
                     <div className="w-0.5 h-3 bg-[#0066FF] rounded-full" />
-                    <span className="text-white/60 text-[10px] font-medium tracking-wide uppercase">
+                    <span className="text-(--app-text-muted) text-[10px] font-medium tracking-wide uppercase">
                         Find Your Perfect Car
                     </span>
                 </div>
@@ -197,10 +197,10 @@ const SearchCard = () => {
                         whileTap={{ scale: 0.98 }}
                         onClick={handleSearch}
                         disabled={isSearching}
-                        className="relative group flex-shrink-0 w-full lg:w-auto"
+                        className="relative group shrink-0 w-full lg:w-auto"
                     >
-                        <div className="absolute -inset-0.5 bg-gradient-to-r from-[#0066FF] to-[#0052cc] rounded-lg opacity-0 blur-md group-hover:opacity-50 transition-opacity duration-300" />
-                        <div className="relative flex items-center justify-center gap-1.5 h-9 px-4 bg-gradient-to-r from-[#0066FF] to-[#0052cc] hover:from-[#0052cc] hover:to-[#003d99] rounded-lg text-white text-xs font-semibold shadow-lg shadow-[#0066FF]/20 transition-all duration-300 disabled:opacity-70">
+                        <div className="absolute -inset-0.5 bg-linear-to-r from-[#0066FF] to-[#0052cc] rounded-lg opacity-0 blur-md group-hover:opacity-50 transition-opacity duration-300" />
+                        <div className="relative flex items-center justify-center gap-1.5 h-9 px-4 bg-linear-to-r from-[#0066FF] to-[#0052cc] hover:from-[#0052cc] hover:to-[#003d99] rounded-lg text-white text-xs font-semibold shadow-lg shadow-[#0066FF]/20 transition-all duration-300 disabled:opacity-70">
                             {isSearching ? (
                                 <Loader2 className="w-3.5 h-3.5 animate-spin" />
                             ) : (
@@ -212,20 +212,20 @@ const SearchCard = () => {
                 </div>
 
                 {/* Quick Stats */}
-                <div className="flex items-center gap-4 mt-3 pt-3 border-t border-white/5">
+                <div className="flex items-center gap-4 mt-3 pt-3 border-t border-(--app-border)">
                     <div className="flex items-center gap-1.5">
                         <span className="text-[#0066FF] font-bold text-sm">{loading ? '...' : stats.totalCars}</span>
-                        <span className="text-white/40 text-[10px]">cars available</span>
+                        <span className="text-(--app-text-muted) text-[10px]">cars available</span>
                     </div>
-                    <div className="w-px h-3 bg-white/10" />
+                    <div className="w-px h-3 bg-(--app-border)" />
                     <div className="flex items-center gap-1.5">
                         <span className="text-[#0066FF] font-bold text-sm">{loading ? '...' : stats.totalBrands}</span>
-                        <span className="text-white/40 text-[10px]">brands</span>
+                        <span className="text-(--app-text-muted) text-[10px]">brands</span>
                     </div>
-                    <div className="w-px h-3 bg-white/10" />
+                    <div className="w-px h-3 bg-(--app-border)" />
                     <div className="flex items-center gap-1.5">
                         <span className="text-[#0066FF] font-bold text-sm">24/7</span>
-                        <span className="text-white/40 text-[10px]">support</span>
+                        <span className="text-(--app-text-muted) text-[10px]">support</span>
                     </div>
                 </div>
             </motion.div>

@@ -1,5 +1,6 @@
 const Mongoose = require('mongoose');
 require('dotenv').config();
+const migrateTestDriveSlotIndexes = require('../utils/migrateTestDriveSlotIndexes');
 
 const connectDB = async () => {
     try {
@@ -7,6 +8,8 @@ const connectDB = async () => {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
+
+        await migrateTestDriveSlotIndexes();
         console.log('MongoDB connected');
     } catch (error) {
         console.error('Failed to connect to MongoDB', error);

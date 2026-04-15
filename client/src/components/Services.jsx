@@ -13,7 +13,11 @@ const Services = () => {
             title: 'Genuine warranty',
             description: '5-year or 150,000 km warranty with a professional team.',
         },
-        { icon: Car, title: 'Home Test Drive', description: 'Book a free test drive. Our specialist comes to your location.' },
+        {
+            icon: Car,
+            title: 'Home Test Drive',
+            description: 'Book a free test drive. Our specialist comes to your location.',
+        },
         { icon: Wrench, title: 'Periodic maintenance', description: 'Automatic reminders. 20% off genuine parts.' },
     ];
 
@@ -27,8 +31,8 @@ const Services = () => {
     };
 
     return (
-        <section className="py-10 lg:py-14 bg-[#0a0d14]">
-            <div className="max-w-[1000px] mx-auto px-4">
+        <section className="py-10 lg:py-14">
+            <div className="max-w-250 mx-auto px-4">
                 <motion.div
                     initial={{ opacity: 0, y: 15 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -37,14 +41,14 @@ const Services = () => {
                     className="text-center mb-8"
                 >
                     <div className="flex items-center justify-center gap-2 mb-2">
-                        <div className="w-6 h-[1px] bg-[#0066FF]" />
+                        <div className="w-6 h-px bg-[#0066FF]" />
                         <span className="text-[#0066FF] text-[10px] font-semibold tracking-[0.15em] uppercase">
                             Services
                         </span>
-                        <div className="w-6 h-[1px] bg-[#0066FF]" />
+                        <div className="w-6 h-px bg-[#0066FF]" />
                     </div>
-                    <h2 className="text-xl md:text-2xl font-bold text-white mb-1">Showroom services</h2>
-                    <p className="text-white/50 text-xs">Experience premium international-standard service</p>
+                    <h2 className="text-xl md:text-2xl font-bold text-(--app-text) mb-1">Showroom services</h2>
+                    <p className="text-(--app-text-muted) text-xs">Experience premium international-standard service</p>
                 </motion.div>
 
                 <motion.div
@@ -59,15 +63,15 @@ const Services = () => {
                             key={idx}
                             variants={itemVariants}
                             whileHover={{ y: -4 }}
-                            className="group p-4 bg-[#111827] border border-white/5 rounded-xl transition-all duration-300 hover:border-[#0066FF]/30 hover:shadow-lg hover:shadow-[#0066FF]/5"
+                            className="group p-4 bg-(--app-surface-strong) border border-(--app-border) rounded-xl transition-all duration-300 hover:border-[#0066FF]/30 shadow-(--app-shadow-soft)"
                         >
                             <div className="w-9 h-9 flex items-center justify-center bg-[#0066FF]/10 rounded-lg mb-3 transition-colors duration-300 group-hover:bg-[#0066FF]">
                                 <service.icon className="w-4 h-4 text-[#0066FF] group-hover:text-white transition-colors" />
                             </div>
-                            <h3 className="text-white font-semibold text-sm mb-1 group-hover:text-[#0066FF] transition-colors">
+                            <h3 className="text-(--app-text) font-semibold text-sm mb-1 group-hover:text-[#0066FF] transition-colors">
                                 {service.title}
                             </h3>
-                            <p className="text-white/50 text-[11px] leading-relaxed">{service.description}</p>
+                            <p className="text-(--app-text-muted) text-[11px] leading-relaxed">{service.description}</p>
                         </motion.div>
                     ))}
                 </motion.div>
@@ -77,4 +81,3 @@ const Services = () => {
 };
 
 export default Services;
-

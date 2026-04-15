@@ -10,16 +10,18 @@ import Footer from './components/Footer';
 
 function App() {
     return (
-        <div className="min-h-screen bg-gradient-to-b from-[#0a0a0f] via-[#0d1520] to-[#0a1628]">
+        <div className="min-h-screen customer-page transition-colors duration-300">
             <Header />
-            <Banner />
-            <SearchCard />
-            <FeaturedCars />
-            <CarComparison />
-            <Promotions />
-            <Services />
-            <News />
-            <Footer />
+            <div>
+                <Banner />
+                <SearchCard />
+                <FeaturedCars />
+                <CarComparison />
+                <Promotions />
+                <Services />
+                <News />
+                <Footer />
+            </div>
         </div>
     );
 }

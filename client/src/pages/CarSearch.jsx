@@ -239,10 +239,10 @@ const CarSearch = () => {
     const FilterSection = ({ title, children, defaultOpen = true }) => {
         const [isOpen, setIsOpen] = useState(defaultOpen);
         return (
-            <div className="border-b border-white/10 pb-4">
+            <div className="border-b border-(--app-border) pb-4">
                 <button
                     onClick={() => setIsOpen(!isOpen)}
-                    className="flex items-center justify-between w-full py-2 text-white font-medium"
+                    className="flex items-center justify-between w-full py-2 text-(--app-text) font-medium"
                 >
                     <span>{title}</span>
                     {isOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
@@ -256,36 +256,36 @@ const CarSearch = () => {
         <div onClick={onClick} className="flex items-center gap-2 cursor-pointer group py-1">
             <div
                 className={`w-4 h-4 rounded border flex items-center justify-center transition-all ${
-                    checked ? 'bg-[#0066FF] border-[#0066FF]' : 'border-white/30 group-hover:border-white/50'
+                    checked ? 'bg-[#0066FF] border-[#0066FF]' : 'border-(--app-border) group-hover:border-[#0066FF]/45'
                 }`}
             >
                 {checked && <Check className="w-3 h-3 text-white" />}
             </div>
-            <span className="text-white/70 group-hover:text-white text-sm flex-1">{label}</span>
-            {count !== undefined && <span className="text-white/40 text-xs">({count})</span>}
+            <span className="text-(--app-text-muted) group-hover:text-(--app-text) text-sm flex-1">{label}</span>
+            {count !== undefined && <span className="text-(--app-text-muted) text-xs">({count})</span>}
         </div>
     );
 
     return (
-        <div className="min-h-screen bg-linear-to-b from-[#0a0a0f] via-[#0d1520] to-[#0a1628]">
+        <div className="min-h-screen customer-page transition-colors duration-300">
             <Header />
 
             <div className="max-w-350 mx-auto px-4 pt-24 pb-20">
                 {/* Search Bar */}
                 <div className="mb-8">
                     <div className="relative max-w-2xl mx-auto">
-                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
+                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-(--app-text-muted)" />
                         <input
                             type="text"
                             value={filters.search}
                             onChange={(e) => handleFilterChange('search', e.target.value)}
                             placeholder="Search cars by name, brand..."
-                            className="w-full pl-12 pr-4 py-4 bg-[#1a2332] border border-white/10 rounded-2xl text-white placeholder-white/40 focus:outline-none focus:border-[#0066FF] transition-colors"
+                            className="w-full pl-12 pr-4 py-4 bg-(--app-input-bg) border border-(--app-border) rounded-2xl text-(--app-text) placeholder:text-(--app-text-muted) focus:outline-none focus:border-[#0066FF] transition-colors"
                         />
                         {filters.search && (
                             <button
                                 onClick={() => handleFilterChange('search', '')}
-                                className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-white"
+                                className="absolute right-4 top-1/2 -translate-y-1/2 text-(--app-text-muted) hover:text-(--app-text)"
                             >
                                 <X className="w-5 h-5" />
                             </button>
@@ -298,7 +298,7 @@ const CarSearch = () => {
                     <div className="flex items-center gap-4">
                         <button
                             onClick={() => setShowFilters(!showFilters)}
-                            className="flex items-center gap-2 px-4 py-2 bg-[#1a2332] border border-white/10 rounded-xl text-white hover:border-[#0066FF] transition-colors"
+                            className="flex items-center gap-2 px-4 py-2 bg-(--app-surface-soft) border border-(--app-border) rounded-xl text-(--app-text) hover:border-[#0066FF] transition-colors"
                         >
                             <SlidersHorizontal className="w-4 h-4" />
                             <span>Filters</span>
@@ -308,8 +308,8 @@ const CarSearch = () => {
                                 </span>
                             )}
                         </button>
-                        <span className="text-white/50">
-                            Found <span className="text-white font-semibold">{pagination.total}</span> cars
+                        <span className="text-(--app-text-muted)">
+                            Found <span className="text-(--app-text) font-semibold">{pagination.total}</span> cars
                         </span>
                     </div>
 
@@ -318,7 +318,7 @@ const CarSearch = () => {
                         <select
                             value={`${filters.sortBy}-${filters.sortOrder}`}
                             onChange={(e) => handleSort(e.target.value)}
-                            className="px-4 py-2 bg-[#1a2332] border border-white/10 rounded-xl text-white text-sm focus:outline-none focus:border-[#0066FF]"
+                            className="px-4 py-2 bg-(--app-surface-soft) border border-(--app-border) rounded-xl text-(--app-text) text-sm focus:outline-none focus:border-[#0066FF]"
                         >
                             {sortOptions.map((opt) => (
                                 <option key={opt.value} value={opt.value}>
@@ -328,16 +328,16 @@ const CarSearch = () => {
                         </select>
 
                         {/* View Mode */}
-                        <div className="flex bg-[#1a2332] rounded-xl border border-white/10 overflow-hidden">
+                        <div className="flex bg-(--app-surface-soft) rounded-xl border border-(--app-border) overflow-hidden">
                             <button
                                 onClick={() => setViewMode('grid')}
-                                className={`p-2 ${viewMode === 'grid' ? 'bg-[#0066FF] text-white' : 'text-white/50 hover:text-white'}`}
+                                className={`p-2 ${viewMode === 'grid' ? 'bg-[#0066FF] text-white' : 'text-(--app-text-muted) hover:text-(--app-text)'}`}
                             >
                                 <Grid3X3 className="w-4 h-4" />
                             </button>
                             <button
                                 onClick={() => setViewMode('list')}
-                                className={`p-2 ${viewMode === 'list' ? 'bg-[#0066FF] text-white' : 'text-white/50 hover:text-white'}`}
+                                className={`p-2 ${viewMode === 'list' ? 'bg-[#0066FF] text-white' : 'text-(--app-text-muted) hover:text-(--app-text)'}`}
                             >
                                 <List className="w-4 h-4" />
                             </button>
@@ -349,9 +349,9 @@ const CarSearch = () => {
                     {/* Sidebar Filters */}
                     {showFilters && (
                         <aside className="w-70 shrink-0">
-                            <div className="bg-[#1a2332] rounded-2xl p-5 sticky top-24 space-y-4">
+                            <div className="customer-surface rounded-2xl p-5 sticky top-24 space-y-4">
                                 <div className="flex items-center justify-between">
-                                    <h3 className="text-white font-semibold">Filters</h3>
+                                    <h3 className="text-(--app-text) font-semibold">Filters</h3>
                                     {activeFilterCount > 0 && (
                                         <button
                                             onClick={clearFilters}
@@ -400,7 +400,7 @@ const CarSearch = () => {
                                                 className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${
                                                     filters.minPrice == range.min && filters.maxPrice == range.max
                                                         ? 'bg-[#0066FF] text-white'
-                                                        : 'text-white/70 hover:bg-white/5'
+                                                        : 'text-(--app-text-muted) hover:bg-(--app-surface-soft)'
                                                 }`}
                                             >
                                                 {range.label}
@@ -419,7 +419,7 @@ const CarSearch = () => {
                                                 className={`px-3 py-1.5 rounded-lg text-sm transition-colors ${
                                                     filters.fuelType.includes(type)
                                                         ? 'bg-[#0066FF] text-white'
-                                                        : 'bg-white/5 text-white/70 hover:bg-white/10'
+                                                        : 'bg-(--app-surface-soft) text-(--app-text-muted) hover:bg-(--app-input-bg)'
                                                 }`}
                                             >
                                                 {type}
@@ -443,7 +443,7 @@ const CarSearch = () => {
                                                 className={`flex-1 px-3 py-2 rounded-lg text-sm transition-colors ${
                                                     filters.transmission === type
                                                         ? 'bg-[#0066FF] text-white'
-                                                        : 'bg-white/5 text-white/70 hover:bg-white/10'
+                                                        : 'bg-(--app-surface-soft) text-(--app-text-muted) hover:bg-(--app-input-bg)'
                                                 }`}
                                             >
                                                 {type}
@@ -462,7 +462,7 @@ const CarSearch = () => {
                                                 className={`px-3 py-1.5 rounded-lg text-sm transition-colors ${
                                                     filters.seats.includes(seat)
                                                         ? 'bg-[#0066FF] text-white'
-                                                        : 'bg-white/5 text-white/70 hover:bg-white/10'
+                                                        : 'bg-(--app-surface-soft) text-(--app-text-muted) hover:bg-(--app-input-bg)'
                                                 }`}
                                             >
                                                 {seat} seats
@@ -479,14 +479,14 @@ const CarSearch = () => {
                                             value={filters.minYear}
                                             onChange={(e) => handleFilterChange('minYear', e.target.value)}
                                             placeholder="From year"
-                                            className="flex-1 px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white text-sm focus:outline-none focus:border-[#0066FF]"
+                                            className="flex-1 px-3 py-2 bg-(--app-input-bg) border border-(--app-border) rounded-lg text-(--app-text) text-sm focus:outline-none focus:border-[#0066FF]"
                                         />
                                         <input
                                             type="number"
                                             value={filters.maxYear}
                                             onChange={(e) => handleFilterChange('maxYear', e.target.value)}
                                             placeholder="To year"
-                                            className="flex-1 px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white text-sm focus:outline-none focus:border-[#0066FF]"
+                                            className="flex-1 px-3 py-2 bg-(--app-input-bg) border border-(--app-border) rounded-lg text-(--app-text) text-sm focus:outline-none focus:border-[#0066FF]"
                                         />
                                     </div>
                                 </FilterSection>
@@ -502,7 +502,7 @@ const CarSearch = () => {
                             </div>
                         ) : cars.length === 0 ? (
                             <div className="text-center py-20">
-                                <p className="text-white/50 text-lg mb-4">No matching cars found</p>
+                                <p className="text-(--app-text-muted) text-lg mb-4">No matching cars found</p>
                                 <button onClick={clearFilters} className="text-[#0066FF] hover:underline">
                                     Clear filters
                                 </button>
@@ -521,7 +521,7 @@ const CarSearch = () => {
                                     {cars.map((car) => (
                                         <div
                                             key={car._id}
-                                            className={`group bg-[#1a2332] border border-white/5 rounded-2xl overflow-hidden hover:border-[#0066FF]/30 hover:shadow-xl hover:shadow-[#0066FF]/10 transition-all duration-300 hover:-translate-y-1 ${
+                                            className={`group customer-surface rounded-2xl overflow-hidden hover:border-[#0066FF]/30 hover:shadow-xl hover:shadow-[#0066FF]/10 transition-all duration-300 hover:-translate-y-1 ${
                                                 viewMode === 'list' ? 'flex' : ''
                                             }`}
                                         >
@@ -538,7 +538,7 @@ const CarSearch = () => {
                                                     alt={car.name}
                                                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                                                 />
-                                                <div className="absolute inset-0 bg-linear-to-t from-[#1a2332] via-transparent opacity-60" />
+                                                <div className="absolute inset-0 bg-linear-to-t from-black/65 via-transparent opacity-60" />
                                                 <span className="absolute top-2 left-2 px-2 py-1 bg-[#0066FF] rounded-lg text-white text-[10px] font-semibold">
                                                     {formatCategoryName(car.category?.name)}
                                                 </span>
@@ -553,15 +553,17 @@ const CarSearch = () => {
                                                         <span className="text-[#0066FF] text-xs">
                                                             {car.brand?.name}
                                                         </span>
-                                                        <span className="text-white/30">•</span>
-                                                        <span className="text-white/50 text-xs">{car.year}</span>
+                                                        <span className="text-(--app-text-muted)">•</span>
+                                                        <span className="text-(--app-text-muted) text-xs">
+                                                            {car.year}
+                                                        </span>
                                                     </div>
-                                                    <h3 className="text-white font-semibold group-hover:text-[#0066FF] transition-colors line-clamp-1">
+                                                    <h3 className="text-(--app-text) font-semibold group-hover:text-[#0066FF] transition-colors line-clamp-1">
                                                         {car.name}
                                                     </h3>
 
                                                     {/* Specs */}
-                                                    <div className="flex items-center gap-3 mt-3 text-white/50 text-xs">
+                                                    <div className="flex items-center gap-3 mt-3 text-(--app-text-muted) text-xs">
                                                         <span className="flex items-center gap-1">
                                                             <Fuel className="w-3 h-3" />
                                                             {formatFuelType(car.fuelType)}
@@ -582,7 +584,7 @@ const CarSearch = () => {
                                                         {formatPrice(car.price)}
                                                     </span>
                                                     <Link to={`/cars/${car.slug}`}>
-                                                        <button className="flex items-center gap-1 px-3 py-1.5 bg-white/5 hover:bg-[#0066FF] rounded-lg text-white text-sm transition-colors">
+                                                        <button className="flex items-center gap-1 px-3 py-1.5 bg-(--app-surface-soft) hover:bg-[#0066FF] rounded-lg text-(--app-text) hover:text-white text-sm transition-colors border border-(--app-border)">
                                                             <span>Details</span>
                                                             <ArrowRight className="w-3 h-3" />
                                                         </button>
@@ -603,7 +605,7 @@ const CarSearch = () => {
                                                 className={`w-10 h-10 rounded-lg font-medium transition-colors ${
                                                     pagination.page === page
                                                         ? 'bg-[#0066FF] text-white'
-                                                        : 'bg-[#1a2332] text-white/50 hover:text-white hover:bg-white/10'
+                                                        : 'bg-(--app-surface-soft) text-(--app-text-muted) hover:text-(--app-text) hover:bg-(--app-input-bg) border border-(--app-border)'
                                                 }`}
                                             >
                                                 {page}

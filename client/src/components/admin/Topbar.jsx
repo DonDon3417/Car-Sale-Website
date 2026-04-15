@@ -3,15 +3,22 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Search, Bell, ChevronDown, User, Settings, LogOut } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useStore } from '../../hooks/useStore';
-import cookies from 'js-cookie';
+import { requestLogout } from '../../config/UserRequest';
+import { clearAuthSession } from '../../config/authSession';
 
 const Topbar = ({ isCollapsed }) => {
     const [isProfileOpen, setIsProfileOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const { dataUser } = useStore();
 
-    const handleLogout = () => {
-        cookies.remove('logged');
+    const handleLogout = async () => {
+        try {
+            await requestLogout();
+        } catch (error) {
+            console.error('Logout failed:', error);
+        }
+
+        clearAuthSession();
         window.location.href = '/';
     };
 

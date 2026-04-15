@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { Outlet, NavLink, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { User, Car, Heart, Lock, LogOut, ChevronRight } from 'lucide-react';
-import cookies from 'js-cookie';
+import { User, Car, Heart, Lock, LogOut, ChevronRight, Settings } from 'lucide-react';
+import { requestLogout } from '../config/UserRequest';
+import { clearAuthSession } from '../config/authSession';
 
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -29,20 +30,31 @@ const sidebarItems = [
         path: '/account/change-password',
         icon: Lock,
     },
+    {
+        label: 'Settings',
+        path: '/account/settings',
+        icon: Settings,
+    },
 ];
 
 const AccountLayout = () => {
     const { dataUser } = useStore();
     const navigate = useNavigate();
 
-    const handleLogout = () => {
-        cookies.remove('logged');
+    const handleLogout = async () => {
+        try {
+            await requestLogout();
+        } catch (error) {
+            console.error('Logout failed:', error);
+        }
+
+        clearAuthSession();
         navigate('/');
         window.location.reload();
     };
 
     return (
-        <div className="min-h-screen bg-linear-to-b from-[#0a0a0f] via-[#0d1520] to-[#0a1628]">
+        <div className="min-h-screen customer-page transition-colors duration-300">
             <Header />
 
             <div className="max-w-275 mx-auto px-4 pt-24 pb-16">
@@ -54,9 +66,9 @@ const AccountLayout = () => {
                         transition={{ duration: 0.4 }}
                         className="w-full lg:w-70 shrink-0"
                     >
-                        <div className="bg-[#111827]/80 backdrop-blur-sm border border-white/6 rounded-2xl overflow-hidden sticky top-20">
+                        <div className="customer-surface backdrop-blur-sm rounded-2xl overflow-hidden sticky top-20 transition-colors duration-300">
                             {/* User Info */}
-                            <div className="p-5 border-b border-white/6">
+                            <div className="p-5 border-b border-(--app-border)">
                                 <div className="flex items-center gap-3">
                                     {dataUser?.avatar ? (
                                         <img
@@ -72,10 +84,12 @@ const AccountLayout = () => {
                                         </div>
                                     )}
                                     <div className="min-w-0">
-                                        <p className="text-white text-sm font-semibold truncate">
+                                        <p className="text-(--app-text) text-sm font-semibold truncate">
                                             {dataUser?.fullName || 'User'}
                                         </p>
-                                        <p className="text-white/40 text-xs truncate">{dataUser?.email || ''}</p>
+                                        <p className="text-(--app-text-muted) text-xs truncate">
+                                            {dataUser?.email || ''}
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -92,7 +106,7 @@ const AccountLayout = () => {
                                                 `flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 group ${
                                                     isActive
                                                         ? 'bg-[#0066FF]/10 text-[#0066FF] border border-[#0066FF]/20'
-                                                        : 'text-white/60 hover:text-white hover:bg-white/4 border border-transparent'
+                                                        : 'text-(--app-text-muted) hover:text-(--app-text) hover:bg-(--app-surface-soft) border border-transparent'
                                                 }`
                                             }
                                         >
@@ -106,7 +120,7 @@ const AccountLayout = () => {
                                 {/* Logout Button */}
                                 <button
                                     onClick={handleLogout}
-                                    className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-red-400 hover:text-red-300 hover:bg-red-500/8 transition-all duration-200 mt-1"
+                                    className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-red-500 hover:text-red-400 hover:bg-red-500/8 transition-all duration-200 mt-1"
                                 >
                                     <LogOut className="w-4.5 h-4.5 shrink-0" />
                                     <span className="flex-1 text-left">Sign out</span>

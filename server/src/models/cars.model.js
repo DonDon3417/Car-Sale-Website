@@ -116,6 +116,12 @@ const carSchema = new Schema(
             enum: ['available', 'out_of_stock', 'coming_soon'],
             default: 'available',
         },
+
+        maxTestDrivePerSlot: {
+            type: Number,
+            default: 2,
+            min: 1,
+        },
     },
     {
         timestamps: true,

@@ -75,7 +75,7 @@ const ContactPage = () => {
                                 </div>
                                 <div>
                                     <h4 className="font-semibold text-white mb-1">Address</h4>
-                                    <p className="text-white/60">123 ABC Street, XYZ District, Ho Chi Minh City</p>
+                                    <p className="text-white/60">No. 298 Cau Dien Street, Tay Tuu Ward, Hanoi City, Vietnam</p>
                                 </div>
                             </div>
 
@@ -85,7 +85,7 @@ const ContactPage = () => {
                                 </div>
                                 <div>
                                     <h4 className="font-semibold text-white mb-1">Hotline</h4>
-                                    <p className="text-white/60">0123 456 789 (24/7 support)</p>
+                                    <p className="text-white/60">0388234370 (24/7 support)</p>
                                 </div>
                             </div>
 
@@ -95,7 +95,7 @@ const ContactPage = () => {
                                 </div>
                                 <div>
                                     <h4 className="font-semibold text-white mb-1">Email</h4>
-                                    <p className="text-white/60">support@carautovn.com</p>
+                                    <p className="text-white/60">phamthanhdonghd1710@gmail.com</p>
                                 </div>
                             </div>
                         </div>

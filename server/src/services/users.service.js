@@ -16,10 +16,51 @@ const bcrypt = require('bcrypt');
 const CryptoJS = require('crypto-js');
 const SendMailForgotPassword = require('../utils/sendMailForgotPassword');
 
+const normalizeEmail = (email = '') => email.toString().trim().toLowerCase();
+const escapeRegex = (value = '') => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const buildEmailLookupRegex = (email = '') => {
+    const normalized = normalizeEmail(email);
+    return new RegExp(`^\\s*${escapeRegex(normalized)}\\s*$`, 'i');
+};
+const findUserByEmail = (email) => modelUser.findOne({ email: buildEmailLookupRegex(email) });
+
 class UserService {
+    async getNotificationReadState(id) {
+        const user = await modelUser.findById(id).select('notificationReadMap');
+        if (!user) {
+            throw new BadRequestError('Người dùng không tồn tại');
+        }
+
+        return user.notificationReadMap ? Object.fromEntries(user.notificationReadMap) : {};
+    }
+
+    async updateNotificationReadState(id, readMap = {}) {
+        if (!readMap || typeof readMap !== 'object' || Array.isArray(readMap)) {
+            throw new BadRequestError('Dữ liệu thông báo không hợp lệ');
+        }
+
+        const sanitizedMap = {};
+        Object.entries(readMap).forEach(([key, value]) => {
+            if (typeof key === 'string' && key.trim()) {
+                sanitizedMap[key.trim()] = Boolean(value);
+            }
+        });
+
+        const user = await modelUser.findById(id);
+        if (!user) {
+            throw new BadRequestError('Người dùng không tồn tại');
+        }
+
+        user.notificationReadMap = sanitizedMap;
+        await user.save();
+
+        return sanitizedMap;
+    }
+
     async createUser(data) {
-        const { fullName, email, password } = data;
-        const findUser = await modelUser.findOne({ email });
+        const { fullName, password } = data;
+        const email = normalizeEmail(data.email);
+        const findUser = await findUserByEmail(email);
         if (findUser) {
             throw new ConflictRequestError('Email đã tồn tại');
         }
@@ -55,8 +96,9 @@ class UserService {
     }
 
     async login(data) {
-        const { email, password } = data;
-        const user = await modelUser.findOne({ email });
+        const password = data.password;
+        const email = normalizeEmail(data.email);
+        const user = await findUserByEmail(email);
         if (!user) {
             throw new BadRequestError('Tài khoản hoặc mật khẩu không chính xác');
         }
@@ -133,7 +175,8 @@ class UserService {
     }
 
     async updateUserAdmin(id, data) {
-        const { fullName, email, phone, address, isAdmin, typeLogin } = data;
+        const { fullName, phone, address, isAdmin, typeLogin } = data;
+        const email = normalizeEmail(data.email);
         const user = await modelUser.findOne({ _id: id });
         if (!user) {
             throw new BadRequestError('Tài khoản không tồn tại');
@@ -176,7 +219,8 @@ class UserService {
     }
 
     async updateUser(id, data) {
-        const { fullName, address, phone, birthDay, email } = data;
+        const { fullName, address, phone, birthDay } = data;
+        const email = normalizeEmail(data.email);
         const user = await modelUser.findOne({ _id: id });
         if (!user) {
             throw new BadRequestError('Người dùng không tồn tại');
@@ -252,7 +296,8 @@ class UserService {
 
     async loginGoogle(credential) {
         const dataToken = jwtDecode(credential);
-        const user = await modelUser.findOne({ email: dataToken.email });
+        const normalizedEmail = normalizeEmail(dataToken.email);
+        const user = await findUserByEmail(normalizedEmail);
 
         if (user) {
             if (user.isBlocked) {
@@ -264,7 +309,7 @@ class UserService {
             return { token, refreshToken };
         } else {
             const newUser = await modelUser.create({
-                email: dataToken.email,
+                email: normalizedEmail,
                 typeLogin: 'google',
                 fullName: dataToken.name,
             });
@@ -276,7 +321,8 @@ class UserService {
     }
 
     async forgotPassword(email) {
-        const user = await modelUser.findOne({ email });
+        const normalizedEmail = normalizeEmail(email);
+        const user = await findUserByEmail(normalizedEmail);
         if (!user) {
             throw new BadRequestError('Tài khoản không tồn tại');
         }

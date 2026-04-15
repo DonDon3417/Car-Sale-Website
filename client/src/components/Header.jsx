@@ -17,10 +17,11 @@ import {
     Loader2,
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
-import cookies from 'js-cookie';
 
 import { useStore } from '../hooks/useStore';
 import { requestGetAllCars } from '../config/CarRequest';
+import { requestLogout } from '../config/UserRequest';
+import { clearAuthSession } from '../config/authSession';
 
 const Header = () => {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -83,8 +84,14 @@ const Header = () => {
         return () => clearTimeout(debounceTimer);
     }, [searchQuery]);
 
-    const handleLogout = () => {
-        cookies.remove('logged');
+    const handleLogout = async () => {
+        try {
+            await requestLogout();
+        } catch (error) {
+            console.error('Logout failed:', error);
+        }
+
+        clearAuthSession();
         window.location.reload();
     };
 
@@ -105,14 +112,14 @@ const Header = () => {
             initial={{ y: -100 }}
             animate={{ y: 0 }}
             transition={{ duration: 0.5 }}
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-[#0a0a0f]/95 backdrop-blur-md shadow-lg shadow-black/10' : 'bg-transparent'}`}
+            className={`fixed top-0 left-0 right-0 z-9999 customer-header transition-all duration-300 ${isScrolled ? 'backdrop-blur-xl' : 'backdrop-blur-md'}`}
         >
-            <div className="max-w-[1200px] mx-auto px-4">
+            <div className="max-w-300 mx-auto px-4">
                 <div className="flex items-center justify-between h-14 gap-4">
                     {/* Logo */}
-                    <Link to="/" className="flex items-center flex-shrink-0">
-                        <span className="text-white font-bold text-sm tracking-[0.12em] uppercase">
-                            <span className="text-white/80">CarMart</span>
+                    <Link to="/" className="flex items-center shrink-0">
+                        <span className="text-(--app-text) font-bold text-sm tracking-[0.12em] uppercase">
+                            <span className="customer-muted">CarMart</span>
                         </span>
                     </Link>
 
@@ -120,17 +127,17 @@ const Header = () => {
                     <div ref={searchRef} className="hidden lg:flex flex-1 max-w-md mx-4 relative">
                         <form onSubmit={handleSearch} className="w-full">
                             <div className="relative w-full">
-                                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
+                                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 customer-muted" />
                                 <input
                                     type="text"
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
                                     onFocus={() => searchQuery.trim() && setShowResults(true)}
                                     placeholder="Search cars..."
-                                    className="w-full pl-10 pr-4 py-2 bg-white/5 border border-white/10 rounded-full text-white text-xs placeholder-white/30 focus:outline-none focus:border-[#0066FF]/50 focus:bg-white/[0.08] transition-all duration-200"
+                                    className="w-full pl-10 pr-4 py-2 bg-(--app-input-bg) border border-(--app-border) rounded-full text-(--app-text) text-xs placeholder:text-(--app-text-muted) focus:outline-none focus:border-[#0066FF]/50 transition-all duration-200"
                                 />
                                 {isSearching && (
-                                    <Loader2 className="absolute right-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/30 animate-spin" />
+                                    <Loader2 className="absolute right-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 customer-muted animate-spin" />
                                 )}
                             </div>
                         </form>
@@ -142,7 +149,7 @@ const Header = () => {
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: 10 }}
-                                    className="absolute top-full left-0 right-0 mt-2 bg-[#1a2332] border border-white/10 rounded-xl shadow-xl overflow-hidden z-50"
+                                    className="absolute top-full left-0 right-0 mt-2 bg-(--app-surface-strong) border border-(--app-border) rounded-xl shadow-xl overflow-hidden z-50"
                                 >
                                     {searchResults.length > 0 ? (
                                         <div className="py-2">
@@ -151,7 +158,7 @@ const Header = () => {
                                                     key={car._id}
                                                     to={`/cars/${car.slug}`}
                                                     onClick={() => setShowResults(false)}
-                                                    className="flex items-center gap-3 px-4 py-2 hover:bg-white/5 transition-colors group"
+                                                    className="flex items-center gap-3 px-4 py-2 hover:bg-(--app-surface-soft) transition-colors group"
                                                 >
                                                     <img
                                                         src={
@@ -163,16 +170,16 @@ const Header = () => {
                                                         className="w-10 h-10 rounded-lg object-cover"
                                                     />
                                                     <div className="flex-1 min-w-0">
-                                                        <h4 className="text-white text-sm font-medium truncate group-hover:text-[#0066FF] transition-colors">
+                                                        <h4 className="text-(--app-text) text-sm font-medium truncate group-hover:text-[#0066FF] transition-colors">
                                                             {car.name}
                                                         </h4>
-                                                        <p className="text-white/50 text-xs">
+                                                        <p className="customer-muted text-xs">
                                                             {formatPrice(car.price)}
                                                         </p>
                                                     </div>
                                                 </Link>
                                             ))}
-                                            <div className="border-t border-white/5 mt-1 pt-1">
+                                            <div className="border-t border-(--app-border) mt-1 pt-1">
                                                 <button
                                                     onClick={(e) => handleSearch(e)}
                                                     className="w-full py-2 text-center text-[#0066FF] text-xs hover:underline"
@@ -182,7 +189,7 @@ const Header = () => {
                                             </div>
                                         </div>
                                     ) : (
-                                        <div className="p-4 text-center text-white/50 text-sm">
+                                        <div className="p-4 text-center customer-muted text-sm">
                                             No matching cars found
                                         </div>
                                     )}
@@ -196,25 +203,25 @@ const Header = () => {
                         {/* Nav Links */}
                         <Link
                             to="/tin-tuc"
-                            className="text-white/60 hover:text-white text-xs font-medium transition-colors duration-200"
+                            className="customer-muted hover:text-(--app-text) text-xs font-medium transition-colors duration-200"
                         >
                             News
                         </Link>
                         <Link
                             to="/lien-he"
-                            className="text-white/60 hover:text-white text-xs font-medium transition-colors duration-200"
+                            className="customer-muted hover:text-(--app-text) text-xs font-medium transition-colors duration-200"
                         >
                             Contact
                         </Link>
 
-                        <div className="w-px h-4 bg-white/10" />
+                        <div className="w-px h-4 bg-(--app-border)" />
 
                         {/* AI Chatbot */}
                         <Link to="/chatbot">
                             <motion.button
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
-                                className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-[#0066FF]/20 to-[#00C2FF]/20 hover:from-[#0066FF]/30 hover:to-[#00C2FF]/30 border border-[#0066FF]/30 rounded-lg text-[#00C2FF] text-xs font-medium transition-all"
+                                className="flex items-center gap-1.5 px-3 py-1.5 bg-linear-to-r from-[#0066FF]/20 to-[#00C2FF]/20 hover:from-[#0066FF]/30 hover:to-[#00C2FF]/30 border border-[#0066FF]/30 rounded-lg text-[#00C2FF] text-xs font-medium transition-all"
                             >
                                 <Bot className="w-3.5 h-3.5" />
                                 <span>AI Advisor</span>
@@ -228,7 +235,7 @@ const Header = () => {
                                     whileHover={{ scale: 1.02 }}
                                     whileTap={{ scale: 0.98 }}
                                     onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                                    className="flex items-center gap-2 px-2 py-1.5 bg-white/10 hover:bg-white/15 border border-white/20 rounded-lg text-white transition-all"
+                                    className="flex items-center gap-2 px-2 py-1.5 bg-(--app-surface-soft) hover:bg-(--app-surface-soft) border border-(--app-border) rounded-lg text-(--app-text) transition-all"
                                 >
                                     {dataUser.avatar ? (
                                         <img
@@ -243,7 +250,7 @@ const Header = () => {
                                             </span>
                                         </div>
                                     )}
-                                    <span className="text-xs font-medium max-w-[100px] truncate">
+                                    <span className="text-xs font-medium max-w-25 truncate">
                                         {dataUser.fullName || 'User'}
                                     </span>
                                     <ChevronDown
@@ -258,38 +265,40 @@ const Header = () => {
                                             initial={{ opacity: 0, y: 10 }}
                                             animate={{ opacity: 1, y: 0 }}
                                             exit={{ opacity: 0, y: 10 }}
-                                            className="absolute right-0 top-full mt-2 w-48 bg-[#111827] border border-white/10 rounded-xl shadow-xl overflow-hidden"
+                                            className="absolute right-0 top-full mt-2 w-48 bg-(--app-surface-strong) border border-(--app-border) rounded-xl shadow-xl overflow-hidden"
                                         >
-                                            <div className="p-3 border-b border-white/5">
-                                                <p className="text-white text-xs font-semibold truncate">
+                                            <div className="p-3 border-b border-(--app-border)">
+                                                <p className="text-(--app-text) text-xs font-semibold truncate">
                                                     {dataUser.fullName}
                                                 </p>
-                                                <p className="text-white/50 text-[10px] truncate">{dataUser.email}</p>
+                                                <p className="text-(--app-text-muted) text-[10px] truncate">
+                                                    {dataUser.email}
+                                                </p>
                                             </div>
                                             <div className="py-1">
                                                 <Link
                                                     to="/account/profile"
-                                                    className="flex items-center gap-2 px-3 py-2 text-white/70 hover:text-white hover:bg-white/5 text-xs transition-colors"
+                                                    className="flex items-center gap-2 px-3 py-2 text-(--app-text-muted) hover:text-(--app-text) hover:bg-(--app-surface-soft) text-xs transition-colors"
                                                 >
                                                     <User className="w-3.5 h-3.5" />
                                                     <span>My account</span>
                                                 </Link>
                                                 <Link
                                                     to="/account/favorites"
-                                                    className="flex items-center gap-2 px-3 py-2 text-white/70 hover:text-white hover:bg-white/5 text-xs transition-colors"
+                                                    className="flex items-center gap-2 px-3 py-2 text-(--app-text-muted) hover:text-(--app-text) hover:bg-(--app-surface-soft) text-xs transition-colors"
                                                 >
                                                     <Heart className="w-3.5 h-3.5" />
                                                     <span>Favorite cars</span>
                                                 </Link>
                                                 <Link
                                                     to="/account/settings"
-                                                    className="flex items-center gap-2 px-3 py-2 text-white/70 hover:text-white hover:bg-white/5 text-xs transition-colors"
+                                                    className="flex items-center gap-2 px-3 py-2 text-(--app-text-muted) hover:text-(--app-text) hover:bg-(--app-surface-soft) text-xs transition-colors"
                                                 >
                                                     <Settings className="w-3.5 h-3.5" />
                                                     <span>Settings</span>
                                                 </Link>
                                             </div>
-                                            <div className="border-t border-white/5 py-1">
+                                            <div className="border-t border-(--app-border) py-1">
                                                 <button
                                                     onClick={handleLogout}
                                                     className="w-full flex items-center gap-2 px-3 py-2 text-red-400 hover:text-red-300 hover:bg-red-500/10 text-xs transition-colors"
@@ -310,6 +319,7 @@ const Header = () => {
                                         whileHover={{ scale: 1.02 }}
                                         whileTap={{ scale: 0.98 }}
                                         className="flex items-center gap-1.5 px-3 py-1.5 bg-white/10 hover:bg-white/15 border border-white/20 rounded-lg text-white text-xs font-medium transition-all"
+                                        className="flex items-center gap-1.5 px-3 py-1.5 bg-(--app-surface-soft) hover:bg-(--app-surface-soft) border border-(--app-border) rounded-lg text-(--app-text) text-xs font-medium transition-all"
                                     >
                                         <LogIn className="w-3.5 h-3.5" />
                                         <span>Log in</span>
@@ -322,7 +332,7 @@ const Header = () => {
                                         className="flex items-center gap-1.5 px-3 py-1.5 bg-[#0066FF] hover:bg-[#0052cc] rounded-lg text-white text-xs font-semibold transition-colors"
                                     >
                                         <UserPlus className="w-3.5 h-3.5" />
-                                        <span>Subscribe</span>
+                                        <span>Sign in</span>
                                     </motion.button>
                                 </Link>
                             </>
@@ -332,7 +342,7 @@ const Header = () => {
                     {/* Mobile Menu Button */}
                     <button
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                        className="lg:hidden p-1.5 text-white"
+                        className="lg:hidden p-1.5 text-(--app-text)"
                     >
                         {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
                     </button>
@@ -346,19 +356,19 @@ const Header = () => {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="lg:hidden bg-[#0a0a0f]/98 backdrop-blur-md border-t border-white/5"
+                        className="lg:hidden customer-header border-t border-(--app-border)"
                     >
-                        <div className="max-w-[1200px] mx-auto px-4 py-4">
+                        <div className="max-w-300 mx-auto px-4 py-4">
                             {/* Mobile Search */}
                             <form onSubmit={handleSearch} className="mb-4">
                                 <div className="relative">
-                                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
+                                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-(--app-text-muted)" />
                                     <input
                                         type="text"
                                         value={searchQuery}
                                         onChange={(e) => setSearchQuery(e.target.value)}
                                         placeholder="Search cars..."
-                                        className="w-full pl-10 pr-4 py-2.5 bg-white/5 border border-white/10 rounded-full text-white text-sm placeholder-white/30 focus:outline-none focus:border-[#0066FF]/50 transition-all"
+                                        className="w-full pl-10 pr-4 py-2.5 bg-(--app-input-bg) border border-(--app-border) rounded-full text-(--app-text) text-sm placeholder:text-(--app-text-muted) focus:outline-none focus:border-[#0066FF]/50 transition-all"
                                     />
                                 </div>
                             </form>
@@ -366,19 +376,19 @@ const Header = () => {
                             <nav className="flex flex-col gap-2">
                                 <Link
                                     to="/"
-                                    className="py-2 text-white/70 hover:text-white text-sm font-medium transition-colors border-b border-white/5"
+                                    className="py-2 text-(--app-text-muted) hover:text-(--app-text) text-sm font-medium transition-colors border-b border-(--app-border)"
                                 >
                                     Home
                                 </Link>
                                 <Link
                                     to="/tin-tuc"
-                                    className="py-2 text-white/70 hover:text-white text-sm font-medium transition-colors border-b border-white/5"
+                                    className="py-2 text-(--app-text-muted) hover:text-(--app-text) text-sm font-medium transition-colors border-b border-(--app-border)"
                                 >
                                     News
                                 </Link>
                                 <Link
                                     to="/lien-he"
-                                    className="py-2 text-white/70 hover:text-white text-sm font-medium transition-colors border-b border-white/5"
+                                    className="py-2 text-(--app-text-muted) hover:text-(--app-text) text-sm font-medium transition-colors border-b border-(--app-border)"
                                 >
                                     Contact
                                 </Link>
@@ -445,7 +455,7 @@ const Header = () => {
                                             className="w-full flex items-center justify-center gap-1.5 py-2.5 bg-[#0066FF] rounded-lg text-white text-sm font-semibold"
                                         >
                                             <UserPlus className="w-4 h-4" />
-                                            <span>Subscribe</span>
+                                            <span>Sign in</span>
                                         </motion.button>
                                     </Link>
                                 </div>
@@ -459,5 +469,3 @@ const Header = () => {
 };
 
 export default Header;
-
-

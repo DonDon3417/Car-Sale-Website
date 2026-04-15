@@ -47,17 +47,17 @@ const MyDepositsPage = () => {
         return (
             <div className="space-y-4">
                 <div>
-                    <h1 className="text-xl font-bold text-white">My Deposits</h1>
-                    <p className="text-white/40 text-sm mt-1">Track your car deposit orders</p>
+                    <h1 className="text-xl font-bold text-(--app-text)">My Deposits</h1>
+                    <p className="text-(--app-text-muted) text-sm mt-1">Track your car deposit orders</p>
                 </div>
                 {[1, 2, 3].map((i) => (
-                    <div key={i} className="bg-[#111827]/80 border border-white/6 rounded-2xl p-5 animate-pulse">
+                    <div key={i} className="customer-surface rounded-2xl p-5 animate-pulse">
                         <div className="flex gap-4">
-                            <div className="w-24 h-18 bg-white/6 rounded-xl" />
+                            <div className="w-24 h-18 bg-(--app-surface-soft) rounded-xl" />
                             <div className="flex-1 space-y-3">
-                                <div className="h-4 bg-white/6 rounded w-1/3" />
-                                <div className="h-3 bg-white/6 rounded w-1/2" />
-                                <div className="h-3 bg-white/6 rounded w-1/4" />
+                                <div className="h-4 bg-(--app-surface-soft) rounded w-1/3" />
+                                <div className="h-3 bg-(--app-surface-soft) rounded w-1/2" />
+                                <div className="h-3 bg-(--app-surface-soft) rounded w-1/4" />
                             </div>
                         </div>
                     </div>
@@ -71,11 +71,9 @@ const MyDepositsPage = () => {
             {/* Page Title */}
             <div className="flex items-center justify-between">
                 <div>
-                    <h1 className="text-xl font-bold text-white">My Deposits</h1>
-                    <p className="text-white/40 text-sm mt-1">
-                        {deposits.length > 0
-                            ? `You have ${deposits.length} deposits`
-                            : 'Track your car deposit orders'}
+                    <h1 className="text-xl font-bold text-(--app-text)">My Deposits</h1>
+                    <p className="text-(--app-text-muted) text-sm mt-1">
+                        {deposits.length > 0 ? `You have ${deposits.length} deposits` : 'Track your car deposit orders'}
                     </p>
                 </div>
             </div>
@@ -85,13 +83,13 @@ const MyDepositsPage = () => {
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="bg-[#111827]/80 backdrop-blur-sm border border-white/6 rounded-2xl p-12 text-center"
+                    className="customer-surface rounded-2xl p-12 text-center"
                 >
-                    <div className="w-16 h-16 bg-white/4 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                        <Package className="w-8 h-8 text-white/20" />
+                    <div className="w-16 h-16 bg-(--app-surface-soft) rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <Package className="w-8 h-8 text-(--app-text-muted)" />
                     </div>
-                    <p className="text-white/50 text-sm">You do not have any deposits yet</p>
-                    <p className="text-white/30 text-xs mt-1">Search and reserve your favorite car</p>
+                    <p className="text-(--app-text-muted) text-sm">You do not have any deposits yet</p>
+                    <p className="text-(--app-text-muted) text-xs mt-1">Search and reserve your favorite car</p>
                 </motion.div>
             )}
 
@@ -107,12 +105,12 @@ const MyDepositsPage = () => {
                             initial={{ opacity: 0, y: 15 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: index * 0.05 }}
-                            className="bg-[#111827]/80 backdrop-blur-sm border border-white/6 rounded-2xl p-5 hover:border-white/10 transition-all duration-200 group"
+                            className="customer-surface rounded-2xl p-5 hover:border-[#0066FF]/25 transition-all duration-200 group"
                         >
                             <div className="flex flex-col sm:flex-row gap-4">
                                 {/* Car Image */}
                                 {car?.images?.[0] && (
-                                    <div className="w-full sm:w-28 h-20 rounded-xl overflow-hidden shrink-0 bg-white/4">
+                                    <div className="w-full sm:w-28 h-20 rounded-xl overflow-hidden shrink-0 bg-(--app-surface-soft)">
                                         <img
                                             src={`${import.meta.env.VITE_URL_IMAGE}${car.images[0]}`}
                                             alt={car.name}
@@ -125,18 +123,18 @@ const MyDepositsPage = () => {
                                 <div className="flex-1 min-w-0">
                                     <div className="flex items-start justify-between gap-3">
                                         <div className="min-w-0">
-                                            <h3 className="text-white text-sm font-semibold truncate">
+                                            <h3 className="text-(--app-text) text-sm font-semibold truncate">
                                                 {car?.name || 'Unknown car'}
                                             </h3>
                                             <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1.5">
                                                 {deposit.carVersion && (
-                                                    <span className="text-white/40 text-xs flex items-center gap-1">
+                                                    <span className="text-(--app-text-muted) text-xs flex items-center gap-1">
                                                         <Car className="w-3 h-3" />
                                                         {deposit.carVersion}
                                                     </span>
                                                 )}
                                                 {deposit.carColor && (
-                                                    <span className="text-white/40 text-xs">
+                                                    <span className="text-(--app-text-muted) text-xs">
                                                         Color: {deposit.carColor}
                                                     </span>
                                                 )}
@@ -154,11 +152,11 @@ const MyDepositsPage = () => {
                                             <CreditCard className="w-3.5 h-3.5" />
                                             {formatPrice(deposit.depositAmount)}
                                         </span>
-                                        <span className="text-white/30 text-xs flex items-center gap-1">
+                                        <span className="text-(--app-text-muted) text-xs flex items-center gap-1">
                                             <Calendar className="w-3 h-3" />
                                             {dayjs(deposit.createdAt).format('DD/MM/YYYY HH:mm')}
                                         </span>
-                                        <span className="text-white/30 text-xs flex items-center gap-1">
+                                        <span className="text-(--app-text-muted) text-xs flex items-center gap-1">
                                             <Clock className="w-3 h-3" />
                                             Expires: {dayjs(deposit.expiresAt).format('DD/MM/YYYY')}
                                         </span>
@@ -168,7 +166,7 @@ const MyDepositsPage = () => {
                                 {/* View Detail */}
                                 <button
                                     onClick={() => setSelectedDeposit(deposit)}
-                                    className="self-center p-2 rounded-lg text-white/30 hover:text-white hover:bg-white/6 transition-all opacity-0 group-hover:opacity-100"
+                                    className="self-center p-2 rounded-lg text-(--app-text-muted) hover:text-(--app-text) hover:bg-(--app-surface-soft) transition-all opacity-0 group-hover:opacity-100"
                                     title="View details"
                                 >
                                     <Eye className="w-4 h-4" />
@@ -194,14 +192,14 @@ const MyDepositsPage = () => {
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95, y: 20 }}
                             onClick={(e) => e.stopPropagation()}
-                            className="w-full max-w-lg bg-[#111827] border border-white/8 rounded-2xl overflow-hidden"
+                            className="w-full max-w-lg customer-surface rounded-2xl overflow-hidden"
                         >
                             {/* Modal Header */}
-                            <div className="flex items-center justify-between p-5 border-b border-white/6">
-                                <h3 className="text-white text-base font-semibold">Deposit order details</h3>
+                            <div className="flex items-center justify-between p-5 border-b border-(--app-border)">
+                                <h3 className="text-(--app-text) text-base font-semibold">Deposit order details</h3>
                                 <button
                                     onClick={() => setSelectedDeposit(null)}
-                                    className="p-1.5 rounded-lg text-white/40 hover:text-white hover:bg-white/6 transition-all"
+                                    className="p-1.5 rounded-lg text-(--app-text-muted) hover:text-(--app-text) hover:bg-(--app-surface-soft) transition-all"
                                 >
                                     <X className="w-4 h-4" />
                                 </button>
@@ -210,7 +208,7 @@ const MyDepositsPage = () => {
                             {/* Modal Body */}
                             <div className="p-5 space-y-4 max-h-[70vh] overflow-y-auto">
                                 {/* Car Info */}
-                                <div className="flex gap-4 p-3 bg-white/2 rounded-xl">
+                                <div className="flex gap-4 p-3 bg-(--app-surface-soft) rounded-xl">
                                     {selectedDeposit.car?.images?.[0] && (
                                         <img
                                             src={`${import.meta.env.VITE_URL_IMAGE}${selectedDeposit.car.images[0]}`}
@@ -219,10 +217,10 @@ const MyDepositsPage = () => {
                                         />
                                     )}
                                     <div>
-                                        <p className="text-white text-sm font-semibold">
+                                        <p className="text-(--app-text) text-sm font-semibold">
                                             {selectedDeposit.car?.name || 'N/A'}
                                         </p>
-                                        <p className="text-white/40 text-xs mt-0.5">
+                                        <p className="text-(--app-text-muted) text-xs mt-0.5">
                                             {[selectedDeposit.carVersion, selectedDeposit.carColor]
                                                 .filter(Boolean)
                                                 .join(' • ')}
@@ -268,11 +266,16 @@ const MyDepositsPage = () => {
                                             value: dayjs(selectedDeposit.expiresAt).format('DD/MM/YYYY'),
                                         },
                                     ].map((item, i) => (
-                                        <div key={i} className="p-3 bg-white/2 rounded-xl">
-                                            <p className="text-white/40 text-[11px] mb-1">{item.label}</p>
+                                        <div
+                                            key={i}
+                                            className="p-3 bg-(--app-surface-soft) rounded-xl border border-(--app-border)"
+                                        >
+                                            <p className="text-(--app-text-muted) text-[11px] mb-1">{item.label}</p>
                                             <p
                                                 className={`text-sm font-medium ${
-                                                    item.highlight ? 'text-[#0066FF]' : item.className || 'text-white'
+                                                    item.highlight
+                                                        ? 'text-[#0066FF]'
+                                                        : item.className || 'text-(--app-text)'
                                                 }`}
                                             >
                                                 {item.value}
@@ -283,17 +286,17 @@ const MyDepositsPage = () => {
 
                                 {/* Note */}
                                 {selectedDeposit.note && (
-                                    <div className="p-3 bg-white/2 rounded-xl">
-                                        <p className="text-white/40 text-[11px] mb-1">Note</p>
-                                        <p className="text-white/70 text-sm">{selectedDeposit.note}</p>
+                                    <div className="p-3 bg-(--app-surface-soft) rounded-xl border border-(--app-border)">
+                                        <p className="text-(--app-text-muted) text-[11px] mb-1">Note</p>
+                                        <p className="text-(--app-text) text-sm">{selectedDeposit.note}</p>
                                     </div>
                                 )}
 
                                 {/* Transaction ID */}
                                 {selectedDeposit.transactionId && (
-                                    <div className="p-3 bg-white/2 rounded-xl">
-                                        <p className="text-white/40 text-[11px] mb-1">Transaction ID</p>
-                                        <p className="text-white/70 text-sm font-mono">
+                                    <div className="p-3 bg-(--app-surface-soft) rounded-xl border border-(--app-border)">
+                                        <p className="text-(--app-text-muted) text-[11px] mb-1">Transaction ID</p>
+                                        <p className="text-(--app-text) text-sm font-mono">
                                             {selectedDeposit.transactionId}
                                         </p>
                                     </div>

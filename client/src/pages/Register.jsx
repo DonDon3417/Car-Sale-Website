@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import { message } from 'antd';
+import { setAuthSession } from '../config/authSession';
 
 import { requestRegister } from '../config/UserRequest';
 
@@ -17,7 +18,16 @@ const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await requestRegister(formData);
+            const normalizedFormData = {
+                ...formData,
+                email: formData.email.trim().toLowerCase(),
+            };
+
+            const res = await requestRegister(normalizedFormData);
+            setAuthSession({
+                accessToken: res?.metadata?.token,
+                refreshToken: res?.metadata?.refreshToken,
+            });
             message.success('Subscribe successfully');
             setTimeout(() => {
                 window.location.reload();
@@ -30,7 +40,7 @@ const Register = () => {
 
     return (
         <>
-            <div className="min-h-screen bg-linear-to-br from-[#0a0a0f] via-[#0d1520] to-[#0a1628] flex items-center justify-center px-4 py-10">
+            <div className="min-h-screen customer-page flex items-center justify-center px-4 py-10 transition-colors duration-300">
                 <Header />
                 <div className="fixed inset-0 overflow-hidden pointer-events-none">
                     <div className="absolute top-0 left-1/2 w-125 h-125 bg-[#0066FF]/5 rounded-full blur-[150px]" />
@@ -48,28 +58,30 @@ const Register = () => {
                         <div className="w-8 h-8 flex items-center justify-center bg-[#0066FF] rounded-lg">
                             <Car className="w-4 h-4 text-white" />
                         </div>
-                        <span className="text-white font-bold text-sm tracking-widest uppercase">AUTOSHOW</span>
+                        <span className="text-(--app-text) font-bold text-sm tracking-widest uppercase">AUTOSHOW</span>
                     </Link>
 
                     {/* Card */}
-                    <div className="bg-[#111827]/80 backdrop-blur-xl border border-white/5 rounded-2xl p-6">
+                    <div className="customer-surface rounded-2xl p-6">
                         <div className="text-center mb-5">
-                            <h1 className="text-xl font-bold text-white mb-1">Create account</h1>
-                            <p className="text-white/50 text-xs">Sign up to receive exclusive offers</p>
+                            <h1 className="text-xl font-bold text-(--app-text) mb-1">Create account</h1>
+                            <p className="text-(--app-text-muted) text-xs">Sign up to receive exclusive offers</p>
                         </div>
 
                         <form onSubmit={handleSubmit} className="space-y-3">
                             {/* Name */}
                             <div>
-                                <label className="block text-white/70 text-xs font-medium mb-1.5">Full name</label>
+                                <label className="block text-(--app-text-muted) text-xs font-medium mb-1.5">
+                                    Full name
+                                </label>
                                 <div className="relative">
-                                    <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
+                                    <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-(--app-text-muted)" />
                                     <input
                                         type="text"
                                         value={formData.fullName}
                                         onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                                         placeholder="Enter full name"
-                                        className="w-full h-10 pl-10 pr-4 bg-white/5 border border-white/10 rounded-lg text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-[#0066FF] transition-colors"
+                                        className="w-full h-10 pl-10 pr-4 bg-(--app-input-bg) border border-(--app-border) rounded-lg text-(--app-text) text-sm placeholder:text-(--app-text-muted) focus:outline-none focus:border-[#0066FF] transition-colors"
                                         required
                                     />
                                 </div>
@@ -77,15 +89,17 @@ const Register = () => {
 
                             {/* Email */}
                             <div>
-                                <label className="block text-white/70 text-xs font-medium mb-1.5">Email</label>
+                                <label className="block text-(--app-text-muted) text-xs font-medium mb-1.5">
+                                    Email
+                                </label>
                                 <div className="relative">
-                                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
+                                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-(--app-text-muted)" />
                                     <input
                                         type="email"
                                         value={formData.email}
                                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                                         placeholder="Enter your email"
-                                        className="w-full h-10 pl-10 pr-4 bg-white/5 border border-white/10 rounded-lg text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-[#0066FF] transition-colors"
+                                        className="w-full h-10 pl-10 pr-4 bg-(--app-input-bg) border border-(--app-border) rounded-lg text-(--app-text) text-sm placeholder:text-(--app-text-muted) focus:outline-none focus:border-[#0066FF] transition-colors"
                                         required
                                     />
                                 </div>
@@ -93,15 +107,17 @@ const Register = () => {
 
                             {/* Phone */}
                             <div>
-                                <label className="block text-white/70 text-xs font-medium mb-1.5">Phone number</label>
+                                <label className="block text-(--app-text-muted) text-xs font-medium mb-1.5">
+                                    Phone number
+                                </label>
                                 <div className="relative">
-                                    <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
+                                    <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-(--app-text-muted)" />
                                     <input
                                         type="tel"
                                         value={formData.phone}
                                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                                         placeholder="Enter phone number"
-                                        className="w-full h-10 pl-10 pr-4 bg-white/5 border border-white/10 rounded-lg text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-[#0066FF] transition-colors"
+                                        className="w-full h-10 pl-10 pr-4 bg-(--app-input-bg) border border-(--app-border) rounded-lg text-(--app-text) text-sm placeholder:text-(--app-text-muted) focus:outline-none focus:border-[#0066FF] transition-colors"
                                         required
                                     />
                                 </div>
@@ -109,21 +125,23 @@ const Register = () => {
 
                             {/* Password */}
                             <div>
-                                <label className="block text-white/70 text-xs font-medium mb-1.5">Password</label>
+                                <label className="block text-(--app-text-muted) text-xs font-medium mb-1.5">
+                                    Password
+                                </label>
                                 <div className="relative">
-                                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
+                                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-(--app-text-muted)" />
                                     <input
                                         type={showPassword ? 'text' : 'password'}
                                         value={formData.password}
                                         onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                                         placeholder="Create a password"
-                                        className="w-full h-10 pl-10 pr-10 bg-white/5 border border-white/10 rounded-lg text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-[#0066FF] transition-colors"
+                                        className="w-full h-10 pl-10 pr-10 bg-(--app-input-bg) border border-(--app-border) rounded-lg text-(--app-text) text-sm placeholder:text-(--app-text-muted) focus:outline-none focus:border-[#0066FF] transition-colors"
                                         required
                                     />
                                     <button
                                         type="button"
                                         onClick={() => setShowPassword(!showPassword)}
-                                        className="absolute right-3 top-1/2 -translate-y-1/2 text-white/40 hover:text-white/70 transition-colors"
+                                        className="absolute right-3 top-1/2 -translate-y-1/2 text-(--app-text-muted) hover:text-(--app-text) transition-colors"
                                     >
                                         {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                                     </button>
@@ -136,13 +154,13 @@ const Register = () => {
                                     Confirm password
                                 </label>
                                 <div className="relative">
-                                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
+                                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-(--app-text-muted)" />
                                     <input
                                         type={showPassword ? 'text' : 'password'}
                                         value={formData.confirmPassword}
                                         onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
                                         placeholder="Re-enter password"
-                                        className="w-full h-10 pl-10 pr-4 bg-white/5 border border-white/10 rounded-lg text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-[#0066FF] transition-colors"
+                                        className="w-full h-10 pl-10 pr-4 bg-(--app-input-bg) border border-(--app-border) rounded-lg text-(--app-text) text-sm placeholder:text-(--app-text-muted) focus:outline-none focus:border-[#0066FF] transition-colors"
                                         required
                                     />
                                 </div>
@@ -153,10 +171,10 @@ const Register = () => {
                                 <input
                                     type="checkbox"
                                     id="terms"
-                                    className="mt-0.5 w-4 h-4 rounded border-white/20 bg-white/5 text-[#0066FF] focus:ring-[#0066FF]/50"
+                                    className="mt-0.5 w-4 h-4 rounded border-(--app-border) bg-(--app-input-bg) text-[#0066FF] focus:ring-[#0066FF]/50"
                                     required
                                 />
-                                <label htmlFor="terms" className="text-white/50 text-[11px] leading-relaxed">
+                                <label htmlFor="terms" className="text-(--app-text-muted) text-[11px] leading-relaxed">
                                     I agree to the{' '}
                                     <a href="#" className="text-[#0066FF] hover:underline">
                                         Terms of Use
@@ -182,14 +200,14 @@ const Register = () => {
 
                         {/* Divider */}
                         <div className="flex items-center gap-3 my-4">
-                            <div className="flex-1 h-px bg-white/10" />
-                            <span className="text-white/40 text-xs">or</span>
-                            <div className="flex-1 h-px bg-white/10" />
+                            <div className="flex-1 h-px bg-(--app-border)" />
+                            <span className="text-(--app-text-muted) text-xs">or</span>
+                            <div className="flex-1 h-px bg-(--app-border)" />
                         </div>
 
                         {/* Social Login */}
                         <div className="flex gap-2">
-                            <button className="flex-1 flex items-center justify-center gap-2 h-9 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-white text-xs font-medium transition-colors">
+                            <button className="flex-1 flex items-center justify-center gap-2 h-9 bg-(--app-surface-soft) hover:bg-(--app-input-bg) border border-(--app-border) rounded-lg text-(--app-text) text-xs font-medium transition-colors">
                                 <svg className="w-4 h-4" viewBox="0 0 24 24">
                                     <path
                                         fill="currentColor"
@@ -210,7 +228,7 @@ const Register = () => {
                                 </svg>
                                 <span>Google</span>
                             </button>
-                            <button className="flex-1 flex items-center justify-center gap-2 h-9 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-white text-xs font-medium transition-colors">
+                            <button className="flex-1 flex items-center justify-center gap-2 h-9 bg-(--app-surface-soft) hover:bg-(--app-input-bg) border border-(--app-border) rounded-lg text-(--app-text) text-xs font-medium transition-colors">
                                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
                                     <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                                 </svg>
@@ -219,7 +237,7 @@ const Register = () => {
                         </div>
 
                         {/* Login Link */}
-                        <p className="text-center text-white/50 text-xs mt-4">
+                        <p className="text-center text-(--app-text-muted) text-xs mt-4">
                             Already have an account?{' '}
                             <Link to="/account/login" className="text-[#0066FF] font-medium hover:underline">
                                 Log in
@@ -234,4 +252,3 @@ const Register = () => {
 };
 
 export default Register;
-

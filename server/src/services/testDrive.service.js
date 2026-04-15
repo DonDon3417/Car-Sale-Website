@@ -1,15 +1,115 @@
 const TestDrive = require('../models/testDrive.model');
 const Car = require('../models/cars.model');
+const TestDriveSlot = require('../models/testDriveSlot.model');
 const { BadRequestError, NotFoundError } = require('../core/error.response');
 const { sendTestDriveConfirmation, sendTestDriveRejection } = require('../utils/emailTestDriver');
 
 // Các khung giờ có thể đặt (8h-17h, nghỉ trưa 12h)
-const TIME_SLOTS = ['08:00', '09:00', '10:00', '11:00', '13:00', '14:00', '15:00', '16:00', '17:00'];
+const TIME_SLOTS = [
+    '08:00',
+    '08:30',
+    '09:00',
+    '09:30',
+    '10:00',
+    '10:30',
+    '11:00',
+    '11:30',
+    '13:00',
+    '13:30',
+    '14:00',
+    '14:30',
+    '15:00',
+    '15:30',
+    '16:00',
+    '16:30',
+    '17:00',
+];
+const MIN_CANCEL_HOURS_BEFORE = Number(process.env.TEST_DRIVE_CANCEL_MIN_HOURS || 2);
 
 class TestDriveService {
+    parseBookingDate(date) {
+        if (!date) return null;
+
+        if (typeof date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(date.trim())) {
+            const [year, month, day] = date.split('-').map(Number);
+            const parsed = new Date(year, month - 1, day);
+            return Number.isNaN(parsed.getTime()) ? null : parsed;
+        }
+
+        const parsedDate = new Date(date);
+        if (Number.isNaN(parsedDate.getTime())) {
+            return null;
+        }
+
+        return new Date(parsedDate.getFullYear(), parsedDate.getMonth(), parsedDate.getDate());
+    }
+
+    getDayRange(date) {
+        const startOfDay = this.parseBookingDate(date);
+        if (!startOfDay) {
+            throw new BadRequestError('Ngày đặt lịch không hợp lệ');
+        }
+
+        const endOfDay = new Date(startOfDay);
+        endOfDay.setHours(23, 59, 59, 999);
+
+        return { startOfDay, endOfDay };
+    }
+
+    getBookingDateTime(date, timeSlot) {
+        const bookingTime = this.parseBookingDate(date);
+        if (!bookingTime) {
+            throw new BadRequestError('Ngày đặt lịch không hợp lệ');
+        }
+
+        const [hour, minute] = timeSlot.split(':').map(Number);
+        bookingTime.setHours(hour, minute, 0, 0);
+        return bookingTime;
+    }
+
+    isPastTimeSlotForToday(date, timeSlot) {
+        const now = new Date();
+        const inputDate = this.parseBookingDate(date);
+
+        if (!inputDate) {
+            return false;
+        }
+
+        if (inputDate.toDateString() !== now.toDateString()) {
+            return false;
+        }
+
+        const bookingTime = this.getBookingDateTime(inputDate, timeSlot);
+        return bookingTime <= now;
+    }
+
+    validateBookingPayload({ carId, date, timeSlot, fullName, phone, email }) {
+        if (!carId || !date || !timeSlot || !fullName || !phone) {
+            throw new BadRequestError('Thiếu thông tin đặt lịch lái thử');
+        }
+
+        const trimmedName = String(fullName).trim();
+        if (trimmedName.length < 2) {
+            throw new BadRequestError('Họ tên không hợp lệ');
+        }
+
+        const normalizedPhone = String(phone).trim();
+        if (!/^\+?[0-9]{9,12}$/.test(normalizedPhone)) {
+            throw new BadRequestError('Số điện thoại không hợp lệ');
+        }
+
+        if (email) {
+            const normalizedEmail = String(email).trim().toLowerCase();
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
+                throw new BadRequestError('Email không hợp lệ');
+            }
+        }
+    }
+
     // Kiểm tra ngày hợp lệ (không phải thứ 7, CN)
     isValidDate(date) {
-        const d = new Date(date);
+        const d = this.parseBookingDate(date);
+        if (!d || Number.isNaN(d.getTime())) return false;
         const dayOfWeek = d.getDay();
         // 0 = Chủ nhật, 6 = Thứ 7
         return dayOfWeek !== 0 && dayOfWeek !== 6;
@@ -19,13 +119,13 @@ class TestDriveService {
     isFutureDate(date) {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
-        const inputDate = new Date(date);
-        inputDate.setHours(0, 0, 0, 0);
+        const inputDate = this.parseBookingDate(date);
+        if (!inputDate) return false;
         return inputDate >= today;
     }
 
     // Lấy danh sách khung giờ còn trống cho 1 ngày
-    async getAvailableSlots(date) {
+    async getAvailableSlots(date, carId) {
         if (!this.isValidDate(date)) {
             throw new BadRequestError('Không thể đặt lịch vào thứ 7 hoặc Chủ nhật');
         }
@@ -34,17 +134,42 @@ class TestDriveService {
             throw new BadRequestError('Không thể đặt lịch cho ngày trong quá khứ');
         }
 
-        const fullSlots = await TestDrive.getFullSlots(date);
+        const { startOfDay, endOfDay } = this.getDayRange(date);
+        const car = carId ? await Car.findById(carId).select('status').lean() : null;
+
+        if (carId && !car) {
+            throw new NotFoundError('Không tìm thấy xe');
+        }
+
+        if (carId && car.status !== 'available') {
+            return TIME_SLOTS.map((slot) => ({ time: slot, available: false }));
+        }
+
+        const carReservedSlotSet = new Set();
+
+        if (carId) {
+            const carReservedSlots = await TestDriveSlot.find(
+                {
+                    car: car._id,
+                    date: { $gte: startOfDay, $lte: endOfDay },
+                },
+                { timeSlot: 1, _id: 0 },
+            ).lean();
+
+            carReservedSlots.forEach((item) => carReservedSlotSet.add(item.timeSlot));
+        }
 
         return TIME_SLOTS.map((slot) => ({
             time: slot,
-            available: !fullSlots.includes(slot),
+            available: !this.isPastTimeSlotForToday(date, slot) && (!carId || !carReservedSlotSet.has(slot)),
         }));
     }
 
     // Tạo lịch đặt lái thử mới
     async createBooking(data) {
         const { customerId, carId, date, timeSlot, fullName, phone, email, note } = data;
+
+        this.validateBookingPayload({ carId, date, timeSlot, fullName, phone, email });
 
         // Validate ngày
         if (!this.isValidDate(date)) {
@@ -53,6 +178,10 @@ class TestDriveService {
 
         if (!this.isFutureDate(date)) {
             throw new BadRequestError('Không thể đặt lịch cho ngày trong quá khứ');
+        }
+
+        if (this.isPastTimeSlotForToday(date, timeSlot)) {
+            throw new BadRequestError('Không thể đặt giờ trong quá khứ');
         }
 
         // Validate khung giờ
@@ -66,24 +195,66 @@ class TestDriveService {
             throw new NotFoundError('Không tìm thấy xe');
         }
 
-        // Kiểm tra slot còn trống
-        const isAvailable = await TestDrive.isSlotAvailable(date, timeSlot);
-        if (!isAvailable) {
-            throw new BadRequestError('Khung giờ này đã được đặt, vui lòng chọn khung giờ khác');
+        if (car.status !== 'available') {
+            throw new BadRequestError('Xe không khả dụng để lái thử ở thời điểm hiện tại');
         }
 
-        // Tạo booking mới
-        const booking = await TestDrive.create({
-            customer: customerId,
-            car: carId,
-            date: new Date(date),
-            timeSlot,
-            fullName,
-            phone,
-            email,
-            note,
-            status: 'pending',
-        });
+        const { startOfDay, endOfDay } = this.getDayRange(date);
+        const normalizedEmail = email ? String(email).trim().toLowerCase() : '';
+        const normalizedFullName = String(fullName).trim();
+        const normalizedPhone = String(phone).trim();
+
+        let reservedSlot;
+        try {
+            reservedSlot = await TestDriveSlot.create({
+                car: carId,
+                date: startOfDay,
+                timeSlot,
+            });
+        } catch (error) {
+            if (error?.code === 11000) {
+                throw new BadRequestError('Xe đã có lịch trong khung giờ này, vui lòng chọn giờ khác');
+            }
+
+            throw error;
+        }
+
+        if (!reservedSlot) {
+            throw new BadRequestError('Xe đã có lịch trong khung giờ này, vui lòng chọn giờ khác');
+        }
+
+        let booking;
+        try {
+            const carBookings = await TestDrive.countDocuments({
+                car: carId,
+                date: { $gte: startOfDay, $lte: endOfDay },
+                timeSlot,
+                status: { $nin: ['cancelled'] },
+            });
+
+            if (carBookings >= 1) {
+                throw new BadRequestError('Xe đã hết lượt lái thử trong khung giờ này');
+            }
+
+            booking = await TestDrive.create({
+                customer: customerId,
+                car: carId,
+                date: startOfDay,
+                timeSlot,
+                fullName: normalizedFullName,
+                phone: normalizedPhone,
+                email: normalizedEmail,
+                note,
+                status: 'pending',
+            });
+        } catch (error) {
+            await TestDriveSlot.findOneAndDelete({
+                car: carId,
+                date: startOfDay,
+                timeSlot,
+            });
+            throw error;
+        }
 
         return await TestDrive.findById(booking._id)
             .populate('customer', 'fullName email phone')
@@ -203,26 +374,31 @@ class TestDriveService {
             throw new BadRequestError('Không thể hủy lịch hẹn này');
         }
 
+        if (!isAdmin && booking.status === 'confirmed') {
+            const bookingDateTime = this.getBookingDateTime(booking.date, booking.timeSlot);
+            const diffMs = bookingDateTime.getTime() - Date.now();
+            if (diffMs < MIN_CANCEL_HOURS_BEFORE * 60 * 60 * 1000) {
+                throw new BadRequestError(`Chỉ có thể hủy trước giờ hẹn ít nhất ${MIN_CANCEL_HOURS_BEFORE} tiếng`);
+            }
+        }
+
         booking.status = 'cancelled';
         booking.cancelReason = reason;
         booking.processedBy = userId;
         await booking.save();
 
-        // Gửi email từ chối/hủy
-        // Chỉ gửi nếu người thực hiện hủy là admin (dựa vào flag isAdmin truyền từ controller)
-        console.log('Cancel Check:', {
-            hasEmail: !!booking.email,
-            email: booking.email,
-            userId,
-            customer: booking.customer,
-            isAdminFlag: isAdmin,
-            reason,
+        const { startOfDay } = this.getDayRange(booking.date);
+        await TestDriveSlot.findOneAndDelete({
+            car: booking.car,
+            date: startOfDay,
+            timeSlot: booking.timeSlot,
         });
 
+        // Gửi email từ chối/hủy
+        // Chỉ gửi nếu người thực hiện hủy là admin (dựa vào flag isAdmin truyền từ controller)
         if (booking.email && isAdmin) {
             try {
                 await booking.populate('car');
-                console.log('Sending rejection email to:', booking.email);
                 await sendTestDriveRejection(
                     booking.email,
                     booking.fullName,
@@ -250,6 +426,8 @@ class TestDriveService {
                     total: [{ $count: 'count' }],
                     pending: [{ $match: { status: 'pending' } }, { $count: 'count' }],
                     confirmed: [{ $match: { status: 'confirmed' } }, { $count: 'count' }],
+                    completed: [{ $match: { status: 'completed' } }, { $count: 'count' }],
+                    cancelled: [{ $match: { status: 'cancelled' } }, { $count: 'count' }],
                     todayBookings: [
                         {
                             $match: {
@@ -267,6 +445,12 @@ class TestDriveService {
             total: stats[0].total[0]?.count || 0,
             pending: stats[0].pending[0]?.count || 0,
             confirmed: stats[0].confirmed[0]?.count || 0,
+            completed: stats[0].completed[0]?.count || 0,
+            cancelled: stats[0].cancelled[0]?.count || 0,
+            conversionRate:
+                (stats[0].total[0]?.count || 0) > 0
+                    ? Number((((stats[0].completed[0]?.count || 0) / (stats[0].total[0]?.count || 0)) * 100).toFixed(2))
+                    : 0,
             todayBookings: stats[0].todayBookings[0]?.count || 0,
         };
     }

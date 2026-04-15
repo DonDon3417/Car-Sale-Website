@@ -1,6 +1,5 @@
 import axios from 'axios';
-import Cookies from 'js-cookie';
-import { requestRefreshToken } from './UserRequest';
+import { clearAuthSession, getAccessToken, getRefreshToken, isTabLoggedIn, setAuthSession } from './authSession';
 
 export class ApiClient {
     constructor(baseURL) {
@@ -21,7 +20,14 @@ export class ApiClient {
     setupInterceptors() {
         // Request interceptor
         this.axiosInstance.interceptors.request.use(
-            (config) => config,
+            (config) => {
+                const accessToken = getAccessToken();
+                if (accessToken) {
+                    config.headers = config.headers || {};
+                    config.headers.Authorization = `Bearer ${accessToken}`;
+                }
+                return config;
+            },
             (error) => Promise.reject(error),
         );
 
@@ -84,7 +90,27 @@ export class ApiClient {
 
     async refreshToken() {
         try {
-            await requestRefreshToken();
+            const refreshToken = getRefreshToken();
+            if (!refreshToken) {
+                throw new Error('Missing refresh token');
+            }
+
+            const res = await axios.get(`${this.baseURL}/api/users/refresh-token`, {
+                withCredentials: true,
+                headers: {
+                    'x-refresh-token': refreshToken,
+                },
+            });
+
+            const nextToken = res?.data?.metadata?.token;
+            if (!nextToken) {
+                throw new Error('Invalid refresh response');
+            }
+
+            setAuthSession({
+                accessToken: nextToken,
+                refreshToken,
+            });
             console.log('Token refreshed successfully');
         } catch (error) {
             console.error('Failed to refresh token:', error);
@@ -108,7 +134,7 @@ export class ApiClient {
         if (this.isHandlingAuthFailure) return;
         this.isHandlingAuthFailure = true;
 
-        Cookies.remove('logged');
+        clearAuthSession();
 
         this.logout().finally(() => {
             if (window.location.pathname !== '/account/login') {
@@ -118,13 +144,25 @@ export class ApiClient {
     }
 
     isLoggedIn() {
-        return Cookies.get('logged') === '1';
+        return isTabLoggedIn();
     }
 
     async logout() {
         try {
             // Use a plain request (without this interceptor) to avoid 401 recursion.
-            await axios.get(`${this.baseURL}/api/users/logout`, { withCredentials: true });
+            const accessToken = getAccessToken();
+            await axios.post(
+                `${this.baseURL}/api/users/logout`,
+                {},
+                {
+                    withCredentials: true,
+                    headers: accessToken
+                        ? {
+                              Authorization: `Bearer ${accessToken}`,
+                          }
+                        : {},
+                },
+            );
         } catch (error) {
             console.error('Logout error:', error);
         }

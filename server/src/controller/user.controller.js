@@ -88,7 +88,7 @@ class UserController {
 
     async refreshToken(req, res) {
         const isProduction = process.env.NODE_ENV === 'production';
-        const { refreshToken } = req.cookies;
+        const refreshToken = req.headers['x-refresh-token'] || req.cookies.refreshToken;
         if (!refreshToken) {
             throw new BadRequestError('Vui lòng đăng nhập lại');
         }
@@ -233,6 +233,19 @@ class UserController {
     async getMessageChatbot(req, res) {
         const { id } = req.user;
         const data = await UserService.getMessageChatbot(id);
+        new OK({ message: 'success', metadata: data }).send(res);
+    }
+
+    async getNotificationReadState(req, res) {
+        const { id } = req.user;
+        const data = await UserService.getNotificationReadState(id);
+        new OK({ message: 'success', metadata: data }).send(res);
+    }
+
+    async updateNotificationReadState(req, res) {
+        const { id } = req.user;
+        const { readMap } = req.body;
+        const data = await UserService.updateNotificationReadState(id, readMap);
         new OK({ message: 'success', metadata: data }).send(res);
     }
 }

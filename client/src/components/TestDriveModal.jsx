@@ -73,8 +73,10 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
         setIsLoading(true);
         setError('');
         try {
-            const formattedDate = date.toISOString().split('T')[0];
-            const res = await request.get(`/api/test-drive/available-slots?date=${formattedDate}`);
+            const formattedDate = formatDateForApi(date);
+            const res = await request.get(
+                `/api/test-drive/available-slots?date=${formattedDate}&carId=${encodeURIComponent(car?._id || '')}`,
+            );
             setAvailableSlots(res.data?.metadata || []);
         } catch (error) {
             setError(error.response?.data?.message || 'Unable to load time slots');
@@ -82,6 +84,13 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
         } finally {
             setIsLoading(false);
         }
+    };
+
+    const formatDateForApi = (date) => {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
     };
 
     // Generate calendar days
@@ -139,7 +148,7 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
         try {
             await request.post('/api/test-drive/booking', {
                 carId: car._id,
-                date: selectedDate.toISOString(),
+                date: formatDateForApi(selectedDate),
                 timeSlot: selectedSlot,
                 fullName: formData.fullName,
                 phone: formData.phone,
@@ -207,7 +216,7 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
                     initial={{ opacity: 0, scale: 0.95, y: 20 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                    className="bg-[#1a2332] rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden shadow-2xl"
+                    className="customer-surface rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden shadow-2xl"
                     onClick={(e) => e.stopPropagation()}
                 >
                     {/* Header */}
@@ -218,7 +227,7 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
                             </div>
                             <div>
                                 <h2 className="text-xl font-bold text-white">Book a Test Drive</h2>
-                                <p className="text-white/80 text-sm">{car?.name}</p>
+                                <p className="text-white/75 text-sm">{car?.name}</p>
                             </div>
                         </div>
                         <button
@@ -226,7 +235,7 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
                                 resetModal();
                                 onClose();
                             }}
-                            className="w-10 h-10 flex items-center justify-center text-white/80 hover:text-white hover:bg-white/20 rounded-xl transition-colors"
+                            className="w-10 h-10 flex items-center justify-center text-white/80 hover:text-white hover:bg-black/20 rounded-xl transition-colors"
                         >
                             <X className="w-6 h-6" />
                         </button>
@@ -241,16 +250,22 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
                                     <div key={s} className="flex items-center gap-2">
                                         <div
                                             className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-colors ${
-                                                step >= s ? 'bg-[#0066FF] text-white' : 'bg-white/10 text-white/50'
+                                                step >= s
+                                                    ? 'bg-[#0066FF] text-white'
+                                                    : 'bg-(--app-input-bg) text-(--app-text-muted)'
                                             }`}
                                         >
                                             {s}
                                         </div>
-                                        <span className={`text-sm ${step >= s ? 'text-white' : 'text-white/50'}`}>
+                                        <span
+                                            className={`text-sm ${step >= s ? 'text-(--app-text)' : 'text-(--app-text-muted)'}`}
+                                        >
                                             {s === 1 ? 'Choose time' : 'Details'}
                                         </span>
                                         {s < 2 && (
-                                            <div className={`w-8 h-0.5 ${step > s ? 'bg-[#0066FF]' : 'bg-white/20'}`} />
+                                            <div
+                                                className={`w-8 h-0.5 ${step > s ? 'bg-[#0066FF]' : 'bg-(--app-border)'}`}
+                                            />
                                         )}
                                     </div>
                                 ))}
@@ -273,16 +288,16 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
                                     <div className="flex items-center justify-between mb-4">
                                         <button
                                             onClick={prevMonth}
-                                            className="p-2 text-white/60 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+                                            className="p-2 text-(--app-text-muted) hover:text-(--app-text) hover:bg-(--app-surface-soft) rounded-lg transition-colors"
                                         >
                                             <ChevronLeft className="w-5 h-5" />
                                         </button>
-                                        <h3 className="text-white font-semibold">
+                                        <h3 className="text-(--app-text) font-semibold">
                                             Month {currentMonth.getMonth() + 1}/{currentMonth.getFullYear()}
                                         </h3>
                                         <button
                                             onClick={nextMonth}
-                                            className="p-2 text-white/60 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+                                            className="p-2 text-(--app-text-muted) hover:text-(--app-text) hover:bg-(--app-surface-soft) rounded-lg transition-colors"
                                         >
                                             <ChevronRight className="w-5 h-5" />
                                         </button>
@@ -291,7 +306,7 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
                                     {/* Day names */}
                                     <div className="grid grid-cols-7 gap-2 mb-2">
                                         {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
-                                            <div key={day} className="text-center text-white/50 text-sm py-2">
+                                            <div key={day} className="text-center text-(--app-text-muted) text-sm py-2">
                                                 {day}
                                             </div>
                                         ))}
@@ -318,10 +333,10 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
                                                         isSelected
                                                             ? 'bg-[#0066FF] text-white'
                                                             : isValid
-                                                              ? 'bg-white/5 text-white hover:bg-white/10'
+                                                              ? 'bg-(--app-surface-soft) text-(--app-text) hover:bg-(--app-input-bg)'
                                                               : isWeekend
                                                                 ? 'bg-red-500/10 text-red-400/50 cursor-not-allowed'
-                                                                : 'bg-white/5 text-white/30 cursor-not-allowed'
+                                                                : 'bg-(--app-surface-soft) text-(--app-text-muted) cursor-not-allowed'
                                                     } ${isToday && !isSelected ? 'ring-2 ring-[#0066FF]' : ''}`}
                                                 >
                                                     {date.getDate()}
@@ -330,7 +345,7 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
                                         })}
                                     </div>
 
-                                    <p className="text-white/50 text-xs mt-3 text-center">
+                                    <p className="text-(--app-text-muted) text-xs mt-3 text-center">
                                         * Weekend bookings are not available
                                     </p>
                                 </div>
@@ -338,7 +353,7 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
                                 {/* Time slots */}
                                 {selectedDate && (
                                     <div>
-                                        <h4 className="text-white font-medium mb-3 flex items-center gap-2">
+                                        <h4 className="text-(--app-text) font-medium mb-3 flex items-center gap-2">
                                             <Clock className="w-4 h-4 text-[#0066FF]" />
                                             Choose time slot - {formatDate(selectedDate)}
                                         </h4>
@@ -358,8 +373,8 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
                                                             selectedSlot === slot.time
                                                                 ? 'bg-[#0066FF] text-white'
                                                                 : slot.available
-                                                                  ? 'bg-white/5 text-white hover:bg-white/10'
-                                                                  : 'bg-white/5 text-white/30 cursor-not-allowed line-through'
+                                                                  ? 'bg-(--app-surface-soft) text-(--app-text) hover:bg-(--app-input-bg)'
+                                                                  : 'bg-(--app-surface-soft) text-(--app-text-muted) cursor-not-allowed line-through'
                                                         }`}
                                                     >
                                                         {slot.time}
@@ -374,7 +389,7 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
                                 <button
                                     onClick={() => setStep(2)}
                                     disabled={!selectedDate || !selectedSlot}
-                                    className="w-full py-3 bg-[#0066FF] hover:bg-[#0052cc] disabled:bg-white/10 disabled:text-white/30 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-colors"
+                                    className="w-full py-3 bg-[#0066FF] hover:bg-[#0052cc] disabled:bg-(--app-input-bg) disabled:text-(--app-text-muted) disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-colors"
                                 >
                                     Continue
                                 </button>
@@ -389,7 +404,7 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
                                     <div className="flex items-center gap-3">
                                         <Calendar className="w-5 h-5 text-[#0066FF]" />
                                         <div>
-                                            <p className="text-white font-medium">{formatDate(selectedDate)}</p>
+                                            <p className="text-(--app-text) font-medium">{formatDate(selectedDate)}</p>
                                             <p className="text-[#0066FF] text-sm font-semibold">{selectedSlot}</p>
                                         </div>
                                     </div>
@@ -398,7 +413,7 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
                                 {/* Form */}
                                 <div className="space-y-4">
                                     <div>
-                                        <label className="block text-white/70 text-sm mb-2">
+                                        <label className="block text-(--app-text-muted) text-sm mb-2">
                                             <User className="w-4 h-4 inline mr-2" />
                                             Full name *
                                         </label>
@@ -407,12 +422,12 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
                                             value={formData.fullName}
                                             onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                                             placeholder="Enter full name"
-                                            className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-white/40 focus:outline-none focus:border-[#0066FF]"
+                                            className="w-full px-4 py-3 bg-(--app-input-bg) border border-(--app-border) rounded-xl text-(--app-text) placeholder:text-(--app-text-muted) focus:outline-none focus:border-[#0066FF]"
                                         />
                                     </div>
 
                                     <div>
-                                        <label className="block text-white/70 text-sm mb-2">
+                                        <label className="block text-(--app-text-muted) text-sm mb-2">
                                             <Phone className="w-4 h-4 inline mr-2" />
                                             Phone number *
                                         </label>
@@ -421,12 +436,12 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
                                             value={formData.phone}
                                             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                                             placeholder="Enter phone number"
-                                            className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-white/40 focus:outline-none focus:border-[#0066FF]"
+                                            className="w-full px-4 py-3 bg-(--app-input-bg) border border-(--app-border) rounded-xl text-(--app-text) placeholder:text-(--app-text-muted) focus:outline-none focus:border-[#0066FF]"
                                         />
                                     </div>
 
                                     <div>
-                                        <label className="block text-white/70 text-sm mb-2">
+                                        <label className="block text-(--app-text-muted) text-sm mb-2">
                                             <Mail className="w-4 h-4 inline mr-2" />
                                             Email
                                         </label>
@@ -435,12 +450,12 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
                                             value={formData.email}
                                             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                                             placeholder="Enter email"
-                                            className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-white/40 focus:outline-none focus:border-[#0066FF]"
+                                            className="w-full px-4 py-3 bg-(--app-input-bg) border border-(--app-border) rounded-xl text-(--app-text) placeholder:text-(--app-text-muted) focus:outline-none focus:border-[#0066FF]"
                                         />
                                     </div>
 
                                     <div>
-                                        <label className="block text-white/70 text-sm mb-2">
+                                        <label className="block text-(--app-text-muted) text-sm mb-2">
                                             <FileText className="w-4 h-4 inline mr-2" />
                                             Note
                                         </label>
@@ -449,7 +464,7 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
                                             onChange={(e) => setFormData({ ...formData, note: e.target.value })}
                                             placeholder="Enter note (optional)"
                                             rows={3}
-                                            className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-white/40 focus:outline-none focus:border-[#0066FF] resize-none"
+                                            className="w-full px-4 py-3 bg-(--app-input-bg) border border-(--app-border) rounded-xl text-(--app-text) placeholder:text-(--app-text-muted) focus:outline-none focus:border-[#0066FF] resize-none"
                                         />
                                     </div>
                                 </div>
@@ -458,14 +473,14 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
                                 <div className="flex gap-3">
                                     <button
                                         onClick={() => setStep(1)}
-                                        className="flex-1 py-3 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-xl transition-colors"
+                                        className="flex-1 py-3 bg-(--app-surface-soft) hover:bg-(--app-input-bg) text-(--app-text) font-semibold rounded-xl transition-colors border border-(--app-border)"
                                     >
                                         Back
                                     </button>
                                     <button
                                         onClick={handleSubmit}
                                         disabled={isSubmitting || !formData.fullName || !formData.phone}
-                                        className="flex-1 py-3 bg-[#0066FF] hover:bg-[#0052cc] disabled:bg-white/10 disabled:text-white/30 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-colors flex items-center justify-center gap-2"
+                                        className="flex-1 py-3 bg-[#0066FF] hover:bg-[#0052cc] disabled:bg-(--app-input-bg) disabled:text-(--app-text-muted) disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-colors flex items-center justify-center gap-2"
                                     >
                                         {isSubmitting ? (
                                             <>
@@ -479,7 +494,7 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
                                 </div>
 
                                 {!user && (
-                                    <p className="text-center text-white/50 text-sm">
+                                    <p className="text-center text-(--app-text-muted) text-sm">
                                         You need to{' '}
                                         <a href="/account/login" className="text-[#0066FF] underline">
                                             log in
@@ -496,26 +511,28 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
                                 <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
                                     <CheckCircle className="w-10 h-10 text-green-400" />
                                 </div>
-                                <h3 className="text-2xl font-bold text-white mb-2">Booking successful!</h3>
-                                <p className="text-white/70 mb-6">We will contact you to confirm your appointment.</p>
+                                <h3 className="text-2xl font-bold text-(--app-text) mb-2">Booking successful!</h3>
+                                <p className="text-(--app-text-muted) mb-6">
+                                    We will contact you to confirm your appointment.
+                                </p>
 
-                                <div className="bg-white/5 rounded-xl p-4 text-left mb-6">
+                                <div className="bg-(--app-surface-soft) border border-(--app-border) rounded-xl p-4 text-left mb-6">
                                     <div className="grid grid-cols-2 gap-4 text-sm">
                                         <div>
-                                            <p className="text-white/50">Car</p>
-                                            <p className="text-white font-medium">{car?.name}</p>
+                                            <p className="text-(--app-text-muted)">Car</p>
+                                            <p className="text-(--app-text) font-medium">{car?.name}</p>
                                         </div>
                                         <div>
-                                            <p className="text-white/50">Days</p>
-                                            <p className="text-white font-medium">{formatDate(selectedDate)}</p>
+                                            <p className="text-(--app-text-muted)">Days</p>
+                                            <p className="text-(--app-text) font-medium">{formatDate(selectedDate)}</p>
                                         </div>
                                         <div>
-                                            <p className="text-white/50">Hours</p>
-                                            <p className="text-white font-medium">{selectedSlot}</p>
+                                            <p className="text-(--app-text-muted)">Hours</p>
+                                            <p className="text-(--app-text) font-medium">{selectedSlot}</p>
                                         </div>
                                         <div>
-                                            <p className="text-white/50">Contact</p>
-                                            <p className="text-white font-medium">{formData.phone}</p>
+                                            <p className="text-(--app-text-muted)">Contact</p>
+                                            <p className="text-(--app-text) font-medium">{formData.phone}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -539,4 +556,3 @@ const TestDriveModal = ({ isOpen, onClose, car }) => {
 };
 
 export default TestDriveModal;
-

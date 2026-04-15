@@ -34,6 +34,8 @@ router.get('/favorites', authUser, asyncHandler(userController.getFavoriteCars))
 router.post('/favorites/:carId/toggle', authUser, asyncHandler(userController.toggleFavoriteCar));
 router.post('/chatbot', authUser, asyncHandler(userController.chatbot));
 router.get('/message-chatbot', authUser, asyncHandler(userController.getMessageChatbot));
+router.get('/notification-read-state', authUser, asyncHandler(userController.getNotificationReadState));
+router.put('/notification-read-state', authUser, asyncHandler(userController.updateNotificationReadState));
 
 router.put('/change-password', authUser, asyncHandler(userController.changePassword));
 

@@ -1,18 +1,19 @@
 const testDriveService = require('../services/testDrive.service');
 const { OK, Created } = require('../core/success.response');
+const { BadRequestError } = require('../core/error.response');
 
 class TestDriveController {
     // Lấy khung giờ còn trống
     getAvailableSlots = async (req, res) => {
-        const { date } = req.query;
+        const { date, carId } = req.query;
 
         if (!date) {
-            throw new Error('Vui lòng chọn ngày');
+            throw new BadRequestError('Vui lòng chọn ngày');
         }
 
         new OK({
             message: 'Available slots retrieved successfully',
-            metadata: await testDriveService.getAvailableSlots(date),
+            metadata: await testDriveService.getAvailableSlots(date, carId),
         }).send(res);
     };
 

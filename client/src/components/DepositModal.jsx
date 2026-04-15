@@ -194,22 +194,22 @@ const DepositModal = ({ isOpen, onClose, car, selectedVersion, selectedColor }) 
                         animate={{ scale: 1, opacity: 1 }}
                         exit={{ scale: 0.95, opacity: 0 }}
                         onClick={(e) => e.stopPropagation()}
-                        className="bg-gradient-to-b from-[#1a2332] to-[#0f1520] rounded-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto shadow-2xl border border-white/10"
+                        className="customer-surface rounded-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto shadow-2xl"
                     >
                         {/* Header */}
-                        <div className="sticky top-0 bg-gradient-to-r from-[#0066FF] to-[#0052cc] p-5 flex items-center justify-between">
+                        <div className="sticky top-0 bg-linear-to-r from-[#0066FF] to-[#0052cc] p-5 flex items-center justify-between">
                             <div className="flex items-center gap-3">
                                 <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
                                     <CreditCard className="w-6 h-6 text-white" />
                                 </div>
                                 <div>
                                     <h2 className="text-xl font-bold text-white">Car Deposits</h2>
-                                    <p className="text-white/70 text-sm">Secure your favorite car ownership</p>
+                                    <p className="text-white/80 text-sm">Secure your favorite car ownership</p>
                                 </div>
                             </div>
                             <button
                                 onClick={handleClose}
-                                className="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center text-white transition-colors"
+                                className="w-10 h-10 bg-black/20 hover:bg-black/30 rounded-full flex items-center justify-center text-white transition-colors"
                             >
                                 <X className="w-5 h-5" />
                             </button>
@@ -221,30 +221,30 @@ const DepositModal = ({ isOpen, onClose, car, selectedVersion, selectedColor }) 
                                 <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
                                     <Check className="w-10 h-10 text-green-400" />
                                 </div>
-                                <h3 className="text-2xl font-bold text-white mb-2">Deposit successful!</h3>
-                                <p className="text-white/60 mb-6">
+                                <h3 className="text-2xl font-bold text-(--app-text) mb-2">Deposit successful!</h3>
+                                <p className="text-(--app-text-muted) mb-6">
                                     Your deposit order has been created. Please complete payment to confirm.
                                 </p>
 
-                                <div className="bg-white/5 rounded-xl p-4 text-left mb-6">
-                                    <div className="flex justify-between py-2 border-b border-white/10">
-                                        <span className="text-white/50">Order ID</span>
-                                        <span className="text-white font-medium">
+                                <div className="bg-(--app-surface-soft) border border-(--app-border) rounded-xl p-4 text-left mb-6">
+                                    <div className="flex justify-between py-2 border-b border-(--app-border)">
+                                        <span className="text-(--app-text-muted)">Order ID</span>
+                                        <span className="text-(--app-text) font-medium">
                                             {depositResult?._id?.slice(-8).toUpperCase()}
                                         </span>
                                     </div>
-                                    <div className="flex justify-between py-2 border-b border-white/10">
-                                        <span className="text-white/50">Amount</span>
+                                    <div className="flex justify-between py-2 border-b border-(--app-border)">
+                                        <span className="text-(--app-text-muted)">Amount</span>
                                         <span className="text-green-400 font-bold">{formatPrice(depositAmount)}</span>
                                     </div>
                                     <div className="flex justify-between py-2">
-                                        <span className="text-white/50">Method</span>
-                                        <span className="text-white font-medium">{paymentMethod}</span>
+                                        <span className="text-(--app-text-muted)">Method</span>
+                                        <span className="text-(--app-text) font-medium">{paymentMethod}</span>
                                     </div>
                                 </div>
 
                                 <div className="flex items-start gap-2 p-3 bg-yellow-500/10 rounded-xl border border-yellow-500/20 text-left mb-6">
-                                    <AlertCircle className="w-5 h-5 text-yellow-400 flex-shrink-0 mt-0.5" />
+                                    <AlertCircle className="w-5 h-5 text-yellow-400 shrink-0 mt-0.5" />
                                     <p className="text-yellow-200/80 text-sm">
                                         Your deposit order will be held for 7 days. Please complete payment and contact
                                         us for confirmation.
@@ -253,7 +253,7 @@ const DepositModal = ({ isOpen, onClose, car, selectedVersion, selectedColor }) 
 
                                 <button
                                     onClick={handleClose}
-                                    className="w-full py-4 bg-gradient-to-r from-[#0066FF] to-[#0052cc] rounded-xl text-white font-semibold"
+                                    className="w-full py-4 bg-linear-to-r from-[#0066FF] to-[#0052cc] rounded-xl text-white font-semibold"
                                 >
                                     Close
                                 </button>
@@ -261,9 +261,9 @@ const DepositModal = ({ isOpen, onClose, car, selectedVersion, selectedColor }) 
                         ) : (
                             <div className="p-5 space-y-5">
                                 {/* Car Info */}
-                                <div className="bg-white/5 rounded-xl p-4 border border-white/10">
+                                <div className="bg-(--app-surface-soft) rounded-xl p-4 border border-(--app-border)">
                                     <div className="flex gap-4">
-                                        <div className="w-24 h-16 rounded-lg overflow-hidden bg-white/10 flex-shrink-0">
+                                        <div className="w-24 h-16 rounded-lg overflow-hidden bg-(--app-input-bg) shrink-0">
                                             <img
                                                 src={
                                                     car.images?.[0]
@@ -275,8 +275,8 @@ const DepositModal = ({ isOpen, onClose, car, selectedVersion, selectedColor }) 
                                             />
                                         </div>
                                         <div className="flex-1 min-w-0">
-                                            <h3 className="text-white font-bold truncate">{car.name}</h3>
-                                            <div className="flex items-center gap-2 text-sm text-white/50 mt-1">
+                                            <h3 className="text-(--app-text) font-bold truncate">{car.name}</h3>
+                                            <div className="flex items-center gap-2 text-sm text-(--app-text-muted) mt-1">
                                                 {versionName && (
                                                     <span className="flex items-center gap-1">
                                                         <Settings className="w-3 h-3" />
@@ -296,22 +296,24 @@ const DepositModal = ({ isOpen, onClose, car, selectedVersion, selectedColor }) 
                                 </div>
 
                                 {/* Deposit Amount */}
-                                <div className="bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-xl p-4 border border-green-500/20">
+                                <div className="bg-linear-to-r from-green-500/10 to-emerald-500/10 rounded-xl p-4 border border-green-500/20">
                                     <div className="flex items-center justify-between">
                                         <div className="flex items-center gap-2">
                                             <Wallet className="w-5 h-5 text-green-400" />
-                                            <span className="text-white/70">Deposit amount (10%)</span>
+                                            <span className="text-(--app-text-muted)">Deposit amount (10%)</span>
                                         </div>
                                         <span className="text-green-400 text-2xl font-bold">
                                             {formatPriceShort(depositAmount)}
                                         </span>
                                     </div>
-                                    <p className="text-white/40 text-xs mt-2">= {formatPrice(depositAmount)}</p>
+                                    <p className="text-(--app-text-muted) text-xs mt-2">
+                                        = {formatPrice(depositAmount)}
+                                    </p>
                                 </div>
 
                                 {/* Payment Methods */}
                                 <div>
-                                    <h4 className="text-white font-semibold mb-3 flex items-center gap-2">
+                                    <h4 className="text-(--app-text) font-semibold mb-3 flex items-center gap-2">
                                         <CreditCard className="w-4 h-4 text-[#0066FF]" />
                                         Select payment method
                                     </h4>
@@ -323,17 +325,19 @@ const DepositModal = ({ isOpen, onClose, car, selectedVersion, selectedColor }) 
                                                 className={`w-full flex items-center gap-4 p-4 rounded-xl border-2 transition-all ${
                                                     paymentMethod === method.id
                                                         ? `${method.bgColor} ${method.borderColor}`
-                                                        : 'bg-white/5 border-white/10 hover:border-white/20'
+                                                        : 'bg-(--app-surface-soft) border-(--app-border) hover:border-[#0066FF]/35'
                                                 }`}
                                             >
                                                 <method.icon />
                                                 <div className="flex-1 text-left">
                                                     <p
-                                                        className={`font-semibold ${paymentMethod === method.id ? 'text-white' : 'text-white/80'}`}
+                                                        className={`font-semibold ${paymentMethod === method.id ? 'text-(--app-text)' : 'text-(--app-text-muted)'}`}
                                                     >
                                                         {method.name}
                                                     </p>
-                                                    <p className="text-white/50 text-sm">{method.description}</p>
+                                                    <p className="text-(--app-text-muted) text-sm">
+                                                        {method.description}
+                                                    </p>
                                                 </div>
                                                 {paymentMethod === method.id && (
                                                     <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center">
@@ -341,7 +345,7 @@ const DepositModal = ({ isOpen, onClose, car, selectedVersion, selectedColor }) 
                                                     </div>
                                                 )}
                                                 <ChevronRight
-                                                    className={`w-5 h-5 ${paymentMethod === method.id ? 'text-white' : 'text-white/30'}`}
+                                                    className={`w-5 h-5 ${paymentMethod === method.id ? 'text-(--app-text)' : 'text-(--app-text-muted)'}`}
                                                 />
                                             </button>
                                         ))}
@@ -350,7 +354,7 @@ const DepositModal = ({ isOpen, onClose, car, selectedVersion, selectedColor }) 
 
                                 {/* Phone Input */}
                                 <div>
-                                    <label className="text-white font-medium mb-2 flex items-center gap-2">
+                                    <label className="text-(--app-text) font-medium mb-2 flex items-center gap-2">
                                         <Phone className="w-4 h-4 text-[#0066FF]" />
                                         Contact phone number
                                     </label>
@@ -359,13 +363,13 @@ const DepositModal = ({ isOpen, onClose, car, selectedVersion, selectedColor }) 
                                         value={phone}
                                         onChange={(e) => setPhone(e.target.value)}
                                         placeholder="Enter phone number"
-                                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-white/30 focus:outline-none focus:border-[#0066FF] transition-colors"
+                                        className="w-full px-4 py-3 bg-(--app-input-bg) border border-(--app-border) rounded-xl text-(--app-text) placeholder:text-(--app-text-muted) focus:outline-none focus:border-[#0066FF] transition-colors"
                                     />
                                 </div>
 
                                 {/* Note Input */}
                                 <div>
-                                    <label className="text-white font-medium mb-2 flex items-center gap-2">
+                                    <label className="text-(--app-text) font-medium mb-2 flex items-center gap-2">
                                         <FileText className="w-4 h-4 text-[#0066FF]" />
                                         Note (optional)
                                     </label>
@@ -374,7 +378,7 @@ const DepositModal = ({ isOpen, onClose, car, selectedVersion, selectedColor }) 
                                         onChange={(e) => setNote(e.target.value)}
                                         placeholder="Enter note or special request..."
                                         rows={2}
-                                        className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-white/30 focus:outline-none focus:border-[#0066FF] transition-colors resize-none"
+                                        className="w-full px-4 py-3 bg-(--app-input-bg) border border-(--app-border) rounded-xl text-(--app-text) placeholder:text-(--app-text-muted) focus:outline-none focus:border-[#0066FF] transition-colors resize-none"
                                     />
                                 </div>
 
@@ -388,9 +392,9 @@ const DepositModal = ({ isOpen, onClose, car, selectedVersion, selectedColor }) 
 
                                 {/* Policy */}
                                 <div className="flex items-start gap-2 p-3 bg-[#0066FF]/10 rounded-xl border border-[#0066FF]/20">
-                                    <Shield className="w-5 h-5 text-[#0066FF] flex-shrink-0 mt-0.5" />
-                                    <div className="text-white/60 text-xs">
-                                        <p className="font-medium text-white/80 mb-1">Deposit policy:</p>
+                                    <Shield className="w-5 h-5 text-[#0066FF] shrink-0 mt-0.5" />
+                                    <div className="text-(--app-text-muted) text-xs">
+                                        <p className="font-medium text-(--app-text) mb-1">Deposit policy:</p>
                                         <ul className="space-y-0.5">
                                             <li>• Deposit 10% of the car value to reserve your spot</li>
                                             <li>• Reservation hold: 7 days</li>
@@ -405,8 +409,8 @@ const DepositModal = ({ isOpen, onClose, car, selectedVersion, selectedColor }) 
                                     disabled={loading || !paymentMethod}
                                     className={`w-full py-4 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all ${
                                         loading || !paymentMethod
-                                            ? 'bg-white/10 text-white/40 cursor-not-allowed'
-                                            : 'bg-gradient-to-r from-[#0066FF] to-[#0052cc] text-white shadow-lg shadow-[#0066FF]/30 hover:shadow-[#0066FF]/50'
+                                            ? 'bg-(--app-input-bg) text-(--app-text-muted) cursor-not-allowed'
+                                            : 'bg-linear-to-r from-[#0066FF] to-[#0052cc] text-white shadow-lg shadow-[#0066FF]/30 hover:shadow-[#0066FF]/50'
                                     }`}
                                 >
                                     {loading ? (

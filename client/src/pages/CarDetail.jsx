@@ -38,7 +38,7 @@ import DepositModal from '../components/DepositModal';
 import { requestGetCarBySlug } from '../config/CarRequest';
 import { requestToggleFavoriteCar } from '../config/UserRequest';
 import { useStore } from '../hooks/useStore';
-import cookies from 'js-cookie';
+import { isTabLoggedIn } from '../config/authSession';
 
 const CarDetail = () => {
     const { slug } = useParams();
@@ -157,7 +157,7 @@ const CarDetail = () => {
     const handleToggleFavorite = async () => {
         if (!car?._id || favoriteLoading) return;
 
-        if (!cookies.get('logged')) {
+        if (!isTabLoggedIn()) {
             navigate('/account/login');
             return;
         }
@@ -224,7 +224,7 @@ const CarDetail = () => {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-[#0a0a0f] flex items-center justify-center">
+            <div className="min-h-screen customer-page flex items-center justify-center">
                 <Loader2 className="w-10 h-10 text-[#0066FF] animate-spin" />
             </div>
         );
@@ -232,8 +232,8 @@ const CarDetail = () => {
 
     if (!car) {
         return (
-            <div className="min-h-screen bg-[#0a0a0f] flex flex-col items-center justify-center">
-                <h1 className="text-white text-2xl mb-4">Not found cars</h1>
+            <div className="min-h-screen customer-page flex flex-col items-center justify-center">
+                <h1 className="text-(--app-text) text-2xl mb-4">Not found cars</h1>
                 <Link to="/" className="text-[#0066FF] hover:underline">
                     Back to home
                 </Link>
@@ -242,20 +242,20 @@ const CarDetail = () => {
     }
 
     return (
-        <div className="min-h-screen bg-linear-to-b from-[#0a0a0f] via-[#0d1520] to-[#0a1628]">
+        <div className="min-h-screen customer-page">
             <Header />
 
             {/* Breadcrumb */}
             <div className="max-w-300 mx-auto px-4 py-4 pt-20">
                 <div className="flex items-center gap-2 text-sm">
-                    <Link to="/" className="text-white/50 hover:text-white transition-colors">
+                    <Link to="/" className="text-(--app-text-muted) hover:text-(--app-text) transition-colors">
                         Home
                     </Link>
-                    <span className="text-white/30">/</span>
-                    <Link to="/cars" className="text-white/50 hover:text-white transition-colors">
+                    <span className="text-(--app-text-muted)">/</span>
+                    <Link to="/cars" className="text-(--app-text-muted) hover:text-(--app-text) transition-colors">
                         Car
                     </Link>
-                    <span className="text-white/30">/</span>
+                    <span className="text-(--app-text-muted)">/</span>
                     <span className="text-[#0066FF]">{car.name}</span>
                 </div>
             </div>
@@ -269,7 +269,7 @@ const CarDetail = () => {
                         <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
-                            className="relative aspect-16/10 bg-[#1a2332] rounded-2xl overflow-hidden group cursor-pointer"
+                            className="relative aspect-16/10 bg-(--app-surface-strong) border border-(--app-border) rounded-2xl overflow-hidden group cursor-pointer shadow-(--app-shadow-soft)"
                             onClick={() => setShowGallery(true)}
                         >
                             <img
@@ -354,10 +354,10 @@ const CarDetail = () => {
                         <div>
                             <div className="flex items-center gap-2 mb-2">
                                 <span className="text-[#0066FF] text-sm font-medium">{car.brand?.name}</span>
-                                <span className="text-white/30">•</span>
-                                <span className="text-white/50 text-sm">{car.year}</span>
+                                <span className="text-(--app-text-muted)">•</span>
+                                <span className="text-(--app-text-muted) text-sm">{car.year}</span>
                             </div>
-                            <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">{car.name}</h1>
+                            <h1 className="text-3xl md:text-4xl font-bold text-(--app-text) mb-4">{car.name}</h1>
 
                             <div className="flex items-end gap-4">
                                 <span className="text-3xl font-bold text-[#0066FF]">{formatPrice(currentPrice)}</span>
@@ -377,24 +377,27 @@ const CarDetail = () => {
                                 { icon: Settings, label: 'Transmission', value: formatTransmission(car.transmission) },
                                 { icon: Users, label: 'Seats', value: `${car.seats} seats` },
                             ].map((spec, idx) => (
-                                <div key={idx} className="bg-white/5 rounded-xl p-3 text-center">
+                                <div
+                                    key={idx}
+                                    className="bg-(--app-surface-strong) border border-(--app-border) rounded-xl p-3 text-center shadow-(--app-shadow-soft)"
+                                >
                                     <spec.icon className="w-5 h-5 text-[#0066FF] mx-auto mb-1" />
-                                    <p className="text-white/40 text-[10px] uppercase mb-0.5">{spec.label}</p>
-                                    <p className="text-white text-sm font-medium">{spec.value}</p>
+                                    <p className="text-(--app-text-muted) text-[10px] uppercase mb-0.5">{spec.label}</p>
+                                    <p className="text-(--app-text) text-sm font-medium">{spec.value}</p>
                                 </div>
                             ))}
                         </div>
 
                         {/* Loan Calculator Preview */}
-                        <div className="bg-linear-to-r from-green-500/10 to-emerald-500/10 border border-green-500/20 rounded-2xl p-5">
+                        <div className="bg-linear-to-r from-green-500/8 to-emerald-500/8 border border-green-500/25 rounded-2xl p-5 shadow-(--app-shadow-soft)">
                             <div className="flex items-center justify-between mb-4">
                                 <div className="flex items-center gap-2">
                                     <div className="w-10 h-10 bg-green-500/20 rounded-xl flex items-center justify-center">
                                         <Calculator className="w-5 h-5 text-green-400" />
                                     </div>
                                     <div>
-                                        <h3 className="text-white font-semibold">Installment estimate</h3>
-                                        <p className="text-white/50 text-xs">
+                                        <h3 className="text-(--app-text) font-semibold">Installment estimate</h3>
+                                        <p className="text-(--app-text-muted) text-xs">
                                             Interest rate from {loanSettings.interestRate}%/year
                                         </p>
                                     </div>
@@ -409,23 +412,23 @@ const CarDetail = () => {
                             </div>
 
                             <div className="grid grid-cols-2 gap-4">
-                                <div className="bg-black/20 rounded-xl p-3">
-                                    <p className="text-white/50 text-xs mb-1">Monthly installment</p>
+                                <div className="bg-(--app-surface-strong) border border-(--app-border) rounded-xl p-3">
+                                    <p className="text-(--app-text-muted) text-xs mb-1">Monthly installment</p>
                                     <p className="text-green-400 text-xl font-bold">
                                         {formatPriceShort(loanCalculation.monthlyPayment)}
                                     </p>
                                 </div>
-                                <div className="bg-black/20 rounded-xl p-3">
-                                    <p className="text-white/50 text-xs mb-1">
+                                <div className="bg-(--app-surface-strong) border border-(--app-border) rounded-xl p-3">
+                                    <p className="text-(--app-text-muted) text-xs mb-1">
                                         Down payment ({loanSettings.downPaymentPercent}%)
                                     </p>
-                                    <p className="text-white text-xl font-bold">
+                                    <p className="text-(--app-text) text-xl font-bold">
                                         {formatPriceShort(loanCalculation.downPayment)}
                                     </p>
                                 </div>
                             </div>
 
-                            <div className="mt-3 flex items-center gap-2 text-white/40 text-xs">
+                            <div className="mt-3 flex items-center gap-2 text-(--app-text-muted) text-xs">
                                 <Info className="w-3 h-3" />
                                 <span>Term {loanSettings.loanTerm} months • Click "Details" to customize</span>
                             </div>
@@ -434,7 +437,7 @@ const CarDetail = () => {
                         {/* Colors */}
                         {car.colors?.length > 0 && (
                             <div>
-                                <h3 className="text-white font-semibold mb-3">
+                                <h3 className="text-(--app-text) font-semibold mb-3">
                                     Colors: <span className="text-[#0066FF]">{car.colors[selectedColor]?.name}</span>
                                 </h3>
                                 <div className="flex gap-2">
@@ -444,7 +447,7 @@ const CarDetail = () => {
                                             onClick={() => setSelectedColor(idx)}
                                             className={`relative w-10 h-10 rounded-full transition-all ${
                                                 selectedColor === idx
-                                                    ? 'ring-2 ring-[#0066FF] ring-offset-2 ring-offset-[#0a0a0f]'
+                                                    ? 'ring-2 ring-[#0066FF] ring-offset-2 ring-offset-[#f8fbff]'
                                                     : ''
                                             }`}
                                             style={{ backgroundColor: color.code }}
@@ -462,7 +465,7 @@ const CarDetail = () => {
                         {/* Versions */}
                         {car.versions?.length > 0 && (
                             <div>
-                                <h3 className="text-white font-semibold mb-3">Version</h3>
+                                <h3 className="text-(--app-text) font-semibold mb-3">Version</h3>
                                 <div className="space-y-2">
                                     {car.versions.map((version, idx) => (
                                         <button
@@ -471,15 +474,17 @@ const CarDetail = () => {
                                             className={`w-full flex items-center justify-between p-4 rounded-xl border transition-all ${
                                                 selectedVersion === idx
                                                     ? 'bg-[#0066FF]/10 border-[#0066FF]'
-                                                    : 'bg-white/5 border-white/10 hover:border-white/20'
+                                                    : 'bg-(--app-surface-strong) border-(--app-border) hover:border-(--app-border-strong)'
                                             }`}
                                         >
                                             <span
-                                                className={`font-medium ${selectedVersion === idx ? 'text-[#0066FF]' : 'text-white'}`}
+                                                className={`font-medium ${selectedVersion === idx ? 'text-[#0066FF]' : 'text-(--app-text)'}`}
                                             >
                                                 {version.name}
                                             </span>
-                                            <span className="text-white/70">{formatPrice(version.price)}</span>
+                                            <span className="text-(--app-text-muted)">
+                                                {formatPrice(version.price)}
+                                            </span>
                                         </button>
                                     ))}
                                 </div>
@@ -501,7 +506,7 @@ const CarDetail = () => {
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
                                 onClick={() => setShowTestDrive(true)}
-                                className="flex-1 flex items-center justify-center gap-2 py-4 bg-white/10 hover:bg-white/20 rounded-xl text-white font-semibold transition-colors"
+                                className="flex-1 flex items-center justify-center gap-2 py-4 bg-(--app-surface-strong) border border-(--app-border) hover:bg-(--app-surface-soft) rounded-xl text-(--app-text) font-semibold transition-colors"
                             >
                                 <Calendar className="w-5 h-5" />
                                 <span>Book a Test Drive</span>
@@ -513,7 +518,7 @@ const CarDetail = () => {
                                     className={`flex items-center justify-center gap-2 px-4 py-3 rounded-xl transition-colors ${
                                         isFavorite
                                             ? 'bg-red-500/15 text-red-400 hover:bg-red-500/20'
-                                            : 'bg-white/5 hover:bg-white/10 text-white/70 hover:text-white'
+                                            : 'bg-(--app-surface-strong) border border-(--app-border) hover:bg-(--app-surface-soft) text-(--app-text-muted) hover:text-(--app-text)'
                                     } ${favoriteLoading ? 'opacity-70 cursor-not-allowed' : ''}`}
                                 >
                                     {favoriteLoading ? (
@@ -532,8 +537,8 @@ const CarDetail = () => {
                 <div className="mt-12 grid lg:grid-cols-3 gap-8">
                     {/* Specifications */}
                     <div className="lg:col-span-2 space-y-6">
-                        <h2 className="text-2xl font-bold text-white">Technical specifications</h2>
-                        <div className="bg-[#1a2332] rounded-2xl p-6">
+                        <h2 className="text-2xl font-bold text-(--app-text)">Technical specifications</h2>
+                        <div className="customer-surface rounded-2xl p-6">
                             <div className="grid md:grid-cols-2 gap-4">
                                 {[
                                     { label: 'Engine', value: car.engine || '-' },
@@ -568,10 +573,10 @@ const CarDetail = () => {
                                 ].map((item, idx) => (
                                     <div
                                         key={idx}
-                                        className="flex justify-between py-3 border-b border-white/5 last:border-0"
+                                        className="flex justify-between py-3 border-b border-(--app-border) last:border-0"
                                     >
-                                        <span className="text-white/50">{item.label}</span>
-                                        <span className="text-white font-medium">{item.value}</span>
+                                        <span className="text-(--app-text-muted)">{item.label}</span>
+                                        <span className="text-(--app-text) font-medium">{item.value}</span>
                                     </div>
                                 ))}
                             </div>
@@ -580,9 +585,9 @@ const CarDetail = () => {
                         {/* Description */}
                         {car.description && (
                             <>
-                                <h2 className="text-2xl font-bold text-white mt-8">Description</h2>
-                                <div className="bg-[#1a2332] rounded-2xl p-6">
-                                    <p className="text-white/70 leading-relaxed whitespace-pre-line">
+                                <h2 className="text-2xl font-bold text-(--app-text) mt-8">Description</h2>
+                                <div className="customer-surface rounded-2xl p-6">
+                                    <p className="text-(--app-text-muted) leading-relaxed whitespace-pre-line">
                                         {car.description}
                                     </p>
                                 </div>
@@ -592,25 +597,27 @@ const CarDetail = () => {
 
                     {/* Contact Card */}
                     <div className="lg:col-span-1">
-                        <div className="bg-[#1a2332] rounded-2xl p-6 sticky top-24">
-                            <h3 className="text-xl font-bold text-white mb-4">Contact advisor</h3>
+                        <div className="customer-surface rounded-2xl p-6 sticky top-24">
+                            <h3 className="text-xl font-bold text-(--app-text) mb-4">Contact advisor</h3>
                             <div className="space-y-4">
-                                <div className="flex items-center gap-3 p-4 bg-white/5 rounded-xl">
+                                <div className="flex items-center gap-3 p-4 bg-(--app-surface-soft) border border-(--app-border) rounded-xl">
                                     <div className="w-12 h-12 bg-[#0066FF]/20 rounded-full flex items-center justify-center">
                                         <Phone className="w-5 h-5 text-[#0066FF]" />
                                     </div>
                                     <div>
-                                        <p className="text-white/50 text-sm">Hotline</p>
-                                        <p className="text-white font-semibold">1900 xxxx</p>
+                                        <p className="text-(--app-text-muted) text-sm">Hotline</p>
+                                        <p className="text-(--app-text) font-semibold">0388234370 (24/7 support)</p>
                                     </div>
                                 </div>
-                                <div className="flex items-center gap-3 p-4 bg-white/5 rounded-xl">
+                                <div className="flex items-center gap-3 p-4 bg-(--app-surface-soft) border border-(--app-border) rounded-xl">
                                     <div className="w-12 h-12 bg-[#0066FF]/20 rounded-full flex items-center justify-center">
                                         <MapPin className="w-5 h-5 text-[#0066FF]" />
                                     </div>
                                     <div>
-                                        <p className="text-white/50 text-sm">Showroom</p>
-                                        <p className="text-white font-semibold">Hanoi, Vietnam</p>
+                                        <p className="text-(--app-text-muted) text-sm">Showroom</p>
+                                        <p className="text-(--app-text) font-semibold">
+                                            No. 298 Cau Dien Street, Tay Tuu Ward, Hanoi City
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -620,7 +627,7 @@ const CarDetail = () => {
                                     <Shield className="w-5 h-5" />
                                     <span className="font-semibold">Commitment</span>
                                 </div>
-                                <ul className="space-y-2 text-white/70 text-sm">
+                                <ul className="space-y-2 text-(--app-text-muted) text-sm">
                                     <li className="flex items-center gap-2">
                                         <Check className="w-4 h-4 text-green-400" />
                                         <span>Genuine warranty</span>

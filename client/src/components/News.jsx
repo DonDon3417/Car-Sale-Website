@@ -40,7 +40,7 @@ const News = () => {
 
     return (
         <section className="py-10 lg:py-14">
-            <div className="max-w-[1000px] mx-auto px-4">
+            <div className="max-w-250 mx-auto px-4">
                 <motion.div
                     initial={{ opacity: 0, y: 15 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -50,17 +50,17 @@ const News = () => {
                 >
                     <div>
                         <div className="flex items-center gap-2 mb-2">
-                            <div className="w-6 h-[1px] bg-[#0066FF]" />
+                            <div className="w-6 h-px bg-[#0066FF]" />
                             <span className="text-[#0066FF] text-[10px] font-semibold tracking-[0.15em] uppercase">
                                 News
                             </span>
                         </div>
-                        <h2 className="text-xl md:text-2xl font-bold text-white mb-1">Automotive News</h2>
-                        <p className="text-white/50 text-xs">Latest trends and technology updates</p>
+                        <h2 className="text-xl md:text-2xl font-bold text-(--app-text) mb-1">Automotive News</h2>
+                        <p className="text-(--app-text-muted) text-xs">Latest trends and technology updates</p>
                     </div>
                     <motion.button
                         whileHover={{ scale: 1.02 }}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-white/20 hover:border-[#0066FF] rounded-lg text-white text-xs font-medium transition-all"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-(--app-border) hover:border-[#0066FF] rounded-lg text-(--app-text) text-xs font-medium transition-all bg-(--app-surface-soft)"
                     >
                         <span>View all</span>
                         <ArrowRight className="w-3 h-3" />
@@ -79,15 +79,15 @@ const News = () => {
                             key={article.id}
                             variants={cardVariants}
                             whileHover={{ y: -4 }}
-                            className="group bg-[#111827] border border-white/5 rounded-xl overflow-hidden transition-all hover:border-white/10 hover:shadow-lg"
+                            className="group customer-surface rounded-xl overflow-hidden transition-all hover:border-[#0066FF]/25 hover:shadow-(--app-shadow-soft)"
                         >
-                            <div className="relative aspect-[16/10] overflow-hidden">
+                            <div className="relative aspect-16/10 overflow-hidden">
                                 <img
                                     src={article.image}
                                     alt={article.title}
                                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-[#111827]/80 via-transparent to-transparent" />
+                                <div className="absolute inset-0 bg-linear-to-t from-black/65 via-transparent to-transparent" />
                                 <span
                                     className="absolute top-2 left-2 px-2 py-0.5 rounded text-white text-[9px] font-semibold uppercase tracking-wider backdrop-blur-sm"
                                     style={{ backgroundColor: `${article.tagColor}CC` }}
@@ -96,11 +96,11 @@ const News = () => {
                                 </span>
                             </div>
                             <div className="p-3">
-                                <div className="flex items-center gap-1 text-white/40 text-[10px] mb-1.5">
+                                <div className="flex items-center gap-1 text-(--app-text-muted) text-[10px] mb-1.5">
                                     <Calendar className="w-2.5 h-2.5" />
                                     <span>{article.date}</span>
                                 </div>
-                                <h3 className="text-white font-semibold text-sm mb-2 line-clamp-2 group-hover:text-[#0066FF] transition-colors">
+                                <h3 className="text-(--app-text) font-semibold text-sm mb-2 line-clamp-2 group-hover:text-[#0066FF] transition-colors">
                                     {article.title}
                                 </h3>
                                 <button className="inline-flex items-center gap-1 text-[#0066FF] text-xs font-medium group-hover:gap-2 transition-all">

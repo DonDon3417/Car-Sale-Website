@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const modelUser = new Schema(
     {
         fullName: { type: String, require: true },
-        email: { type: String, require: true },
+        email: { type: String, require: true, trim: true, lowercase: true },
         password: { type: String, require: true },
         isAdmin: { type: Boolean, default: false },
         address: { type: String, require: false, default: '' },
@@ -20,6 +20,11 @@ const modelUser = new Schema(
                 ref: 'Car',
             },
         ],
+        notificationReadMap: {
+            type: Map,
+            of: Boolean,
+            default: {},
+        },
     },
     {
         timestamps: true,

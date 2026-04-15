@@ -90,20 +90,21 @@ const ChangePasswordPage = () => {
         <div className="space-y-6">
             {/* Page Title */}
             <div>
-                <h1 className="text-xl font-bold text-white">Change Password</h1>
-                <p className="text-white/40 text-sm mt-1">Update your password to protect your account</p>
+                <h1 className="text-xl font-bold text-(--app-text)">Change Password</h1>
+                <p className="text-(--app-text-muted) text-sm mt-1">Update your password to protect your account</p>
             </div>
 
             {/* Security Notice */}
             <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="flex items-start gap-3 p-4 bg-[#0066FF]/[0.06] border border-[#0066FF]/[0.12] rounded-xl"
+                className="flex items-start gap-3 p-4 bg-[#0066FF]/10 border border-[#0066FF]/20 rounded-xl"
             >
                 <Shield className="w-5 h-5 text-[#0066FF] shrink-0 mt-0.5" />
                 <div>
-                    <p className="text-white/70 text-xs leading-relaxed">
-                        Password should have at least 6 characters, including uppercase, lowercase, and numbers for better security.
+                    <p className="text-(--app-text-muted) text-xs leading-relaxed">
+                        Password should have at least 6 characters, including uppercase, lowercase, and numbers for
+                        better security.
                     </p>
                 </div>
             </motion.div>
@@ -113,26 +114,28 @@ const ChangePasswordPage = () => {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="bg-[#111827]/80 backdrop-blur-sm border border-white/[0.06] rounded-2xl p-6"
+                className="customer-surface rounded-2xl p-6"
             >
                 <form onSubmit={handleSubmit} className="space-y-5">
                     {passwordFields.map((field) => (
                         <div key={field.name}>
-                            <label className="block text-white/60 text-xs font-medium mb-2">{field.label}</label>
+                            <label className="block text-(--app-text-muted) text-xs font-medium mb-2">
+                                {field.label}
+                            </label>
                             <div className="relative">
-                                <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
+                                <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-(--app-text-muted)" />
                                 <input
                                     type={showPasswords[field.showKey] ? 'text' : 'password'}
                                     name={field.name}
                                     value={form[field.name]}
                                     onChange={handleChange}
                                     placeholder={field.placeholder}
-                                    className="w-full pl-10 pr-11 py-3 bg-white/[0.04] border border-white/[0.08] rounded-xl text-white text-sm placeholder-white/20 outline-none transition-all duration-200 focus:border-[#0066FF]/50 focus:bg-white/[0.06] hover:border-white/15"
+                                    className="w-full pl-10 pr-11 py-3 bg-(--app-input-bg) border border-(--app-border) rounded-xl text-(--app-text) text-sm placeholder:text-(--app-text-muted) outline-none transition-all duration-200 focus:border-[#0066FF]/50 hover:border-[#0066FF]/35"
                                 />
                                 <button
                                     type="button"
                                     onClick={() => togglePassword(field.showKey)}
-                                    className="absolute right-3 top-1/2 -translate-y-1/2 p-0.5 text-white/30 hover:text-white/60 transition-colors"
+                                    className="absolute right-3 top-1/2 -translate-y-1/2 p-0.5 text-(--app-text-muted) hover:text-(--app-text) transition-colors"
                                 >
                                     {showPasswords[field.showKey] ? (
                                         <EyeOff className="w-4 h-4" />

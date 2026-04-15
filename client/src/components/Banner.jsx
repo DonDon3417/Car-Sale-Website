@@ -3,11 +3,14 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, ChevronRight, Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { requestGetAllCars } from '../config/CarRequest';
+import { useStore } from '../hooks/useStore';
 
 const Banner = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
     const [slides, setSlides] = useState([]);
     const [loading, setLoading] = useState(true);
+    const { themeMode } = useStore();
+    const isLightTheme = themeMode === 'light';
 
     const formatTransmission = (value) => {
         if (!value) return 'Automatic';
@@ -105,7 +108,7 @@ const Banner = () => {
 
     if (loading) {
         return (
-            <div className="h-[75vh] min-h-[500px] flex items-center justify-center bg-[#0F172A]">
+            <div className="h-[75vh] min-h-125 flex items-center justify-center bg-(--app-surface-strong)">
                 <Loader2 className="w-10 h-10 text-[#0066FF] animate-spin" />
             </div>
         );
@@ -116,7 +119,7 @@ const Banner = () => {
     const slide = slides[currentSlide];
 
     return (
-        <section className="relative h-[75vh] min-h-[500px] max-h-[700px] overflow-hidden bg-black">
+        <section className="relative h-[75vh] min-h-125 max-h-175 overflow-hidden bg-(--app-surface-strong)">
             <AnimatePresence mode="wait">
                 <motion.div
                     key={slide.id}
@@ -127,30 +130,32 @@ const Banner = () => {
                     className="absolute inset-0"
                 >
                     {slide.image && <img src={slide.image} alt={slide.title} className="w-full h-full object-cover" />}
-                    <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-transparent to-transparent opacity-80" />
+                    <div className="absolute inset-0 bg-linear-to-r from-black/72 via-black/44 to-black/15" />
+                    <div className="absolute inset-0 bg-linear-to-t from-[#020817]/55 via-transparent to-transparent" />
                 </motion.div>
             </AnimatePresence>
 
-            <div className="relative z-10 h-full max-w-[1100px] mx-auto px-4 flex items-center">
+            <div className="relative z-10 h-full max-w-275 mx-auto px-4 flex items-center">
                 <motion.div
                     key={slide.id} // Re-animate text on slide change
                     initial={{ opacity: 0, x: -30 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.6, delay: 0.2 }}
-                    className="max-w-lg"
+                    className="max-w-lg p-5 sm:p-6"
                 >
                     <span className="inline-block px-3 py-1 bg-[#0066FF]/20 border border-[#0066FF]/30 rounded-full text-[#0066FF] text-[10px] font-semibold tracking-wider uppercase mb-3">
                         {slide.subtitle}
                     </span>
 
-                    <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-3">
+                    <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-3 drop-shadow-[0_6px_20px_rgba(0,0,0,0.45)]">
                         {slide.title}
                         <br />
                         <span className="text-[#0066FF]">{slide.highlight}</span>
                     </h1>
 
-                    <p className="text-white/60 text-sm mb-5">{slide.description}</p>
+                    <p className="text-white/78 text-sm mb-5 drop-shadow-[0_4px_14px_rgba(0,0,0,0.35)]">
+                        {slide.description}
+                    </p>
 
                     <div className="flex items-center gap-3 mb-6">
                         <Link to={`/cars/${slide.slug}`}>
@@ -170,7 +175,7 @@ const Banner = () => {
                             <motion.button
                                 whileHover={{ scale: 1.03 }}
                                 whileTap={{ scale: 0.97 }}
-                                className="flex items-center gap-1.5 px-4 py-2 bg-white/10 hover:bg-white/15 backdrop-blur-sm border border-white/20 rounded-lg text-white text-xs font-medium transition-all"
+                                className="flex items-center gap-1.5 px-4 py-2 border border-white/25 rounded-lg text-white text-xs font-medium transition-all bg-black/28 hover:bg-black/38 shadow-(--app-shadow-soft)"
                             >
                                 <span>Get a quote</span>
                                 <ChevronRight className="w-3.5 h-3.5" />
@@ -182,7 +187,7 @@ const Banner = () => {
                         {slide.features.map((feature, idx) => (
                             <div key={idx} className="flex items-center gap-1.5">
                                 <div className="w-1 h-1 bg-[#0066FF] rounded-full" />
-                                <span className="text-white/70 text-[10px] font-medium">{feature}</span>
+                                <span className="text-white/78 text-[10px] font-medium">{feature}</span>
                             </div>
                         ))}
                     </div>
@@ -195,7 +200,13 @@ const Banner = () => {
                     <button
                         key={idx}
                         onClick={() => setCurrentSlide(idx)}
-                        className={`h-1 rounded-full transition-all duration-300 ${idx === currentSlide ? 'w-6 bg-[#0066FF]' : 'w-2 bg-white/30 hover:bg-white/50'}`}
+                        className={`h-1 rounded-full transition-all duration-300 ${
+                            idx === currentSlide
+                                ? 'w-6 bg-[#0066FF]'
+                                : isLightTheme
+                                  ? 'w-2 bg-slate-400/60 hover:bg-slate-500/70'
+                                  : 'w-2 bg-(--app-text-muted)/45 hover:bg-(--app-text-muted)/70'
+                        }`}
                     />
                 ))}
             </div>
@@ -206,7 +217,11 @@ const Banner = () => {
                 transition={{ duration: 1.5, repeat: Infinity }}
                 className="absolute bottom-6 right-6 z-20"
             >
-                <div className="flex flex-col items-center gap-1.5 text-white/40">
+                <div
+                    className={`flex flex-col items-center gap-1.5 ${
+                        isLightTheme ? 'text-slate-600/80' : 'text-(--app-text-muted)'
+                    }`}
+                >
                     <span className="text-[9px] uppercase tracking-wider">Scroll</span>
                     <ChevronDown className="w-4 h-4" />
                 </div>
