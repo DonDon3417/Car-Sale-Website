@@ -13,6 +13,7 @@ router.get('/momo-callback', asyncHandler(depositController.momoCallback));
 
 // Admin routes
 router.get('/admin/all', authAdmin, asyncHandler(depositController.getAllDeposits));
+router.get('/admin/export-csv', authAdmin, asyncHandler(depositController.exportDepositsCsv));
 router.put('/admin/:id/status', authAdmin, asyncHandler(depositController.updateDepositStatus));
 router.get('/admin/stats', authAdmin, asyncHandler(depositController.getDepositStats));
 

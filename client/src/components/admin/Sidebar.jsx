@@ -1,6 +1,5 @@
-import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
     LayoutDashboard,
     Car,
@@ -19,9 +18,12 @@ import {
     Mail,
     Bot,
 } from 'lucide-react';
+import { requestLogout } from '../../config/UserRequest';
+import { clearAuthSession } from '../../config/authSession';
 
 const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
     const location = useLocation();
+    const navigate = useNavigate();
 
     const menuItems = [
         { name: 'Dashboard', icon: LayoutDashboard, path: '/admin' },
@@ -39,7 +41,18 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
 
     const isActive = (path) => {
         if (path === '/admin') return location.pathname === '/admin';
-        return location.pathname.startsWith(path);
+        return location.pathname === path || location.pathname.startsWith(`${path}/`);
+    };
+
+    const handleLogout = async () => {
+        try {
+            await requestLogout();
+        } catch (error) {
+            console.error('Logout failed:', error);
+        }
+
+        clearAuthSession();
+        navigate('/account/login', { replace: true });
     };
 
     return (
@@ -101,7 +114,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                                     )}
 
                                     <item.icon
-                                        className={`w-5 h-5 flex-shrink-0 transition-colors ${active ? 'text-[#0066FF]' : 'group-hover:text-[#0066FF]'}`}
+                                        className={`w-5 h-5 shrink-0 transition-colors ${active ? 'text-[#0066FF]' : 'group-hover:text-[#0066FF]'}`}
                                     />
 
                                     <AnimatePresence mode="wait">
@@ -135,13 +148,13 @@ const Sidebar = ({ isCollapsed, setIsCollapsed }) => {
                     {!isCollapsed && <span className="text-sm font-medium">Collapse</span>}
                 </button>
 
-                <Link
-                    to="/"
+                <button
+                    onClick={handleLogout}
                     className="w-full flex items-center gap-2 px-3 py-2.5 mt-1 text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded-xl transition-all"
                 >
-                    <LogOut className="w-5 h-5 flex-shrink-0" />
+                    <LogOut className="w-5 h-5 shrink-0" />
                     {!isCollapsed && <span className="text-sm font-medium">Sign out</span>}
-                </Link>
+                </button>
             </div>
         </motion.aside>
     );

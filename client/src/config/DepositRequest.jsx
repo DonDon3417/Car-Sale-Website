@@ -30,6 +30,14 @@ export const requestGetAllDeposits = async (params = {}) => {
     return res.data;
 };
 
+// Admin: Export deposits CSV
+export const requestExportDepositsCsv = async (params = {}) => {
+    return apiClient.get('/api/deposit/admin/export-csv', {
+        params,
+        responseType: 'blob',
+    });
+};
+
 // Admin: Update deposit status
 export const requestUpdateDepositStatus = async (id, data) => {
     const res = await apiClient.put(`/api/deposit/admin/${id}/status`, data);

@@ -46,6 +46,110 @@ class ChatbotService {
     }
 
     /**
+     * Lấy danh sách session chatbot cho admin
+     */
+    static async getAdminSessions(query = {}) {
+        const { page = 1, limit = 10, search = '', level = '', startDate = '', endDate = '' } = query;
+        const skip = (Number(page) - 1) * Number(limit);
+        const finalFilter = {};
+
+        const normalizedLevel = String(level || '').trim();
+        if (['Hot', 'Warm', 'Cold'].includes(normalizedLevel)) {
+            finalFilter.level = normalizedLevel;
+        }
+
+        const updatedAtFilter = {};
+        if (startDate) {
+            const from = new Date(`${startDate}T00:00:00.000Z`);
+            if (!Number.isNaN(from.getTime())) {
+                updatedAtFilter.$gte = from;
+            }
+        }
+
+        if (endDate) {
+            const to = new Date(`${endDate}T23:59:59.999Z`);
+            if (!Number.isNaN(to.getTime())) {
+                updatedAtFilter.$lte = to;
+            }
+        }
+
+        if (Object.keys(updatedAtFilter).length) {
+            finalFilter.updatedAt = updatedAtFilter;
+        }
+
+        let userFilter = {};
+        if (search && String(search).trim()) {
+            const keyword = String(search).trim();
+            const users = await require('../models/users.model')
+                .find({
+                    $or: [
+                        { fullName: { $regex: keyword, $options: 'i' } },
+                        { email: { $regex: keyword, $options: 'i' } },
+                        { phone: { $regex: keyword, $options: 'i' } },
+                    ],
+                })
+                .select('_id')
+                .lean();
+
+            userFilter = { userId: { $in: users.map((u) => u._id) } };
+        }
+
+        Object.assign(finalFilter, userFilter);
+
+        const [sessions, total] = await Promise.all([
+            ChatSession.find(finalFilter)
+                .populate('userId', 'fullName email phone avatar')
+                .sort({ updatedAt: -1 })
+                .skip(skip)
+                .limit(Number(limit))
+                .lean(),
+            ChatSession.countDocuments(finalFilter),
+        ]);
+
+        const mappedSessions = sessions.map((s) => ({
+            _id: s._id,
+            user: s.userId,
+            lastMessage: s.messages?.length ? s.messages[s.messages.length - 1].content : 'Cuộc hội thoại mới',
+            messageCount: s.messages?.length || 0,
+            interestScore: s.interestScore,
+            level: s.level,
+            reason: s.reason,
+            createdAt: s.createdAt,
+            updatedAt: s.updatedAt,
+        }));
+
+        return {
+            sessions: mappedSessions,
+            pagination: {
+                page: Number(page),
+                limit: Number(limit),
+                total,
+                totalPages: Math.ceil(total / Number(limit)),
+            },
+        };
+    }
+
+    /**
+     * Lấy chi tiết lịch sử chat theo session cho admin
+     */
+    static async getAdminSessionById(sessionId) {
+        const session = await ChatSession.findById(sessionId).populate('userId', 'fullName email phone avatar').lean();
+
+        if (!session) throw new Error('Không tìm thấy phiên chat');
+
+        return {
+            _id: session._id,
+            user: session.userId,
+            messages: session.messages || [],
+            interestScore: session.interestScore,
+            level: session.level,
+            reason: session.reason,
+            createdAt: session.createdAt,
+            updatedAt: session.updatedAt,
+        };
+    }
+
+    /**
      * Gửi tin nhắn và nhận phản hồi AI
      */
     static async sendMessage(sessionId, content) {

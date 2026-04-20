@@ -127,8 +127,9 @@ const CarManager = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedCar, setSelectedCar] = useState(null);
     const [submitting, setSubmitting] = useState(false);
-    const [pagination, setPagination] = useState({ current: 1, pageSize: 10, total: 0 });
+    const [pagination, setPagination] = useState({ current: 1, pageSize: 20, total: 0 });
     const [searchText, setSearchText] = useState('');
+    const [brandFilter, setBrandFilter] = useState('');
     const [fileList, setFileList] = useState([]);
     const [colors, setColors] = useState([]);
     const [versions, setVersions] = useState([]);
@@ -140,7 +141,7 @@ const CarManager = () => {
 
     useEffect(() => {
         fetchCars();
-    }, [pagination.current, pagination.pageSize]);
+    }, [pagination.current, pagination.pageSize, brandFilter]);
 
     const fetchInitialData = async () => {
         try {
@@ -159,6 +160,9 @@ const CarManager = () => {
                 page: pagination.current,
                 limit: pagination.pageSize,
                 search: searchText,
+                brand: brandFilter || undefined,
+                sortBy: 'name',
+                sortOrder: 'asc',
             });
             setCars(res.metadata?.cars || []);
             setPagination((prev) => ({
@@ -175,6 +179,11 @@ const CarManager = () => {
     const handleSearch = () => {
         setPagination((prev) => ({ ...prev, current: 1 }));
         fetchCars();
+    };
+
+    const handleBrandFilterChange = (value) => {
+        setBrandFilter(value || '');
+        setPagination((prev) => ({ ...prev, current: 1 }));
     };
 
     const handleOpenModal = (car = null) => {
@@ -731,7 +740,7 @@ const CarManager = () => {
             </div>
 
             {/* Search */}
-            <div className="flex gap-2 max-w-md">
+            <div className="flex gap-2 max-w-3xl">
                 <Input
                     placeholder="Search cars..."
                     prefix={<SearchOutlined />}
@@ -740,6 +749,21 @@ const CarManager = () => {
                     onPressEnter={handleSearch}
                     allowClear
                 />
+                <Select
+                    placeholder="Filter by brand"
+                    value={brandFilter || undefined}
+                    onChange={handleBrandFilterChange}
+                    allowClear
+                    showSearch
+                    optionFilterProp="children"
+                    className="min-w-50"
+                >
+                    {brands.map((b) => (
+                        <Select.Option key={b._id} value={b._id}>
+                            {b.name}
+                        </Select.Option>
+                    ))}
+                </Select>
                 <Button onClick={handleSearch}>Search</Button>
             </div>
 
@@ -752,6 +776,7 @@ const CarManager = () => {
                 pagination={{
                     ...pagination,
                     showSizeChanger: true,
+                    pageSizeOptions: ['10', '20', '50', '100'],
                     showTotal: (total) => `Total ${total} cars`,
                 }}
                 onChange={(pag) => setPagination({ ...pagination, current: pag.current, pageSize: pag.pageSize })}

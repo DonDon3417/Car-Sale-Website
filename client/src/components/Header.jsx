@@ -318,7 +318,6 @@ const Header = () => {
                                     <motion.button
                                         whileHover={{ scale: 1.02 }}
                                         whileTap={{ scale: 0.98 }}
-                                        className="flex items-center gap-1.5 px-3 py-1.5 bg-white/10 hover:bg-white/15 border border-white/20 rounded-lg text-white text-xs font-medium transition-all"
                                         className="flex items-center gap-1.5 px-3 py-1.5 bg-(--app-surface-soft) hover:bg-(--app-surface-soft) border border-(--app-border) rounded-lg text-(--app-text) text-xs font-medium transition-all"
                                     >
                                         <LogIn className="w-3.5 h-3.5" />

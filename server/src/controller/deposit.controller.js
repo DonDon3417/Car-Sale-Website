@@ -98,6 +98,19 @@ class DepositController {
         }
     }
 
+    // Admin: Export deposits as CSV
+    async exportDepositsCsv(req, res, next) {
+        try {
+            const { csv, filename } = await depositService.exportDepositsCsv(req.query);
+
+            res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+            res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+            res.status(200).send(csv);
+        } catch (error) {
+            next(error);
+        }
+    }
+
     // Get deposit statistics
     async getDepositStats(req, res, next) {
         try {

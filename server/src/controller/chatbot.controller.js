@@ -50,6 +50,22 @@ class ChatbotController {
             metadata: await ChatbotService.getStats(),
         }).send(res);
     };
+
+    // Danh sách lịch sử chat (Admin)
+    getAdminSessions = async (req, res, next) => {
+        new OK({
+            message: 'Admin sessions retrieved successfully',
+            metadata: await ChatbotService.getAdminSessions(req.query),
+        }).send(res);
+    };
+
+    // Chi tiết lịch sử chat (Admin)
+    getAdminSessionById = async (req, res, next) => {
+        new OK({
+            message: 'Admin session retrieved successfully',
+            metadata: await ChatbotService.getAdminSessionById(req.params.id),
+        }).send(res);
+    };
 }
 
 module.exports = new ChatbotController();

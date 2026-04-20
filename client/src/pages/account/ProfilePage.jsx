@@ -44,6 +44,7 @@ const ProfilePage = () => {
             message.error('Please enter your full name');
             return;
         }
+
         setLoading(true);
         try {
             await requestUpdateUser({
@@ -103,7 +104,7 @@ const ProfilePage = () => {
             label: 'Email',
             icon: Mail,
             type: 'email',
-            value: dataUser?.email || '',
+            placeholder: '',
             readOnly: true,
         },
         {
@@ -193,7 +194,7 @@ const ProfilePage = () => {
                 <form onSubmit={handleSubmit} className="space-y-5">
                     {inputFields.map((field) => {
                         const Icon = field.icon;
-                        const value = field.readOnly ? field.value : form[field.name];
+                        const value = field.name === 'email' ? dataUser?.email || '' : (form[field.name] ?? '');
                         return (
                             <div key={field.name}>
                                 <label className="block text-(--app-text-muted) text-xs font-medium mb-2">

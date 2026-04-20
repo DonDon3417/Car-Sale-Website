@@ -1,4 +1,4 @@
-﻿import { useState } from 'react';
+﻿import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Lock, Eye, EyeOff, ArrowRight, Car, User, Phone } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -6,6 +6,8 @@ import Footer from '../components/Footer';
 import Header from '../components/Header';
 import { message } from 'antd';
 import { setAuthSession } from '../config/authSession';
+import { requestAuth, requestLoginGoogle } from '../config/UserRequest';
+import CryptoJS from 'crypto-js';
 
 import { requestRegister } from '../config/UserRequest';
 
@@ -14,6 +16,18 @@ const Register = () => {
     const [formData, setFormData] = useState({ fullName: '', email: '', phone: '', password: '', confirmPassword: '' });
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const clientId = import.meta.env.VITE_CLIENT_ID;
+        if (!window?.google?.accounts?.id || !clientId) {
+            return;
+        }
+
+        window.google.accounts.id.initialize({
+            client_id: clientId,
+            callback: handleGoogleLoginSuccess,
+        });
+    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -38,6 +52,66 @@ const Register = () => {
         }
     };
 
+    const handleGoogleLoginSuccess = async (credentialResponse) => {
+        try {
+            const credential = credentialResponse?.credential;
+            if (!credential) {
+                message.error('Không lấy được thông tin Google');
+                return;
+            }
+
+            const loginRes = await requestLoginGoogle({ credential });
+            setAuthSession({
+                accessToken: loginRes?.metadata?.token,
+                refreshToken: loginRes?.metadata?.refreshToken,
+            });
+
+            let redirectPath = '/';
+            try {
+                const res = await requestAuth();
+                const bytes = CryptoJS.AES.decrypt(res.metadata, import.meta.env.VITE_SECRET_CRYPTO);
+                const originalText = bytes.toString(CryptoJS.enc.Utf8);
+
+                if (originalText) {
+                    const user = JSON.parse(originalText);
+                    if (user?.isAdmin) {
+                        redirectPath = '/admin';
+                    }
+                }
+            } catch (authError) {
+                console.error('Auth decode error:', authError);
+            }
+
+            message.success('Đăng nhập Google thành công');
+            navigate(redirectPath, { replace: true });
+        } catch (error) {
+            message.error(error?.response?.data?.message || 'Đăng nhập Google thất bại');
+        }
+    };
+
+    const handleGoogleLoginError = () => {
+        message.error('Đăng nhập Google thất bại');
+    };
+
+    const handleGoogleLoginClick = () => {
+        const clientId = import.meta.env.VITE_CLIENT_ID;
+        if (!clientId || !window?.google?.accounts?.id) {
+            message.error('Google login chưa được cấu hình');
+            return;
+        }
+
+        try {
+            window.google.accounts.id.prompt();
+        } catch (error) {
+            console.error('Google prompt error:', error);
+            handleGoogleLoginError();
+        }
+    };
+
+    const handleFacebookLoginClick = () => {
+        message.info('Đăng nhập Facebook đang được phát triển');
+    };
+
     return (
         <>
             <div className="min-h-screen customer-page flex items-center justify-center px-4 py-10 transition-colors duration-300">
@@ -51,14 +125,14 @@ const Register = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="relative w-full max-w-100"
+                    className="relative w-full max-w-100 translate-y-3"
                 >
                     {/* Logo */}
-                    <Link to="/" className="flex items-center justify-center gap-2 mb-6">
+                    <Link to="/" className="flex items-center justify-center gap-2 mb-7">
                         <div className="w-8 h-8 flex items-center justify-center bg-[#0066FF] rounded-lg">
                             <Car className="w-4 h-4 text-white" />
                         </div>
-                        <span className="text-(--app-text) font-bold text-sm tracking-widest uppercase">AUTOSHOW</span>
+                        <span className="text-(--app-text) font-bold text-sm tracking-widest uppercase">CARMART</span>
                     </Link>
 
                     {/* Card */}
@@ -207,7 +281,11 @@ const Register = () => {
 
                         {/* Social Login */}
                         <div className="flex gap-2">
-                            <button className="flex-1 flex items-center justify-center gap-2 h-9 bg-(--app-surface-soft) hover:bg-(--app-input-bg) border border-(--app-border) rounded-lg text-(--app-text) text-xs font-medium transition-colors">
+                            <button
+                                type="button"
+                                onClick={handleGoogleLoginClick}
+                                className="flex-1 flex items-center justify-center gap-2 h-9 bg-(--app-surface-soft) hover:bg-(--app-input-bg) border border-(--app-border) rounded-lg text-(--app-text) text-xs font-medium transition-colors"
+                            >
                                 <svg className="w-4 h-4" viewBox="0 0 24 24">
                                     <path
                                         fill="currentColor"
@@ -228,7 +306,11 @@ const Register = () => {
                                 </svg>
                                 <span>Google</span>
                             </button>
-                            <button className="flex-1 flex items-center justify-center gap-2 h-9 bg-(--app-surface-soft) hover:bg-(--app-input-bg) border border-(--app-border) rounded-lg text-(--app-text) text-xs font-medium transition-colors">
+                            <button
+                                type="button"
+                                onClick={handleFacebookLoginClick}
+                                className="flex-1 flex items-center justify-center gap-2 h-9 bg-(--app-surface-soft) hover:bg-(--app-input-bg) border border-(--app-border) rounded-lg text-(--app-text) text-xs font-medium transition-colors"
+                            >
                                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
                                     <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                                 </svg>

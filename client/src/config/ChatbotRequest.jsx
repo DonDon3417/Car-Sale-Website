@@ -29,3 +29,13 @@ export const deleteChatbotSession = (id) => {
 export const getChatbotStats = () => {
     return apiClient.get('/api/chatbot/stats');
 };
+
+// Lấy danh sách lịch sử chat chatbot (admin)
+export const getChatbotAdminSessions = (params = {}) => {
+    return apiClient.get('/api/chatbot/admin/sessions', { params });
+};
+
+// Lấy chi tiết 1 phiên chat chatbot (admin)
+export const getChatbotAdminSessionById = (id) => {
+    return apiClient.get(`/api/chatbot/admin/session/${id}`);
+};

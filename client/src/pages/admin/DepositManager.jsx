@@ -21,8 +21,14 @@ import {
     DollarSign,
     Calendar,
     Banknote,
+    Download,
 } from 'lucide-react';
-import { requestGetAllDeposits, requestUpdateDepositStatus, requestGetDepositStats } from '../../config/DepositRequest';
+import {
+    requestGetAllDeposits,
+    requestUpdateDepositStatus,
+    requestGetDepositStats,
+    requestExportDepositsCsv,
+} from '../../config/DepositRequest';
 
 // Payment method icons
 const MomoIcon = () => (
@@ -107,12 +113,13 @@ const DepositManager = () => {
     const [deposits, setDeposits] = useState([]);
     const [stats, setStats] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
-    const [filterStatus, setFilterStatus] = useState('');
-    const [filterPaymentMethod, setFilterPaymentMethod] = useState('');
+    const [filterStatus, setFilterStatus] = useState('all');
+    const [filterPaymentMethod, setFilterPaymentMethod] = useState('all');
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedDeposit, setSelectedDeposit] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isProcessing, setIsProcessing] = useState(false);
+    const [isExportingCsv, setIsExportingCsv] = useState(false);
     const [pagination, setPagination] = useState({ page: 1, limit: 10, total: 0, totalPages: 0 });
 
     // Fetch deposits
@@ -169,6 +176,44 @@ const DepositManager = () => {
         }
     };
 
+    const handleStatusFilterChange = (event) => {
+        setFilterStatus(event.target.value);
+        setPagination((prev) => ({ ...prev, page: 1 }));
+    };
+
+    const handlePaymentMethodFilterChange = (event) => {
+        setFilterPaymentMethod(event.target.value);
+        setPagination((prev) => ({ ...prev, page: 1 }));
+    };
+
+    const handleExportCsv = async () => {
+        setIsExportingCsv(true);
+        try {
+            const response = await requestExportDepositsCsv({
+                status: filterStatus,
+                paymentMethod: filterPaymentMethod,
+            });
+
+            const disposition = response.headers?.['content-disposition'] || '';
+            const matched = disposition.match(/filename="?([^\"]+)"?/i);
+            const filename = matched?.[1] || 'deposits.csv';
+
+            const blob = new Blob([response.data], { type: 'text/csv;charset=utf-8;' });
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', filename);
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            window.URL.revokeObjectURL(url);
+        } catch (error) {
+            console.error('Error exporting deposits CSV:', error);
+        } finally {
+            setIsExportingCsv(false);
+        }
+    };
+
     // Format date
     const formatDate = (date) => {
         return new Date(date).toLocaleDateString('en-US', {
@@ -221,6 +266,14 @@ const DepositManager = () => {
                 >
                     <RefreshCw className="w-4 h-4" />
                     Refresh
+                </button>
+                <button
+                    onClick={handleExportCsv}
+                    disabled={isExportingCsv}
+                    className="flex items-center gap-2 px-4 py-2 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 rounded-xl transition-colors disabled:opacity-60"
+                >
+                    {isExportingCsv ? <Loader2 className="w-4 h-4 animate-spin" /> : <Download className="w-4 h-4" />}
+                    Export CSV
                 </button>
             </div>
 
@@ -305,26 +358,44 @@ const DepositManager = () => {
                     {/* Status filter */}
                     <select
                         value={filterStatus}
-                        onChange={(e) => setFilterStatus(e.target.value)}
+                        onChange={handleStatusFilterChange}
                         className="px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white text-sm focus:outline-none focus:border-[#0066FF]"
                     >
-                        <option value="">All statuses</option>
-                        <option value="pending">Pending</option>
-                        <option value="confirmed">Confirmed</option>
-                        <option value="completed">Completed</option>
-                        <option value="cancelled">Cancelled</option>
+                        <option value="all" className="text-black bg-white">
+                            All statuses
+                        </option>
+                        <option value="pending" className="text-black bg-white">
+                            Pending
+                        </option>
+                        <option value="confirmed" className="text-black bg-white">
+                            Confirmed
+                        </option>
+                        <option value="completed" className="text-black bg-white">
+                            Completed
+                        </option>
+                        <option value="cancelled" className="text-black bg-white">
+                            Cancelled
+                        </option>
                     </select>
 
                     {/* Payment method filter */}
                     <select
                         value={filterPaymentMethod}
-                        onChange={(e) => setFilterPaymentMethod(e.target.value)}
+                        onChange={handlePaymentMethodFilterChange}
                         className="px-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white text-sm focus:outline-none focus:border-[#0066FF]"
                     >
-                        <option value="">All payment methods</option>
-                        <option value="MOMO">MoMo</option>
-                        <option value="VNPAY">VNPay</option>
-                        <option value="PAYPAL">PayPal</option>
+                        <option value="all" className="text-black bg-white">
+                            All payment methods
+                        </option>
+                        <option value="MOMO" className="text-black bg-white">
+                            MoMo
+                        </option>
+                        <option value="VNPAY" className="text-black bg-white">
+                            VNPay
+                        </option>
+                        <option value="PAYPAL" className="text-black bg-white">
+                            PayPal
+                        </option>
                     </select>
                 </div>
             </div>
@@ -346,17 +417,13 @@ const DepositManager = () => {
                             <thead>
                                 <tr className="border-b border-white/10">
                                     <th className="text-left py-4 px-4 text-white/60 text-sm font-medium">Order ID</th>
-                                    <th className="text-left py-4 px-4 text-white/60 text-sm font-medium">
-                                        Customers
-                                    </th>
+                                    <th className="text-left py-4 px-4 text-white/60 text-sm font-medium">Customers</th>
                                     <th className="text-left py-4 px-4 text-white/60 text-sm font-medium">Car</th>
-                                    <th className="text-left py-4 px-4 text-white/60 text-sm font-medium">Deposit amount</th>
                                     <th className="text-left py-4 px-4 text-white/60 text-sm font-medium">
-                                        Payment
+                                        Deposit amount
                                     </th>
-                                    <th className="text-left py-4 px-4 text-white/60 text-sm font-medium">
-                                        Status
-                                    </th>
+                                    <th className="text-left py-4 px-4 text-white/60 text-sm font-medium">Payment</th>
+                                    <th className="text-left py-4 px-4 text-white/60 text-sm font-medium">Status</th>
                                     <th className="text-right py-4 px-4 text-white/60 text-sm font-medium">Actions</th>
                                 </tr>
                             </thead>

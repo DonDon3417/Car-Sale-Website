@@ -13,5 +13,7 @@ router.delete('/session/:id', authUser, asyncHandler(chatbotController.deleteSes
 
 // Admin routes
 router.get('/stats', authAdmin, asyncHandler(chatbotController.getStats));
+router.get('/admin/sessions', authAdmin, asyncHandler(chatbotController.getAdminSessions));
+router.get('/admin/session/:id', authAdmin, asyncHandler(chatbotController.getAdminSessionById));
 
 module.exports = router;

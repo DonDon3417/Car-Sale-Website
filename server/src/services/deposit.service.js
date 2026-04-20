@@ -17,6 +17,27 @@ function generatePayID() {
 }
 
 class DepositService {
+    _buildAdminDepositFilter(filters = {}) {
+        const { status = '', paymentMethod = '' } = filters;
+        const filter = {};
+
+        const normalizedStatus = String(status || '')
+            .trim()
+            .toLowerCase();
+        if (normalizedStatus && normalizedStatus !== 'all') {
+            filter.status = normalizedStatus;
+        }
+
+        const normalizedPaymentMethod = String(paymentMethod || '')
+            .trim()
+            .toUpperCase();
+        if (normalizedPaymentMethod && normalizedPaymentMethod !== 'ALL') {
+            filter.paymentMethod = normalizedPaymentMethod;
+        }
+
+        return filter;
+    }
+
     // Tạo đặt cọc mới
     async createDeposit(userId, data) {
         const { carId, carVersion, carColor, carPrice, paymentMethod, note, customerPhone } = data;
@@ -243,12 +264,11 @@ class DepositService {
     // Admin: Lấy tất cả đặt cọc (bỏ qua đơn chưa thanh toán)
     async getAllDeposits(filters = {}) {
         const { status, paymentMethod, page = 1, limit = 10 } = filters;
+        const filter = this._buildAdminDepositFilter({ status, paymentMethod });
 
-        const filter = { paymentStatus: { $ne: 'pending' } };
-        if (status) filter.status = status;
-        if (paymentMethod) filter.paymentMethod = paymentMethod;
-
-        const skip = (page - 1) * limit;
+        const parsedPage = Math.max(parseInt(page, 10) || 1, 1);
+        const parsedLimit = Math.max(parseInt(limit, 10) || 10, 1);
+        const skip = (parsedPage - 1) * parsedLimit;
 
         const [deposits, total] = await Promise.all([
             Deposit.find(filter)
@@ -260,18 +280,76 @@ class DepositService {
                 })
                 .sort({ createdAt: -1 })
                 .skip(skip)
-                .limit(parseInt(limit)),
+                .limit(parsedLimit),
             Deposit.countDocuments(filter),
         ]);
 
         return {
             deposits,
             pagination: {
-                page: parseInt(page),
-                limit: parseInt(limit),
+                page: parsedPage,
+                limit: parsedLimit,
                 total,
-                totalPages: Math.ceil(total / limit),
+                totalPages: Math.ceil(total / parsedLimit),
             },
+        };
+    }
+
+    async exportDepositsCsv(filters = {}) {
+        const filter = this._buildAdminDepositFilter(filters);
+
+        const deposits = await Deposit.find(filter)
+            .populate('user', 'fullName email phone')
+            .populate('car', 'name')
+            .sort({ createdAt: -1 });
+
+        const csvEscape = (value) => `"${String(value ?? '').replace(/"/g, '""')}"`;
+
+        const headers = [
+            'Order ID',
+            'Created At',
+            'Customer Name',
+            'Customer Email',
+            'Customer Phone',
+            'Car Name',
+            'Car Version',
+            'Car Color',
+            'Car Price',
+            'Deposit Amount',
+            'Payment Method',
+            'Payment Status',
+            'Status',
+            'Confirmed At',
+            'Cancelled At',
+            'Cancel Reason',
+            'Note',
+        ];
+
+        const rows = deposits.map((deposit) => [
+            csvEscape(deposit._id),
+            csvEscape(deposit.createdAt ? new Date(deposit.createdAt).toISOString() : ''),
+            csvEscape(deposit.user?.fullName || ''),
+            csvEscape(deposit.user?.email || ''),
+            csvEscape(deposit.customerPhone || deposit.user?.phone || ''),
+            csvEscape(deposit.car?.name || ''),
+            csvEscape(deposit.carVersion || ''),
+            csvEscape(deposit.carColor || ''),
+            csvEscape(deposit.carPrice || 0),
+            csvEscape(deposit.depositAmount || 0),
+            csvEscape(deposit.paymentMethod || ''),
+            csvEscape(deposit.paymentStatus || ''),
+            csvEscape(deposit.status || ''),
+            csvEscape(deposit.confirmedAt ? new Date(deposit.confirmedAt).toISOString() : ''),
+            csvEscape(deposit.cancelledAt ? new Date(deposit.cancelledAt).toISOString() : ''),
+            csvEscape(deposit.cancelReason || ''),
+            csvEscape(deposit.note || ''),
+        ]);
+
+        const csv = [headers.map(csvEscape).join(','), ...rows.map((r) => r.join(','))].join('\n');
+
+        return {
+            csv,
+            filename: `deposits-${new Date().toISOString().slice(0, 10)}.csv`,
         };
     }
 

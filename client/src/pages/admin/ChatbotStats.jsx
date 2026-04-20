@@ -1,6 +1,7 @@
 ﻿import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { MessageCircle, TrendingUp, Flame, Thermometer, Snowflake, BarChart3, Activity } from 'lucide-react';
+import { MessageCircle, TrendingUp, Flame, Thermometer, Snowflake, BarChart3, Activity, Search } from 'lucide-react';
+import { Modal } from 'antd';
 import {
     PieChart,
     Pie,
@@ -16,7 +17,7 @@ import {
     ResponsiveContainer,
     Legend,
 } from 'recharts';
-import { getChatbotStats } from '../../config/ChatbotRequest';
+import { getChatbotAdminSessionById, getChatbotAdminSessions, getChatbotStats } from '../../config/ChatbotRequest';
 
 const COLORS_PIE = {
     Hot: '#ef4444',
@@ -60,10 +61,24 @@ const CustomTooltip = ({ active, payload, label }) => {
 const ChatbotStats = () => {
     const [stats, setStats] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [historyLoading, setHistoryLoading] = useState(false);
+    const [historySearch, setHistorySearch] = useState('');
+    const [historyLevel, setHistoryLevel] = useState('');
+    const [historyStartDate, setHistoryStartDate] = useState('');
+    const [historyEndDate, setHistoryEndDate] = useState('');
+    const [history, setHistory] = useState([]);
+    const [historyPagination, setHistoryPagination] = useState({ page: 1, limit: 10, total: 0, totalPages: 0 });
+    const [selectedSession, setSelectedSession] = useState(null);
+    const [detailLoading, setDetailLoading] = useState(false);
+    const [isDetailOpen, setIsDetailOpen] = useState(false);
 
     useEffect(() => {
         fetchStats();
     }, []);
+
+    useEffect(() => {
+        fetchChatHistory();
+    }, [historyPagination.page]);
 
     const fetchStats = async () => {
         try {
@@ -74,6 +89,71 @@ const ChatbotStats = () => {
         } finally {
             setLoading(false);
         }
+    };
+
+    const fetchChatHistory = async (
+        nextPage = historyPagination.page,
+        nextSearch = historySearch,
+        nextLevel = historyLevel,
+        nextStartDate = historyStartDate,
+        nextEndDate = historyEndDate,
+    ) => {
+        try {
+            setHistoryLoading(true);
+            const res = await getChatbotAdminSessions({
+                page: nextPage,
+                limit: historyPagination.limit,
+                search: nextSearch || undefined,
+                level: nextLevel || undefined,
+                startDate: nextStartDate || undefined,
+                endDate: nextEndDate || undefined,
+            });
+
+            const metadata = res.data?.metadata;
+            setHistory(metadata?.sessions || []);
+            setHistoryPagination((prev) => ({
+                ...prev,
+                ...(metadata?.pagination || {}),
+            }));
+        } catch (err) {
+            console.error('Error fetching chatbot history:', err);
+        } finally {
+            setHistoryLoading(false);
+        }
+    };
+
+    const openSessionDetail = async (sessionId) => {
+        try {
+            setDetailLoading(true);
+            setIsDetailOpen(true);
+            const res = await getChatbotAdminSessionById(sessionId);
+            setSelectedSession(res.data?.metadata || null);
+        } catch (err) {
+            console.error('Error loading chatbot session detail:', err);
+            setSelectedSession(null);
+        } finally {
+            setDetailLoading(false);
+        }
+    };
+
+    const handleSearchHistory = () => {
+        setHistoryPagination((prev) => ({ ...prev, page: 1 }));
+        fetchChatHistory(1, historySearch, historyLevel, historyStartDate, historyEndDate);
+    };
+
+    const clearHistoryFilters = () => {
+        setHistorySearch('');
+        setHistoryLevel('');
+        setHistoryStartDate('');
+        setHistoryEndDate('');
+        setHistoryPagination((prev) => ({ ...prev, page: 1 }));
+        fetchChatHistory(1, '', '', '', '');
+    };
+
+    const levelClass = (level) => {
+        if (level === 'Hot') return 'bg-red-500/20 text-red-300 border border-red-500/30';
+        if (level === 'Warm') return 'bg-amber-500/20 text-amber-300 border border-amber-500/30';
+        return 'bg-blue-500/20 text-blue-300 border border-blue-500/30';
     };
 
     if (loading) {
@@ -271,9 +351,205 @@ const ChatbotStats = () => {
                     )}
                 </motion.div>
             </div>
+
+            {/* Chat History */}
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="bg-[#1E293B]/80 backdrop-blur-sm rounded-2xl p-5 border border-white/5"
+            >
+                <div className="flex items-center justify-between gap-3 mb-4 flex-wrap">
+                    <h3 className="text-white font-semibold text-base flex items-center gap-2">
+                        <MessageCircle className="w-4 h-4 text-[#0066FF]" />
+                        Customer chat history
+                    </h3>
+
+                    <div className="flex items-center gap-2 flex-wrap justify-end">
+                        <select
+                            value={historyLevel}
+                            onChange={(e) => setHistoryLevel(e.target.value)}
+                            className="bg-[#0F172A] border border-white/10 rounded-lg px-3 py-2 text-sm text-white"
+                        >
+                            <option value="">All levels</option>
+                            <option value="Hot">Hot</option>
+                            <option value="Warm">Warm</option>
+                            <option value="Cold">Cold</option>
+                        </select>
+
+                        <input
+                            type="date"
+                            value={historyStartDate}
+                            max={historyEndDate || undefined}
+                            onChange={(e) => setHistoryStartDate(e.target.value)}
+                            className="bg-[#0F172A] border border-white/10 rounded-lg px-3 py-2 text-sm text-white"
+                        />
+
+                        <input
+                            type="date"
+                            value={historyEndDate}
+                            min={historyStartDate || undefined}
+                            onChange={(e) => setHistoryEndDate(e.target.value)}
+                            className="bg-[#0F172A] border border-white/10 rounded-lg px-3 py-2 text-sm text-white"
+                        />
+
+                        <div className="relative">
+                            <Search className="w-4 h-4 text-white/40 absolute left-3 top-1/2 -translate-y-1/2" />
+                            <input
+                                value={historySearch}
+                                onChange={(e) => setHistorySearch(e.target.value)}
+                                onKeyDown={(e) => e.key === 'Enter' && handleSearchHistory()}
+                                placeholder="Search customer..."
+                                className="bg-[#0F172A] border border-white/10 rounded-lg pl-9 pr-3 py-2 text-sm text-white placeholder:text-white/30"
+                            />
+                        </div>
+                        <button
+                            onClick={handleSearchHistory}
+                            className="px-3 py-2 bg-[#0066FF] hover:bg-[#0052cc] text-white text-sm rounded-lg transition-colors"
+                        >
+                            Apply
+                        </button>
+                        <button
+                            onClick={clearHistoryFilters}
+                            className="px-3 py-2 bg-white/10 hover:bg-white/20 text-white text-sm rounded-lg transition-colors"
+                        >
+                            Clear
+                        </button>
+                    </div>
+                </div>
+
+                {historyLoading ? (
+                    <div className="text-white/50 text-sm py-8 text-center">Loading chat history...</div>
+                ) : history.length === 0 ? (
+                    <div className="text-white/40 text-sm py-8 text-center">No chat history found</div>
+                ) : (
+                    <div className="overflow-x-auto">
+                        <table className="w-full min-w-225">
+                            <thead>
+                                <tr className="text-left text-white/50 text-xs border-b border-white/10">
+                                    <th className="py-3 pr-4">Customer</th>
+                                    <th className="py-3 pr-4">Last message</th>
+                                    <th className="py-3 pr-4">Messages</th>
+                                    <th className="py-3 pr-4">Score</th>
+                                    <th className="py-3 pr-4">Level</th>
+                                    <th className="py-3 pr-4">Updated</th>
+                                    <th className="py-3">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {history.map((item) => (
+                                    <tr key={item._id} className="border-b border-white/6">
+                                        <td className="py-3 pr-4">
+                                            <div className="text-white text-sm font-medium">
+                                                {item.user?.fullName || 'N/A'}
+                                            </div>
+                                            <div className="text-white/40 text-xs">{item.user?.email || ''}</div>
+                                        </td>
+                                        <td className="py-3 pr-4 text-white/70 text-sm max-w-90 truncate">
+                                            {item.lastMessage || 'No message'}
+                                        </td>
+                                        <td className="py-3 pr-4 text-white/70 text-sm">{item.messageCount || 0}</td>
+                                        <td className="py-3 pr-4 text-white/70 text-sm">{item.interestScore || 0}</td>
+                                        <td className="py-3 pr-4">
+                                            <span
+                                                className={`px-2 py-1 text-xs rounded-full ${levelClass(item.level)}`}
+                                            >
+                                                {item.level || 'Cold'}
+                                            </span>
+                                        </td>
+                                        <td className="py-3 pr-4 text-white/50 text-xs">
+                                            {new Date(item.updatedAt).toLocaleString('en-US')}
+                                        </td>
+                                        <td className="py-3">
+                                            <button
+                                                onClick={() => openSessionDetail(item._id)}
+                                                className="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white text-xs rounded-lg transition-colors"
+                                            >
+                                                View detail
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                )}
+
+                <div className="flex items-center justify-between mt-4 text-xs text-white/50">
+                    <span>Total: {historyPagination.total || 0}</span>
+                    <div className="flex items-center gap-2">
+                        <button
+                            disabled={(historyPagination.page || 1) <= 1}
+                            onClick={() => setHistoryPagination((prev) => ({ ...prev, page: prev.page - 1 }))}
+                            className="px-2.5 py-1.5 rounded bg-white/10 disabled:opacity-40"
+                        >
+                            Prev
+                        </button>
+                        <span>
+                            Page {historyPagination.page || 1}/{historyPagination.totalPages || 1}
+                        </span>
+                        <button
+                            disabled={(historyPagination.page || 1) >= (historyPagination.totalPages || 1)}
+                            onClick={() => setHistoryPagination((prev) => ({ ...prev, page: prev.page + 1 }))}
+                            className="px-2.5 py-1.5 rounded bg-white/10 disabled:opacity-40"
+                        >
+                            Next
+                        </button>
+                    </div>
+                </div>
+            </motion.div>
+
+            <Modal
+                title="Customer chat history detail"
+                open={isDetailOpen}
+                onCancel={() => {
+                    setIsDetailOpen(false);
+                    setSelectedSession(null);
+                }}
+                footer={null}
+                width={860}
+            >
+                {detailLoading ? (
+                    <div className="py-8 text-center text-white/50">Loading...</div>
+                ) : !selectedSession ? (
+                    <div className="py-8 text-center text-white/50">No details available</div>
+                ) : (
+                    <div className="space-y-4">
+                        <div className="bg-[#0F172A] rounded-lg p-3 border border-white/10">
+                            <div className="text-sm text-white font-medium">
+                                {selectedSession.user?.fullName || 'N/A'}
+                            </div>
+                            <div className="text-xs text-white/50">{selectedSession.user?.email || ''}</div>
+                            <div className="text-xs text-white/50">Phone: {selectedSession.user?.phone || 'N/A'}</div>
+                        </div>
+
+                        <div className="max-h-105 overflow-y-auto space-y-3 pr-1">
+                            {(selectedSession.messages || []).map((msg, idx) => (
+                                <div
+                                    key={`${msg.timestamp || idx}-${idx}`}
+                                    className={`p-3 rounded-lg border ${
+                                        msg.role === 'user'
+                                            ? 'bg-blue-500/10 border-blue-500/20'
+                                            : 'bg-emerald-500/10 border-emerald-500/20'
+                                    }`}
+                                >
+                                    <div className="flex items-center justify-between mb-1">
+                                        <span className="text-xs font-semibold text-white/80">
+                                            {msg.role === 'user' ? 'Customer' : 'AI Bot'}
+                                        </span>
+                                        <span className="text-xs text-white/40">
+                                            {msg.timestamp ? new Date(msg.timestamp).toLocaleString('en-US') : ''}
+                                        </span>
+                                    </div>
+                                    <p className="text-sm text-white/90 whitespace-pre-wrap">{msg.content}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )}
+            </Modal>
         </div>
     );
 };
 
 export default ChatbotStats;
-
